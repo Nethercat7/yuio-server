@@ -36,4 +36,9 @@ public class CollegeServiceImpl implements CollegeService {
     public int del(String id) {
         return collegeDao.del(id);
     }
+
+    @Override
+    public int upd(College college) {
+        return collegeDao.upd(college);
+    }
 }

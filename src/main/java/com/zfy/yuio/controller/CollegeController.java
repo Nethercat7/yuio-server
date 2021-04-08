@@ -40,4 +40,13 @@ public class CollegeController {
         }
         return new ResultBody(1,"删除失败，可能已经被删除","error");
     }
+
+    @PostMapping("upd")
+    public ResultBody upd(@RequestBody College college){
+        int status=collegeService.upd(college);
+        if(status==1){
+            return new ResultBody(0,"成功修改","success");
+        }
+        return new ResultBody(1,"修改失败，请稍后重试","error");
+    }
 }

@@ -33,4 +33,12 @@ public interface CollegeService {
      *@Return int
      */
     int del(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description 修改院系信息
+     *@param college
+     *@Return int
+     */
+    int upd(College college);
 }

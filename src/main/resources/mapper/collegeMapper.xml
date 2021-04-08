@@ -17,4 +17,10 @@
         DELETE FROM college
         WHERE college_id=#{id}
     </delete>
+
+    <update id="upd" parameterType="College">
+        UPDATE college
+        SET college_name=#{collegeName},college_code=#{collegeCode},college_status=#{collegeStatus},college_description=#{collegeDescription}
+        WHERE college_id=#{collegeId}
+    </update>
 </mapper>
