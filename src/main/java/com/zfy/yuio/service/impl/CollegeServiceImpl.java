@@ -31,4 +31,9 @@ public class CollegeServiceImpl implements CollegeService {
     public List<College> get() {
         return collegeDao.get();
     }
+
+    @Override
+    public int del(String id) {
+        return collegeDao.del(id);
+    }
 }

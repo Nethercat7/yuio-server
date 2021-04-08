@@ -24,11 +24,20 @@ public class CollegeController {
         if(status==1){
             return new ResultBody(0,"成功添加","success");
         }
-        return new ResultBody(1,"添加失败","danger");
+        return new ResultBody(1,"添加失败","error");
     }
 
     @GetMapping("get")
     public ResultBody get(){
         return new ResultBody(0,collegeService.get(),"success");
+    }
+
+    @GetMapping("del")
+    public ResultBody del(@RequestParam("id")String id){
+        int status=collegeService.del(id);
+        if(status==1){
+            return new ResultBody(0,"成功删除","success");
+        }
+        return new ResultBody(1,"删除失败，可能已经被删除","error");
     }
 }

@@ -12,4 +12,9 @@
     <select id="get" resultType="College">
         SELECT * FROM college
     </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM college
+        WHERE college_id=#{id}
+    </delete>
 </mapper>

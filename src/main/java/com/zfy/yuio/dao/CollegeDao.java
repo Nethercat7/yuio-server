@@ -27,4 +27,12 @@ public interface CollegeDao {
      *@Return java.util.List<com.zfy.yuio.entity.College>
     */
     List<College> get();
+
+    /**
+     *@Author Nethercat7
+     *@Description 根据ID删除院系
+     *@param id
+     *@Return int
+    */
+    int del(String id);
 }
