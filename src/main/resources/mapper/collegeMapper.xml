@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.CollegeDao">
+    <insert id="add" parameterType="College">
+        INSERT INTO college(college_id,college_name,college_code,college_status,college_description)
+        VALUES (#{collegeId},#{collegeName},#{collegeCode},#{collegeStatus},#{collegeDescription})
+    </insert>
+</mapper>

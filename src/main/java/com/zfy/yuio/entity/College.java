@@ -2,6 +2,8 @@ package com.zfy.yuio.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDateTime;
+
 /**
  *@Description:学院实体类
  *@Author:Nethercat7
@@ -16,6 +18,10 @@ public class College {
     private String collegeCode;
     @JsonProperty("college_status")
     private int collegeStatus;
+    @JsonProperty("college_create_time")
+    private LocalDateTime collegeCreateTime;
+    @JsonProperty("college_description")
+    private String collegeDescription;
 
     public String getCollegeId() {
         return collegeId;
@@ -47,5 +53,21 @@ public class College {
 
     public void setCollegeStatus(int collegeStatus) {
         this.collegeStatus = collegeStatus;
+    }
+
+    public LocalDateTime getCollegeCreateTime() {
+        return collegeCreateTime;
+    }
+
+    public void setCollegeCreateTime(LocalDateTime collegeCreateTime) {
+        this.collegeCreateTime = collegeCreateTime;
+    }
+
+    public String getCollegeDescription() {
+        return collegeDescription;
+    }
+
+    public void setCollegeDescription(String collegeDescription) {
+        this.collegeDescription = collegeDescription;
     }
 }
