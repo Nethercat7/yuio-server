@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.OrgDao">
+    <insert id="add" parameterType="Org">
+        INSERT INTO org(org_id,org_name,org_code,org_status,org_description)
+        VALUES (#{orgId},#{orgName},#{orgCode},#{orgStatus},#{orgDescription})
+    </insert>
+
+    <select id="get" resultType="Org">
+        SELECT * FROM org
+    </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM org
+        WHERE org_id=#{id}
+    </delete>
+
+    <update id="upd" parameterType="Org">
+        UPDATE org
+        SET org_name=#{orgName},org_code=#{orgCode},org_status=#{orgStatus},org_description=#{orgDescription}
+        WHERE org_id=#{orgId}
+    </update>
+</mapper>
