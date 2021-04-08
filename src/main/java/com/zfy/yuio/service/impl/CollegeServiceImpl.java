@@ -7,8 +7,10 @@ import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
- *@Description:院系
+ *@Description:院系管理
  *@Author:Nethercat7
  *@CreateDate:2021/4/8 19:58
 */
@@ -23,5 +25,10 @@ public class CollegeServiceImpl implements CollegeService {
     public int add(College college) {
         college.setCollegeId(snowflakeIdGeneratorUntil.getId());
         return collegeDao.add(college);
+    }
+
+    @Override
+    public List<College> get() {
+        return collegeDao.get();
     }
 }

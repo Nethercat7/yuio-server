@@ -16,6 +16,12 @@ public class ResultBody {
         this.type = type;
     }
 
+    public ResultBody(int code, Object obj, String type) {
+        this.code = code;
+        this.obj = obj;
+        this.type = type;
+    }
+
     public int getCode() {
         return code;
     }

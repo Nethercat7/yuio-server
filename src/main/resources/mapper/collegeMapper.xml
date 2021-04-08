@@ -8,4 +8,8 @@
         INSERT INTO college(college_id,college_name,college_code,college_status,college_description)
         VALUES (#{collegeId},#{collegeName},#{collegeCode},#{collegeStatus},#{collegeDescription})
     </insert>
+
+    <select id="get" resultType="College">
+        SELECT * FROM college
+    </select>
 </mapper>
