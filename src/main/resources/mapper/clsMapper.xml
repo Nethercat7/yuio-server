@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.ClsDao">
+    <insert id="add" parameterType="Cls">
+        INSERT INTO cls(cls_id,cls_name,cls_status,cls_description,cls_major_id,cls_grade,cls_college_id)
+        VALUES (#{clsId},#{clsName},#{clsStatus},#{clsDescription},#{clsMajorId},#{clsGrade},#{clsCollegeId})
+    </insert>
+</mapper>

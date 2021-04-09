@@ -10,21 +10,21 @@ import java.time.LocalDateTime;
  *@CreateDate:2021/4/9 16:34
 */
 public class Major {
-    @JsonProperty("major_id")
+    @JsonProperty("id")
     private String majorId;
-    @JsonProperty("major_name")
+    @JsonProperty("name")
     private String majorName;
-    @JsonProperty("major_code")
+    @JsonProperty("code")
     private String majorCode;
-    @JsonProperty("major_status")
+    @JsonProperty("status")
     private int majorStatus;
-    @JsonProperty("major_create_time")
+    @JsonProperty("create_time")
     private LocalDateTime majorCreateTime;
-    @JsonProperty("major_description")
+    @JsonProperty("description")
     private String majorDescription;
-    @JsonProperty("major_college_id")
+    @JsonProperty("college_id")
     private String majorCollegeId;
-    @JsonProperty("major_college_name")
+    @JsonProperty("college_name")
     private String majorCollegeName;
 
     public String getMajorId() {

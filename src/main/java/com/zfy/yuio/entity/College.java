@@ -11,17 +11,17 @@ import java.util.List;
  *@CreateDate:2021/4/8 18:18
 */
 public class College {
-    @JsonProperty("college_id")
+    @JsonProperty("id")
     private String collegeId;
-    @JsonProperty("college_name")
+    @JsonProperty("name")
     private String collegeName;
-    @JsonProperty("college_code")
+    @JsonProperty("code")
     private String collegeCode;
-    @JsonProperty("college_status")
+    @JsonProperty("status")
     private int collegeStatus;
-    @JsonProperty("college_create_time")
+    @JsonProperty("create_time")
     private LocalDateTime collegeCreateTime;
-    @JsonProperty("college_description")
+    @JsonProperty("description")
     private String collegeDescription;
 
     private List<Major> children;
