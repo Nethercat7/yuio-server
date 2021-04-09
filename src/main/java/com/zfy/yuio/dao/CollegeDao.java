@@ -43,4 +43,12 @@ public interface CollegeDao {
      *@Return int
     */
     int upd(College college);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过ID获取院系信息
+     *@param id
+     *@Return com.zfy.yuio.entity.College
+    */
+    College getById(String id);
 }

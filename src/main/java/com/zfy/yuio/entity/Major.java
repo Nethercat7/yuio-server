@@ -24,6 +24,8 @@ public class Major {
     private String majorDescription;
     @JsonProperty("major_college_id")
     private String majorCollegeId;
+    @JsonProperty("major_college_name")
+    private String majorCollegeName;
 
     public String getMajorId() {
         return majorId;
@@ -79,5 +81,13 @@ public class Major {
 
     public void setMajorCollegeId(String majorCollegeId) {
         this.majorCollegeId = majorCollegeId;
+    }
+
+    public String getMajorCollegeName() {
+        return majorCollegeName;
+    }
+
+    public void setMajorCollegeName(String majorCollegeName) {
+        this.majorCollegeName = majorCollegeName;
     }
 }

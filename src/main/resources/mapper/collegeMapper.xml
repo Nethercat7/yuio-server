@@ -23,4 +23,9 @@
         SET college_name=#{collegeName},college_code=#{collegeCode},college_status=#{collegeStatus},college_description=#{collegeDescription}
         WHERE college_id=#{collegeId}
     </update>
+
+    <select id="getById" parameterType="String" resultType="College">
+        SELECT * FROM college
+        WHERE college_id=#{id}
+    </select>
 </mapper>
