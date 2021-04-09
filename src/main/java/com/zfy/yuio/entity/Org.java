@@ -3,6 +3,7 @@ package com.zfy.yuio.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *@Description:组织实体类
@@ -22,6 +23,11 @@ public class Org {
     private LocalDateTime orgCreateTime;
     @JsonProperty("org_description")
     private String orgDescription;
+    @JsonProperty("org_pid")
+    private String orgPid;
+
+    //下级组织
+    private List<Org> children;
 
     public String getOrgId() {
         return orgId;
@@ -69,5 +75,21 @@ public class Org {
 
     public void setOrgDescription(String orgDescription) {
         this.orgDescription = orgDescription;
+    }
+
+    public String getOrgPid() {
+        return orgPid;
+    }
+
+    public void setOrgPid(String orgPid) {
+        this.orgPid = orgPid;
+    }
+
+    public List<Org> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Org> children) {
+        this.children = children;
     }
 }

@@ -1,6 +1,5 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.Org;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +26,7 @@ public interface OrgDao {
      *@param
      *@Return java.util.List<com.zfy.yuio.entity.College>
     */
-    List<College> get();
+    List<Org> get();
 
     /**
      *@Author Nethercat7
@@ -44,4 +43,12 @@ public interface OrgDao {
      *@Return int
     */
     int upd(Org org);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过上级组织的ID来获取属于其的下级组织
+     *@param id
+     *@Return java.util.List<com.zfy.yuio.entity.College>
+    */
+    List<Org> getSubordinate(String id);
 }

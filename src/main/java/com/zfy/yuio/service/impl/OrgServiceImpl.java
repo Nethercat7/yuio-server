@@ -1,7 +1,6 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.OrgDao;
-import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.Org;
 import com.zfy.yuio.service.OrgService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
@@ -29,8 +28,14 @@ public class OrgServiceImpl implements OrgService {
     }
 
     @Override
-    public List<College> get() {
-        return orgDao.get();
+    public List<Org> get() {
+        List<Org> org=orgDao.get();
+        //获取下级组织
+        for (Org o:org
+             ) {
+            o.setChildren(orgDao.getSubordinate(o.getOrgId()));
+        }
+        return org;
     }
 
     @Override

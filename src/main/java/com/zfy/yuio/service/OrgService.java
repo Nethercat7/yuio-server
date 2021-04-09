@@ -1,6 +1,5 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.Org;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public interface OrgService {
      *@param
      *@Return java.util.List<com.zfy.yuio.entity.College>
      */
-    List<College> get();
+    List<Org> get();
 
     /**
      *@Author Nethercat7
