@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.MajorDao">
+    <insert id="add" parameterType="Major">
+        INSERT INTO major(major_id,major_name,major_code,major_status,major_description,major_college_id)
+        VALUES (#{majorId},#{majorName},#{majorCode},#{majorStatus},#{majorDescription},#{majorCollegeId})
+    </insert>
+
+    <select id="get" resultType="Major">
+        SELECT * FROM major
+    </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM major
+        WHERE major_id=#{id}
+    </delete>
+
+    <update id="upd" parameterType="Major">
+        UPDATE major
+        SET major_name=#{majorName},major_code=#{majorCode},major_status=#{majorStatus},major_description=#{majorDescription},major_college_id=#{majorCollegeId}
+        WHERE major_id=#{majorId}
+    </update>
+</mapper>
