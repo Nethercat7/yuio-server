@@ -43,4 +43,12 @@ public interface MajorDao {
      *@Return int
     */
     int upd(Major major);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过院系ID获取专业
+     *@param pid
+     *@Return java.util.List<com.zfy.yuio.entity.Major>
+    */
+    List<Major> getByPid(String pid);
 }

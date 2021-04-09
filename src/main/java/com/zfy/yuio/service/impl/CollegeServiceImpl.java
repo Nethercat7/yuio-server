@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.CollegeDao;
+import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.entity.College;
 import com.zfy.yuio.service.CollegeService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
@@ -10,16 +11,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- *@Description:院系管理
- *@Author:Nethercat7
- *@CreateDate:2021/4/8 19:58
-*/
+ * @Description:院系管理
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/8 19:58
+ */
 @Service
 public class CollegeServiceImpl implements CollegeService {
     @Autowired
     private CollegeDao collegeDao;
 
-    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil=new SnowflakeIdGeneratorUntil(0,0);
+    @Autowired
+    private MajorDao majorDao;
+
+    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil = new SnowflakeIdGeneratorUntil(0, 0);
 
     @Override
     public int add(College college) {
@@ -29,7 +33,12 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Override
     public List<College> get() {
-        return collegeDao.get();
+        List<College> colleges=collegeDao.get();
+        for (College c:colleges
+             ) {
+            c.setChildren(majorDao.getByPid(c.getCollegeId()));
+        }
+        return colleges;
     }
 
     @Override

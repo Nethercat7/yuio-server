@@ -3,6 +3,7 @@ package com.zfy.yuio.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *@Description:学院实体类
@@ -22,6 +23,8 @@ public class College {
     private LocalDateTime collegeCreateTime;
     @JsonProperty("college_description")
     private String collegeDescription;
+
+    private List<Major> children;
 
     public String getCollegeId() {
         return collegeId;
@@ -69,5 +72,13 @@ public class College {
 
     public void setCollegeDescription(String collegeDescription) {
         this.collegeDescription = collegeDescription;
+    }
+
+    public List<Major> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Major> children) {
+        this.children = children;
     }
 }

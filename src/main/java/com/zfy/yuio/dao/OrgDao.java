@@ -51,4 +51,12 @@ public interface OrgDao {
      *@Return java.util.List<com.zfy.yuio.entity.College>
     */
     List<Org> getSubordinate(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过ID获取组织
+     *@param id
+     *@Return com.zfy.yuio.entity.Org
+    */
+    Org getById(String id);
 }

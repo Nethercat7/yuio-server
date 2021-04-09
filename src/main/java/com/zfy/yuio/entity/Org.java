@@ -25,6 +25,8 @@ public class Org {
     private String orgDescription;
     @JsonProperty("org_pid")
     private String orgPid;
+    @JsonProperty("org_level")
+    private int orgLevel;
 
     //下级组织
     private List<Org> children;
@@ -91,5 +93,13 @@ public class Org {
 
     public void setChildren(List<Org> children) {
         this.children = children;
+    }
+
+    public int getOrgLevel() {
+        return orgLevel;
+    }
+
+    public void setOrgLevel(int orgLevel) {
+        this.orgLevel = orgLevel;
     }
 }

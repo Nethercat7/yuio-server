@@ -23,4 +23,9 @@
         SET major_name=#{majorName},major_code=#{majorCode},major_status=#{majorStatus},major_description=#{majorDescription},major_college_id=#{majorCollegeId}
         WHERE major_id=#{majorId}
     </update>
+
+    <select id="getByPid" parameterType="String" resultType="Major">
+        SELECT * FROM major
+        WHERE major_college_id=#{pid}
+    </select>
 </mapper>

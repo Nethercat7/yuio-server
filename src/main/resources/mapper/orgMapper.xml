@@ -5,13 +5,12 @@
 
 <mapper namespace="com.zfy.yuio.dao.OrgDao">
     <insert id="add" parameterType="Org">
-        INSERT INTO org(org_id,org_name,org_code,org_status,org_description,org_pid)
-        VALUES (#{orgId},#{orgName},#{orgCode},#{orgStatus},#{orgDescription},#{orgPid})
+        INSERT INTO org(org_id,org_name,org_code,org_status,org_description,org_pid,org_level)
+        VALUES (#{orgId},#{orgName},#{orgCode},#{orgStatus},#{orgDescription},#{orgPid},#{orgLevel})
     </insert>
 
     <select id="get" resultType="Org">
         SELECT * FROM org
-        WHERE org_pid IS NULL
     </select>
 
     <delete id="del" parameterType="String">
@@ -28,5 +27,10 @@
     <select id="getSubordinate" parameterType="String" resultType="Org">
         SELECT * FROM org
         WHERE org_pid=#{id}
+    </select>
+
+    <select id="getById" parameterType="String" resultType="Org">
+        SELECT * FROM org
+        WHERE org_id=#{id}
     </select>
 </mapper>
