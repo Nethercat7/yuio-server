@@ -8,4 +8,8 @@
         INSERT INTO cls(cls_id,cls_name,cls_status,cls_description,cls_major_id,cls_grade,cls_college_id)
         VALUES (#{clsId},#{clsName},#{clsStatus},#{clsDescription},#{clsMajorId},#{clsGrade},#{clsCollegeId})
     </insert>
+
+    <select id="get" resultType="Cls">
+        SELECT * FROM cls
+    </select>
 </mapper>

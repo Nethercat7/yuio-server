@@ -2,6 +2,8 @@ package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.Cls;
 
+import java.util.List;
+
 /**
  *@Description:班级管理模块
  *@Author:Nethercat7
@@ -16,4 +18,11 @@ public interface ClsService {
      */
     int add(Cls cls);
 
+    /**
+     *@Author Nethercat7
+     *@Description 获取所有班级
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.Cls>
+     */
+    List<Cls> get();
 }

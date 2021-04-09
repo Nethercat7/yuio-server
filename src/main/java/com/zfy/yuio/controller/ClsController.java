@@ -21,4 +21,9 @@ public class ClsController {
         }
         return new ResultBody(1,"添加失败","error");
     }
+
+    @GetMapping("get")
+    public ResultBody get(){
+        return new ResultBody(0,clsService.get(),"success");
+    }
 }

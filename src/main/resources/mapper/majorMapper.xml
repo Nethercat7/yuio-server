@@ -28,4 +28,9 @@
         SELECT * FROM major
         WHERE major_college_id=#{pid}
     </select>
+
+    <select id="getNameById" parameterType="String" resultType="String">
+        SELECT major_name FROM major
+        WHERE major_id=#{id}
+    </select>
 </mapper>

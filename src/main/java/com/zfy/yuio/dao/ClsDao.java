@@ -3,6 +3,8 @@ package com.zfy.yuio.dao;
 import com.zfy.yuio.entity.Cls;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  *@Description:班级管理模块
  *@Author:Nethercat7
@@ -17,4 +19,12 @@ public interface ClsDao {
      *@Return int
     */
     int add(Cls cls);
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取所有班级
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.Cls>
+    */
+    List<Cls> get();
 }

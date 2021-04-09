@@ -28,4 +28,9 @@
         SELECT * FROM college
         WHERE college_id=#{id}
     </select>
+
+    <select id="getNameById" parameterType="String" resultType="String">
+        SELECT college_name FROM college
+        WHERE college_id=#{id}
+    </select>
 </mapper>
