@@ -3,6 +3,7 @@ package com.zfy.yuio.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *@Description:学生实体类
@@ -10,28 +11,38 @@ import java.time.LocalDateTime;
  *@CreateDate:2021/4/9 23:14
 */
 public class Student {
-    @JsonProperty("student_id")
+    @JsonProperty("id")
     private String studentId;
-    @JsonProperty("student_name")
+    @JsonProperty("name")
     private String studentName;
-    @JsonProperty("student_code")
+    @JsonProperty("code")
     private String studentCode;
-    @JsonProperty("student_phone")
+    @JsonProperty("phone")
     private String studentPhone;
-    @JsonProperty("student_status")
+    @JsonProperty("status")
     private int studentStatus;
-    @JsonProperty("student_grade")
+    @JsonProperty("grade")
     private int studentGrade;
-    @JsonProperty("student_description")
+    @JsonProperty("description")
     private String studentDescription;
-    @JsonProperty("student_create_time")
+    @JsonProperty("create_time")
     private LocalDateTime studentCreateTime;
-    @JsonProperty("student_college_id")
+    @JsonProperty("college_id")
     private String studentCollegeId;
-    @JsonProperty("student_major_id")
+    @JsonProperty("major_id")
     private String studentMajorId;
-    @JsonProperty("student_class_id")
+    @JsonProperty("class_id")
     private String studentClassId;
+    @JsonProperty("college_name")
+    private String studentCollegeName;
+    @JsonProperty("major_name")
+    private String studentMajorName;
+    @JsonProperty("cls_name")
+    private String studentClsName;
+    @JsonProperty("gender")
+    private int studentGender;
+
+    private List<String> container;
 
     public String getStudentId() {
         return studentId;
@@ -119,5 +130,45 @@ public class Student {
 
     public void setStudentClassId(String studentClassId) {
         this.studentClassId = studentClassId;
+    }
+
+    public String getStudentCollegeName() {
+        return studentCollegeName;
+    }
+
+    public void setStudentCollegeName(String studentCollegeName) {
+        this.studentCollegeName = studentCollegeName;
+    }
+
+    public String getStudentMajorName() {
+        return studentMajorName;
+    }
+
+    public void setStudentMajorName(String studentMajorName) {
+        this.studentMajorName = studentMajorName;
+    }
+
+    public String getStudentClsName() {
+        return studentClsName;
+    }
+
+    public void setStudentClsName(String studentClsName) {
+        this.studentClsName = studentClsName;
+    }
+
+    public List<String> getContainer() {
+        return container;
+    }
+
+    public void setContainer(List<String> container) {
+        this.container = container;
+    }
+
+    public int getStudentGender() {
+        return studentGender;
+    }
+
+    public void setStudentGender(int studentGender) {
+        this.studentGender = studentGender;
     }
 }
