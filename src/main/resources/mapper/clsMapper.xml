@@ -23,4 +23,14 @@
         SET cls_name=#{clsName},cls_status=#{clsStatus},cls_description=#{clsDescription},cls_major_id=#{clsMajorId},cls_grade=#{clsGrade},cls_college_id=#{clsCollegeId}
         WHERE cls_id=#{clsId}
     </update>
+
+    <select id="getByPid" parameterType="String" resultType="Cls">
+        SELECT * FROM cls
+        WHERE cls_major_id=#{pid}
+    </select>
+
+    <select id="getNameById" parameterType="String" resultType="String">
+        SELECT cls_name FROM cls
+        WHERE cls_id=#{id}
+    </select>
 </mapper>

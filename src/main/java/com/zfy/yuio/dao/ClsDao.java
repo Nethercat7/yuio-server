@@ -43,4 +43,20 @@ public interface ClsDao {
      *@Return int
     */
     int upd(Cls cls);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过院系ID获取专业
+     *@param pid
+     *@Return java.util.List<com.zfy.yuio.entity.Cls>
+     */
+    List<Cls> getByPid(String pid);
+
+    /**
+     *@Author Nethercat7
+     *@Description 根据ID获取专业名称
+     *@param id
+     *@Return
+     */
+    String getNameById(String id);
 }
