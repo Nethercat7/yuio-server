@@ -12,4 +12,14 @@
     <select id="get" resultType="Cls">
         SELECT * FROM cls
     </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM cls
+        WHERE cls_id=#{id}
+    </delete>
+
+    <update id="upd" parameterType="Cls">
+        UPDATE cls
+        SET cls_name=#{clsName},cls_status=#{clsStatus},cls_description=#{clsDescription},cls_major_id=#{clsMajorId},cls_grade=#{clsGrade},cls_college_id=#{clsCollegeId}
+    </update>
 </mapper>

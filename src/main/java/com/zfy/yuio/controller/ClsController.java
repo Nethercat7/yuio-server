@@ -26,4 +26,22 @@ public class ClsController {
     public ResultBody get(){
         return new ResultBody(0,clsService.get(),"success");
     }
+
+    @GetMapping("del")
+    public ResultBody add(@RequestParam("id") String id){
+        int status=clsService.del(id);
+        if(status==1){
+            return new ResultBody(0,"成功删除","success");
+        }
+        return new ResultBody(1,"删除失败","error");
+    }
+
+    @PostMapping("upd")
+    public ResultBody upd(@RequestBody Cls cls){
+        int status=clsService.upd(cls);
+        if(status==1){
+            return new ResultBody(0,"成功修改","success");
+        }
+        return new ResultBody(1,"修改失败","error");
+    }
 }

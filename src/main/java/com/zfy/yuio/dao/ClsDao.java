@@ -27,4 +27,20 @@ public interface ClsDao {
      *@Return java.util.List<com.zfy.yuio.entity.Cls>
     */
     List<Cls> get();
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过ID删除班级
+     *@param id
+     *@Return int
+    */
+    int del(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description 修改班级信息
+     *@param cls
+     *@Return int
+    */
+    int upd(Cls cls);
 }

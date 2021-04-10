@@ -9,6 +9,7 @@ import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,7 +45,26 @@ public class ClsServiceImpl implements ClsService {
              ) {
             c.setClsCollegeName(collegeDao.getNameById(c.getClsCollegeId()));
             c.setClsMajorName(majorDao.getNameById(c.getClsMajorId()));
+            List<String> container=new ArrayList<>();
+            container.add(c.getClsCollegeId());
+            container.add(c.getClsMajorId());
+            c.setContainer(container);
         }
         return cls;
+    }
+
+    @Override
+    public int del(String id) {
+        return clsDao.del(id);
+    }
+
+    @Override
+    public int upd(Cls cls) {
+        String collegeId = cls.getContainer().get(0);
+        String majorId = cls.getContainer().get(1);
+        //设置班级所属的学院和专业ID
+        cls.setClsCollegeId(collegeId);
+        cls.setClsMajorId(majorId);
+        return clsDao.upd(cls);
     }
 }
