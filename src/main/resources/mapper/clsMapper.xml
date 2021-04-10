@@ -21,5 +21,6 @@
     <update id="upd" parameterType="Cls">
         UPDATE cls
         SET cls_name=#{clsName},cls_status=#{clsStatus},cls_description=#{clsDescription},cls_major_id=#{clsMajorId},cls_grade=#{clsGrade},cls_college_id=#{clsCollegeId}
+        WHERE cls_id=#{clsId}
     </update>
 </mapper>

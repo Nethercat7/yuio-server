@@ -39,6 +39,7 @@ public class ClsController {
     @PostMapping("upd")
     public ResultBody upd(@RequestBody Cls cls){
         int status=clsService.upd(cls);
+        //int status=1;
         if(status==1){
             return new ResultBody(0,"成功修改","success");
         }
