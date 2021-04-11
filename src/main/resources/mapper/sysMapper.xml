@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.SysDao">
+    <update id="resetPwd" parameterType="String">
+        <choose>
+            <when test="type==0">
+                UPDATE user
+                SET user_pwd=#{pwd}
+                WHERE user_id=#{key}
+            </when>
+            <otherwise>
+                UPDATE student
+                SET student_pwd=#{pwd}
+                WHERE student_id=#{key}
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="getPwd" parameterType="String" resultType="Map">
+        <choose>
+            <when test="type==0"></when>
+            <otherwise>
+                SELECT student_pwd,student_salt
+                FROM student
+                WHERE student_id OR student_code=#{key}
+            </otherwise>
+        </choose>
+    </select>
+</mapper>
