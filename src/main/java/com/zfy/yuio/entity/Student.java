@@ -41,6 +41,10 @@ public class Student {
     private String studentClsName;
     @JsonProperty("gender")
     private int studentGender;
+    @JsonProperty("pwd")
+    private String studentPwd;
+    @JsonProperty("salt")
+    private String studentSalt;
 
     private List<String> container;
 
@@ -170,5 +174,21 @@ public class Student {
 
     public void setStudentGender(int studentGender) {
         this.studentGender = studentGender;
+    }
+
+    public String getStudentPwd() {
+        return studentPwd;
+    }
+
+    public void setStudentPwd(String studentPwd) {
+        this.studentPwd = studentPwd;
+    }
+
+    public String getStudentSalt() {
+        return studentSalt;
+    }
+
+    public void setStudentSalt(String studentSalt) {
+        this.studentSalt = studentSalt;
     }
 }

@@ -6,6 +6,7 @@ import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.dao.StudentDao;
 import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.StudentService;
+import com.zfy.yuio.utils.ShiroUntil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ import java.util.List;
  */
 @Service
 public class StudentServiceImpl implements StudentService {
+    //随机盐的个数
+    private static final int SALT = 7;
+    //散列次数
+    private static final int HASH = 1739;
+
     @Autowired
     private StudentDao studentDao;
 
@@ -39,6 +45,10 @@ public class StudentServiceImpl implements StudentService {
         student.setStudentId(snowflakeIdGeneratorUntil.getId());
         //为当前学生设置院系、专业和班级
         setBaseInfo(student);
+        //设置随机盐
+        student.setStudentSalt(ShiroUntil.getSalt(SALT));
+        //默认密码
+        student.setStudentPwd(ShiroUntil.pwd2MD5("123456",student.getStudentSalt(),HASH));
         return studentDao.add(student);
     }
 

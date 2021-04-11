@@ -1,4 +1,4 @@
-package com.zfy.yuio.realm;
+package com.zfy.yuio.realms;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

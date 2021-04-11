@@ -1,6 +1,6 @@
 package com.zfy.yuio.config;
 
-import com.zfy.yuio.realm.AuthRealm;
+import com.zfy.yuio.realms.AuthRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;

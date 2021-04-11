@@ -6,9 +6,9 @@
 <mapper namespace="com.zfy.yuio.dao.StudentDao">
     <insert id="add" parameterType="Student">
         INSERT INTO student(student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
-        student_description,student_college_id,student_major_id,student_class_id)
+        student_description,student_college_id,student_major_id,student_class_id,student_pwd,student_salt)
         VALUES (#{studentId},#{studentName},#{studentCode},#{studentGender},#{studentPhone},#{studentStatus},#{studentGrade},
-        #{studentDescription},#{studentCollegeId},#{studentMajorId},#{studentClassId})
+        #{studentDescription},#{studentCollegeId},#{studentMajorId},#{studentClassId},#{studentPwd},#{studentSalt})
     </insert>
 
     <select id="get" resultType="Student">
