@@ -18,4 +18,11 @@
         DELETE FROM usr
         WHERE usr_id=#{id}
     </delete>
+
+    <update id="upd" parameterType="Usr">
+        UPDATE usr
+        SET usr_name=#{usrName},usr_account=#{usrAccount},usr_gender=#{usrGender},usr_phone=#{usrPhone},usr_email=#{usrEmail},usr_status=#{usrStatus},
+        usr_description=#{usrDescription}
+        WHERE usr_id=#{usrId}
+    </update>
 </mapper>

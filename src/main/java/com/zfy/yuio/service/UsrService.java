@@ -33,4 +33,12 @@ public interface UsrService {
      *@Return int
      */
     int del(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description Update user
+     *@param usr
+     *@Return int
+     */
+    int upd(Usr usr);
 }

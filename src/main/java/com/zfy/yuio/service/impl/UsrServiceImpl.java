@@ -42,4 +42,9 @@ public class UsrServiceImpl implements UsrService {
     public int del(String id) {
         return usrDao.del(id);
     }
+
+    @Override
+    public int upd(Usr usr) {
+        return usrDao.upd(usr);
+    }
 }

@@ -40,4 +40,13 @@ public class UsrController {
         }
         return new ResultBody(0,"成功删除","success");
     }
+
+    @PostMapping("upd")
+    public ResultBody upd(@RequestBody Usr usr){
+        int status=usrService.upd(usr);
+        if(status!=1){
+            return new ResultBody(1,"修改失败","error");
+        }
+        return new ResultBody(0,"成功修改","success");
+    }
 }
