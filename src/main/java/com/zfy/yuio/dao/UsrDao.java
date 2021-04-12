@@ -3,6 +3,8 @@ package com.zfy.yuio.dao;
 import com.zfy.yuio.entity.Usr;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  *@Description:用户管理模块
  *@Author:Nethercat7
@@ -17,4 +19,12 @@ public interface UsrDao {
      *@Return int
     */
     int add(Usr usr);
+
+    /**
+     *@Author Nethercat7
+     *@Description Get user
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.Usr>
+    */
+    List<Usr> get();
 }

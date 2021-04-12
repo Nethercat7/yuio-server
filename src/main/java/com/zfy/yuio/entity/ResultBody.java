@@ -22,6 +22,11 @@ public class ResultBody {
         this.type = type;
     }
 
+    public ResultBody(int code, Object obj) {
+        this.code = code;
+        this.obj = obj;
+    }
+
     public int getCode() {
         return code;
     }

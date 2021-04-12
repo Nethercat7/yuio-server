@@ -26,4 +26,9 @@ public class UsrController {
         }
         return new ResultBody(0,"成功添加","success");
     }
+
+    @GetMapping("get")
+    private ResultBody get(){
+        return new ResultBody(0,usrService.get());
+    }
 }

@@ -8,6 +8,8 @@ import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  *@Description:User mgt
  *@Author:Nethercat7
@@ -29,5 +31,10 @@ public class UsrServiceImpl implements UsrService {
         //set default password
         usr.setUsrPwd(ShiroUntil.pwd2MD5("123456",usr.getUsrSalt(),1739));
         return usrDao.add(usr);
+    }
+
+    @Override
+    public List<Usr> get() {
+        return usrDao.get();
     }
 }

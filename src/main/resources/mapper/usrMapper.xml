@@ -4,8 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.UsrDao">
-    <insert id="add">
+    <insert id="add" parameterType="Usr">
         INSERT INTO usr(usr_id,usr_name,usr_account,usr_gender,usr_phone,usr_email,usr_status,usr_description,usr_pwd,usr_salt)
         VALUES (#{usrId},#{usrName},#{usrAccount},#{usrGender},#{usrPhone},#{usrEmail},#{usrStatus},#{usrDescription},#{usrPwd},#{usrSalt})
     </insert>
+
+    <select id="get" resultType="Usr">
+        SELECT usr_id,usr_name,usr_account,usr_gender,usr_phone,usr_email,usr_status,usr_description
+        FROM usr
+    </select>
 </mapper>
