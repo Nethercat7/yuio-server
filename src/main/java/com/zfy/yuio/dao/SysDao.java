@@ -14,19 +14,19 @@ public interface SysDao {
     /**
      *@Author Nethercat7
      *@Description 重置密码
-     *@param type
+     *@param isUser
      *@param key
      *@param pwd
      *@Return int
      */
-    int resetPwd(int type,String key,String pwd);
+    int resetPwd(boolean isUser,String key,String pwd);
 
     /**
      *@Author Nethercat7
      *@Description 获取密码信息
-     *@param type
+     *@param isUser
      *@param key
      *@Return java.util.Map<java.lang.String,java.lang.String>
     */
-    Map<String,String> getPwd(int type,String key);
+    Map<String,String> getPwd(boolean isUser,String key);
 }

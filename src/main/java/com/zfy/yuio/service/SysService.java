@@ -15,4 +15,12 @@ public interface SysService {
      *@Return int
      */
     int resetPwd(Map<String,Object> map);
+
+    /**
+     *@Author Nethercat7
+     *@Description 登录
+     *@param map
+     *@Return int
+    */
+    int login(Map<String,Object> map);
 }

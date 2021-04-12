@@ -27,4 +27,15 @@ public class SysController {
         }
         return new ResultBody(1,"重置失败","error");
     }
+
+    @PostMapping("login")
+    public ResultBody login(@RequestBody Map<String,Object> map){
+        int status=sysService.login(map);
+        if(status==1){
+            return new ResultBody(1,"账号不正确","error");
+        }else if(status==2){
+            return new ResultBody(2,"密码错误","error");
+        }
+        return new ResultBody(0,"登录成功","success");
+    }
 }

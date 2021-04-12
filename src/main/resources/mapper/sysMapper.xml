@@ -6,7 +6,7 @@
 <mapper namespace="com.zfy.yuio.dao.SysDao">
     <update id="resetPwd" parameterType="String">
         <choose>
-            <when test="type==0">
+            <when test="isUser">
                 UPDATE user
                 SET user_pwd=#{pwd}
                 WHERE user_id=#{key}
@@ -21,11 +21,12 @@
 
     <select id="getPwd" parameterType="String" resultType="Map">
         <choose>
-            <when test="type==0"></when>
+            <when test="isUser"></when>
             <otherwise>
                 SELECT student_pwd,student_salt
                 FROM student
-                WHERE student_id OR student_code=#{key}
+                WHERE student_id=#{key}
+                OR student_code=#{key}
             </otherwise>
         </choose>
     </select>
