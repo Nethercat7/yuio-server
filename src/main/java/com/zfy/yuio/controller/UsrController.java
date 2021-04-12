@@ -31,4 +31,13 @@ public class UsrController {
     private ResultBody get(){
         return new ResultBody(0,usrService.get());
     }
+
+    @GetMapping("del")
+    private ResultBody del(@RequestParam("id")String id){
+        int status=usrService.del(id);
+        if(status!=1){
+            return new ResultBody(1,"删除失败","error");
+        }
+        return new ResultBody(0,"成功删除","success");
+    }
 }

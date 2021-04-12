@@ -37,4 +37,9 @@ public class UsrServiceImpl implements UsrService {
     public List<Usr> get() {
         return usrDao.get();
     }
+
+    @Override
+    public int del(String id) {
+        return usrDao.del(id);
+    }
 }

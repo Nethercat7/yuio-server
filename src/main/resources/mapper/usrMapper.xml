@@ -13,4 +13,9 @@
         SELECT usr_id,usr_name,usr_account,usr_gender,usr_phone,usr_email,usr_status,usr_description
         FROM usr
     </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM usr
+        WHERE usr_id=#{id}
+    </delete>
 </mapper>

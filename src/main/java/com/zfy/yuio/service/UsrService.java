@@ -25,4 +25,12 @@ public interface UsrService {
      *@Return java.util.List<com.zfy.yuio.entity.Usr>
      */
     List<Usr> get();
+
+    /**
+     *@Author Nethercat7
+     *@Description Delete user
+     *@param id
+     *@Return int
+     */
+    int del(String id);
 }
