@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.UsrDao">
+    <insert id="add">
+        INSERT INTO usr(usr_id,usr_name,usr_account,usr_gender,usr_phone,usr_email,usr_status,usr_description,usr_pwd,usr_salt)
+        VALUES (#{usrId},#{usrName},#{usrAccount},#{usrGender},#{usrPhone},#{usrEmail},#{usrStatus},#{usrDescription},#{usrPwd},#{usrSalt})
+    </insert>
+</mapper>
