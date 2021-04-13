@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.RoleDao">
+    <insert id="add">
+        INSERT INTO role(role_id,role_name,role_pid,role_status,role_description)
+        VALUES(#{roleId},#{roleName},#{rolePid},#{roleStatus},#{roleDescription})
+    </insert>
+</mapper>
