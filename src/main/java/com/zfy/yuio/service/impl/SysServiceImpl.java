@@ -27,6 +27,8 @@ public class SysServiceImpl implements SysService {
         String pwd="";
         if(isUser){
             //do user op
+            String salt=info.get("usr_slat");
+            pwd=ShiroUntil.pwd2MD5("123456",salt,1739);
         }else{
             String salt=info.get("student_salt");
             pwd= ShiroUntil.pwd2MD5("123456",salt,1739);

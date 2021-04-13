@@ -7,9 +7,9 @@
     <update id="resetPwd" parameterType="String">
         <choose>
             <when test="isUser">
-                UPDATE user
-                SET user_pwd=#{pwd}
-                WHERE user_id=#{key}
+                UPDATE usr
+                SET usr_pwd=#{pwd}
+                WHERE usr_id=#{key}
             </when>
             <otherwise>
                 UPDATE student
@@ -21,7 +21,12 @@
 
     <select id="getPwd" parameterType="String" resultType="Map">
         <choose>
-            <when test="isUser"></when>
+            <when test="isUser">
+                SELECT usr_pwd,usr_salt
+                FROM usr
+                WHERE usr_id=#{key}
+                OR usr_account=#{key}
+            </when>
             <otherwise>
                 SELECT student_pwd,student_salt
                 FROM student
