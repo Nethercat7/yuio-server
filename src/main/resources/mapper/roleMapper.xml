@@ -4,8 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.RoleDao">
-    <insert id="add">
+    <insert id="add" parameterType="Role">
         INSERT INTO role(role_id,role_name,role_pid,role_status,role_description)
         VALUES(#{roleId},#{roleName},#{rolePid},#{roleStatus},#{roleDescription})
     </insert>
+
+    <select id="get" resultType="Role">
+        SELECT * FROM role
+    </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM role
+        WHERE role_id=#{id}
+    </delete>
 </mapper>

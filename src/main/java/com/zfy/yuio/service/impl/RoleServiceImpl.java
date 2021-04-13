@@ -7,6 +7,8 @@ import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  *@Description:Role mgt
  *@Author:Nethercat7
@@ -26,5 +28,15 @@ public class RoleServiceImpl implements RoleService {
         //set pid
         role.setRolePid("0");
         return roleDao.add(role);
+    }
+
+    @Override
+    public List<Role> get() {
+        return roleDao.get();
+    }
+
+    @Override
+    public int del(String id) {
+        return roleDao.del(id);
     }
 }

@@ -2,6 +2,8 @@ package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.Role;
 
+import java.util.List;
+
 /**
  *@Description:Role mgt
  *@Author:Nethercat7
@@ -15,4 +17,20 @@ public interface RoleService {
      *@Return int
      */
     int add(Role role);
+
+    /**
+     *@Author Nethercat7
+     *@Description Get Roles
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.Role>
+     */
+    List<Role> get();
+
+    /**
+     *@Author Nethercat7
+     *@Description Delete role
+     *@param id
+     *@Return int
+     */
+    int del(String id);
 }
