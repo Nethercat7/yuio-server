@@ -33,4 +33,12 @@ public interface RoleService {
      *@Return int
      */
     int del(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description Update role
+     *@param role
+     *@Return int
+     */
+    int upd(Role role);
 }

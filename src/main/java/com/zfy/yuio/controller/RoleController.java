@@ -36,4 +36,12 @@ public class RoleController {
         return new ResultBody(0, "成功删除", "success");
     }
 
+    @PostMapping("upd")
+    public ResultBody upd(@RequestBody Role role) {
+        int status = roleService.upd(role);
+        if (status != 1) {
+            return new ResultBody(1, "修改失败", "error");
+        }
+        return new ResultBody(0, "成功修改", "success");
+    }
 }

@@ -39,4 +39,9 @@ public class RoleServiceImpl implements RoleService {
     public int del(String id) {
         return roleDao.del(id);
     }
+
+    @Override
+    public int upd(Role role) {
+        return roleDao.upd(role);
+    }
 }
