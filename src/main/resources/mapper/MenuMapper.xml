@@ -12,4 +12,9 @@
     <select id="get" resultType="Menu">
         SELECT * FROM menu
     </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM menu
+        WHERE menu_id=#{id}
+    </delete>
 </mapper>

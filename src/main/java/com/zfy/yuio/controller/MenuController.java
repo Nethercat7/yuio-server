@@ -24,11 +24,20 @@ public class MenuController {
         if(status!=1){
             return new ResultBody(1,"添加失败","error");
         }
-        return new ResultBody(0,"成功添加","error");
+        return new ResultBody(0,"成功添加","success");
     }
 
     @GetMapping("get")
     public ResultBody get(){
         return new ResultBody(0,menuService.get());
+    }
+
+    @GetMapping("del")
+    public ResultBody del(@RequestParam("id")String id){
+        int status=menuService.del(id);
+        if(status!=1){
+            return new ResultBody(1,"删除失败","error");
+        }
+        return new ResultBody(0,"成功删除","success");
     }
 }

@@ -25,4 +25,12 @@ public interface MenuService {
      *@Return java.util.List<com.zfy.yuio.entity.Menu>
      */
     List<Menu> get();
+
+    /**
+     *@Author Nethercat7
+     *@Description Delete menu
+     *@param id
+     *@Return int
+     */
+    int del(String id);
 }

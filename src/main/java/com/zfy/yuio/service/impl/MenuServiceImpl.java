@@ -28,4 +28,9 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> get() {
         return menuDao.get();
     }
+
+    @Override
+    public int del(String id) {
+        return menuDao.del(id);
+    }
 }
