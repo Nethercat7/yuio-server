@@ -35,4 +35,12 @@ public interface MenuDao {
      *@Return int
     */
     int del(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description Update menu
+     *@param menu
+     *@Return int
+    */
+    int upd(Menu menu);
 }

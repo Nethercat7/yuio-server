@@ -17,4 +17,10 @@
         DELETE FROM menu
         WHERE menu_id=#{id}
     </delete>
+
+    <update id="upd" parameterType="Menu">
+        UPDATE menu
+        SET menu_name=#{menuName},menu_mark=#{menuMark},menu_url=#{menuUrl},menu_icon=#{menuIcon},menu_description=#{menuDescription},menu_status=#{menuStatus},menu_level=#{menuLevel},menu_pid=#{menuPid},menu_type=#{menuType}
+        WHERE menu_id=#{menuId}
+    </update>
 </mapper>
