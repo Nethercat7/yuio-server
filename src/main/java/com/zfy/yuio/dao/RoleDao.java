@@ -43,4 +43,22 @@ public interface RoleDao {
      *@Return int
      */
     int upd(Role role);
+
+    /**
+     *@Author Nethercat7
+     *@Description 添加角色权限
+     *@param rprId
+     *@param rprRoleId
+     *@param rprPermsId
+     *@Return int
+    */
+    int addPerms(String rprId,String rprRoleId,String rprPermsId);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过角色Id获取该角色所拥有的权限
+     *@param id
+     *@Return java.util.List<java.lang.String>
+    */
+    List<String> getRolePerms(String id);
 }

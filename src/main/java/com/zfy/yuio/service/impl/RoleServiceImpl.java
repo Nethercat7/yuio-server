@@ -27,12 +27,23 @@ public class RoleServiceImpl implements RoleService {
         role.setRoleId(snowflakeIdGeneratorUntil.getId());
         //set pid
         role.setRolePid("0");
+        //保存角色权限
+        for (String perms:role.getPerms()
+             ) {
+            roleDao.addPerms(snowflakeIdGeneratorUntil.getId(),role.getRoleId(),perms);
+        }
         return roleDao.add(role);
     }
 
     @Override
     public List<Role> get() {
-        return roleDao.get();
+        List<Role> roles= roleDao.get();
+        //获取当前角色所拥有的权限
+        for (Role r:roles
+             ) {
+            r.setPerms(roleDao.getRolePerms(r.getRoleId()));
+        }
+        return roles;
     }
 
     @Override

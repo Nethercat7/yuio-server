@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *@Description:角色实体
@@ -24,6 +25,8 @@ public class Role {
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime roleCreateTime;
+
+    private List<String> perms;
 
     public String getRoleId() {
         return roleId;
@@ -71,5 +74,13 @@ public class Role {
 
     public void setRoleCreateTime(LocalDateTime roleCreateTime) {
         this.roleCreateTime = roleCreateTime;
+    }
+
+    public List<String> getPerms() {
+        return perms;
+    }
+
+    public void setPerms(List<String> perms) {
+        this.perms = perms;
     }
 }

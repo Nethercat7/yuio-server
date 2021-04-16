@@ -23,4 +23,15 @@
         SET role_name=#{roleName},role_pid=#{rolePid},role_status=#{roleStatus},role_description=#{roleDescription}
         WHERE role_id=#{roleId}
     </update>
+
+    <insert id="addPerms" parameterType="String">
+        INSERT INTO role_perms_relation(rpr_id,rpr_role_id,rpr_perms_id)
+        VALUES(#{rprId},#{rprRoleId},#{rprPermsId})
+    </insert>
+
+    <select id="getRolePerms" parameterType="String" resultType="String">
+        SELECT rpr_perms_id
+        FROM role_perms_relation
+        WHERE rpr_role_id=#{id}
+    </select>
 </mapper>
