@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.MenuDao">
+    <insert id="add" parameterType="Menu">
+        INSERT INTO menu(menu_id,menu_name,menu_mark,menu_url,menu_icon,menu_description,menu_status,menu_level,menu_pid,menu_type)
+        VALUES(#{menuId},#{menuName},#{menuMark},#{menuUrl},#{menuIcon},#{menuDescription},#{menuStatus},#{menuLevel},#{menuPid},#{menuType})
+    </insert>
+</mapper>
