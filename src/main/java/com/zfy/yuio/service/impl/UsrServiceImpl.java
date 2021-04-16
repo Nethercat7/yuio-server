@@ -28,8 +28,8 @@ public class UsrServiceImpl implements UsrService {
         //Add role before add user
         for (String role:usr.getRoles()
              ) {
-            String urId=snowflakeIdGeneratorUntil.getId();
-            usrDao.addRole(urId,userId,role);
+            String urrId=snowflakeIdGeneratorUntil.getId();
+            usrDao.addRole(urrId,userId,role);
         }
         usr.setUsrId(userId);
         //set random salt
@@ -51,11 +51,19 @@ public class UsrServiceImpl implements UsrService {
 
     @Override
     public int del(String id) {
+        usrDao.delRole(id);
         return usrDao.del(id);
     }
 
     @Override
     public int upd(Usr usr) {
+        //先删除关系表中的用户角色信息
+        usrDao.delRole(usr.getUsrId());
+        //再重新添加
+        for (String r: usr.getRoles()
+             ) {
+            usrDao.addRole(snowflakeIdGeneratorUntil.getId(),usr.getUsrId(),r);
+        }
         return usrDao.upd(usr);
     }
 }

@@ -47,12 +47,12 @@ public interface UsrDao {
     /**
      *@Author Nethercat7
      *@Description Add role for user
-     *@param urId
-     *@param urUsrId
-     *@param urRoleId
+     *@param urrId
+     *@param urrUsrId
+     *@param urrRoleId
      *@Return int
     */
-    int addRole(String urId,String urUsrId,String urRoleId);
+    int addRole(String urrId,String urrUsrId,String urrRoleId);
 
     /**
      *@Author Nethercat7
@@ -61,4 +61,12 @@ public interface UsrDao {
      *@Return java.util.List<java.lang.String>
     */
     List<String> getRoles(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description Delete role by user id
+     *@param id
+     *@Return int
+    */
+    int delRole(String id);
 }
