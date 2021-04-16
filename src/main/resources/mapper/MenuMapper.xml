@@ -8,4 +8,8 @@
         INSERT INTO menu(menu_id,menu_name,menu_mark,menu_url,menu_icon,menu_description,menu_status,menu_level,menu_pid,menu_type)
         VALUES(#{menuId},#{menuName},#{menuMark},#{menuUrl},#{menuIcon},#{menuDescription},#{menuStatus},#{menuLevel},#{menuPid},#{menuType})
     </insert>
+
+    <select id="get" resultType="Menu">
+        SELECT * FROM menu
+    </select>
 </mapper>

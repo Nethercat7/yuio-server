@@ -26,4 +26,9 @@ public class MenuController {
         }
         return new ResultBody(0,"成功添加","error");
     }
+
+    @GetMapping("get")
+    public ResultBody get(){
+        return new ResultBody(0,menuService.get());
+    }
 }

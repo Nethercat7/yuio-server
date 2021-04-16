@@ -3,6 +3,8 @@ package com.zfy.yuio.dao;
 import com.zfy.yuio.entity.Menu;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  *@Description:Menu mgt
  *@Author:Nethercat7
@@ -17,4 +19,12 @@ public interface MenuDao {
      *@Return int
     */
     int add(Menu menu);
+
+    /**
+     *@Author Nethercat7
+     *@Description Get menu
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.Menu>
+    */
+    List<Menu> get();
 }

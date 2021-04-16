@@ -7,6 +7,8 @@ import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MenuServiceImpl implements MenuService {
     @Autowired
@@ -20,5 +22,10 @@ public class MenuServiceImpl implements MenuService {
         menu.setMenuPid("0");
         menu.setMenuLevel(1);
         return menuDao.add(menu);
+    }
+
+    @Override
+    public List<Menu> get() {
+        return menuDao.get();
     }
 }
