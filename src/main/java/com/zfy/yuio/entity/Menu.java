@@ -3,6 +3,7 @@ package com.zfy.yuio.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *@Description:菜单实体
@@ -32,6 +33,8 @@ public class Menu {
     private int menuLevel;
     @JsonProperty("type")
     private int menuType;
+
+    private List<Menu> children;
 
     public String getMenuId() {
         return menuId;
@@ -119,5 +122,13 @@ public class Menu {
 
     public void setMenuType(int menuType) {
         this.menuType = menuType;
+    }
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
     }
 }
