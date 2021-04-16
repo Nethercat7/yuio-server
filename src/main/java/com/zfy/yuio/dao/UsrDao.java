@@ -53,4 +53,12 @@ public interface UsrDao {
      *@Return int
     */
     int addRole(String urId,String urUsrId,String urRoleId);
+
+    /**
+     *@Author Nethercat7
+     *@Description Get role by user id
+     *@param id
+     *@Return java.util.List<java.lang.String>
+    */
+    List<String> getRoles(String id);
 }

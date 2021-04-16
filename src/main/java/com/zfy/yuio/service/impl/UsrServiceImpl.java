@@ -41,7 +41,12 @@ public class UsrServiceImpl implements UsrService {
 
     @Override
     public List<Usr> get() {
-        return usrDao.get();
+        List<Usr> usrList=usrDao.get();
+        for (Usr u:usrList
+             ) {
+            u.setRoles(usrDao.getRoles(u.getUsrId()));
+        }
+        return usrList;
     }
 
     @Override

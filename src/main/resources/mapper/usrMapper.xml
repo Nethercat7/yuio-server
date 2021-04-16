@@ -30,4 +30,9 @@
         INSERT INTO usr_role_relation(ur_id,ur_usr_id,ur_role_id)
         VALUES(#{urId},#{urUsrId},#{urRoleId})
     </insert>
+
+    <select id="getRoles" parameterType="String" resultType="String">
+        SELECT ur_role_id FROM usr_role_relation
+        WHERE ur_usr_id=#{id}
+    </select>
 </mapper>
