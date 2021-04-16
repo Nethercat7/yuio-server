@@ -61,4 +61,12 @@ public interface RoleDao {
      *@Return java.util.List<java.lang.String>
     */
     List<String> getRolePerms(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过Id删除权限
+     *@param id
+     *@Return int
+    */
+    int delPerms(String id);
 }

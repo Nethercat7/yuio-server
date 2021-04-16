@@ -34,4 +34,9 @@
         FROM role_perms_relation
         WHERE rpr_role_id=#{id}
     </select>
+
+    <delete id="delPerms" parameterType="String">
+        DELETE FROM role_perms_relation
+        WHERE rpr_role_id=#{id}
+    </delete>
 </mapper>

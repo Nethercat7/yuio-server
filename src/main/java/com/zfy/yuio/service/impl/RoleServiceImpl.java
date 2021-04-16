@@ -48,11 +48,20 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int del(String id) {
+        //先删除角色权限
+        roleDao.delPerms(id);
         return roleDao.del(id);
     }
 
     @Override
     public int upd(Role role) {
+        //先删除该角色下的所有权限
+        roleDao.delPerms(role.getRoleId());
+        //再添加权限
+        for (String perms:role.getPerms()
+             ) {
+            roleDao.addPerms(snowflakeIdGeneratorUntil.getId(),role.getRoleId(),perms);
+        }
         return roleDao.upd(role);
     }
 }
