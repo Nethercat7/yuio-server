@@ -25,4 +25,9 @@
         usr_description=#{usrDescription}
         WHERE usr_id=#{usrId}
     </update>
+
+    <insert id="addRole" parameterType="String">
+        INSERT INTO usr_role_relation(ur_id,ur_usr_id,ur_role_id)
+        VALUES(#{urId},#{urUsrId},#{urRoleId})
+    </insert>
 </mapper>

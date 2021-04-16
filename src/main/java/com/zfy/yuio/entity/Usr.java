@@ -3,6 +3,7 @@ package com.zfy.yuio.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *@Description:用户实体类
@@ -32,6 +33,8 @@ public class Usr {
     private String usrPwd;
     @JsonProperty("salt")
     private String usrSalt;
+    @JsonProperty("roles")
+    private List<String> roles;
 
     public String getUsrId() {
         return usrId;
@@ -119,5 +122,13 @@ public class Usr {
 
     public void setUsrSalt(String usrSalt) {
         this.usrSalt = usrSalt;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

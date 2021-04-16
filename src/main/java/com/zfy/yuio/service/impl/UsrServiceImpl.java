@@ -24,8 +24,14 @@ public class UsrServiceImpl implements UsrService {
 
     @Override
     public int add(Usr usr) {
-        //set id
-        usr.setUsrId(snowflakeIdGeneratorUntil.getId());
+        String userId=snowflakeIdGeneratorUntil.getId();
+        //Add role before add user
+        for (String role:usr.getRoles()
+             ) {
+            String urId=snowflakeIdGeneratorUntil.getId();
+            usrDao.addRole(urId,userId,role);
+        }
+        usr.setUsrId(userId);
         //set random salt
         usr.setUsrSalt(ShiroUntil.getSalt(7));
         //set default password

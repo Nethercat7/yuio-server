@@ -43,4 +43,14 @@ public interface UsrDao {
      *@Return int
     */
     int upd(Usr usr);
+
+    /**
+     *@Author Nethercat7
+     *@Description Add role for user
+     *@param urId
+     *@param urUsrId
+     *@param urRoleId
+     *@Return int
+    */
+    int addRole(String urId,String urUsrId,String urRoleId);
 }
