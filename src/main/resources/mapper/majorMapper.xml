@@ -5,8 +5,8 @@
 
 <mapper namespace="com.zfy.yuio.dao.MajorDao">
     <insert id="add" parameterType="Major">
-        INSERT INTO major(major_id,major_name,major_code,major_status,major_description,major_college_id)
-        VALUES (#{majorId},#{majorName},#{majorCode},#{majorStatus},#{majorDescription},#{majorCollegeId})
+        INSERT INTO major(major_id,major_name,major_status,major_description,major_college_id)
+        VALUES (#{majorId},#{majorName},#{majorStatus},#{majorDescription},#{majorCollegeId})
     </insert>
 
     <select id="get" resultType="Major">
@@ -20,7 +20,7 @@
 
     <update id="upd" parameterType="Major">
         UPDATE major
-        SET major_name=#{majorName},major_code=#{majorCode},major_status=#{majorStatus},major_description=#{majorDescription},major_college_id=#{majorCollegeId}
+        SET major_name=#{majorName},major_status=#{majorStatus},major_description=#{majorDescription},major_college_id=#{majorCollegeId}
         WHERE major_id=#{majorId}
     </update>
 

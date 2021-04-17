@@ -15,8 +15,6 @@ public class Major {
     private String majorId;
     @JsonProperty("name")
     private String majorName;
-    @JsonProperty("code")
-    private String majorCode;
     @JsonProperty("status")
     private int majorStatus;
     @JsonProperty("create_time")
@@ -44,14 +42,6 @@ public class Major {
 
     public void setMajorName(String majorName) {
         this.majorName = majorName;
-    }
-
-    public String getMajorCode() {
-        return majorCode;
-    }
-
-    public void setMajorCode(String majorCode) {
-        this.majorCode = majorCode;
     }
 
     public int getMajorStatus() {
