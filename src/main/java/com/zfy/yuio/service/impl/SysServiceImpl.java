@@ -1,5 +1,6 @@
 package com.zfy.yuio.service.impl;
 
+import com.zfy.yuio.dao.StudentDao;
 import com.zfy.yuio.dao.SysDao;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
@@ -22,6 +23,9 @@ import java.util.Map;
 public class SysServiceImpl implements SysService {
     @Autowired
     private SysDao sysDao;
+
+    @Autowired
+    private StudentDao studentDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 
@@ -71,6 +75,11 @@ public class SysServiceImpl implements SysService {
     @Override
     public int saveEmploymentStatus(EStatus eStatus) {
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
+        Student student=studentDao.getById(eStatus.getEsStudentId());
+        eStatus.setEsClassId(student.getStudentClassId());
+        eStatus.setEsMajorId(student.getStudentMajorId());
+        eStatus.setEsCollegeId(student.getStudentCollegeId());
+        eStatus.setEsGrade(student.getStudentGrade());
         return sysDao.saveEmploymentStatus(eStatus);
     }
 
@@ -81,10 +90,10 @@ public class SysServiceImpl implements SysService {
         if (loginInfo != null) {
             String currentPwd = loginInfo.getStudentPwd();
             String salt = loginInfo.getStudentSalt();
-            if (!currentPwd.equals(ShiroUtil.pwd2MD5(inputPwd, salt, 1739))) return new ResultBody(2,"密码不正确","error");
+            if (!currentPwd.equals(ShiroUtil.pwd2MD5(inputPwd, salt, 1739))) return new ResultBody(2, "密码不正确", "error");
         } else {
-            return new ResultBody(1,"账号不存在","error");
+            return new ResultBody(1, "账号不存在", "error");
         }
-        return new ResultBody(0,JWTUtil.createToken(loginInfo.getStudentId(),loginInfo.getStudentName(),loginInfo.getStudentCode()));
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode()));
     }
 }

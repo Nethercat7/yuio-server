@@ -45,9 +45,9 @@ public class SysController {
     public ResultBody saveEmploymentStatus(@RequestBody EStatus eStatus) {
         int status = sysService.saveEmploymentStatus(eStatus);
         if (status != 1) {
-            return new ResultBody(1, "提交失败", "success");
+            return new ResultBody(1, "提交失败", "error");
         }
-        return new ResultBody(1, "提交成功", "error");
+        return new ResultBody(1, "提交成功", "success");
     }
 
     @PostMapping("studentLogin")

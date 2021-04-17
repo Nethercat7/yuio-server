@@ -43,4 +43,12 @@ public interface StudentDao {
      *@Return int
      */
     int upd(Student student);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过ID获取学生信息
+     *@param id
+     *@Return com.zfy.yuio.entity.Student
+    */
+    Student getById(String id);
 }

@@ -19,9 +19,9 @@ public class EStatus {
     @JsonProperty("college_id")
     private String esCollegeId;
     @JsonProperty("grade")
-    private String esGrade;
+    private int esGrade;
     @JsonProperty("employment")
-    private String esEmployment;
+    private boolean esEmployment;
     @JsonProperty("company")
     private String esCompany;
     @JsonProperty("work_city")
@@ -29,7 +29,7 @@ public class EStatus {
     @JsonProperty("work_type")
     private String esWorkType;
     @JsonProperty("status")
-    private String esStatus;
+    private int esStatus;
     @JsonProperty("plan")
     private String esPlan;
     @JsonProperty("intention_city")
@@ -77,19 +77,19 @@ public class EStatus {
         this.esCollegeId = esCollegeId;
     }
 
-    public String getEsGrade() {
+    public int getEsGrade() {
         return esGrade;
     }
 
-    public void setEsGrade(String esGrade) {
+    public void setEsGrade(int esGrade) {
         this.esGrade = esGrade;
     }
 
-    public String getEsEmployment() {
+    public boolean getEsEmployment() {
         return esEmployment;
     }
 
-    public void setEsEmployment(String esEmployment) {
+    public void setEsEmployment(boolean esEmployment) {
         this.esEmployment = esEmployment;
     }
 
@@ -117,11 +117,11 @@ public class EStatus {
         this.esWorkType = esWorkType;
     }
 
-    public String getEsStatus() {
+    public int getEsStatus() {
         return esStatus;
     }
 
-    public void setEsStatus(String esStatus) {
+    public void setEsStatus(int esStatus) {
         this.esStatus = esStatus;
     }
 
