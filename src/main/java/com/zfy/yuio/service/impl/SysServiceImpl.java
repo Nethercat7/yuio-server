@@ -11,6 +11,7 @@ import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Map;
 
@@ -76,6 +77,10 @@ public class SysServiceImpl implements SysService {
     public int saveEmploymentStatus(EStatus eStatus) {
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
         Student student=studentDao.getById(eStatus.getEsStudentId());
+        //如果是已存在的就进行更新
+        if(!ObjectUtils.isEmpty(student)){
+            return sysDao.updEStatus(eStatus);
+        }
         eStatus.setEsClsId(student.getStudentClassId());
         eStatus.setEsMajorId(student.getStudentMajorId());
         eStatus.setEsCollegeId(student.getStudentCollegeId());

@@ -57,4 +57,11 @@
         OR es_major_id=#{id}
         OR es_college_id=#{id}
     </select>
+
+    <update id="updEStatus" parameterType="EStatus">
+        UPDATE employment_status
+        SET es_employment=#{esEmployment},es_company=#{esCompany},es_work_city=#{esWorkCity},es_work_type=#{esWorkType},es_status=#{esStatus},es_plan=#{esPlan},
+        es_intention_city=#{esIntentionCity},es_intention_work=#{esIntentionWork}
+        WHERE es_student_id=#{esStudentId}
+    </update>
 </mapper>

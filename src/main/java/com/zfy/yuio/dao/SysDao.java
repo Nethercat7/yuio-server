@@ -55,4 +55,6 @@ public interface SysDao {
      *@Return com.zfy.yuio.entity.EStatus
     */
     EStatus getEStatus(String id);
+
+    int updEStatus(EStatus eStatus);
 }

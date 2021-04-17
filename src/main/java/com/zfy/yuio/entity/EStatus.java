@@ -31,7 +31,7 @@ public class EStatus {
     @JsonProperty("status")
     private int esStatus;
     @JsonProperty("plan")
-    private String esPlan;
+    private int esPlan;
     @JsonProperty("intention_city")
     private String esIntentionCity;
     @JsonProperty("intention_work")
@@ -129,11 +129,11 @@ public class EStatus {
         this.esStatus = esStatus;
     }
 
-    public String getEsPlan() {
+    public int getEsPlan() {
         return esPlan;
     }
 
-    public void setEsPlan(String esPlan) {
+    public void setEsPlan(int esPlan) {
         this.esPlan = esPlan;
     }
 
