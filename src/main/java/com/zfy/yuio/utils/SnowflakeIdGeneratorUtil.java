@@ -1,7 +1,7 @@
 package com.zfy.yuio.utils;
 
 
-public class SnowflakeIdGeneratorUntil {
+public class SnowflakeIdGeneratorUtil {
 
     //================================================Algorithm's Parameter=============================================
     // 系统开始时间截 (UTC 2017-06-28 00:00:00)
@@ -50,7 +50,7 @@ public class SnowflakeIdGeneratorUntil {
      * @param workerId     工作ID (0~31)
      * @param dataCenterId 数据中心ID (0~31)
      */
-    public SnowflakeIdGeneratorUntil(long workerId, long dataCenterId) {
+    public SnowflakeIdGeneratorUtil(long workerId, long dataCenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("Worker Id can't be greater than %d or less than 0", maxWorkerId));
         }

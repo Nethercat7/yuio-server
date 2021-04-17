@@ -35,4 +35,11 @@
             </otherwise>
         </choose>
     </select>
+
+    <insert id="saveEmploymentStatus" parameterType="EStatus">
+        INSERT INTO employment_status(es_id,es_student_id,es_class_id,es_major_id,es_college_id,es_grade,es_employment,es_company,
+        es_work_city,es_work_type,es_status,es_plan,es_intention_city,es_intention_work)
+        VALUES(#{esId},#{esStudentId},#{esClassId},#{esMajorId},#{esCollegeId},#{esGrade},#{esEmployment},#{esCompany},#{esWorkCity},
+        #{esWorkType},#{esStatus},#{esPlan},#{esIntentionCity},#{esIntentionWork})
+    </insert>
 </mapper>

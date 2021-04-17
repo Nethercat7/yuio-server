@@ -9,7 +9,7 @@ import java.util.Random;
  *@Author:Nethercat7
  *@CreateDate:2021/4/11 23:03
 */
-public class ShiroUntil {
+public class ShiroUtil {
     /**
      *@Author Nethercat7
      *@Description 将密码通过MD5算法加密

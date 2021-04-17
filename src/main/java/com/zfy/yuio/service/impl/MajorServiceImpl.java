@@ -5,7 +5,7 @@ import com.zfy.yuio.dao.CollegeDao;
 import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.entity.Major;
 import com.zfy.yuio.service.MajorService;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +27,11 @@ public class MajorServiceImpl implements MajorService {
     @Autowired
     private ClsDao clsDao;
 
-    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil = new SnowflakeIdGeneratorUntil(1, 0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(1, 0);
 
     @Override
     public int add(Major major) {
-        major.setMajorId(snowflakeIdGeneratorUntil.getId());
+        major.setMajorId(snowflakeIdGeneratorUtil.getId());
         return majorDao.add(major);
     }
 

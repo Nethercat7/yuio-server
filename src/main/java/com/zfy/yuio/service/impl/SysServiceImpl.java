@@ -1,8 +1,10 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysDao;
+import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.service.SysService;
-import com.zfy.yuio.utils.ShiroUntil;
+import com.zfy.yuio.utils.ShiroUtil;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class SysServiceImpl implements SysService {
     @Autowired
     private SysDao sysDao;
 
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil =new SnowflakeIdGeneratorUtil(7,0);
+
     @Override
     public int resetPwd(Map<String,Object> map) {
         boolean isUser=Boolean.parseBoolean(String.valueOf(map.get("isUser"))) ;
@@ -28,10 +32,10 @@ public class SysServiceImpl implements SysService {
         if(isUser){
             //do user op
             String salt=info.get("usr_slat");
-            pwd=ShiroUntil.pwd2MD5("123456",salt,1739);
+            pwd= ShiroUtil.pwd2MD5("123456",salt,1739);
         }else{
             String salt=info.get("student_salt");
-            pwd= ShiroUntil.pwd2MD5("123456",salt,1739);
+            pwd= ShiroUtil.pwd2MD5("123456",salt,1739);
         }
         return sysDao.resetPwd(isUser,key,pwd);
     }
@@ -52,12 +56,18 @@ public class SysServiceImpl implements SysService {
                 currentPwd=info.get("student_pwd");
                 salt=info.get("student_salt");
             }
-            if(!currentPwd.equals(ShiroUntil.pwd2MD5(pwd,salt,1739))){
+            if(!currentPwd.equals(ShiroUtil.pwd2MD5(pwd,salt,1739))){
                 return 2;
             }
             return 0;
         }else{
             return 1;
         }
+    }
+
+    @Override
+    public int saveEmploymentStatus(EStatus eStatus) {
+        eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
+        return sysDao.saveEmploymentStatus(eStatus);
     }
 }

@@ -3,8 +3,8 @@ package com.zfy.yuio.service.impl;
 import com.zfy.yuio.dao.UsrDao;
 import com.zfy.yuio.entity.Usr;
 import com.zfy.yuio.service.UsrService;
-import com.zfy.yuio.utils.ShiroUntil;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
+import com.zfy.yuio.utils.ShiroUtil;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,22 +20,22 @@ public class UsrServiceImpl implements UsrService {
     @Autowired
     private UsrDao usrDao;
 
-    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil=new SnowflakeIdGeneratorUntil(4,0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil =new SnowflakeIdGeneratorUtil(4,0);
 
     @Override
     public int add(Usr usr) {
-        String userId=snowflakeIdGeneratorUntil.getId();
+        String userId= snowflakeIdGeneratorUtil.getId();
         //Add role before add user
         for (String role:usr.getRoles()
              ) {
-            String urrId=snowflakeIdGeneratorUntil.getId();
+            String urrId= snowflakeIdGeneratorUtil.getId();
             usrDao.addRole(urrId,userId,role);
         }
         usr.setUsrId(userId);
         //set random salt
-        usr.setUsrSalt(ShiroUntil.getSalt(7));
+        usr.setUsrSalt(ShiroUtil.getSalt(7));
         //set default password
-        usr.setUsrPwd(ShiroUntil.pwd2MD5("123456",usr.getUsrSalt(),1739));
+        usr.setUsrPwd(ShiroUtil.pwd2MD5("123456",usr.getUsrSalt(),1739));
         return usrDao.add(usr);
     }
 
@@ -62,7 +62,7 @@ public class UsrServiceImpl implements UsrService {
         //再重新添加
         for (String r: usr.getRoles()
              ) {
-            usrDao.addRole(snowflakeIdGeneratorUntil.getId(),usr.getUsrId(),r);
+            usrDao.addRole(snowflakeIdGeneratorUtil.getId(),usr.getUsrId(),r);
         }
         return usrDao.upd(usr);
     }

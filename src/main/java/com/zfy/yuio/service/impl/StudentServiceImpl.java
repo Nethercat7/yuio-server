@@ -6,8 +6,8 @@ import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.dao.StudentDao;
 import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.StudentService;
-import com.zfy.yuio.utils.ShiroUntil;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
+import com.zfy.yuio.utils.ShiroUtil;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,17 +38,17 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private ClsDao clsDao;
 
-    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil = new SnowflakeIdGeneratorUntil(3, 0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(3, 0);
 
     @Override
     public int add(Student student) {
-        student.setStudentId(snowflakeIdGeneratorUntil.getId());
+        student.setStudentId(snowflakeIdGeneratorUtil.getId());
         //为当前学生设置院系、专业和班级
         setBaseInfo(student);
         //设置随机盐
-        student.setStudentSalt(ShiroUntil.getSalt(SALT));
+        student.setStudentSalt(ShiroUtil.getSalt(SALT));
         //默认密码
-        student.setStudentPwd(ShiroUntil.pwd2MD5("123456",student.getStudentSalt(),HASH));
+        student.setStudentPwd(ShiroUtil.pwd2MD5("123456",student.getStudentSalt(),HASH));
         return studentDao.add(student);
     }
 

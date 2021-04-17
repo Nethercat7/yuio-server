@@ -5,7 +5,7 @@ import com.zfy.yuio.dao.CollegeDao;
 import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.entity.Cls;
 import com.zfy.yuio.service.ClsService;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class ClsServiceImpl implements ClsService {
     @Autowired
     private MajorDao majorDao;
 
-    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil = new SnowflakeIdGeneratorUntil(2, 0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(2, 0);
 
     @Override
     public int add(Cls cls) {
@@ -33,7 +33,7 @@ public class ClsServiceImpl implements ClsService {
         cls.setClsCollegeId(collegeId);
         cls.setClsMajorId(majorId);
         //设置班级ID
-        cls.setClsId(snowflakeIdGeneratorUntil.getId());
+        cls.setClsId(snowflakeIdGeneratorUtil.getId());
         return clsDao.add(cls);
     }
 

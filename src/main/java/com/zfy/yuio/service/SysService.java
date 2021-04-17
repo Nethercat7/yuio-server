@@ -1,5 +1,7 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.EStatus;
+
 import java.util.Map;
 
 /**
@@ -23,4 +25,12 @@ public interface SysService {
      *@Return int
     */
     int login(Map<String,Object> map);
+
+    /**
+     *@Author Nethercat7
+     *@Description 保存填写的就业情况信息
+     *@param eStatus
+     *@Return int
+     */
+    int saveEmploymentStatus(EStatus eStatus);
 }

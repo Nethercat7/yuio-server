@@ -3,7 +3,7 @@ package com.zfy.yuio.service.impl;
 import com.zfy.yuio.dao.OrgDao;
 import com.zfy.yuio.entity.Org;
 import com.zfy.yuio.service.OrgService;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +20,11 @@ public class OrgServiceImpl implements OrgService {
     @Autowired
     private OrgDao orgDao;
 
-    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil = new SnowflakeIdGeneratorUntil(0, 0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(0, 0);
 
     @Override
     public int add(Org org) {
-        org.setOrgId(snowflakeIdGeneratorUntil.getId());
+        org.setOrgId(snowflakeIdGeneratorUtil.getId());
         if (org.getOrgPid() == null) {
             org.setOrgPid("0");
             org.setOrgLevel(0);

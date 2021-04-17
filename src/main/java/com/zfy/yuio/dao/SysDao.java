@@ -1,5 +1,6 @@
 package com.zfy.yuio.dao;
 
+import com.zfy.yuio.entity.EStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -29,4 +30,12 @@ public interface SysDao {
      *@Return java.util.Map<java.lang.String,java.lang.String>
     */
     Map<String,String> getPwd(boolean isUser,String key);
+
+    /**
+     *@Author Nethercat7
+     *@Description 保存填写的就业情况信息
+     *@param eStatus
+     *@Return int
+    */
+    int saveEmploymentStatus(EStatus eStatus);
 }

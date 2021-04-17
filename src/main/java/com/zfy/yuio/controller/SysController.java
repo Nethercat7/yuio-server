@@ -1,5 +1,6 @@
 package com.zfy.yuio.controller;
 
+import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,14 @@ public class SysController {
             return new ResultBody(2,"密码错误","error");
         }
         return new ResultBody(0,"登录成功","success");
+    }
+
+    @PostMapping("saveEmploymentStatus")
+    public ResultBody saveEmploymentStatus(@RequestBody EStatus eStatus){
+        int status=sysService.saveEmploymentStatus(eStatus);
+        if(status!=1){
+            return new ResultBody(1,"提交失败","success");
+        }
+        return new ResultBody(1,"提交成功","error");
     }
 }

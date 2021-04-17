@@ -3,7 +3,7 @@ package com.zfy.yuio.service.impl;
 import com.zfy.yuio.dao.RoleDao;
 import com.zfy.yuio.entity.Role;
 import com.zfy.yuio.service.RoleService;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUntil;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +19,18 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
 
-    SnowflakeIdGeneratorUntil snowflakeIdGeneratorUntil=new SnowflakeIdGeneratorUntil(5,0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil =new SnowflakeIdGeneratorUtil(5,0);
 
     @Override
     public int add(Role role) {
         //set id
-        role.setRoleId(snowflakeIdGeneratorUntil.getId());
+        role.setRoleId(snowflakeIdGeneratorUtil.getId());
         //set pid
         role.setRolePid("0");
         //保存角色权限
         for (String perms:role.getPerms()
              ) {
-            roleDao.addPerms(snowflakeIdGeneratorUntil.getId(),role.getRoleId(),perms);
+            roleDao.addPerms(snowflakeIdGeneratorUtil.getId(),role.getRoleId(),perms);
         }
         return roleDao.add(role);
     }
@@ -60,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
         //再添加权限
         for (String perms:role.getPerms()
              ) {
-            roleDao.addPerms(snowflakeIdGeneratorUntil.getId(),role.getRoleId(),perms);
+            roleDao.addPerms(snowflakeIdGeneratorUtil.getId(),role.getRoleId(),perms);
         }
         return roleDao.upd(role);
     }
