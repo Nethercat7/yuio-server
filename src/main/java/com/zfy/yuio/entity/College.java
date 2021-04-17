@@ -15,8 +15,6 @@ public class College {
     private String collegeId;
     @JsonProperty("name")
     private String collegeName;
-    @JsonProperty("code")
-    private String collegeCode;
     @JsonProperty("status")
     private int collegeStatus;
     @JsonProperty("create_time")
@@ -40,14 +38,6 @@ public class College {
 
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
-    }
-
-    public String getCollegeCode() {
-        return collegeCode;
-    }
-
-    public void setCollegeCode(String collegeCode) {
-        this.collegeCode = collegeCode;
     }
 
     public int getCollegeStatus() {
