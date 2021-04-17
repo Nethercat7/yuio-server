@@ -1,6 +1,7 @@
 package com.zfy.yuio.dao;
 
 import com.zfy.yuio.entity.EStatus;
+import com.zfy.yuio.entity.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -38,4 +39,12 @@ public interface SysDao {
      *@Return int
     */
     int saveEmploymentStatus(EStatus eStatus);
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取学生登入信息
+     *@param student
+     *@Return int
+    */
+    Student getStudentLoginInfo(Student student);
 }

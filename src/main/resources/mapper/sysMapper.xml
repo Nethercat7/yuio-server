@@ -42,4 +42,11 @@
         VALUES(#{esId},#{esStudentId},#{esClassId},#{esMajorId},#{esCollegeId},#{esGrade},#{esEmployment},#{esCompany},#{esWorkCity},
         #{esWorkType},#{esStatus},#{esPlan},#{esIntentionCity},#{esIntentionWork})
     </insert>
+
+    <select id="getStudentLoginInfo" parameterType="Student" resultType="Student">
+        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
+        student_description,student_college_id,student_major_id,student_class_id,student_pwd,student_salt,student_create_time
+        FROM student
+        WHERE student_code=#{studentCode}
+    </select>
 </mapper>

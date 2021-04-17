@@ -1,6 +1,8 @@
 package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.EStatus;
+import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.Student;
 
 import java.util.Map;
 
@@ -33,4 +35,6 @@ public interface SysService {
      *@Return int
      */
     int saveEmploymentStatus(EStatus eStatus);
+
+    ResultBody studentLogin(Student student);
 }
