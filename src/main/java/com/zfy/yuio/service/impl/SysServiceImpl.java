@@ -76,7 +76,7 @@ public class SysServiceImpl implements SysService {
     public int saveEmploymentStatus(EStatus eStatus) {
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
         Student student=studentDao.getById(eStatus.getEsStudentId());
-        eStatus.setEsClassId(student.getStudentClassId());
+        eStatus.setEsClsId(student.getStudentClassId());
         eStatus.setEsMajorId(student.getStudentMajorId());
         eStatus.setEsCollegeId(student.getStudentCollegeId());
         eStatus.setEsGrade(student.getStudentGrade());
@@ -95,5 +95,10 @@ public class SysServiceImpl implements SysService {
             return new ResultBody(1, "账号不存在", "error");
         }
         return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode()));
+    }
+
+    @Override
+    public EStatus getEStatus(String id) {
+        return sysDao.getEStatus(id);
     }
 }

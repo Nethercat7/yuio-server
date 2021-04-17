@@ -47,11 +47,16 @@ public class SysController {
         if (status != 1) {
             return new ResultBody(1, "提交失败", "error");
         }
-        return new ResultBody(1, "提交成功", "success");
+        return new ResultBody(0, "提交成功", "success");
     }
 
     @PostMapping("studentLogin")
     public ResultBody login(@RequestBody Student student) {
         return sysService.studentLogin(student);
+    }
+
+    @GetMapping("getEStatus")
+    public ResultBody getEStatus(@RequestParam("id") String id) {
+        return new ResultBody(0,sysService.getEStatus(id));
     }
 }

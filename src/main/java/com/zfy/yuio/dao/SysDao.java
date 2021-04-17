@@ -47,4 +47,12 @@ public interface SysDao {
      *@Return int
     */
     Student getStudentLoginInfo(Student student);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过ID获取就业情况统计信息
+     *@param id
+     *@Return com.zfy.yuio.entity.EStatus
+    */
+    EStatus getEStatus(String id);
 }

@@ -12,8 +12,8 @@ public class EStatus {
     private String esId;
     @JsonProperty("student_id")
     private String esStudentId;
-    @JsonProperty("class_id")
-    private String esClassId;
+    @JsonProperty("cls_id")
+    private String esClsId;
     @JsonProperty("major_id")
     private String esMajorId;
     @JsonProperty("college_id")
@@ -53,12 +53,16 @@ public class EStatus {
         this.esStudentId = esStudentId;
     }
 
-    public String getEsClassId() {
-        return esClassId;
+    public String getEsClsId() {
+        return esClsId;
     }
 
-    public void setEsClassId(String esClassId) {
-        this.esClassId = esClassId;
+    public void setEsClsId(String esClsId) {
+        this.esClsId = esClsId;
+    }
+
+    public boolean isEsEmployment() {
+        return esEmployment;
     }
 
     public String getEsMajorId() {
