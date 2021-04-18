@@ -64,4 +64,9 @@ public class SysController {
     public ResultBody getCollegeAndMajor(){
         return new ResultBody(0,sysService.getCollegeAndMajor(),"success");
     }
+
+    @GetMapping("getFullOrg")
+    public ResultBody getFullOrg(){
+        return new ResultBody(0,sysService.getFullOrg(),"success");
+    }
 }

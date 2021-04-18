@@ -1,13 +1,7 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.CollegeDao;
-import com.zfy.yuio.dao.MajorDao;
-import com.zfy.yuio.dao.StudentDao;
-import com.zfy.yuio.dao.SysDao;
-import com.zfy.yuio.entity.College;
-import com.zfy.yuio.entity.EStatus;
-import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.Student;
+import com.zfy.yuio.dao.*;
+import com.zfy.yuio.entity.*;
 import com.zfy.yuio.service.SysService;
 import com.zfy.yuio.utils.JWTUtil;
 import com.zfy.yuio.utils.ShiroUtil;
@@ -37,6 +31,9 @@ public class SysServiceImpl implements SysService {
 
     @Autowired
     private MajorDao majorDao;
+
+    @Autowired
+            private ClsDao clsDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 
@@ -125,5 +122,23 @@ public class SysServiceImpl implements SysService {
             c.setChildren(majorDao.getByPid(c.getCollegeId()));
         }
         return colleges;
+    }
+
+    @Override
+    public List<College> getFullOrg() {
+        List<College> collegeList= collegeDao.get();
+        //添加之间的关联
+        for (College c:collegeList
+             ) {
+            //获取院系下的专业
+            List<Major> majors=majorDao.getByPid(c.getCollegeId());
+            for (Major m:majors
+                 ) {
+                //获取专业下的班级
+                m.setChildren(clsDao.getByPid(m.getMajorId()));
+            }
+            c.setChildren(majors);
+        }
+        return collegeList;
     }
 }

@@ -56,4 +56,12 @@ public interface SysService {
      *@Return java.util.List<com.zfy.yuio.entity.College>
      */
     List<College> getCollegeAndMajor();
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取关联的院系、专业以及班级信息
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.College>
+    */
+    List<College> getFullOrg();
 }
