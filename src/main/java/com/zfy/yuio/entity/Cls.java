@@ -30,7 +30,7 @@ public class Cls {
     @JsonProperty("major_name")
     private String clsMajorName;
     @JsonProperty("grade")
-    private String clsGrade;
+    private int clsGrade;
 
     private List<String> container;//用于装院系和专业ID配合前端的级联选择器
 
@@ -114,11 +114,11 @@ public class Cls {
         this.container = container;
     }
 
-    public String getClsGrade() {
+    public int getClsGrade() {
         return clsGrade;
     }
 
-    public void setClsGrade(String clsGrade) {
+    public void setClsGrade(int clsGrade) {
         this.clsGrade = clsGrade;
     }
 }
