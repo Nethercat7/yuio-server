@@ -56,5 +56,11 @@ public interface SysDao {
     */
     EStatus getEStatus(String id);
 
+    /**
+     *@Author Nethercat7
+     *@Description 更新就业情信息
+     *@param eStatus
+     *@Return int
+    */
     int updEStatus(EStatus eStatus);
 }

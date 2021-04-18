@@ -1,7 +1,10 @@
 package com.zfy.yuio.service.impl;
 
+import com.zfy.yuio.dao.CollegeDao;
+import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.dao.StudentDao;
 import com.zfy.yuio.dao.SysDao;
+import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.Student;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +31,12 @@ public class SysServiceImpl implements SysService {
 
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private CollegeDao collegeDao;
+
+    @Autowired
+    private MajorDao majorDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 
@@ -105,5 +115,15 @@ public class SysServiceImpl implements SysService {
     @Override
     public EStatus getEStatus(String id) {
         return sysDao.getEStatus(id);
+    }
+
+    @Override
+    public List<College> getCollegeAndMajor() {
+        List<College> colleges=collegeDao.get();
+        for (College c:colleges
+        ) {
+            c.setChildren(majorDao.getByPid(c.getCollegeId()));
+        }
+        return colleges;
     }
 }

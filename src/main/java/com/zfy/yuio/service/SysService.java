@@ -1,9 +1,11 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.Student;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,4 +47,13 @@ public interface SysService {
      *@Return com.zfy.yuio.entity.EStatus
      */
     EStatus getEStatus(String id);
+
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取院系以及旗下的专业
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.College>
+     */
+    List<College> getCollegeAndMajor();
 }

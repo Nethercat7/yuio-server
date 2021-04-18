@@ -59,4 +59,9 @@ public class SysController {
     public ResultBody getEStatus(@RequestParam("id") String id) {
         return new ResultBody(0,sysService.getEStatus(id));
     }
+
+    @GetMapping("getCollegeAndMajor")
+    public ResultBody getCollegeAndMajor(){
+        return new ResultBody(0,sysService.getCollegeAndMajor(),"success");
+    }
 }
