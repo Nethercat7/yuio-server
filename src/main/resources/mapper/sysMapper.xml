@@ -50,7 +50,7 @@
         WHERE student_code=#{studentCode}
     </select>
 
-    <select id="getEStatus" parameterType="String" resultType="EStatus">
+    <select id="getEStatusById" parameterType="String" resultType="EStatus">
         SELECT * FROM employment_status
         WHERE es_student_id=#{id}
         OR es_cls_id=#{id}
@@ -64,4 +64,8 @@
         es_intention_city=#{esIntentionCity},es_intention_work=#{esIntentionWork}
         WHERE es_student_id=#{esStudentId}
     </update>
+
+    <select id="getEStatus" resultType="EStatus">
+        SELECT * FROM employment_status
+    </select>
 </mapper>

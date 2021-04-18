@@ -46,7 +46,7 @@ public interface SysService {
      *@param id
      *@Return com.zfy.yuio.entity.EStatus
      */
-    EStatus getEStatus(String id);
+    EStatus getEStatusById(String id);
 
 
     /**
@@ -64,4 +64,6 @@ public interface SysService {
      *@Return java.util.List<com.zfy.yuio.entity.College>
     */
     List<College> getFullOrg();
+
+    Map<String,Object> getTotalEmploymentRate();
 }

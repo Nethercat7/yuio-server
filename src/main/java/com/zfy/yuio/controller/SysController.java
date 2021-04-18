@@ -57,7 +57,7 @@ public class SysController {
 
     @GetMapping("getEStatus")
     public ResultBody getEStatus(@RequestParam("id") String id) {
-        return new ResultBody(0,sysService.getEStatus(id));
+        return new ResultBody(0,sysService.getEStatusById(id));
     }
 
     @GetMapping("getCollegeAndMajor")
@@ -68,5 +68,10 @@ public class SysController {
     @GetMapping("getFullOrg")
     public ResultBody getFullOrg(){
         return new ResultBody(0,sysService.getFullOrg(),"success");
+    }
+
+    @GetMapping("getTotalEmploymentRate")
+    public ResultBody getTotalEmploymentRate(){
+        return new ResultBody(0,sysService.getTotalEmploymentRate(),"success");
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -110,8 +112,8 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public EStatus getEStatus(String id) {
-        return sysDao.getEStatus(id);
+    public EStatus getEStatusById(String id) {
+        return sysDao.getEStatusById(id);
     }
 
     @Override
@@ -140,5 +142,30 @@ public class SysServiceImpl implements SysService {
             c.setChildren(majors);
         }
         return collegeList;
+    }
+
+    @Override
+    public Map<String,Object> getTotalEmploymentRate() {
+        //获取所有的就业情况统计信息
+        List<EStatus> eStatuses=sysDao.getEStatus();
+        //计算总人数
+        int totalPeople=studentDao.get().size();
+        //计算各学院就业人数
+        int employmentPeople=0;
+        for (EStatus es:eStatuses
+             ) {
+            if(es.getEsEmployment()) employmentPeople+=1;
+        }
+        //计算各学院未就业人数
+        int unEmploymentPeople=totalPeople-employmentPeople;
+        //计算总就业率
+        DecimalFormat df=new DecimalFormat("0.00");
+        String employmentRate=df.format((float)(totalPeople-unEmploymentPeople)/(float)totalPeople*100);
+        Map<String,Object> map=new HashMap<>();
+        map.put("total_people",totalPeople);
+        map.put("employment_people",employmentPeople);
+        map.put("unemployment_people",unEmploymentPeople);
+        map.put("employment_rate",employmentRate);
+        return map;
     }
 }

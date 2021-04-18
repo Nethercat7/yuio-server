@@ -4,6 +4,7 @@ import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.Student;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,7 +55,7 @@ public interface SysDao {
      *@param id
      *@Return com.zfy.yuio.entity.EStatus
     */
-    EStatus getEStatus(String id);
+    EStatus getEStatusById(String id);
 
     /**
      *@Author Nethercat7
@@ -63,4 +64,12 @@ public interface SysDao {
      *@Return int
     */
     int updEStatus(EStatus eStatus);
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取所有的就业情况统计信息
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.EStatus>
+    */
+    List<EStatus> getEStatus();
 }
