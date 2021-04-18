@@ -132,4 +132,19 @@ public class RandomInfoGenerateUntil {
         }
         return gender;
     }
+
+    /**
+     *@param
+     *@Author 赵富源
+     *@Description 随机生成true|false
+     *@Return java.lang.String
+     */
+    public static boolean randomBoolean(){
+        Random random=new Random();
+        boolean b=true;
+        if(random.nextInt(2)==0){
+            b=false;
+        }
+        return b;
+    }
 }

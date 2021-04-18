@@ -21,5 +21,13 @@ public interface ToolService {
      *@Return int
     */
     int randomStudent(int num);
+
+    /**
+     *@Author Nethercat7
+     *@Description 随机生成就业情况信息
+     *@param
+     *@Return int
+    */
+    int randomEStatus(int num);
 }
 

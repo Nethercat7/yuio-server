@@ -28,4 +28,10 @@ public class ToolController {
         toolService.randomStudent(num);
         return new ResultBody(0, "oo");
     }
+
+    @GetMapping("randomEStatus")
+    public ResultBody randomEStatus(@RequestParam("num") int num) {
+        toolService.randomEStatus(num);
+        return new ResultBody(0, "oo");
+    }
 }
