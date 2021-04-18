@@ -72,4 +72,12 @@ public interface SysDao {
      *@Return java.util.List<com.zfy.yuio.entity.EStatus>
     */
     List<EStatus> getEStatus();
+
+    /**
+     *@Author Nethercat7
+     *@Description 根据院系ID获取该院系下的就业情况信息
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.EStatus>
+    */
+    List<EStatus> getEStatusByCollegeId(String id);
 }

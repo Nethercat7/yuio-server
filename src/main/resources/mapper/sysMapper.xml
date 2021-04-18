@@ -68,4 +68,9 @@
     <select id="getEStatus" resultType="EStatus">
         SELECT * FROM employment_status
     </select>
+
+    <select id="getEStatusByCollegeId" parameterType="String" resultType="EStatus">
+        SELECT * FROM employment_status
+        WHERE es_college_id=#{id}
+    </select>
 </mapper>

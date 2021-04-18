@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class SysServiceImpl implements SysService {
     private MajorDao majorDao;
 
     @Autowired
-            private ClsDao clsDao;
+    private ClsDao clsDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 
@@ -85,9 +86,9 @@ public class SysServiceImpl implements SysService {
     @Override
     public int saveEmploymentStatus(EStatus eStatus) {
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
-        Student student=studentDao.getById(eStatus.getEsStudentId());
+        Student student = studentDao.getById(eStatus.getEsStudentId());
         //如果是已存在的就进行更新
-        if(!ObjectUtils.isEmpty(student)){
+        if (!ObjectUtils.isEmpty(student)) {
             return sysDao.updEStatus(eStatus);
         }
         eStatus.setEsClsId(student.getStudentClassId());
@@ -118,8 +119,8 @@ public class SysServiceImpl implements SysService {
 
     @Override
     public List<College> getCollegeAndMajor() {
-        List<College> colleges=collegeDao.get();
-        for (College c:colleges
+        List<College> colleges = collegeDao.get();
+        for (College c : colleges
         ) {
             c.setChildren(majorDao.getByPid(c.getCollegeId()));
         }
@@ -128,14 +129,14 @@ public class SysServiceImpl implements SysService {
 
     @Override
     public List<College> getFullOrg() {
-        List<College> collegeList= collegeDao.get();
+        List<College> collegeList = collegeDao.get();
         //添加之间的关联
-        for (College c:collegeList
-             ) {
+        for (College c : collegeList
+        ) {
             //获取院系下的专业
-            List<Major> majors=majorDao.getByPid(c.getCollegeId());
-            for (Major m:majors
-                 ) {
+            List<Major> majors = majorDao.getByPid(c.getCollegeId());
+            for (Major m : majors
+            ) {
                 //获取专业下的班级
                 m.setChildren(clsDao.getByPid(m.getMajorId()));
             }
@@ -145,27 +146,67 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public Map<String,Object> getTotalEmploymentRate() {
+    public Map<String, Object> getTotalEmploymentInfo() {
         //获取所有的就业情况统计信息
-        List<EStatus> eStatuses=sysDao.getEStatus();
+        List<EStatus> eStatuses = sysDao.getEStatus();
         //计算总人数
-        int totalPeople=studentDao.get().size();
+        int totalPeople = studentDao.get().size();
         //计算各学院就业人数
-        int employmentPeople=0;
-        for (EStatus es:eStatuses
-             ) {
-            if(es.getEsEmployment()) employmentPeople+=1;
+        int employmentPeople = 0;
+        for (EStatus es : eStatuses
+        ) {
+            if (es.getEsEmployment()) employmentPeople += 1;
         }
         //计算各学院未就业人数
-        int unEmploymentPeople=totalPeople-employmentPeople;
+        int unEmploymentPeople = totalPeople - employmentPeople;
         //计算总就业率
-        DecimalFormat df=new DecimalFormat("0.00");
-        String employmentRate=df.format((float)(totalPeople-unEmploymentPeople)/(float)totalPeople*100);
-        Map<String,Object> map=new HashMap<>();
-        map.put("total_people",totalPeople);
-        map.put("employment_people",employmentPeople);
-        map.put("unemployment_people",unEmploymentPeople);
-        map.put("employment_rate",employmentRate);
+        DecimalFormat df = new DecimalFormat("0.00");
+        String employmentRate = df.format((float) (totalPeople - unEmploymentPeople) / (float) totalPeople * 100);
+        Map<String, Object> map = new HashMap<>();
+        map.put("total_people", totalPeople);
+        map.put("employment_people", employmentPeople);
+        map.put("unemployment_people", unEmploymentPeople);
+        map.put("employment_rate", employmentRate);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getCollegeEmploymentInfo() {
+        //获取所有院系
+        List<College> collegeList = collegeDao.get();
+        //定义柱状图的X和Y轴数据
+        List<String> collegeNameList = new ArrayList<>();
+        List<String> collegeEmploymentRate = new ArrayList<>();
+        List<Integer> collegeEmploymentPeople = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat("0.00");
+        for (College c : collegeList
+        ) {
+            //获取该院系下的就业情况信息
+            List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId());
+            //获取该院系下的所有学生信息
+            List<Student> studentList = studentDao.getByCollegeId(c.getCollegeId());
+            //计算该院系下的学生总量
+            int totalPeople = studentList.size();
+            //计算该院系下已就业的学生数量
+            int employmentPeople = 0;
+            for (EStatus e : eStatusList
+            ) {
+                if (!e.getEsEmployment()) employmentPeople += 1;
+            }
+            //计算未就业的学生总数量
+            int unEmploymentPeople = totalPeople - employmentPeople;
+            //计算就业率
+            String employmentRate = df.format((float) (totalPeople - unEmploymentPeople) / (float) totalPeople * 100);
+            //将数据添加进列表中
+            collegeNameList.add(c.getCollegeName());
+            collegeEmploymentRate.add(employmentRate);
+            collegeEmploymentPeople.add(employmentPeople);
+        }
+        //将数据添加进MAP中返回
+        Map<String, Object> map = new HashMap<>();
+        map.put("college_name", collegeNameList);
+        map.put("college_employment_rate", collegeEmploymentRate);
+        map.put("college_employment_people", collegeEmploymentPeople);
         return map;
     }
 }

@@ -65,5 +65,13 @@ public interface SysService {
     */
     List<College> getFullOrg();
 
-    Map<String,Object> getTotalEmploymentRate();
+    /**
+     *@Author Nethercat7
+     *@Description 获取整个学校总就业情况
+     *@param
+     *@Return java.util.Map<java.lang.String,java.lang.Object>
+    */
+    Map<String,Object> getTotalEmploymentInfo();
+
+    Map<String,Object> getCollegeEmploymentInfo();
 }

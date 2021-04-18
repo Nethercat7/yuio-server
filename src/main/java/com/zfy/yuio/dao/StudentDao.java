@@ -51,4 +51,12 @@ public interface StudentDao {
      *@Return com.zfy.yuio.entity.Student
     */
     Student getById(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description 查询该院系下的所有学生信息
+     *@param id
+     *@Return java.util.List<com.zfy.yuio.entity.Student>
+    */
+    List<Student> getByCollegeId(String id);
 }
