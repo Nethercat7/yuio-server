@@ -1,7 +1,5 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.ClsDao;
-import com.zfy.yuio.dao.CollegeDao;
 import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.entity.Major;
 import com.zfy.yuio.service.MajorService;
@@ -21,12 +19,6 @@ public class MajorServiceImpl implements MajorService {
     @Autowired
     private MajorDao majorDao;
 
-    @Autowired
-    private CollegeDao collegeDao;
-
-    @Autowired
-    private ClsDao clsDao;
-
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(1, 0);
 
     @Override
@@ -37,13 +29,7 @@ public class MajorServiceImpl implements MajorService {
 
     @Override
     public List<Major> get() {
-        List<Major> majors = majorDao.get();
-        for (Major m : majors
-        ) {
-            m.setMajorCollegeName(collegeDao.getById(m.getMajorCollegeId()).getCollegeName());
-            m.setChildren(clsDao.getByPid(m.getMajorId()));
-        }
-        return majors;
+        return majorDao.get();
     }
 
     @Override
