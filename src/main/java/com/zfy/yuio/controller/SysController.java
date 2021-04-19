@@ -69,14 +69,4 @@ public class SysController {
     public ResultBody getFullOrg(){
         return new ResultBody(0,sysService.getFullOrg(),"success");
     }
-
-    @GetMapping("getTotalEmploymentInfo")
-    public ResultBody getTotalEmploymentInfo(){
-        return new ResultBody(0,sysService.getTotalEmploymentInfo(),"success");
-    }
-
-    @GetMapping("getCollegeEmploymentInfo")
-    public ResultBody getCollegeEmploymentInfo(){
-        return new ResultBody(0,sysService.getCollegeEmploymentInfo(),"success");
-    }
 }
