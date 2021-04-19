@@ -1,0 +1,22 @@
+package com.zfy.yuio.dao;
+
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ *@Description:数据统计模块
+ *@Author:Nethercat7
+ *@CreateDate:2021/4/19 17:32
+*/
+@Repository
+public interface StatisticsDao {
+    /**
+     *@Author Nethercat7
+     *@Description 获取就业城市信息
+     *@param
+     *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+    */
+    List<Map<String,Object>> getEmploymentCityInfo();
+}

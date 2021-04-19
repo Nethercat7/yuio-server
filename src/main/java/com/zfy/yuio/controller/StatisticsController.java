@@ -29,4 +29,9 @@ public class StatisticsController {
     public ResultBody getCollegeEmploymentInfo(){
         return new ResultBody(0,statisticsService.getCollegeEmploymentInfo(),"success");
     }
+
+    @GetMapping("getEmploymentCityInfo")
+    public ResultBody getEmploymentCityInfo(){
+        return new ResultBody(0,statisticsService.getEmploymentCityInfo(),"success");
+    }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.StatisticsDao">
+    <select id="getEmploymentCityInfo" resultType="Map">
+        SELECT COUNT(es_id) as people,es_work_city as city
+        FROM employment_status
+        WHERE es_employment=1
+        GROUP BY city
+        ORDER BY people desc
+    </select>
+</mapper>

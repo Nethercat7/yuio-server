@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *@Description:数据统计模块
- *@Author:Nethercat7
- *@CreateDate:2021/4/19 17:19
-*/
+ * @Description:数据统计模块
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/19 17:19
+ */
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
     @Autowired
@@ -36,6 +36,9 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Autowired
     private ClsDao clsDao;
+
+    @Autowired
+    private StatisticsDao statisticsDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 
@@ -72,11 +75,11 @@ public class StatisticsServiceImpl implements StatisticsService {
         List<String> collegeNameList = new ArrayList<>();
         List<String> collegeEmploymentRate = new ArrayList<>();
         List<Integer> collegeEmploymentPeople = new ArrayList<>();
-        List<Map<String,Object>> tableData=new ArrayList<>();
+        List<Map<String, Object>> tableData = new ArrayList<>();
         DecimalFormat df = new DecimalFormat("0.00");
         for (College c : collegeList
         ) {
-            Map<String,Object> map=new HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             //获取该院系下的就业情况信息
             List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId());
             //获取该院系下的所有学生信息
@@ -97,11 +100,11 @@ public class StatisticsServiceImpl implements StatisticsService {
             collegeNameList.add(c.getCollegeName());
             collegeEmploymentRate.add(employmentRate);
             collegeEmploymentPeople.add(employmentPeople);
-            map.put("college_name",c.getCollegeName());
-            map.put("total_people",totalPeople);
-            map.put("employment_people",employmentPeople);
-            map.put("unemployment_people",unEmploymentPeople);
-            map.put("employment_rate",employmentRate);
+            map.put("college_name", c.getCollegeName());
+            map.put("total_people", totalPeople);
+            map.put("employment_people", employmentPeople);
+            map.put("unemployment_people", unEmploymentPeople);
+            map.put("employment_rate", employmentRate);
             tableData.add(map);
         }
         //将数据添加进MAP中返回
@@ -109,7 +112,12 @@ public class StatisticsServiceImpl implements StatisticsService {
         map.put("college_name", collegeNameList);
         map.put("college_employment_rate", collegeEmploymentRate);
         map.put("college_employment_people", collegeEmploymentPeople);
-        map.put("data",tableData);
+        map.put("data", tableData);
         return map;
+    }
+
+    @Override
+    public List<Map<String, Object>> getEmploymentCityInfo() {
+        return statisticsDao.getEmploymentCityInfo();
     }
 }
