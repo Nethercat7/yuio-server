@@ -120,4 +120,9 @@ public class StatisticsServiceImpl implements StatisticsService {
     public List<Map<String, Object>> getEmploymentCityInfo() {
         return statisticsDao.getEmploymentCityInfo();
     }
+
+    @Override
+    public List<Map<String, Object>> getEmploymentWorkInfo() {
+        return statisticsDao.getEmploymentWorkInfo();
+    }
 }

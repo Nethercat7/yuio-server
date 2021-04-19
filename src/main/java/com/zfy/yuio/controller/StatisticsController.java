@@ -34,4 +34,9 @@ public class StatisticsController {
     public ResultBody getEmploymentCityInfo(){
         return new ResultBody(0,statisticsService.getEmploymentCityInfo(),"success");
     }
+
+    @GetMapping("getEmploymentWorkInfo")
+    public ResultBody getEmploymentWorkInfo(){
+        return new ResultBody(0,statisticsService.getEmploymentWorkInfo(),"success");
+    }
 }

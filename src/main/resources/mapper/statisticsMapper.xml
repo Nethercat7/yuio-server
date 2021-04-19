@@ -11,4 +11,12 @@
         GROUP BY city
         ORDER BY people desc
     </select>
+
+    <select id="getEmploymentWorkInfo" resultType="Map">
+        SELECT COUNT(es_id) as people,es_work_type as type
+        FROM employment_status
+        WHERE es_employment=1
+        GROUP BY type
+        ORDER BY people desc
+    </select>
 </mapper>

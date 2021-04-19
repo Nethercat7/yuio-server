@@ -32,4 +32,12 @@ public interface StatisticsService {
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getEmploymentCityInfo();
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取就业岗位信息
+     *@param
+     *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     */
+    List<Map<String,Object>> getEmploymentWorkInfo();
 }
