@@ -38,6 +38,12 @@ public interface SysService {
      */
     int saveEmploymentStatus(EStatus eStatus);
 
+    /**
+     *@Author Nethercat7
+     *@Description 学生登录
+     *@param student
+     *@Return com.zfy.yuio.entity.ResultBody
+    */
     ResultBody studentLogin(Student student);
 
     /**
@@ -64,14 +70,4 @@ public interface SysService {
      *@Return java.util.List<com.zfy.yuio.entity.College>
     */
     List<College> getFullOrg();
-
-    /**
-     *@Author Nethercat7
-     *@Description 获取整个学校总就业情况
-     *@param
-     *@Return java.util.Map<java.lang.String,java.lang.Object>
-    */
-    Map<String,Object> getTotalEmploymentInfo();
-
-    Map<String,Object> getCollegeEmploymentInfo();
 }
