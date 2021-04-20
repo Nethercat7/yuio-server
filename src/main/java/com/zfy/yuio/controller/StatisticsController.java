@@ -44,4 +44,9 @@ public class StatisticsController {
     public ResultBody getUnEmploymentStudentPlan(){
         return new ResultBody(0,statisticsService.getUnEmploymentStudentPlan(),"success");
     }
+
+    @GetMapping("getIntentionCityInfo")
+    public ResultBody getIntentionCityInfo(){
+        return new ResultBody(0,statisticsService.getIntentionCityInfo(),"success");
+    }
 }

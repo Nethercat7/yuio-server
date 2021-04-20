@@ -27,4 +27,11 @@
         GROUP BY plan
         ORDER BY people desc
     </select>
+
+    <select id="getIntentionCityInfo" resultType="Map">
+        SELECT COUNT(es_id) as people,es_intention_city as city
+        FROM employment_status
+        GROUP BY city
+        ORDER BY people desc
+    </select>
 </mapper>
