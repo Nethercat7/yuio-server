@@ -3,10 +3,7 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Description:数据统计模块
@@ -21,13 +18,13 @@ public class StatisticsController {
     private StatisticsService statisticsService;
 
     @GetMapping("getTotalEmploymentInfo")
-    public ResultBody getTotalEmploymentInfo(){
-        return new ResultBody(0,statisticsService.getTotalEmploymentInfo(),"success");
+    public ResultBody getTotalEmploymentInfo(@RequestParam("grade") int grade){
+        return new ResultBody(0,statisticsService.getTotalEmploymentInfo(grade),"success");
     }
 
     @GetMapping("getCollegeEmploymentInfo")
-    public ResultBody getCollegeEmploymentInfo(){
-        return new ResultBody(0,statisticsService.getCollegeEmploymentInfo(),"success");
+    public ResultBody getCollegeEmploymentInfo(@RequestParam("grade") int grade){
+        return new ResultBody(0,statisticsService.getCollegeEmploymentInfo(grade),"success");
     }
 
     @GetMapping("getEmploymentCityInfo")

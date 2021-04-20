@@ -68,10 +68,10 @@ public interface SysDao {
     /**
      *@Author Nethercat7
      *@Description 获取所有的就业情况统计信息
-     *@param
+     *@param grade
      *@Return java.util.List<com.zfy.yuio.entity.EStatus>
     */
-    List<EStatus> getEStatus();
+    List<EStatus> getEStatus(int grade);
 
     /**
      *@Author Nethercat7
@@ -79,5 +79,5 @@ public interface SysDao {
      *@param
      *@Return java.util.List<com.zfy.yuio.entity.EStatus>
     */
-    List<EStatus> getEStatusByCollegeId(String id);
+    List<EStatus> getEStatusByCollegeId(String id,int grade);
 }

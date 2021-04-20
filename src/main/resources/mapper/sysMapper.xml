@@ -65,12 +65,14 @@
         WHERE es_student_id=#{esStudentId}
     </update>
 
-    <select id="getEStatus" resultType="EStatus">
+    <select id="getEStatus" resultType="EStatus" parameterType="Integer">
         SELECT * FROM employment_status
+        WHERE es_grade=#{grade}
     </select>
 
-    <select id="getEStatusByCollegeId" parameterType="String" resultType="EStatus">
+    <select id="getEStatusByCollegeId" parameterType="Object" resultType="EStatus">
         SELECT * FROM employment_status
         WHERE es_college_id=#{id}
+        AND es_grade=#{grade}
     </select>
 </mapper>

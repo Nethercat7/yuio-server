@@ -15,7 +15,7 @@ public interface StatisticsService {
      *@param
      *@Return java.util.Map<java.lang.String,java.lang.Object>
      */
-    Map<String,Object> getTotalEmploymentInfo();
+    Map<String,Object> getTotalEmploymentInfo(int grade);
 
     /**
      *@Author Nethercat7
@@ -23,7 +23,7 @@ public interface StatisticsService {
      *@param
      *@Return java.util.Map<java.lang.String,java.lang.Object>
      */
-    Map<String,Object> getCollegeEmploymentInfo();
+    Map<String,Object> getCollegeEmploymentInfo(int grade);
 
     /**
      *@Author Nethercat7

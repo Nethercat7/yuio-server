@@ -40,9 +40,9 @@ public class StatisticsServiceImpl implements StatisticsService {
     private WorkDao workDao;
 
     @Override
-    public Map<String, Object> getTotalEmploymentInfo() {
+    public Map<String, Object> getTotalEmploymentInfo(int grade) {
         //获取所有的就业情况统计信息
-        List<EStatus> eStatuses = sysDao.getEStatus();
+        List<EStatus> eStatuses = sysDao.getEStatus(grade);
         //计算总人数
         int totalPeople = studentDao.get().size();
         //计算各学院就业人数
@@ -65,7 +65,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public Map<String, Object> getCollegeEmploymentInfo() {
+    public Map<String, Object> getCollegeEmploymentInfo(int grade) {
         //获取所有院系
         List<College> collegeList = collegeDao.get();
         //定义柱状图的X和Y轴数据
@@ -78,7 +78,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         ) {
             Map<String, Object> map = new HashMap<>();
             //获取该院系下的就业情况信息
-            List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId());
+            List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId(),grade);
             //获取该院系下的所有学生信息
             List<Student> studentList = studentDao.getByCollegeId(c.getCollegeId());
             //计算该院系下的学生总量
