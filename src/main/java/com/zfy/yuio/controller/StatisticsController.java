@@ -39,4 +39,9 @@ public class StatisticsController {
     public ResultBody getEmploymentWorkInfo(){
         return new ResultBody(0,statisticsService.getEmploymentWorkInfo(),"success");
     }
+
+    @GetMapping("getUnEmploymentStudentPlan")
+    public ResultBody getUnEmploymentStudentPlan(){
+        return new ResultBody(0,statisticsService.getUnEmploymentStudentPlan(),"success");
+    }
 }
