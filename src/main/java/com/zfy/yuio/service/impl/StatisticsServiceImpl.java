@@ -45,7 +45,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         //获取所有的就业情况统计信息
         List<EStatus> eStatuses = sysDao.getEStatus(grade);
         //计算总人数
-        int totalPeople = studentDao.get().size();
+        int totalPeople = studentDao.get(grade).size();
         //计算各学院就业人数
         int employmentPeople = 0;
         for (EStatus es : eStatuses

@@ -27,6 +27,9 @@
     <select id="getByPid" parameterType="String" resultType="Cls">
         SELECT * FROM cls
         WHERE cls_major_id=#{pid}
+        <if test="grade!=0">
+            AND cls_grade=#{grade}
+        </if>
     </select>
 
     <select id="getNameById" parameterType="String" resultType="String">

@@ -12,7 +12,7 @@ public interface ToolService {
      *@param num
      *@Return int
     */
-    int randomCls(int num);
+    int randomCls(int num,int grade);
 
     /**
      *@Author Nethercat7
@@ -20,7 +20,7 @@ public interface ToolService {
      *@param num
      *@Return int
     */
-    int randomStudent(int num);
+    int randomStudent(int num,int grade);
 
     /**
      *@Author Nethercat7
@@ -28,6 +28,6 @@ public interface ToolService {
      *@param
      *@Return int
     */
-    int randomEStatus(int num);
+    int randomEStatus(int num,int grade);
 }
 

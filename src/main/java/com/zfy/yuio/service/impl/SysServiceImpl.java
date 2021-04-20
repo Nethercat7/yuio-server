@@ -135,7 +135,7 @@ public class SysServiceImpl implements SysService {
             for (Major m : majors
             ) {
                 //获取专业下的班级
-                m.setChildren(clsDao.getByPid(m.getMajorId()));
+                m.setChildren(clsDao.getByPid(m.getMajorId(),0));
             }
             c.setChildren(majors);
         }

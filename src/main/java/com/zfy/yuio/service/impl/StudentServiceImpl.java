@@ -54,7 +54,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> get() {
-        List<Student> students = studentDao.get();
+        List<Student> students = studentDao.get(0);
         for (Student s : students
         ) {
             s.setStudentCollegeName(collegeDao.getNameById(s.getStudentCollegeId()));

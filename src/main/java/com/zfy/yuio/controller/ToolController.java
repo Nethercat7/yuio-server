@@ -1,6 +1,5 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.ToolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,20 +17,17 @@ public class ToolController {
     private ToolService toolService;
 
     @GetMapping("randomCls")
-    public ResultBody randomCls(@RequestParam("num") int num) {
-        toolService.randomCls(num);
-        return new ResultBody(0, "oo");
+    public void randomCls(@RequestParam("num") int num,@RequestParam("grade") int grade) {
+        toolService.randomCls(num,grade);
     }
 
     @GetMapping("randomStudent")
-    public ResultBody randomStudent(@RequestParam("num") int num) {
-        toolService.randomStudent(num);
-        return new ResultBody(0, "oo");
+    public void randomStudent(@RequestParam("num") int num,@RequestParam("grade") int grade) {
+        toolService.randomStudent(num,grade);
     }
 
     @GetMapping("randomEStatus")
-    public ResultBody randomEStatus(@RequestParam("num") int num) {
-        toolService.randomEStatus(num);
-        return new ResultBody(0, "oo");
+    public void randomEStatus(@RequestParam("num") int num,@RequestParam("grade") int grade) {
+        toolService.randomEStatus(num,grade);
     }
 }

@@ -50,7 +50,7 @@ public interface ClsDao {
      *@param pid
      *@Return java.util.List<com.zfy.yuio.entity.Cls>
      */
-    List<Cls> getByPid(String pid);
+    List<Cls> getByPid(String pid,int grade);
 
     /**
      *@Author Nethercat7

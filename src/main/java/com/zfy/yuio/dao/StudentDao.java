@@ -26,7 +26,7 @@ public interface StudentDao {
      *@param
      *@Return java.util.List<com.zfy.yuio.entity.Student>
      */
-    List<Student> get();
+    List<Student> get(int grade);
 
     /**
      *@Author Nethercat7

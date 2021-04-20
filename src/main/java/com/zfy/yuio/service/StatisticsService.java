@@ -12,7 +12,7 @@ public interface StatisticsService {
     /**
      *@Author Nethercat7
      *@Description 获取整个学校总就业情况
-     *@param
+     *@param grade
      *@Return java.util.Map<java.lang.String,java.lang.Object>
      */
     Map<String,Object> getTotalEmploymentInfo(int grade);
@@ -20,7 +20,7 @@ public interface StatisticsService {
     /**
      *@Author Nethercat7
      *@Description 获取各学院的就业情况
-     *@param
+     *@param grade
      *@Return java.util.Map<java.lang.String,java.lang.Object>
      */
     Map<String,Object> getCollegeEmploymentInfo(int grade);
@@ -28,7 +28,7 @@ public interface StatisticsService {
     /**
      *@Author Nethercat7
      *@Description 获取就业城市信息
-     *@param
+     *@param map
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getEmploymentCityInfo(Map<String,Object> map);
@@ -36,7 +36,7 @@ public interface StatisticsService {
     /**
      *@Author Nethercat7
      *@Description 获取就业岗位信息
-     *@param
+     *@param map
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getEmploymentWorkInfo(Map<String,Object> map);
@@ -44,7 +44,7 @@ public interface StatisticsService {
     /**
      *@Author Nethercat7
      *@Description 获取未就业学生的规划
-     *@param
+     *@param map
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getUnEmploymentStudentPlan(Map<String,Object> map);
@@ -52,7 +52,7 @@ public interface StatisticsService {
     /**
      *@Author Nethercat7
      *@Description 获取意向城市信息
-     *@param
+     *@param map
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getIntentionCityInfo(Map<String,Object> map);
@@ -60,7 +60,7 @@ public interface StatisticsService {
     /**
      *@Author Nethercat7
      *@Description 获取意向岗位信息
-     *@param
+     *@param map
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getIntentionWorkInfo(Map<String,Object> map);

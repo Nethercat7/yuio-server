@@ -42,25 +42,24 @@ public class ToolServiceImpl implements ToolService {
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(8, 0);
 
     @Override
-    public int randomCls(int num) {
-        for (int i = 0; i < num; i++) {
-            Random random = new Random();
-            //获取所有院系
-            List<College> collegeList = collegeDao.get();
-            //随机获取一个院系
-            College college = collegeList.get(random.nextInt(collegeList.size()));
-            //根据院系ID获取旗下的所有专业
-            List<Major> majorList = majorDao.getByPid(college.getCollegeId());
-            //随机获取一个专业
-            Major major = majorList.get(random.nextInt(majorList.size()));
-            //生成班级
-            generateCls(college.getCollegeId(), major.getMajorId(), major.getMajorName() + "的班级" + random.nextInt(100));
+    public int randomCls(int num, int grade) {
+        List<College> colleges = collegeDao.get();
+        for (College college : colleges
+        ) {
+            List<Major> majors = majorDao.getByPid(college.getCollegeId());
+            for (Major major : majors
+            ) {
+                //为每个专业设置3个班级
+                for (int i = 0; i < 3; i++) {
+                    generateCls(college.getCollegeId(), major.getMajorId(), grade + "级" + major.getMajorName() + "的班级" + i + 1, grade);
+                }
+            }
         }
         return 0;
     }
 
     @Override
-    public int randomStudent(int num) {
+    public int randomStudent(int num, int grade) {
         Random random = new Random();
         //获取所有院系
         List<College> collegeList = collegeDao.get();
@@ -72,24 +71,24 @@ public class ToolServiceImpl implements ToolService {
             //随机获取一个专业
             Major major = majorList.get(random.nextInt(majorList.size()));
             //根据专业Id获取旗下所有的班级
-            List<Cls> clsList = clsDao.getByPid(major.getMajorId());
+            List<Cls> clsList = clsDao.getByPid(major.getMajorId(), grade);
             //随机获取一个班级
             Cls cls = clsList.get(random.nextInt(clsList.size()));
             //生成学生
-            generateStudent(college.getCollegeId(), major.getMajorId(), cls.getClsId());
+            generateStudent(college.getCollegeId(), major.getMajorId(), cls.getClsId(), grade);
         }
         return 0;
     }
 
     @Override
-    public int randomEStatus(int num) {
+    public int randomEStatus(int num, int grade) {
         Random random = new Random();
         //获取学生信息
-        List<Student> studentList = studentDao.get();
+        List<Student> studentList = studentDao.get(grade);
         //获取城市
-        String[] cities={"504637296813838336","504637298156015616","504637302073495555","504637301532430336","504637297333932034","504637298118266883","504637298759995392","504637300655820803","504637298197958657"};
+        String[] cities = {"504637296813838336", "504637298156015616", "504637302073495555", "504637301532430336", "504637297333932034", "504637298118266883", "504637298759995392", "504637300655820803", "504637298197958657"};
         String[] works = {"504656117557665792", "504656171731296256", "504656362937032704", "504656429500637184", "504656462774050816", "504656499461627904", "504656798368702464", "504656835991609344", "504656536077901824", "504656392129388544"};
-        for (int i = 0; i < studentList.size(); i++) {
+        for (int i = 0; i < num; i++) {
             String studentId = studentList.get(i).getStudentId();
             String clsId = studentList.get(i).getStudentClassId();
             String majorId = studentList.get(i).getStudentMajorId();
@@ -101,48 +100,48 @@ public class ToolServiceImpl implements ToolService {
             int plan = random.nextInt(13);
             String iCity = cities[random.nextInt(cities.length)];
             String iType = works[random.nextInt(works.length)];
-            generateEStatus(studentId, clsId, majorId, collegeId, employment, wCity, wType, status, plan, iCity, iType);
+            generateEStatus(studentId, clsId, majorId, collegeId, employment, wCity, wType, status, plan, iCity, iType, grade);
         }
         return 0;
     }
 
-    private void generateCls(String collegeId, String majorId, String clsName) {
+    private void generateCls(String collegeId, String majorId, String clsName, int grade) {
         Cls cls = new Cls();
         cls.setClsId(snowflakeIdGeneratorUtil.getId());
         cls.setClsName(clsName);
         cls.setClsStatus(0);
-        cls.setClsGrade(2017);
+        cls.setClsGrade(grade);
         cls.setClsDescription("自动生成的班级数据");
         cls.setClsCollegeId(collegeId);
         cls.setClsMajorId(majorId);
         clsDao.add(cls);
     }
 
-    private void generateStudent(String collegeId, String majorId, String clsId) {
+    private void generateStudent(String collegeId, String majorId, String clsId, int grade) {
         Student student = new Student();
         student.setStudentId(snowflakeIdGeneratorUtil.getId());
         student.setStudentCode(snowflakeIdGeneratorUtil.getId());
         student.setStudentGender(RandomInfoGenerateUntil.randomGender());
         student.setStudentPhone(RandomInfoGenerateUntil.randomChinaPhoneNumber());
-        student.setStudentDescription("Test Data");
+        student.setStudentDescription("自动生成的学生数据");
         student.setStudentSalt(ShiroUtil.getSalt(7));
         student.setStudentPwd(ShiroUtil.pwd2MD5("123456", student.getStudentSalt(), 1739));
         student.setStudentName(RandomInfoGenerateUntil.randomChineseName(student.getStudentGender()));
-        student.setStudentGrade(2017);
+        student.setStudentGrade(grade);
         student.setStudentCollegeId(collegeId);
         student.setStudentMajorId(majorId);
         student.setStudentClassId(clsId);
         studentDao.add(student);
     }
 
-    private void generateEStatus(String studentId, String clsId, String majorId, String collegeId, boolean employment, String wCity, String wType, int status, int plan, String iCity, String iType) {
+    private void generateEStatus(String studentId, String clsId, String majorId, String collegeId, boolean employment, String wCity, String wType, int status, int plan, String iCity, String iType, int grade) {
         EStatus eStatus = new EStatus();
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
         eStatus.setEsStudentId(studentId);
         eStatus.setEsClsId(clsId);
         eStatus.setEsMajorId(majorId);
         eStatus.setEsCollegeId(collegeId);
-        eStatus.setEsGrade(2017);
+        eStatus.setEsGrade(grade);
         eStatus.setEsEmployment(employment);
         eStatus.setEsCompany("自动生成的公司名称");
         eStatus.setEsWorkCity(wCity);
@@ -154,12 +153,12 @@ public class ToolServiceImpl implements ToolService {
         sysDao.saveEmploymentStatus(eStatus);
     }
 
-    private List<City> getCities(){
-        List<City> cities=cityDao.get();
-        List<City> cityList=new ArrayList<>();
-        for (City c:cities
-             ) {
-            if(ObjectUtils.isEmpty(cityDao.getByPid(c.getCityId()))) cityList.add(c);
+    private List<City> getCities() {
+        List<City> cities = cityDao.get();
+        List<City> cityList = new ArrayList<>();
+        for (City c : cities
+        ) {
+            if (ObjectUtils.isEmpty(cityDao.getByPid(c.getCityId()))) cityList.add(c);
         }
         return cityList;
     }
