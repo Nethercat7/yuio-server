@@ -8,6 +8,10 @@
         SELECT COUNT(es_id) as people,es_work_city as city
         FROM employment_status
         WHERE es_employment=1
+        AND es_grade=#{grade}
+        <if test="id!=null">
+            AND es_college_id=#{id} OR es_major_id=#{id} OR es_cls_id=#{id}
+        </if>
         GROUP BY city
         ORDER BY people desc
     </select>

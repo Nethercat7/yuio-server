@@ -5,6 +5,8 @@ import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @Description:数据统计模块
  * @Author:Nethercat7
@@ -27,9 +29,9 @@ public class StatisticsController {
         return new ResultBody(0,statisticsService.getCollegeEmploymentInfo(grade),"success");
     }
 
-    @GetMapping("getEmploymentCityInfo")
-    public ResultBody getEmploymentCityInfo(){
-        return new ResultBody(0,statisticsService.getEmploymentCityInfo(),"success");
+    @PostMapping("getEmploymentCityInfo")
+    public ResultBody getEmploymentCityInfo(@RequestBody Map<String,Object> form){
+        return new ResultBody(0,statisticsService.getEmploymentCityInfo(form),"success");
     }
 
     @GetMapping("getEmploymentWorkInfo")

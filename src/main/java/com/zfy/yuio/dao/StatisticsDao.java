@@ -18,7 +18,7 @@ public interface StatisticsDao {
      *@param
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
     */
-    List<Map<String,Object>> getEmploymentCityInfo();
+    List<Map<String,Object>> getEmploymentCityInfo(int grade,String id);
 
     /**
      *@Author Nethercat7

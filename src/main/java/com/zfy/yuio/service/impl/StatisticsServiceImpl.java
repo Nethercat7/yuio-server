@@ -7,6 +7,7 @@ import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -114,12 +115,15 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public List<Map<String, Object>> getEmploymentCityInfo() {
-        List<Map<String, Object>> maps = statisticsDao.getEmploymentCityInfo();
+    public List<Map<String, Object>> getEmploymentCityInfo(Map<String,Object> map) {
+        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+        String id=null;
+        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
+        List<Map<String, Object>> maps = statisticsDao.getEmploymentCityInfo(grade,id);
         for (Map<String, Object> m : maps
         ) {
-            String id=String.valueOf(m.get("city"));
-            m.put("city", cityDao.getCityName(id));
+            String cityId=String.valueOf(m.get("city"));
+            m.put("city", cityDao.getCityName(cityId));
         }
         return maps;
     }
