@@ -27,12 +27,4 @@ public interface CityDao {
      *@Return List<City>
     */
     List<City> get();
-
-    /**
-     *@Author Nethercat7
-     *@Description 通过PID获取下级市县
-     *@param id
-     *@Return java.util.List<com.zfy.yuio.entity.City>
-    */
-    List<City> getByPid(String id);
 }

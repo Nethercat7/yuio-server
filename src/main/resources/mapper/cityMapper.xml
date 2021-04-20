@@ -11,10 +11,6 @@
 
     <select id="get" resultType="City">
         SELECT * FROM city
-    </select>
-
-    <select id="getByPid" resultType="City">
-        SELECT * FROM city
-        WHERE city_pid=#{id}
+        WHERE city_level=0 OR city_level=1
     </select>
 </mapper>
