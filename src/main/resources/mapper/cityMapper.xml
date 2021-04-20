@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.CityDao">
+    <insert  id="add" parameterType="City">
+        INSERT INTO city(city_id,city_name,city_pid,city_status,city_level)
+        VALUES(#{cityId},#{cityName},#{cityPid},#{cityStatus},#{cityLevel})
+    </insert>
+</mapper>
