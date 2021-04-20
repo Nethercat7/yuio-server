@@ -161,4 +161,18 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
         return maps;
     }
+
+    @Override
+    public List<Map<String,Object>> getGrade() {
+        List<Integer> grades=statisticsDao.getGrade();
+        List<Map<String,Object>> maps=new ArrayList<>();
+        for (Integer i:grades
+             ) {
+            Map<String,Object> map=new HashMap<>();
+            map.put("value",i);
+            map.put("label",i+"届");
+            maps.add(map);
+        }
+        return maps;
+    }
 }

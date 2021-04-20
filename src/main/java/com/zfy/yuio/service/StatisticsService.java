@@ -64,4 +64,12 @@ public interface StatisticsService {
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getIntentionWorkInfo();
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取年级
+     *@param
+     *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+    */
+    List<Map<String,Object>> getGrade();
 }

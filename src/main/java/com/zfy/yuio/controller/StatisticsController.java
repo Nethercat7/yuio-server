@@ -54,4 +54,9 @@ public class StatisticsController {
     public ResultBody getIntentionWorkInfo(){
         return new ResultBody(0,statisticsService.getIntentionWorkInfo(),"success");
     }
+
+    @GetMapping("getGrade")
+    public ResultBody getGrade(){
+        return new ResultBody(0,statisticsService.getGrade(),"success");
+    }
 }
