@@ -26,7 +26,7 @@ public interface StatisticsDao {
      *@param
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
     */
-    List<Map<String,Object>> getEmploymentWorkInfo();
+    List<Map<String,Object>> getEmploymentWorkInfo(int grade,String id);
 
     /**
      *@Author Nethercat7
@@ -34,7 +34,7 @@ public interface StatisticsDao {
      *@param
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
     */
-    List<Map<String,Object>> getUnEmploymentStudentPlan();
+    List<Map<String,Object>> getUnEmploymentStudentPlan(int grade,String id);
 
     /**
      *@Author Nethercat7

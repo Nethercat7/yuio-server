@@ -34,14 +34,14 @@ public class StatisticsController {
         return new ResultBody(0,statisticsService.getEmploymentCityInfo(form),"success");
     }
 
-    @GetMapping("getEmploymentWorkInfo")
-    public ResultBody getEmploymentWorkInfo(){
-        return new ResultBody(0,statisticsService.getEmploymentWorkInfo(),"success");
+    @PostMapping("getEmploymentWorkInfo")
+    public ResultBody getEmploymentWorkInfo(@RequestBody Map<String,Object> form){
+        return new ResultBody(0,statisticsService.getEmploymentWorkInfo(form),"success");
     }
 
-    @GetMapping("getUnEmploymentStudentPlan")
-    public ResultBody getUnEmploymentStudentPlan(){
-        return new ResultBody(0,statisticsService.getUnEmploymentStudentPlan(),"success");
+    @PostMapping("getUnEmploymentStudentPlan")
+    public ResultBody getUnEmploymentStudentPlan(@RequestBody Map<String,Object> form){
+        return new ResultBody(0,statisticsService.getUnEmploymentStudentPlan(form),"success");
     }
 
     @GetMapping("getIntentionCityInfo")

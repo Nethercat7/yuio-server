@@ -20,6 +20,10 @@
         SELECT COUNT(es_id) as people,es_work_type as type
         FROM employment_status
         WHERE es_employment=1
+        AND es_grade=#{grade}
+        <if test="id!=null">
+            AND es_college_id=#{id} OR es_major_id=#{id} OR es_cls_id=#{id}
+        </if>
         GROUP BY type
         ORDER BY people desc
     </select>
@@ -28,6 +32,10 @@
         SELECT COUNT(es_id) as people,es_plan as plan
         FROM employment_status
         WHERE es_employment=0
+        AND es_grade=#{grade}
+        <if test="id!=null">
+            AND es_college_id=#{id} OR es_major_id=#{id} OR es_cls_id=#{id}
+        </if>
         GROUP BY plan
         ORDER BY people desc
     </select>

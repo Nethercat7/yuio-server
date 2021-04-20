@@ -129,19 +129,25 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public List<Map<String, Object>> getEmploymentWorkInfo() {
-        List<Map<String, Object>> maps = statisticsDao.getEmploymentWorkInfo();
+    public List<Map<String, Object>> getEmploymentWorkInfo(Map<String,Object> map) {
+        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+        String id=null;
+        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
+        List<Map<String, Object>> maps = statisticsDao.getEmploymentWorkInfo(grade,id);
         for (Map<String, Object> m : maps
         ) {
-            String id=String.valueOf(m.get("type"));
-            m.put("type", workDao.getWorkName(id));
+            String typeId=String.valueOf(m.get("type"));
+            m.put("type", workDao.getWorkName(typeId));
         }
         return maps;
     }
 
     @Override
-    public List<Map<String, Object>> getUnEmploymentStudentPlan() {
-        return statisticsDao.getUnEmploymentStudentPlan();
+    public List<Map<String, Object>> getUnEmploymentStudentPlan(Map<String,Object> map) {
+        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+        String id=null;
+        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
+        return statisticsDao.getUnEmploymentStudentPlan(grade,id);
     }
 
     @Override
