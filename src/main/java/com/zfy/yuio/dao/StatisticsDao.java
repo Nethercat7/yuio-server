@@ -42,7 +42,7 @@ public interface StatisticsDao {
      *@param
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
-    List<Map<String,Object>> getIntentionCityInfo();
+    List<Map<String,Object>> getIntentionCityInfo(int grade,String id);
 
     /**
      *@Author Nethercat7
@@ -50,7 +50,7 @@ public interface StatisticsDao {
      *@param
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
-    List<Map<String,Object>> getIntentionWorkInfo();
+    List<Map<String,Object>> getIntentionWorkInfo(int grade,String id);
 
     /**
      *@Author Nethercat7

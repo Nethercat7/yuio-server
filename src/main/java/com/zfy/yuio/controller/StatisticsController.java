@@ -44,14 +44,14 @@ public class StatisticsController {
         return new ResultBody(0,statisticsService.getUnEmploymentStudentPlan(form),"success");
     }
 
-    @GetMapping("getIntentionCityInfo")
-    public ResultBody getIntentionCityInfo(){
-        return new ResultBody(0,statisticsService.getIntentionCityInfo(),"success");
+    @PostMapping("getIntentionCityInfo")
+    public ResultBody getIntentionCityInfo(@RequestBody Map<String,Object> form){
+        return new ResultBody(0,statisticsService.getIntentionCityInfo(form),"success");
     }
 
-    @GetMapping("getIntentionWorkInfo")
-    public ResultBody getIntentionWorkInfo(){
-        return new ResultBody(0,statisticsService.getIntentionWorkInfo(),"success");
+    @PostMapping("getIntentionWorkInfo")
+    public ResultBody getIntentionWorkInfo(@RequestBody Map<String,Object> form){
+        return new ResultBody(0,statisticsService.getIntentionWorkInfo(form),"success");
     }
 
     @GetMapping("getGrade")

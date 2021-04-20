@@ -55,7 +55,7 @@ public interface StatisticsService {
      *@param
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
-    List<Map<String,Object>> getIntentionCityInfo();
+    List<Map<String,Object>> getIntentionCityInfo(Map<String,Object> map);
 
     /**
      *@Author Nethercat7
@@ -63,7 +63,7 @@ public interface StatisticsService {
      *@param
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
-    List<Map<String,Object>> getIntentionWorkInfo();
+    List<Map<String,Object>> getIntentionWorkInfo(Map<String,Object> map);
 
     /**
      *@Author Nethercat7

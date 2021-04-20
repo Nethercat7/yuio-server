@@ -151,23 +151,29 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public List<Map<String, Object>> getIntentionCityInfo() {
-        List<Map<String, Object>> maps = statisticsDao.getIntentionCityInfo();
+    public List<Map<String, Object>> getIntentionCityInfo(Map<String,Object> map) {
+        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+        String id=null;
+        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
+        List<Map<String, Object>> maps = statisticsDao.getIntentionCityInfo(grade,id);
         for (Map<String, Object> m : maps
         ) {
-            String id=String.valueOf(m.get("city"));
-            m.put("city", cityDao.getCityName(id));
+            String cityId=String.valueOf(m.get("city"));
+            m.put("city", cityDao.getCityName(cityId));
         }
         return maps;
     }
 
     @Override
-    public List<Map<String, Object>> getIntentionWorkInfo() {
-        List<Map<String, Object>> maps = statisticsDao.getIntentionWorkInfo();
+    public List<Map<String, Object>> getIntentionWorkInfo(Map<String,Object> map) {
+        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+        String id=null;
+        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
+        List<Map<String, Object>> maps = statisticsDao.getIntentionWorkInfo(grade,id);
         for (Map<String, Object> m : maps
         ) {
-            String id=String.valueOf(m.get("type"));
-            m.put("type", workDao.getWorkName(id));
+            String typeId=String.valueOf(m.get("type"));
+            m.put("type", workDao.getWorkName(typeId));
         }
         return maps;
     }
