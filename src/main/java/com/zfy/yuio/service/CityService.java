@@ -25,4 +25,12 @@ public interface CityService {
      *@Return List<City>
      */
     List<City> get();
+
+    /**
+     *@Author Nethercat7
+     *@Description 城市信息初始化
+     *@param city
+     *@Return
+    */
+    void initial(City city);
 }

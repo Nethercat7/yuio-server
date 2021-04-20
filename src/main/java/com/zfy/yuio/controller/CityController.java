@@ -23,4 +23,9 @@ public class CityController {
     public ResultBody get(){
         return new ResultBody(0, cityService.get());
     }
+
+    @PostMapping("initial")
+    public void initial(@RequestBody City city){
+        cityService.initial(city);
+    }
 }

@@ -6,6 +6,7 @@ import com.zfy.yuio.service.CityService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +26,11 @@ public class CityServiceImpl implements CityService {
     @Override
     public int add(City city) {
         city.setCityId(snowflakeIdGeneratorUtil.getId());
-        city.setCityStatus(0);
-        if (city.getCityPid() == null) {
+        if (ObjectUtils.isEmpty(city.getCityPid())) {
             city.setCityPid("0");
             city.setCityLevel(0);
         }
-        cityDao.add(city);
-        if (city.getChildren() != null) {
-            setChildren(city.getChildren(), city.getCityId(), city.getCityLevel());
-        }
-        return 0;
+        return cityDao.add(city);
     }
 
     @Override
@@ -50,6 +46,20 @@ public class CityServiceImpl implements CityService {
             c.setChildren(getChildren(c.getCityId(), cityList));
         }
         return cities;
+    }
+
+    @Override
+    public void initial(City city) {
+        city.setCityId(snowflakeIdGeneratorUtil.getId());
+        city.setCityStatus(0);
+        if (city.getCityPid() == null) {
+            city.setCityPid("0");
+            city.setCityLevel(0);
+        }
+        cityDao.add(city);
+        if (city.getChildren() != null) {
+            setChildren(city.getChildren(), city.getCityId(), city.getCityLevel());
+        }
     }
 
     private void setChildren(List<City> children, String pid, int level) {
@@ -76,7 +86,7 @@ public class CityServiceImpl implements CityService {
         for (City c : children
         ) {
             c.setChildren(getChildren(c.getCityId(), cityList));
-            if(c.getChildren().size()==0) c.setChildren(null);
+            if (c.getChildren().size() == 0) c.setChildren(null);
         }
         return children;
     }
