@@ -5,7 +5,6 @@ import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.StatisticsService;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,15 +31,13 @@ public class StatisticsServiceImpl implements StatisticsService {
     private CollegeDao collegeDao;
 
     @Autowired
-    private MajorDao majorDao;
-
-    @Autowired
-    private ClsDao clsDao;
+    private CityDao cityDao;
 
     @Autowired
     private StatisticsDao statisticsDao;
 
-    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
+    @Autowired
+    private WorkDao workDao;
 
     @Override
     public Map<String, Object> getTotalEmploymentInfo() {
@@ -118,12 +115,24 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public List<Map<String, Object>> getEmploymentCityInfo() {
-        return statisticsDao.getEmploymentCityInfo();
+        List<Map<String, Object>> maps = statisticsDao.getEmploymentCityInfo();
+        for (Map<String, Object> m : maps
+        ) {
+            String id=String.valueOf(m.get("city"));
+            m.put("city", cityDao.getCityName(id));
+        }
+        return maps;
     }
 
     @Override
     public List<Map<String, Object>> getEmploymentWorkInfo() {
-        return statisticsDao.getEmploymentWorkInfo();
+        List<Map<String, Object>> maps = statisticsDao.getEmploymentWorkInfo();
+        for (Map<String, Object> m : maps
+        ) {
+            String id=String.valueOf(m.get("type"));
+            m.put("type", workDao.getWorkName(id));
+        }
+        return maps;
     }
 
     @Override
@@ -133,11 +142,23 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public List<Map<String, Object>> getIntentionCityInfo() {
-        return statisticsDao.getIntentionCityInfo();
+        List<Map<String, Object>> maps = statisticsDao.getIntentionCityInfo();
+        for (Map<String, Object> m : maps
+        ) {
+            String id=String.valueOf(m.get("city"));
+            m.put("city", cityDao.getCityName(id));
+        }
+        return maps;
     }
 
     @Override
     public List<Map<String, Object>> getIntentionWorkInfo() {
-        return statisticsDao.getIntentionWorkInfo();
+        List<Map<String, Object>> maps = statisticsDao.getIntentionWorkInfo();
+        for (Map<String, Object> m : maps
+        ) {
+            String id=String.valueOf(m.get("type"));
+            m.put("type", workDao.getWorkName(id));
+        }
+        return maps;
     }
 }

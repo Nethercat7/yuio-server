@@ -59,4 +59,12 @@ public interface WorkDao {
      *@Return com.zfy.yuio.entity.Work
     */
     List<Work> getByPid(String pid);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过Id获取岗位名称
+     *@param id
+     *@Return java.lang.String
+    */
+    String getWorkName(String id);
 }

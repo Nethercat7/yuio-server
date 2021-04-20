@@ -35,4 +35,9 @@
         WHERE city_pid=#{pid}
         AND city_level=1
     </select>
+
+    <select id="getCityName" parameterType="String" resultType="String">
+        SELECT city_name FROM city
+        WHERE city_id=#{id}
+    </select>
 </mapper>

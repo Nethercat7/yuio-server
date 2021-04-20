@@ -33,4 +33,9 @@
         SELECT * FROM work
         WHERE work_pid=#{pid}
     </select>
+
+    <select id="getWorkName" parameterType="String" resultType="String">
+        SELECT work_name FROM work
+        WHERE work_id=#{id}
+    </select>
 </mapper>
