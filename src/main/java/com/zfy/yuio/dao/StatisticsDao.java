@@ -43,4 +43,12 @@ public interface StatisticsDao {
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
      */
     List<Map<String,Object>> getIntentionCityInfo();
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取意向岗位信息
+     *@param
+     *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     */
+    List<Map<String,Object>> getIntentionWorkInfo();
 }

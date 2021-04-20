@@ -135,4 +135,9 @@ public class StatisticsServiceImpl implements StatisticsService {
     public List<Map<String, Object>> getIntentionCityInfo() {
         return statisticsDao.getIntentionCityInfo();
     }
+
+    @Override
+    public List<Map<String, Object>> getIntentionWorkInfo() {
+        return statisticsDao.getIntentionWorkInfo();
+    }
 }

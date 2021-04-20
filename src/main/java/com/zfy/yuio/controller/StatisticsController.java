@@ -49,4 +49,9 @@ public class StatisticsController {
     public ResultBody getIntentionCityInfo(){
         return new ResultBody(0,statisticsService.getIntentionCityInfo(),"success");
     }
+
+    @GetMapping("getIntentionWorkInfo")
+    public ResultBody getIntentionWorkInfo(){
+        return new ResultBody(0,statisticsService.getIntentionWorkInfo(),"success");
+    }
 }
