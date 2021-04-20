@@ -29,6 +29,9 @@ public class CityServiceImpl implements CityService {
         if (ObjectUtils.isEmpty(city.getCityPid())) {
             city.setCityPid("0");
             city.setCityLevel(0);
+        }else{
+            City c=cityDao.getById(city.getCityPid());
+            city.setCityLevel(c.getCityLevel()+1);
         }
         return cityDao.add(city);
     }
@@ -46,6 +49,23 @@ public class CityServiceImpl implements CityService {
             c.setChildren(getChildren(c.getCityId(), cityList));
         }
         return cities;
+    }
+
+    @Override
+    public int del(String id) {
+        return cityDao.del(id);
+    }
+
+    @Override
+    public int upd(City city) {
+        if (ObjectUtils.isEmpty(city.getCityPid())) {
+            city.setCityPid("0");
+            city.setCityLevel(0);
+        }else{
+            City c=cityDao.getById(city.getCityPid());
+            city.setCityLevel(c.getCityLevel()+1);
+        }
+        return cityDao.upd(city);
     }
 
     @Override

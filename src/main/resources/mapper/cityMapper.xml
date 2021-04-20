@@ -13,4 +13,20 @@
         SELECT * FROM city
         WHERE city_level=0 OR city_level=1
     </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM city
+        WHERE city_id=#{id}
+    </delete>
+
+    <update id="upd" parameterType="City">
+        UPDATE city
+        SET city_name=#{cityName},city_pid=#{cityPid},city_status=#{cityStatus},city_level=#{cityLevel}
+        WHERE city_id=#{cityId}
+    </update>
+
+    <select id="getById" parameterType="String" resultType="City">
+        SELECT * FROM city
+        WHERE city_id=#{id}
+    </select>
 </mapper>

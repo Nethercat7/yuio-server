@@ -27,4 +27,28 @@ public interface CityDao {
      *@Return List<City>
     */
     List<City> get();
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过Id删除城市
+     *@param id
+     *@Return int
+    */
+    int del(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description 修改城市
+     *@param city
+     *@Return int
+    */
+    int upd(City city);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过Id获取城市
+     *@param id
+     *@Return com.zfy.yuio.entity.City
+    */
+    City getById(String id);
 }
