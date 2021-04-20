@@ -2,6 +2,8 @@ package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.City;
 
+import java.util.List;
+
 /**
  *@Description:城市管理
  *@Author:Nethercat7
@@ -15,4 +17,12 @@ public interface CityService {
      *@Return int
      */
     int add(City city);
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取城市信息
+     *@param
+     *@Return List<City>
+     */
+    List<City> get();
 }

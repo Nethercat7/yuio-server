@@ -14,8 +14,13 @@ public class CityController {
     private CityService cityService;
 
     @PostMapping("add")
-    public ResultBody city(@RequestBody City city){
+    public ResultBody add(@RequestBody City city){
         cityService.add(city);
         return new ResultBody(0,null);
+    }
+
+    @GetMapping("get")
+    public ResultBody get(){
+        return new ResultBody(0, cityService.get());
     }
 }

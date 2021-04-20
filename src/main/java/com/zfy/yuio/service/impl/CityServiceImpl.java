@@ -6,8 +6,8 @@ import com.zfy.yuio.service.CityService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,18 +26,33 @@ public class CityServiceImpl implements CityService {
     public int add(City city) {
         city.setCityId(snowflakeIdGeneratorUtil.getId());
         city.setCityStatus(0);
-        if(ObjectUtils.isEmpty(city.getCityPid())){
+        if(city.getCityPid()==null){
             city.setCityPid("0");
             city.setCityLevel(0);
         }
         cityDao.add(city);
         if(city.getChildren()!=null){
-            setChildren(city.getChildren(),city.getCityPid(),city.getCityLevel());
+            setChildren(city.getChildren(),city.getCityId(),city.getCityLevel());
         }
         return 0;
     }
 
-    private void setChildren(List<City> children,String pid,int level){
+    @Override
+    public List<City> get() {
+        List<City> cityList=cityDao.get();
+        List<City> cities=new ArrayList<>();
+        for (City c:cityList
+             ) {
+            if(c.getCityPid().equals("0")) cities.add(c);
+        }
+        for (City c:cities
+             ) {
+            c.setChildren(getChildren(c.getCityId(),cityList));
+        }
+        return cities;
+    }
+
+    private void setChildren(List<City> children, String pid, int level){
         for (City c:children
              ) {
             c.setCityId(snowflakeIdGeneratorUtil.getId());
@@ -49,5 +64,18 @@ public class CityServiceImpl implements CityService {
                 setChildren(c.getChildren(),c.getCityId(),c.getCityLevel());
             }
         }
+    }
+
+    private List<City> getChildren(String pid,List<City> cityList){
+        List<City> children=new ArrayList<>();
+        for (City c:cityList
+             ) {
+            if(c.getCityPid().equals(pid)) children.add(c);
+        }
+        for (City c:children
+             ) {
+            c.setChildren(getChildren(c.getCityId(),cityList));
+        }
+        return children;
     }
 }

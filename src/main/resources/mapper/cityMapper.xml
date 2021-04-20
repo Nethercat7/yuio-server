@@ -8,4 +8,13 @@
         INSERT INTO city(city_id,city_name,city_pid,city_status,city_level)
         VALUES(#{cityId},#{cityName},#{cityPid},#{cityStatus},#{cityLevel})
     </insert>
+
+    <select id="get" resultType="City">
+        SELECT * FROM city
+    </select>
+
+    <select id="getByPid" resultType="City">
+        SELECT * FROM city
+        WHERE city_pid=#{id}
+    </select>
 </mapper>
