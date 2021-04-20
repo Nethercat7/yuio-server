@@ -51,4 +51,12 @@ public interface CityDao {
      *@Return com.zfy.yuio.entity.City
     */
     City getById(String id);
+
+    /**
+     *@Author Nethercat7
+     *@Description 通过PID获取城市
+     *@param pid
+     *@Return com.zfy.yuio.entity.City
+    */
+    List<City> getByPid(String pid);
 }

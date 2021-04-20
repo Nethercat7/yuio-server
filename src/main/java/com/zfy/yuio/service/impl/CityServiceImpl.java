@@ -47,6 +47,7 @@ public class CityServiceImpl implements CityService {
         for (City c : cities
         ) {
             c.setChildren(getChildren(c.getCityId(), cityList));
+            if(ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return cities;
     }
@@ -106,7 +107,7 @@ public class CityServiceImpl implements CityService {
         for (City c : children
         ) {
             c.setChildren(getChildren(c.getCityId(), cityList));
-            if (c.getChildren().size() == 0) c.setChildren(null);
+            if(ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return children;
     }

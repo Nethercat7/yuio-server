@@ -29,4 +29,10 @@
         SELECT * FROM city
         WHERE city_id=#{id}
     </select>
+
+    <select id="getByPid" parameterType="String" resultType="City">
+        SELECT * FROM city
+        WHERE city_pid=#{pid}
+        AND city_level=1
+    </select>
 </mapper>

@@ -8,7 +8,9 @@ import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +35,9 @@ public class ToolServiceImpl implements ToolService {
 
     @Autowired
     private SysDao sysDao;
+
+    @Autowired
+    private CityDao cityDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(8, 0);
 
@@ -80,22 +85,23 @@ public class ToolServiceImpl implements ToolService {
     public int randomEStatus(int num) {
         Random random = new Random();
         //获取学生信息
-        List<Student> studentList=studentDao.get();
-        String[] cities={"北京","上海","广东","深圳","南宁","柳州","杭州","长沙","武汉","桂林"};
-        String[] works={"后台开发","前端开发","电商运营","大数据挖掘","食品安全","产品经理","游戏推广","车辆运营","动画设计","投资顾问"};
+        List<Student> studentList = studentDao.get();
+        //获取城市
+        String[] cities={"504637296813838336","504637298156015616","504637302073495555","504637301532430336","504637297333932034","504637298118266883","504637298759995392","504637300655820803","504637298197958657"};
+        String[] works = {"后台开发", "前端开发", "电商运营", "大数据挖掘", "食品安全", "产品经理", "游戏推广", "车辆运营", "动画设计", "投资顾问"};
         for (int i = 0; i < studentList.size(); i++) {
-            String studentId=studentList.get(i).getStudentId();
-            String clsId=studentList.get(i).getStudentClassId();
-            String majorId=studentList.get(i).getStudentMajorId();
-            String collegeId=studentList.get(i).getStudentCollegeId();
-            boolean employment=RandomInfoGenerateUntil.randomBoolean();
-            String wCity=cities[random.nextInt(cities.length)];
-            String wType=works[random.nextInt(works.length)];
-            int status=random.nextInt(3);
-            int plan=random.nextInt(13);
-            String iCity=cities[random.nextInt(cities.length)];
-            String iType=works[random.nextInt(works.length)];
-            generateEStatus(studentId,clsId,majorId,collegeId,employment,wCity,wType,status,plan,iCity,iType);
+            String studentId = studentList.get(i).getStudentId();
+            String clsId = studentList.get(i).getStudentClassId();
+            String majorId = studentList.get(i).getStudentMajorId();
+            String collegeId = studentList.get(i).getStudentCollegeId();
+            boolean employment = RandomInfoGenerateUntil.randomBoolean();
+            String wCity = cities[random.nextInt(cities.length)];
+            String wType = works[random.nextInt(works.length)];
+            int status = random.nextInt(3);
+            int plan = random.nextInt(13);
+            String iCity = cities[random.nextInt(cities.length)];
+            String iType = works[random.nextInt(works.length)];
+            generateEStatus(studentId, clsId, majorId, collegeId, employment, wCity, wType, status, plan, iCity, iType);
         }
         return 0;
     }
@@ -129,8 +135,8 @@ public class ToolServiceImpl implements ToolService {
         studentDao.add(student);
     }
 
-    private void generateEStatus(String studentId,String clsId,String majorId,String collegeId,boolean employment,String wCity,String wType,int status,int plan,String iCity,String iType) {
-        EStatus eStatus=new EStatus();
+    private void generateEStatus(String studentId, String clsId, String majorId, String collegeId, boolean employment, String wCity, String wType, int status, int plan, String iCity, String iType) {
+        EStatus eStatus = new EStatus();
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
         eStatus.setEsStudentId(studentId);
         eStatus.setEsClsId(clsId);
@@ -146,5 +152,15 @@ public class ToolServiceImpl implements ToolService {
         eStatus.setEsIntentionCity(iCity);
         eStatus.setEsIntentionWork(iType);
         sysDao.saveEmploymentStatus(eStatus);
+    }
+
+    private List<City> getCities(){
+        List<City> cities=cityDao.get();
+        List<City> cityList=new ArrayList<>();
+        for (City c:cities
+             ) {
+            if(ObjectUtils.isEmpty(cityDao.getByPid(c.getCityId()))) cityList.add(c);
+        }
+        return cityList;
     }
 }
