@@ -125,7 +125,7 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public List<College> getFullOrg() {
+    public List<College> getFullOrg(int grade) {
         List<College> collegeList = collegeDao.get();
         //添加之间的关联
         for (College c : collegeList
@@ -135,7 +135,7 @@ public class SysServiceImpl implements SysService {
             for (Major m : majors
             ) {
                 //获取专业下的班级
-                m.setChildren(clsDao.getByPid(m.getMajorId(),0));
+                m.setChildren(clsDao.getByPid(m.getMajorId(),grade));
             }
             c.setChildren(majors);
         }

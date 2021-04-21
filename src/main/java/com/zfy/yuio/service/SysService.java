@@ -69,5 +69,5 @@ public interface SysService {
      *@param
      *@Return java.util.List<com.zfy.yuio.entity.College>
     */
-    List<College> getFullOrg();
+    List<College> getFullOrg(int grade);
 }

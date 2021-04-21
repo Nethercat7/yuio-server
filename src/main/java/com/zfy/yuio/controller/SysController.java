@@ -66,7 +66,8 @@ public class SysController {
     }
 
     @GetMapping("getFullOrg")
-    public ResultBody getFullOrg(){
-        return new ResultBody(0,sysService.getFullOrg(),"success");
+    public ResultBody getFullOrg(@RequestParam Map<String,Object> map){
+        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+        return new ResultBody(0,sysService.getFullOrg(grade),"success");
     }
 }
