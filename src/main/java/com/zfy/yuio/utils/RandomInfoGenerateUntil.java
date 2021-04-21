@@ -124,13 +124,13 @@ public class RandomInfoGenerateUntil {
      *@Description 生成随机性别
      *@Return java.lang.String
      */
-    public static int randomGender(){
+    public static String randomGender(){
         Random random=new Random();
         int gender=1;
         if(random.nextInt(2)==0){
             gender=0;
         }
-        return gender;
+        return String.valueOf(gender);
     }
 
     /**

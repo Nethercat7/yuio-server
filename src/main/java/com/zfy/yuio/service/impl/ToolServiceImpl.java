@@ -93,11 +93,11 @@ public class ToolServiceImpl implements ToolService {
             String clsId = studentList.get(i).getStudentClassId();
             String majorId = studentList.get(i).getStudentMajorId();
             String collegeId = studentList.get(i).getStudentCollegeId();
-            boolean employment = RandomInfoGenerateUntil.randomBoolean();
+            String employment = String.valueOf(RandomInfoGenerateUntil.randomBoolean());
             String wCity = cities[random.nextInt(cities.length)];
             String wType = works[random.nextInt(works.length)];
-            int status = random.nextInt(3);
-            int plan = random.nextInt(13);
+            String status = String.valueOf(random.nextInt(3));
+            String plan = String.valueOf(random.nextInt(13));
             String iCity = cities[random.nextInt(cities.length)];
             String iType = works[random.nextInt(works.length)];
             generateEStatus(studentId, clsId, majorId, collegeId, employment, wCity, wType, status, plan, iCity, iType, grade);
@@ -126,7 +126,7 @@ public class ToolServiceImpl implements ToolService {
         student.setStudentDescription("自动生成的学生数据");
         student.setStudentSalt(ShiroUtil.getSalt(7));
         student.setStudentPwd(ShiroUtil.pwd2MD5("123456", student.getStudentSalt(), 1739));
-        student.setStudentName(RandomInfoGenerateUntil.randomChineseName(student.getStudentGender()));
+        student.setStudentName(RandomInfoGenerateUntil.randomChineseName(Integer.parseInt(student.getStudentGender())));
         student.setStudentGrade(grade);
         student.setStudentCollegeId(collegeId);
         student.setStudentMajorId(majorId);
@@ -134,7 +134,7 @@ public class ToolServiceImpl implements ToolService {
         studentDao.add(student);
     }
 
-    private void generateEStatus(String studentId, String clsId, String majorId, String collegeId, boolean employment, String wCity, String wType, int status, int plan, String iCity, String iType, int grade) {
+    private void generateEStatus(String studentId, String clsId, String majorId, String collegeId, String employment, String wCity, String wType, String status, String plan, String iCity, String iType, int grade) {
         EStatus eStatus = new EStatus();
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
         eStatus.setEsStudentId(studentId);

@@ -4,15 +4,19 @@ import com.zfy.yuio.dao.ClsDao;
 import com.zfy.yuio.dao.CollegeDao;
 import com.zfy.yuio.dao.MajorDao;
 import com.zfy.yuio.dao.StudentDao;
+import com.zfy.yuio.entity.QueryParam;
 import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.StudentService;
 import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:学生管理模块
@@ -48,7 +52,7 @@ public class StudentServiceImpl implements StudentService {
         //设置随机盐
         student.setStudentSalt(ShiroUtil.getSalt(SALT));
         //默认密码
-        student.setStudentPwd(ShiroUtil.pwd2MD5("123456",student.getStudentSalt(),HASH));
+        student.setStudentPwd(ShiroUtil.pwd2MD5("123456", student.getStudentSalt(), HASH));
         return studentDao.add(student);
     }
 
@@ -57,9 +61,6 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = studentDao.get(0);
         for (Student s : students
         ) {
-            s.setStudentCollegeName(collegeDao.getNameById(s.getStudentCollegeId()));
-            s.setStudentMajorName(majorDao.getNameById(s.getStudentMajorId()));
-            s.setStudentClsName(clsDao.getNameById(s.getStudentClassId()));
             List<String> container = new ArrayList<>();
             container.add(s.getStudentCollegeId());
             container.add(s.getStudentMajorId());
@@ -79,6 +80,40 @@ public class StudentServiceImpl implements StudentService {
         //为当前学生设置院系、专业和班级
         setBaseInfo(student);
         return studentDao.upd(student);
+    }
+
+    @Override
+    public List<Student> getWithEStatusInfo(QueryParam queryParam) {
+        List<Student> students = studentDao.getWithEStatusInfo(queryParam);
+        for (Student student : students
+        ) {
+            if (ObjectUtils.isEmpty(student.getEsId())) {
+                student.setWrite(0);
+            } else {
+                student.setWrite(1);
+            }
+            //设置院系、专业和班级信息
+            List<String> container = new ArrayList<>();
+            container.add(student.getStudentCollegeId());
+            container.add(student.getStudentMajorId());
+            container.add(student.getStudentClassId());
+            student.setContainer(container);
+        }
+        return students;
+    }
+
+    @Override
+    public List<Map<String, Object>> getStudentGrade() {
+        List<Integer> grades = studentDao.getStudentGrade();
+        List<Map<String, Object>> gradeList = new ArrayList<>();
+        for (Integer grade : grades
+        ) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("label", grade + "级");
+            map.put("value", grade);
+            gradeList.add(map);
+        }
+        return gradeList;
     }
 
     private void setBaseInfo(Student student) {

@@ -20,7 +20,7 @@ public class Student {
     @JsonProperty("phone")
     private String studentPhone;
     @JsonProperty("status")
-    private int studentStatus;
+    private String studentStatus;
     @JsonProperty("grade")
     private int studentGrade;
     @JsonProperty("description")
@@ -40,13 +40,34 @@ public class Student {
     @JsonProperty("cls_name")
     private String studentClsName;
     @JsonProperty("gender")
-    private int studentGender;
+    private String studentGender;
     @JsonProperty("pwd")
     private String studentPwd;
     @JsonProperty("salt")
     private String studentSalt;
 
+    //EStatus
+    @JsonProperty("employment")
+    private int esEmployment;
+    @JsonProperty("company")
+    private String esCompany;
+    @JsonProperty("work_city")
+    private String esWorkCity;
+    @JsonProperty("work_type")
+    private String esWorkType;
+    @JsonProperty("es_status")
+    private String esStatus;
+    @JsonProperty("plan")
+    private String esPlan;
+    @JsonProperty("intention_city")
+    private String esIntentionCity;
+    @JsonProperty("intention_work")
+    private String esIntentionWork;
+    @JsonProperty("es_id")
+    private String esId;
+
     private List<String> container;
+    private int write;//是否填写就业信息
 
     public String getStudentId() {
         return studentId;
@@ -78,14 +99,6 @@ public class Student {
 
     public void setStudentPhone(String studentPhone) {
         this.studentPhone = studentPhone;
-    }
-
-    public int getStudentStatus() {
-        return studentStatus;
-    }
-
-    public void setStudentStatus(int studentStatus) {
-        this.studentStatus = studentStatus;
     }
 
     public int getStudentGrade() {
@@ -168,14 +181,6 @@ public class Student {
         this.container = container;
     }
 
-    public int getStudentGender() {
-        return studentGender;
-    }
-
-    public void setStudentGender(int studentGender) {
-        this.studentGender = studentGender;
-    }
-
     public String getStudentPwd() {
         return studentPwd;
     }
@@ -190,5 +195,101 @@ public class Student {
 
     public void setStudentSalt(String studentSalt) {
         this.studentSalt = studentSalt;
+    }
+
+    public int getEsEmployment() {
+        return esEmployment;
+    }
+
+    public void setEsEmployment(int esEmployment) {
+        this.esEmployment = esEmployment;
+    }
+
+    public String getEsCompany() {
+        return esCompany;
+    }
+
+    public void setEsCompany(String esCompany) {
+        this.esCompany = esCompany;
+    }
+
+    public String getEsWorkCity() {
+        return esWorkCity;
+    }
+
+    public void setEsWorkCity(String esWorkCity) {
+        this.esWorkCity = esWorkCity;
+    }
+
+    public String getEsWorkType() {
+        return esWorkType;
+    }
+
+    public void setEsWorkType(String esWorkType) {
+        this.esWorkType = esWorkType;
+    }
+
+    public String getEsIntentionCity() {
+        return esIntentionCity;
+    }
+
+    public void setEsIntentionCity(String esIntentionCity) {
+        this.esIntentionCity = esIntentionCity;
+    }
+
+    public String getEsIntentionWork() {
+        return esIntentionWork;
+    }
+
+    public void setEsIntentionWork(String esIntentionWork) {
+        this.esIntentionWork = esIntentionWork;
+    }
+
+    public int getWrite() {
+        return write;
+    }
+
+    public void setWrite(int write) {
+        this.write = write;
+    }
+
+    public String getEsId() {
+        return esId;
+    }
+
+    public void setEsId(String esId) {
+        this.esId = esId;
+    }
+
+    public String getStudentStatus() {
+        return studentStatus;
+    }
+
+    public void setStudentStatus(String studentStatus) {
+        this.studentStatus = studentStatus;
+    }
+
+    public String getStudentGender() {
+        return studentGender;
+    }
+
+    public void setStudentGender(String studentGender) {
+        this.studentGender = studentGender;
+    }
+
+    public String getEsStatus() {
+        return esStatus;
+    }
+
+    public void setEsStatus(String esStatus) {
+        this.esStatus = esStatus;
+    }
+
+    public String getEsPlan() {
+        return esPlan;
+    }
+
+    public void setEsPlan(String esPlan) {
+        this.esPlan = esPlan;
     }
 }

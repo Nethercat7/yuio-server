@@ -21,7 +21,7 @@ public class EStatus {
     @JsonProperty("grade")
     private int esGrade;
     @JsonProperty("employment")
-    private boolean esEmployment;
+    private String esEmployment;
     @JsonProperty("company")
     private String esCompany;
     @JsonProperty("work_city")
@@ -29,9 +29,9 @@ public class EStatus {
     @JsonProperty("work_type")
     private String esWorkType;
     @JsonProperty("status")
-    private int esStatus;
+    private String esStatus;
     @JsonProperty("plan")
-    private int esPlan;
+    private String esPlan;
     @JsonProperty("intention_city")
     private String esIntentionCity;
     @JsonProperty("intention_work")
@@ -61,10 +61,6 @@ public class EStatus {
         this.esClsId = esClsId;
     }
 
-    public boolean isEsEmployment() {
-        return esEmployment;
-    }
-
     public String getEsMajorId() {
         return esMajorId;
     }
@@ -87,14 +83,6 @@ public class EStatus {
 
     public void setEsGrade(int esGrade) {
         this.esGrade = esGrade;
-    }
-
-    public boolean getEsEmployment() {
-        return esEmployment;
-    }
-
-    public void setEsEmployment(boolean esEmployment) {
-        this.esEmployment = esEmployment;
     }
 
     public String getEsCompany() {
@@ -121,22 +109,6 @@ public class EStatus {
         this.esWorkType = esWorkType;
     }
 
-    public int getEsStatus() {
-        return esStatus;
-    }
-
-    public void setEsStatus(int esStatus) {
-        this.esStatus = esStatus;
-    }
-
-    public int getEsPlan() {
-        return esPlan;
-    }
-
-    public void setEsPlan(int esPlan) {
-        this.esPlan = esPlan;
-    }
-
     public String getEsIntentionCity() {
         return esIntentionCity;
     }
@@ -151,5 +123,29 @@ public class EStatus {
 
     public void setEsIntentionWork(String esIntentionWork) {
         this.esIntentionWork = esIntentionWork;
+    }
+
+    public String getEsEmployment() {
+        return esEmployment;
+    }
+
+    public void setEsEmployment(String esEmployment) {
+        this.esEmployment = esEmployment;
+    }
+
+    public String getEsStatus() {
+        return esStatus;
+    }
+
+    public void setEsStatus(String esStatus) {
+        this.esStatus = esStatus;
+    }
+
+    public String getEsPlan() {
+        return esPlan;
+    }
+
+    public void setEsPlan(String esPlan) {
+        this.esPlan = esPlan;
     }
 }

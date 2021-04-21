@@ -50,7 +50,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         int employmentPeople = 0;
         for (EStatus es : eStatuses
         ) {
-            if (es.getEsEmployment()) employmentPeople += 1;
+            if (es.getEsEmployment().equals("1")) employmentPeople += 1;
         }
         //计算各学院未就业人数
         int unEmploymentPeople = totalPeople - employmentPeople;
@@ -88,7 +88,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             int employmentPeople = 0;
             for (EStatus e : eStatusList
             ) {
-                if (!e.getEsEmployment()) employmentPeople += 1;
+                if (e.getEsEmployment().equals("1")) employmentPeople += 1;
             }
             //计算未就业的学生总数量
             int unEmploymentPeople = totalPeople - employmentPeople;
@@ -98,6 +98,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             collegeNameList.add(c.getCollegeName());
             collegeEmploymentRate.add(employmentRate);
             collegeEmploymentPeople.add(employmentPeople);
+            map.put("college_id",c.getCollegeId());
             map.put("college_name", c.getCollegeName());
             map.put("total_people", totalPeople);
             map.put("employment_people", employmentPeople);
@@ -190,5 +191,14 @@ public class StatisticsServiceImpl implements StatisticsService {
             maps.add(map);
         }
         return maps;
+    }
+
+    @Override
+    public List<Student> getEStatusStudentInfo(Map<String,Object> map) {
+        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+        String id=null;
+        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
+        List<Student> students=statisticsDao.getEStatusStudentInfo(id,grade);
+        return students;
     }
 }

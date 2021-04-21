@@ -1,5 +1,7 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.Student;
+
 import java.util.List;
 import java.util.Map;
 
@@ -72,4 +74,12 @@ public interface StatisticsService {
      *@Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
     */
     List<Map<String,Object>> getGrade();
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取各学生的就业情况信息填写状况
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.Student>
+     */
+    List<Student> getEStatusStudentInfo(Map<String,Object> map);
 }

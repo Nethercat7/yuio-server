@@ -1,5 +1,6 @@
 package com.zfy.yuio.dao;
 
+import com.zfy.yuio.entity.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -59,4 +60,12 @@ public interface StatisticsDao {
      *@Return int
     */
     List<Integer> getGrade();
+
+    /**
+     *@Author Nethercat7
+     *@Description 获取各学生的就业情况信息填写状况
+     *@param
+     *@Return java.util.List<com.zfy.yuio.entity.Student>
+    */
+    List<Student> getEStatusStudentInfo(String id,int grade);
 }
