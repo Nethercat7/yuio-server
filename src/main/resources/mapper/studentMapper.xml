@@ -58,11 +58,14 @@
         WHERE student_id=#{id}
     </select>
 
-    <select id="getByCollegeId" parameterType="String" resultType="Student">
+    <select id="getByCollegeId" parameterType="Object" resultType="Student">
         SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
         student_description,student_college_id,student_major_id,student_cls_id,student_create_time
         FROM student
         WHERE student_college_id=#{id}
+        <if test="grade!=0">
+            AND student_grade=#{grade}
+        </if>
     </select>
 
     <select id="getWithEStatusInfo" parameterType="QueryParam" resultType="Student">

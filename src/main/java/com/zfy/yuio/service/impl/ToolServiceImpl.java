@@ -93,7 +93,7 @@ public class ToolServiceImpl implements ToolService {
             String clsId = studentList.get(i).getStudentClassId();
             String majorId = studentList.get(i).getStudentMajorId();
             String collegeId = studentList.get(i).getStudentCollegeId();
-            String employment = String.valueOf(RandomInfoGenerateUntil.randomBoolean());
+            String employment = String.valueOf(random.nextInt(2));
             String wCity = cities[random.nextInt(cities.length)];
             String wType = works[random.nextInt(works.length)];
             String status = String.valueOf(random.nextInt(3));

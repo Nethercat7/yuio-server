@@ -1,5 +1,6 @@
 package com.zfy.yuio.controller;
 
+import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,18 @@ public class StatisticsController {
     }
 
     @PostMapping("getEmploymentCityInfo")
-    public ResultBody getEmploymentCityInfo(@RequestBody Map<String,Object> form){
-        return new ResultBody(0,statisticsService.getEmploymentCityInfo(form),"success");
+    public ResultBody getEmploymentCityInfo(@RequestBody EStatus eStatus){
+        return new ResultBody(0,statisticsService.getEmploymentCityInfo(eStatus),"success");
     }
 
     @PostMapping("getEmploymentWorkInfo")
-    public ResultBody getEmploymentWorkInfo(@RequestBody Map<String,Object> form){
-        return new ResultBody(0,statisticsService.getEmploymentWorkInfo(form),"success");
+    public ResultBody getEmploymentWorkInfo(@RequestBody EStatus eStatus){
+        return new ResultBody(0,statisticsService.getEmploymentWorkInfo(eStatus),"success");
     }
 
     @PostMapping("getUnEmploymentStudentPlan")
-    public ResultBody getUnEmploymentStudentPlan(@RequestBody Map<String,Object> form){
-        return new ResultBody(0,statisticsService.getUnEmploymentStudentPlan(form),"success");
+    public ResultBody getUnEmploymentStudentPlan(@RequestBody EStatus eStatus){
+        return new ResultBody(0,statisticsService.getUnEmploymentStudentPlan(eStatus),"success");
     }
 
     @PostMapping("getIntentionCityInfo")

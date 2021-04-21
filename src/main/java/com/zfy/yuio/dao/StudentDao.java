@@ -54,16 +54,16 @@ public interface StudentDao {
     Student getById(String id);
 
     /**
-     * @param id
-     * @Author Nethercat7
-     * @Description 查询该院系下的所有学生信息
-     * @Return java.util.List<com.zfy.yuio.entity.Student>
-     */
-    List<Student> getByCollegeId(String id);
+     *@Author Nethercat7
+     *@Description 查询学院中的学生信息
+     *@param id
+     *@param grade
+     *@Return java.util.List<com.zfy.yuio.entity.Student>
+    */
+    List<Student> getByCollegeId(String id, int grade);
 
     /**
-     * @param id
-     * @param grade
+     * @param queryParam
      * @Author Nethercat7
      * @Description 查询学生信息以及就业情况填写信息
      * @Return java.util.List<com.zfy.yuio.entity.Student>

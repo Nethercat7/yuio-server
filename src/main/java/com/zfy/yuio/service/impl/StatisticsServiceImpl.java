@@ -3,6 +3,7 @@ package com.zfy.yuio.service.impl;
 import com.zfy.yuio.dao.*;
 import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.EStatus;
+import com.zfy.yuio.entity.Statistics;
 import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,9 +80,9 @@ public class StatisticsServiceImpl implements StatisticsService {
         ) {
             Map<String, Object> map = new HashMap<>();
             //获取该院系下的就业情况信息
-            List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId(),grade);
+            List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId(), grade);
             //获取该院系下的所有学生信息
-            List<Student> studentList = studentDao.getByCollegeId(c.getCollegeId());
+            List<Student> studentList = studentDao.getByCollegeId(c.getCollegeId(), grade);
             //计算该院系下的学生总量
             int totalPeople = studentList.size();
             //计算该院系下已就业的学生数量
@@ -98,7 +99,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             collegeNameList.add(c.getCollegeName());
             collegeEmploymentRate.add(employmentRate);
             collegeEmploymentPeople.add(employmentPeople);
-            map.put("college_id",c.getCollegeId());
+            map.put("college_id", c.getCollegeId());
             map.put("college_name", c.getCollegeName());
             map.put("total_people", totalPeople);
             map.put("employment_people", employmentPeople);
@@ -116,89 +117,68 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public List<Map<String, Object>> getEmploymentCityInfo(Map<String,Object> map) {
-        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
-        String id=null;
-        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
-        List<Map<String, Object>> maps = statisticsDao.getEmploymentCityInfo(grade,id);
+    public List<Statistics> getEmploymentCityInfo(EStatus eStatus) {
+        return statisticsDao.getEmploymentCityInfo(eStatus);
+    }
+
+    @Override
+    public List<Statistics> getEmploymentWorkInfo(EStatus eStatus) {
+        return statisticsDao.getEmploymentWorkInfo(eStatus);
+    }
+
+    @Override
+    public List<Statistics> getUnEmploymentStudentPlan(EStatus eStatus) {
+        return statisticsDao.getUnEmploymentStudentPlan(eStatus);
+    }
+
+    @Override
+    public List<Map<String, Object>> getIntentionCityInfo(Map<String, Object> map) {
+        int grade = Integer.parseInt(String.valueOf(map.get("grade")));
+        String id = null;
+        if (!ObjectUtils.isEmpty(map.get("id"))) id = String.valueOf(map.get("id"));
+        List<Map<String, Object>> maps = statisticsDao.getIntentionCityInfo(grade, id);
         for (Map<String, Object> m : maps
         ) {
-            String cityId=String.valueOf(m.get("city"));
+            String cityId = String.valueOf(m.get("city"));
             m.put("city", cityDao.getCityName(cityId));
         }
         return maps;
     }
 
     @Override
-    public List<Map<String, Object>> getEmploymentWorkInfo(Map<String,Object> map) {
-        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
-        String id=null;
-        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
-        List<Map<String, Object>> maps = statisticsDao.getEmploymentWorkInfo(grade,id);
+    public List<Map<String, Object>> getIntentionWorkInfo(Map<String, Object> map) {
+        int grade = Integer.parseInt(String.valueOf(map.get("grade")));
+        String id = null;
+        if (!ObjectUtils.isEmpty(map.get("id"))) id = String.valueOf(map.get("id"));
+        List<Map<String, Object>> maps = statisticsDao.getIntentionWorkInfo(grade, id);
         for (Map<String, Object> m : maps
         ) {
-            String typeId=String.valueOf(m.get("type"));
+            String typeId = String.valueOf(m.get("type"));
             m.put("type", workDao.getWorkName(typeId));
         }
         return maps;
     }
 
     @Override
-    public List<Map<String, Object>> getUnEmploymentStudentPlan(Map<String,Object> map) {
-        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
-        String id=null;
-        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
-        return statisticsDao.getUnEmploymentStudentPlan(grade,id);
-    }
-
-    @Override
-    public List<Map<String, Object>> getIntentionCityInfo(Map<String,Object> map) {
-        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
-        String id=null;
-        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
-        List<Map<String, Object>> maps = statisticsDao.getIntentionCityInfo(grade,id);
-        for (Map<String, Object> m : maps
+    public List<Map<String, Object>> getGrade() {
+        List<Integer> grades = statisticsDao.getGrade();
+        List<Map<String, Object>> maps = new ArrayList<>();
+        for (Integer i : grades
         ) {
-            String cityId=String.valueOf(m.get("city"));
-            m.put("city", cityDao.getCityName(cityId));
-        }
-        return maps;
-    }
-
-    @Override
-    public List<Map<String, Object>> getIntentionWorkInfo(Map<String,Object> map) {
-        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
-        String id=null;
-        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
-        List<Map<String, Object>> maps = statisticsDao.getIntentionWorkInfo(grade,id);
-        for (Map<String, Object> m : maps
-        ) {
-            String typeId=String.valueOf(m.get("type"));
-            m.put("type", workDao.getWorkName(typeId));
-        }
-        return maps;
-    }
-
-    @Override
-    public List<Map<String,Object>> getGrade() {
-        List<Integer> grades=statisticsDao.getGrade();
-        List<Map<String,Object>> maps=new ArrayList<>();
-        for (Integer i:grades
-             ) {
-            Map<String,Object> map=new HashMap<>();
-            map.put("value",i);
-            map.put("label",i+"届");
+            Map<String, Object> map = new HashMap<>();
+            map.put("value", i);
+            map.put("label", i + "届");
             maps.add(map);
         }
         return maps;
     }
 
     @Override
-    public List<Student> getEStatusStudentInfo(Map<String,Object> map) {
-        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
-        String id=null;
-        if(!ObjectUtils.isEmpty(map.get("id"))) id=String.valueOf(map.get("id"));
-        List<Student> students=statisticsDao.getEStatusStudentInfo(id,grade);
+    public List<Student> getEStatusStudentInfo(Map<String, Object> map) {
+        int grade = Integer.parseInt(String.valueOf(map.get("grade")));
+        String id = null;
+        if (!ObjectUtils.isEmpty(map.get("id"))) id = String.valueOf(map.get("id"));
+        List<Student> students = statisticsDao.getEStatusStudentInfo(id, grade);
         return students;
     }
 }
