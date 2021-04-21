@@ -88,23 +88,4 @@
         SELECT DISTINCT es_grade
         FROM employment_status
     </select>
-
-    <select id="getEStatusStudentInfo" parameterType="Object" resultType="Student">
-        SELECT
-        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,s.student_description,s.student_college_id,s.student_major_id,s.student_class_id,
-        e.es_employment,e.es_work_city,e.es_work_type,e.es_status,e.es_plan,e.es_intention_city,e.es_intention_work
-        FROM student s
-        LEFT JOIN employment_status e
-        ON s.student_id=e.es_student_id
-        <if test="id!=null">
-            WHERE s.student_id=#{id}
-            OR s.student_class_id=#{id}
-            OR s.student_major_id=#{id}
-            OR s.student_college_id=#{id}
-        </if>
-        <if test="grade!=0">
-            AND s.student_grade=#{grade}
-        </if>
-        ORDER BY e.es_employment
-    </select>
 </mapper>

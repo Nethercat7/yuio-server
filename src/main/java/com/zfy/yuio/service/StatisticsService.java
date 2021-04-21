@@ -2,7 +2,6 @@ package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.Statistics;
-import com.zfy.yuio.entity.Student;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +27,4 @@ public interface StatisticsService {
     List<Map<String, Object>> getIntentionWorkInfo(Map<String, Object> map);
 
     List<Map<String, Object>> getGrade();
-
-    List<Student> getEStatusStudentInfo(Map<String, Object> map);
 }

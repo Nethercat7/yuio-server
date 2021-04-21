@@ -2,7 +2,6 @@ package com.zfy.yuio.dao;
 
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.Statistics;
-import com.zfy.yuio.entity.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,6 +25,4 @@ public interface StatisticsDao {
     List<Map<String, Object>> getIntentionWorkInfo(int grade, String id);
 
     List<Integer> getGrade();
-
-    List<Student> getEStatusStudentInfo(String id, int grade);
 }

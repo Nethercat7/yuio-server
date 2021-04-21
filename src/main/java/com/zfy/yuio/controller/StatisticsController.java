@@ -59,9 +59,4 @@ public class StatisticsController {
     public ResultBody getGrade(){
         return new ResultBody(0,statisticsService.getGrade(),"success");
     }
-
-    @PostMapping("getEStatusStudentInfo")
-    public ResultBody getEStatusStudentInfo(@RequestBody Map<String,Object> form){
-        return new ResultBody(0,statisticsService.getEStatusStudentInfo(form),"success");
-    }
 }

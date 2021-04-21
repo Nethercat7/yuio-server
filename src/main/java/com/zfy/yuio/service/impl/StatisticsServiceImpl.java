@@ -172,13 +172,4 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
         return maps;
     }
-
-    @Override
-    public List<Student> getEStatusStudentInfo(Map<String, Object> map) {
-        int grade = Integer.parseInt(String.valueOf(map.get("grade")));
-        String id = null;
-        if (!ObjectUtils.isEmpty(map.get("id"))) id = String.valueOf(map.get("id"));
-        List<Student> students = statisticsDao.getEStatusStudentInfo(id, grade);
-        return students;
-    }
 }
