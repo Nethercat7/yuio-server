@@ -62,23 +62,41 @@
         ORDER BY people desc
     </select>
 
-    <select id="getIntentionCityInfo" resultType="Map">
-        SELECT COUNT(es_id) as people,es_intention_city as city
-        FROM employment_status
-        WHERE es_grade=#{grade}
-        <if test="id!=null">
-            AND es_college_id=#{id} OR es_major_id=#{id} OR es_cls_id=#{id}
+    <select id="getIntentionCityInfo" resultType="Statistics">
+        SELECT COUNT(e.es_id) as people,c.city_name as city
+        FROM employment_status e
+        LEFT JOIN city c
+        ON e.es_intention_city=c.city_id
+        WHERE es_employment=1
+        AND es_grade=#{esGrade}
+        <if test="esCollegeId!=null">
+            AND es_college_id=#{esCollegeId}
+        </if>
+        <if test="esMajorId!=null">
+            AND es_major_id=#{esMajorId}
+        </if>
+        <if test="esClsId!=null">
+            AND es_cls_id=#{esClsId}
         </if>
         GROUP BY city
         ORDER BY people desc
     </select>
 
-    <select id="getIntentionWorkInfo" resultType="Map">
-        SELECT COUNT(es_id) as people,es_intention_work as type
-        FROM employment_status
-        WHERE es_grade=#{grade}
-        <if test="id!=null">
-            AND es_college_id=#{id} OR es_major_id=#{id} OR es_cls_id=#{id}
+    <select id="getIntentionWorkInfo" resultType="Statistics">
+        SELECT COUNT(e.es_id) as people,w.work_name as type
+        FROM employment_status e
+        LEFT JOIN work w
+        ON e.es_intention_work=w.work_id
+        WHERE e.es_employment=1
+        AND e.es_grade=#{esGrade}
+        <if test="esCollegeId!=null">
+            AND e.es_college_id=#{esCollegeId}
+        </if>
+        <if test="esMajorId!=null">
+            AND e.es_major_id=#{esMajorId}
+        </if>
+        <if test="esClsId!=null">
+            AND e.es_cls_id=#{esClsId}
         </if>
         GROUP BY type
         ORDER BY people desc

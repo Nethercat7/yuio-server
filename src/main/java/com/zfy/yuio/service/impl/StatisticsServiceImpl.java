@@ -8,7 +8,6 @@ import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -33,13 +32,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     private CollegeDao collegeDao;
 
     @Autowired
-    private CityDao cityDao;
-
-    @Autowired
     private StatisticsDao statisticsDao;
-
-    @Autowired
-    private WorkDao workDao;
 
     @Override
     public Map<String, Object> getTotalEmploymentInfo(int grade) {
@@ -132,31 +125,13 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public List<Map<String, Object>> getIntentionCityInfo(Map<String, Object> map) {
-        int grade = Integer.parseInt(String.valueOf(map.get("grade")));
-        String id = null;
-        if (!ObjectUtils.isEmpty(map.get("id"))) id = String.valueOf(map.get("id"));
-        List<Map<String, Object>> maps = statisticsDao.getIntentionCityInfo(grade, id);
-        for (Map<String, Object> m : maps
-        ) {
-            String cityId = String.valueOf(m.get("city"));
-            m.put("city", cityDao.getCityName(cityId));
-        }
-        return maps;
+    public List<Statistics> getIntentionCityInfo(EStatus eStatus) {
+        return statisticsDao.getIntentionCityInfo(eStatus);
     }
 
     @Override
-    public List<Map<String, Object>> getIntentionWorkInfo(Map<String, Object> map) {
-        int grade = Integer.parseInt(String.valueOf(map.get("grade")));
-        String id = null;
-        if (!ObjectUtils.isEmpty(map.get("id"))) id = String.valueOf(map.get("id"));
-        List<Map<String, Object>> maps = statisticsDao.getIntentionWorkInfo(grade, id);
-        for (Map<String, Object> m : maps
-        ) {
-            String typeId = String.valueOf(m.get("type"));
-            m.put("type", workDao.getWorkName(typeId));
-        }
-        return maps;
+    public List<Statistics> getIntentionWorkInfo(EStatus eStatus) {
+        return statisticsDao.getIntentionWorkInfo(eStatus);
     }
 
     @Override

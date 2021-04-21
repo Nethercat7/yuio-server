@@ -22,9 +22,9 @@ public interface StatisticsService {
 
     List<Statistics> getUnEmploymentStudentPlan(EStatus eStatus);
 
-    List<Map<String, Object>> getIntentionCityInfo(Map<String, Object> map);
+    List<Statistics> getIntentionCityInfo(EStatus eStatus);
 
-    List<Map<String, Object>> getIntentionWorkInfo(Map<String, Object> map);
+    List<Statistics> getIntentionWorkInfo(EStatus eStatus);
 
     List<Map<String, Object>> getGrade();
 }

@@ -6,8 +6,6 @@ import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
  * @Description:数据统计模块
  * @Author:Nethercat7
@@ -46,13 +44,13 @@ public class StatisticsController {
     }
 
     @PostMapping("getIntentionCityInfo")
-    public ResultBody getIntentionCityInfo(@RequestBody Map<String,Object> form){
-        return new ResultBody(0,statisticsService.getIntentionCityInfo(form),"success");
+    public ResultBody getIntentionCityInfo(@RequestBody EStatus eStatus){
+        return new ResultBody(0,statisticsService.getIntentionCityInfo(eStatus),"success");
     }
 
     @PostMapping("getIntentionWorkInfo")
-    public ResultBody getIntentionWorkInfo(@RequestBody Map<String,Object> form){
-        return new ResultBody(0,statisticsService.getIntentionWorkInfo(form),"success");
+    public ResultBody getIntentionWorkInfo(@RequestBody EStatus eStatus){
+        return new ResultBody(0,statisticsService.getIntentionWorkInfo(eStatus),"success");
     }
 
     @GetMapping("getGrade")
