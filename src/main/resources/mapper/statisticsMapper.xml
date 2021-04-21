@@ -50,13 +50,13 @@
         WHERE es_employment=0
         AND es_grade=#{esGrade}
         <if test="esCollegeId!=null">
-            AND e.es_college_id=#{esCollegeId}
+            AND es_college_id=#{esCollegeId}
         </if>
         <if test="esMajorId!=null">
-            AND e.es_major_id=#{esMajorId}
+            AND es_major_id=#{esMajorId}
         </if>
         <if test="esClsId!=null">
-            AND e.es_cls_id=#{esClsId}
+            AND es_cls_id=#{esClsId}
         </if>
         GROUP BY plan
         ORDER BY people desc
