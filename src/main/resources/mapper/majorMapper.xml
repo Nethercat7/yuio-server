@@ -10,7 +10,11 @@
     </insert>
 
     <select id="get" resultType="Major">
-        SELECT * FROM major
+        SELECT m.major_id,m.major_name,m.major_status,m.major_create_time,m.major_description,m.major_college_id,
+        c.college_name AS major_college_name
+        FROM major m
+        LEFT JOIN college c
+        ON m.major_college_id=c.college_id
     </select>
 
     <delete id="del" parameterType="String">
