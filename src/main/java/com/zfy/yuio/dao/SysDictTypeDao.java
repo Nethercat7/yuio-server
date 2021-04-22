@@ -3,6 +3,8 @@ package com.zfy.yuio.dao;
 import com.zfy.yuio.entity.SysDictType;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  *@Description:字典类型
  *@Author:Nethercat7
@@ -11,4 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysDictTypeDao {
     int add(SysDictType sysDictType);
+
+    List<SysDictType> get();
 }

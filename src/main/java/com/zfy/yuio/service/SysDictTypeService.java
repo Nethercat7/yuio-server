@@ -2,6 +2,8 @@ package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.SysDictType;
 
+import java.util.List;
+
 /**
  *@Description:字典类型
  *@Author:Nethercat7
@@ -9,4 +11,6 @@ import com.zfy.yuio.entity.SysDictType;
 */
 public interface SysDictTypeService {
     int add(SysDictType sysDictType);
+
+    List<SysDictType> get();
 }

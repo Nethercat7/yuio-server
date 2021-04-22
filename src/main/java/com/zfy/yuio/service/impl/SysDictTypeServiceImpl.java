@@ -7,6 +7,8 @@ import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SysDictTypeServiceImpl implements SysDictTypeService {
     @Autowired
@@ -18,5 +20,10 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     public int add(SysDictType sysDictType) {
         sysDictType.setDictId(snowflakeIdGeneratorUtil.getId());
         return sysDictTypeDao.add(sysDictType);
+    }
+
+    @Override
+    public List<SysDictType> get() {
+        return sysDictTypeDao.get();
     }
 }

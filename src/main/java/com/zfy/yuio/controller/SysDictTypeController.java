@@ -21,4 +21,9 @@ public class SysDictTypeController {
         }
         return new ResultBody(0,"添加成功","success");
     }
+
+    @GetMapping("get")
+    public ResultBody get(){
+        return new ResultBody(0,sysDictTypeService.get());
+    }
 }

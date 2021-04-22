@@ -8,4 +8,8 @@
         INSERT INTO sys_dict_type(dict_id,dict_name,dict_type,status,remark)
         VALUES (#{dictId},#{dictName},#{dictType},#{status},#{remark})
     </insert>
+
+    <select id="get" resultType="SysDictType">
+        SELECT * FROM sys_dict_type
+    </select>
 </mapper>
