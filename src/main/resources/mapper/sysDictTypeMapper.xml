@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.SysDictTypeDao">
+    <insert id="add" parameterType="SysDictType">
+        INSERT INTO sys_dict_type(dict_id,dict_name,dict_type,status,remark)
+        VALUES (#{dictId},#{dictName},#{dictType},#{status},#{remark})
+    </insert>
+</mapper>
