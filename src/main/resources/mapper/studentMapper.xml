@@ -105,6 +105,12 @@
         <if test="employment!=null">
             AND e.es_employment=#{employment}
         </if>
+        <if test="write==0">
+            AND e.es_employment IS NULL
+        </if>
+        <if test="write==1">
+            AND e.es_employment IS NOT NULL
+        </if>
         ORDER BY e.es_employment
     </select>
 </mapper>
