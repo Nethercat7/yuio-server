@@ -31,4 +31,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     public int del(String id) {
         return sysDictTypeDao.del(id);
     }
+
+    @Override
+    public int upd(SysDictType sysDictType) {
+        return sysDictTypeDao.upd(sysDictType);
+    }
 }

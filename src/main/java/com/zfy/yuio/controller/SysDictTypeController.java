@@ -35,4 +35,13 @@ public class SysDictTypeController {
         }
         return new ResultBody(0,"删除成功","success");
     }
+
+    @PutMapping("upd")
+    public ResultBody upd(@RequestBody SysDictType sysDictType){
+        int status=sysDictTypeService.upd(sysDictType);
+        if(status!=1){
+            return new ResultBody(1,"修改失败","error");
+        }
+        return new ResultBody(0,"修改成功","success");
+    }
 }
