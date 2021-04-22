@@ -75,4 +75,9 @@
         WHERE es_college_id=#{id}
         AND es_grade=#{grade}
     </select>
+
+    <select id="getGrade" resultType="Integer">
+        SELECT DISTINCT cls_grade
+        FROM cls
+    </select>
 </mapper>

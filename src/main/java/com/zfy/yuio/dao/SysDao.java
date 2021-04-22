@@ -80,4 +80,6 @@ public interface SysDao {
      *@Return java.util.List<com.zfy.yuio.entity.EStatus>
     */
     List<EStatus> getEStatusByCollegeId(String id,int grade);
+
+    List<Integer> getGrade();
 }

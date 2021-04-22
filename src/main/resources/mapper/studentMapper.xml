@@ -107,9 +107,4 @@
         </if>
         ORDER BY e.es_employment
     </select>
-
-    <select id="getStudentGrade" resultType="Integer">
-        SELECT DISTINCT student_grade
-        FROM student
-    </select>
 </mapper>

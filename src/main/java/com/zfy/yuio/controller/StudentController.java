@@ -55,9 +55,4 @@ public class StudentController {
     public ResultBody getWithEStatusInfo(@RequestBody QueryParam queryParam) {
         return new ResultBody(0, studentService.getWithEStatusInfo(queryParam),"success");
     }
-
-    @GetMapping("getStudentGrade")
-    public ResultBody getStudentGrade() {
-        return new ResultBody(0, studentService.getStudentGrade(), "success");
-    }
 }

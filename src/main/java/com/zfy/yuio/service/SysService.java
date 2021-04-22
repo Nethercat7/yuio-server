@@ -70,4 +70,6 @@ public interface SysService {
      *@Return java.util.List<com.zfy.yuio.entity.College>
     */
     List<College> getFullOrg(int grade);
+
+    List<Map<String,Object>> getGrade();
 }

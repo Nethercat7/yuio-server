@@ -4,7 +4,6 @@ import com.zfy.yuio.entity.QueryParam;
 import com.zfy.yuio.entity.Student;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Description:学生管理模块
@@ -44,20 +43,6 @@ public interface StudentService {
      */
     int upd(Student student);
 
-    /**
-     * @param id
-     * @param grade
-     * @Author Nethercat7
-     * @Description 查询学生信息以及就业情况填写信息
-     * @Return java.util.List<com.zfy.yuio.entity.Student>
-     */
     List<Student> getWithEStatusInfo(QueryParam queryParam);
 
-    /**
-     * @param
-     * @Author Nethercat7
-     * @Description 获取学生年级
-     * @Return java.util.List<java.util.Map < java.lang.String, java.lang.Object>>
-     */
-    List<Map<String, Object>> getStudentGrade();
 }

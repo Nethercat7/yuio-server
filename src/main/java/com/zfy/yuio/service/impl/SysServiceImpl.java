@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -140,5 +142,19 @@ public class SysServiceImpl implements SysService {
             c.setChildren(majors);
         }
         return collegeList;
+    }
+
+    @Override
+    public List<Map<String,Object>> getGrade() {
+        List<Integer> grade = sysDao.getGrade();
+        List<Map<String, Object>> gradeList = new ArrayList<>();
+        for (Integer g : grade
+        ) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("label", g + "级");
+            map.put("value", g);
+            gradeList.add(map);
+        }
+        return gradeList;
     }
 }

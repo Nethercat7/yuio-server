@@ -102,20 +102,6 @@ public class StudentServiceImpl implements StudentService {
         return students;
     }
 
-    @Override
-    public List<Map<String, Object>> getStudentGrade() {
-        List<Integer> grades = studentDao.getStudentGrade();
-        List<Map<String, Object>> gradeList = new ArrayList<>();
-        for (Integer grade : grades
-        ) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("label", grade + "级");
-            map.put("value", grade);
-            gradeList.add(map);
-        }
-        return gradeList;
-    }
-
     private void setBaseInfo(Student student) {
         String collegeId = student.getContainer().get(0);
         String majorId = student.getContainer().get(1);

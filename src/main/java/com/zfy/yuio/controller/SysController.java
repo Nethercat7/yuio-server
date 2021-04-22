@@ -70,4 +70,9 @@ public class SysController {
         int grade=Integer.parseInt(String.valueOf(map.get("grade")));
         return new ResultBody(0,sysService.getFullOrg(grade),"success");
     }
+
+    @GetMapping("getGrade")
+    public ResultBody getGrade(){
+        return new ResultBody(0,sysService.getGrade(),"success");
+    }
 }
