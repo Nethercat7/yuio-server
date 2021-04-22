@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *@Description:用户实体类
- *@Author:Nethercat7
- *@CreateDate:2021/4/12 17:02
-*/
+ * @Description:用户实体类
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/12 17:02
+ */
 public class Usr {
     @JsonProperty("id")
     private String usrId;
@@ -18,13 +18,13 @@ public class Usr {
     @JsonProperty("account")
     private String usrAccount;
     @JsonProperty("gender")
-    private int usrGender;
+    private String usrGender;
     @JsonProperty("phone")
     private String usrPhone;
     @JsonProperty("email")
     private String usrEmail;
     @JsonProperty("status")
-    private int usrStatus;
+    private String usrStatus;
     @JsonProperty("description")
     private String usrDescription;
     @JsonProperty("create_time")
@@ -60,13 +60,6 @@ public class Usr {
         this.usrAccount = usrAccount;
     }
 
-    public int getUsrGender() {
-        return usrGender;
-    }
-
-    public void setUsrGender(int usrGender) {
-        this.usrGender = usrGender;
-    }
 
     public String getUsrPhone() {
         return usrPhone;
@@ -84,13 +77,6 @@ public class Usr {
         this.usrEmail = usrEmail;
     }
 
-    public int getUsrStatus() {
-        return usrStatus;
-    }
-
-    public void setUsrStatus(int usrStatus) {
-        this.usrStatus = usrStatus;
-    }
 
     public String getUsrDescription() {
         return usrDescription;
@@ -130,5 +116,21 @@ public class Usr {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public String getUsrGender() {
+        return usrGender;
+    }
+
+    public void setUsrGender(String usrGender) {
+        this.usrGender = usrGender;
+    }
+
+    public String getUsrStatus() {
+        return usrStatus;
+    }
+
+    public void setUsrStatus(String usrStatus) {
+        this.usrStatus = usrStatus;
     }
 }
