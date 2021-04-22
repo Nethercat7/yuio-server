@@ -102,10 +102,10 @@
         <if test="grade!=0">
             AND s.student_grade=#{grade}
         </if>
-        <if test="employment!=null">
+        <if test="employment!=null and employment!=''">
             AND e.es_employment=#{employment}
         </if>
-        <if test="write==0">
+        <if test="write==0 and write!=''">
             AND e.es_employment IS NULL
         </if>
         <if test="write==1">
