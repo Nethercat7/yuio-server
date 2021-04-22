@@ -12,4 +12,9 @@
     <select id="get" resultType="SysDictType">
         SELECT * FROM sys_dict_type
     </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM sys_dict_type
+        WHERE dict_id=#{id}
+    </delete>
 </mapper>

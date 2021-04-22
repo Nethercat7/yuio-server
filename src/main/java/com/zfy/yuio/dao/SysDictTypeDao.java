@@ -15,4 +15,6 @@ public interface SysDictTypeDao {
     int add(SysDictType sysDictType);
 
     List<SysDictType> get();
+
+    int del(String id);
 }
