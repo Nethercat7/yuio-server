@@ -1,0 +1,39 @@
+package com.zfy.yuio.service.impl;
+
+import com.zfy.yuio.dao.SysDictDataDao;
+import com.zfy.yuio.entity.SysDictData;
+import com.zfy.yuio.service.SysDictDataService;
+import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class SysDictDataServiceImpl implements SysDictDataService {
+    @Autowired
+    private SysDictDataDao sysDictDataDao;
+
+    private SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil=new SnowflakeIdGeneratorUtil(12,0);
+
+    @Override
+    public int add(SysDictData sysDictData) {
+        sysDictData.setDictId(snowflakeIdGeneratorUtil.getId());
+        return sysDictDataDao.add(sysDictData);
+    }
+
+    @Override
+    public List<SysDictData> get(String type) {
+        return sysDictDataDao.get(type);
+    }
+
+    @Override
+    public int del(String id) {
+        return sysDictDataDao.del(id);
+    }
+
+    @Override
+    public int upd(SysDictData sysDictData) {
+        return sysDictDataDao.upd(sysDictData);
+    }
+}
