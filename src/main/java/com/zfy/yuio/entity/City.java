@@ -18,7 +18,7 @@ public class City {
     @JsonProperty("pid")
     private String cityPid;
     @JsonProperty("status")
-    private int cityStatus;
+    private String cityStatus;
     @JsonProperty("create_time")
     private LocalDateTime cityCreateTime;
     @JsonProperty("level")
@@ -50,11 +50,11 @@ public class City {
         this.cityPid = cityPid;
     }
 
-    public int getCityStatus() {
+    public String getCityStatus() {
         return cityStatus;
     }
 
-    public void setCityStatus(int cityStatus) {
+    public void setCityStatus(String cityStatus) {
         this.cityStatus = cityStatus;
     }
 

@@ -16,7 +16,7 @@ public class College {
     @JsonProperty("name")
     private String collegeName;
     @JsonProperty("status")
-    private int collegeStatus;
+    private String collegeStatus;
     @JsonProperty("create_time")
     private LocalDateTime collegeCreateTime;
     @JsonProperty("description")
@@ -40,11 +40,11 @@ public class College {
         this.collegeName = collegeName;
     }
 
-    public int getCollegeStatus() {
+    public String getCollegeStatus() {
         return collegeStatus;
     }
 
-    public void setCollegeStatus(int collegeStatus) {
+    public void setCollegeStatus(String collegeStatus) {
         this.collegeStatus = collegeStatus;
     }
 

@@ -24,7 +24,7 @@ public class Menu {
     @JsonProperty("description")
     private String menuDescription;
     @JsonProperty("status")
-    private int menuStatus;
+    private String menuStatus;
     @JsonProperty("create_time")
     private LocalDateTime menuCreateTime;
     @JsonProperty("pid")
@@ -32,7 +32,7 @@ public class Menu {
     @JsonProperty("level")
     private int menuLevel;
     @JsonProperty("type")
-    private int menuType;
+    private String menuType;
 
     private List<Menu> children;
 
@@ -100,11 +100,11 @@ public class Menu {
         this.menuPid = menuPid;
     }
 
-    public int getMenuStatus() {
+    public String getMenuStatus() {
         return menuStatus;
     }
 
-    public void setMenuStatus(int menuStatus) {
+    public void setMenuStatus(String menuStatus) {
         this.menuStatus = menuStatus;
     }
 
@@ -116,11 +116,11 @@ public class Menu {
         this.menuLevel = menuLevel;
     }
 
-    public int getMenuType() {
+    public String getMenuType() {
         return menuType;
     }
 
-    public void setMenuType(int menuType) {
+    public void setMenuType(String menuType) {
         this.menuType = menuType;
     }
 

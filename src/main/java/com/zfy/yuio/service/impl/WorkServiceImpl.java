@@ -72,7 +72,7 @@ public class WorkServiceImpl implements WorkService {
     @Override
     public void initial(Work work) {
         work.setWorkId(snowflakeIdGeneratorUtil.getId());
-        work.setWorkStatus(0);
+        work.setWorkStatus("0");
         if (work.getWorkPid() == null) {
             work.setWorkPid("0");
             work.setWorkLevel(0);
@@ -87,7 +87,7 @@ public class WorkServiceImpl implements WorkService {
         for (Work c : children
         ) {
             c.setWorkId(snowflakeIdGeneratorUtil.getId());
-            c.setWorkStatus(0);
+            c.setWorkStatus("0");
             c.setWorkPid(pid);
             c.setWorkLevel(level + 1);
             workDao.add(c);

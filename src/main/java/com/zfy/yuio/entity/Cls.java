@@ -6,17 +6,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *@Description:专业实体
- *@Author:Nethercat7
- *@CreateDate:2021/4/9 16:34
-*/
+ * @Description:专业实体
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/9 16:34
+ */
 public class Cls {
     @JsonProperty("id")
     private String clsId;
     @JsonProperty("name")
     private String clsName;
     @JsonProperty("status")
-    private int clsStatus;
+    private String clsStatus;
     @JsonProperty("create_time")
     private LocalDateTime clsCreateTime;
     @JsonProperty("description")
@@ -50,11 +50,11 @@ public class Cls {
         this.clsName = clsName;
     }
 
-    public int getClsStatus() {
+    public String getClsStatus() {
         return clsStatus;
     }
 
-    public void setClsStatus(int clsStatus) {
+    public void setClsStatus(String clsStatus) {
         this.clsStatus = clsStatus;
     }
 

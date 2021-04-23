@@ -72,7 +72,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public void initial(City city) {
         city.setCityId(snowflakeIdGeneratorUtil.getId());
-        city.setCityStatus(0);
+        city.setCityStatus("0");
         if (city.getCityPid() == null) {
             city.setCityPid("0");
             city.setCityLevel(0);
@@ -87,7 +87,7 @@ public class CityServiceImpl implements CityService {
         for (City c : children
         ) {
             c.setCityId(snowflakeIdGeneratorUtil.getId());
-            c.setCityStatus(0);
+            c.setCityStatus("0");
             c.setCityPid(pid);
             c.setCityLevel(level + 1);
             cityDao.add(c);

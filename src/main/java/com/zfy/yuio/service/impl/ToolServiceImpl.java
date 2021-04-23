@@ -109,7 +109,7 @@ public class ToolServiceImpl implements ToolService {
         Cls cls = new Cls();
         cls.setClsId(snowflakeIdGeneratorUtil.getId());
         cls.setClsName(clsName);
-        cls.setClsStatus(0);
+        cls.setClsStatus("0");
         cls.setClsGrade(grade);
         cls.setClsDescription("自动生成的班级数据");
         cls.setClsCollegeId(collegeId);

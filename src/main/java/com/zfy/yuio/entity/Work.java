@@ -18,7 +18,7 @@ public class Work {
     @JsonProperty("pid")
     private String workPid;
     @JsonProperty("status")
-    private int workStatus;
+    private String workStatus;
     @JsonProperty("create_time")
     private LocalDateTime workCreateTime;
     @JsonProperty("level")
@@ -50,11 +50,11 @@ public class Work {
         this.workPid = workPid;
     }
 
-    public int getWorkStatus() {
+    public String getWorkStatus() {
         return workStatus;
     }
 
-    public void setWorkStatus(int workStatus) {
+    public void setWorkStatus(String workStatus) {
         this.workStatus = workStatus;
     }
 

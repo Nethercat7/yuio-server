@@ -19,7 +19,7 @@ public class Role {
     @JsonProperty("pid")
     private String rolePid;
     @JsonProperty("status")
-    private int roleStatus;
+    private String roleStatus;
     @JsonProperty("description")
     private String roleDescription;
     @JsonProperty("create_time")
@@ -52,11 +52,11 @@ public class Role {
         this.rolePid = rolePid;
     }
 
-    public int getRoleStatus() {
+    public String getRoleStatus() {
         return roleStatus;
     }
 
-    public void setRoleStatus(int roleStatus) {
+    public void setRoleStatus(String roleStatus) {
         this.roleStatus = roleStatus;
     }
 
