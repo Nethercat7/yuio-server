@@ -90,7 +90,7 @@ public class ToolServiceImpl implements ToolService {
         String[] works = {"504656117557665792", "504656171731296256", "504656362937032704", "504656429500637184", "504656462774050816", "504656499461627904", "504656798368702464", "504656835991609344", "504656536077901824", "504656392129388544"};
         for (int i = 0; i < num; i++) {
             String studentId = studentList.get(i).getStudentId();
-            String clsId = studentList.get(i).getStudentClassId();
+            String clsId = studentList.get(i).getStudentClsId();
             String majorId = studentList.get(i).getStudentMajorId();
             String collegeId = studentList.get(i).getStudentCollegeId();
             String employment = String.valueOf(random.nextInt(2));
@@ -130,7 +130,7 @@ public class ToolServiceImpl implements ToolService {
         student.setStudentGrade(grade);
         student.setStudentCollegeId(collegeId);
         student.setStudentMajorId(majorId);
-        student.setStudentClassId(clsId);
+        student.setStudentClsId(clsId);
         studentDao.add(student);
     }
 

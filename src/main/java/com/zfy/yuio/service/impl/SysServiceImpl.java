@@ -90,7 +90,7 @@ public class SysServiceImpl implements SysService {
         if (!ObjectUtils.isEmpty(student)) {
             return sysDao.updEStatus(eStatus);
         }
-        eStatus.setEsClsId(student.getStudentClassId());
+        eStatus.setEsClsId(student.getStudentClsId());
         eStatus.setEsMajorId(student.getStudentMajorId());
         eStatus.setEsCollegeId(student.getStudentCollegeId());
         eStatus.setEsGrade(student.getStudentGrade());

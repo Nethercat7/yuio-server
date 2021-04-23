@@ -31,8 +31,8 @@ public class Student {
     private String studentCollegeId;
     @JsonProperty("major_id")
     private String studentMajorId;
-    @JsonProperty("class_id")
-    private String studentClassId;
+    @JsonProperty("cls_id")
+    private String studentClsId;
     @JsonProperty("college_name")
     private String studentCollegeName;
     @JsonProperty("major_name")
@@ -141,12 +141,12 @@ public class Student {
         this.studentMajorId = studentMajorId;
     }
 
-    public String getStudentClassId() {
-        return studentClassId;
+    public String getStudentClsId() {
+        return studentClsId;
     }
 
-    public void setStudentClassId(String studentClassId) {
-        this.studentClassId = studentClassId;
+    public void setStudentClsId(String studentClsId) {
+        this.studentClsId = studentClsId;
     }
 
     public String getStudentCollegeName() {

@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Description:学生管理模块
@@ -64,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
             List<String> container = new ArrayList<>();
             container.add(s.getStudentCollegeId());
             container.add(s.getStudentMajorId());
-            container.add(s.getStudentClassId());
+            container.add(s.getStudentClsId());
             s.setContainer(container);
         }
         return students;
@@ -96,7 +94,7 @@ public class StudentServiceImpl implements StudentService {
             List<String> container = new ArrayList<>();
             container.add(student.getStudentCollegeId());
             container.add(student.getStudentMajorId());
-            container.add(student.getStudentClassId());
+            container.add(student.getStudentClsId());
             student.setContainer(container);
         }
         return students;
@@ -108,6 +106,6 @@ public class StudentServiceImpl implements StudentService {
         String clsId = student.getContainer().get(2);
         student.setStudentCollegeId(collegeId);
         student.setStudentMajorId(majorId);
-        student.setStudentClassId(clsId);
+        student.setStudentClsId(clsId);
     }
 }
