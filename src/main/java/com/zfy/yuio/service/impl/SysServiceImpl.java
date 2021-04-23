@@ -58,28 +58,12 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public int login(Map<String, Object> map) {
-        boolean isUser = Boolean.parseBoolean(String.valueOf(map.get("isUser")));
-        String key = String.valueOf(map.get("key"));
-        String pwd = String.valueOf(map.get("pwd"));
-        Map<String, String> info = sysDao.getPwd(isUser, key);
-        if (info != null) {
-            String currentPwd = "";
-            String salt = "";
-            if (isUser) {
-                currentPwd = info.get("user_pwd");
-                salt = info.get("user_salt");
-            } else {
-                currentPwd = info.get("student_pwd");
-                salt = info.get("student_salt");
-            }
-            if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, 1739))) {
-                return 2;
-            }
-            return 0;
-        } else {
-            return 1;
-        }
+    public ResultBody login(Map<String, Object> map) {
+        boolean isUser=Boolean.parseBoolean(String.valueOf(map.get("isUser")));
+        String key=String.valueOf(map.get("key"));
+        String pwd=String.valueOf(map.get("pwd"));
+        if(isUser) return usrLogin(key,pwd);
+        return studentLogin(key,pwd);
     }
 
     @Override
@@ -95,20 +79,6 @@ public class SysServiceImpl implements SysService {
         eStatus.setEsCollegeId(student.getStudentCollegeId());
         eStatus.setEsGrade(student.getStudentGrade());
         return sysDao.saveEmploymentStatus(eStatus);
-    }
-
-    @Override
-    public ResultBody studentLogin(Student student) {
-        Student loginInfo = sysDao.getStudentLoginInfo(student);
-        String inputPwd = student.getStudentPwd();
-        if (loginInfo != null) {
-            String currentPwd = loginInfo.getStudentPwd();
-            String salt = loginInfo.getStudentSalt();
-            if (!currentPwd.equals(ShiroUtil.pwd2MD5(inputPwd, salt, 1739))) return new ResultBody(2, "密码不正确", "error");
-        } else {
-            return new ResultBody(1, "账号不存在", "error");
-        }
-        return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode()));
     }
 
     @Override
@@ -156,5 +126,29 @@ public class SysServiceImpl implements SysService {
             gradeList.add(map);
         }
         return gradeList;
+    }
+
+    private ResultBody studentLogin(String code,String pwd) {
+        Student loginInfo = sysDao.getStudentLoginInfo(code);
+        if (loginInfo != null) {
+            String currentPwd = loginInfo.getStudentPwd();
+            String salt = loginInfo.getStudentSalt();
+            if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, 1739))) return new ResultBody(2, "密码不正确", "error");
+        } else {
+            return new ResultBody(1, "账号不存在", "error");
+        }
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode()));
+    }
+
+    private ResultBody usrLogin(String account,String pwd) {
+        Usr loginInfo = sysDao.getUsrLoginInfo(account);
+        if (loginInfo != null) {
+            String currentPwd = loginInfo.getUsrPwd();
+            String salt = loginInfo.getUsrSalt();
+            if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, 1739))) return new ResultBody(2, "密码不正确", "error");
+        } else {
+            return new ResultBody(1, "账号不存在", "error");
+        }
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getUsrId(), loginInfo.getUsrName()));
     }
 }

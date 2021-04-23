@@ -3,7 +3,6 @@ package com.zfy.yuio.service;
 import com.zfy.yuio.entity.College;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.Student;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +27,7 @@ public interface SysService {
      *@param map
      *@Return int
     */
-    int login(Map<String,Object> map);
+    ResultBody login(Map<String,Object> map);
 
     /**
      *@Author Nethercat7
@@ -37,14 +36,6 @@ public interface SysService {
      *@Return int
      */
     int saveEmploymentStatus(EStatus eStatus);
-
-    /**
-     *@Author Nethercat7
-     *@Description 学生登录
-     *@param student
-     *@Return com.zfy.yuio.entity.ResultBody
-    */
-    ResultBody studentLogin(Student student);
 
     /**
      *@Author Nethercat7

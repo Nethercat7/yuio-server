@@ -43,13 +43,6 @@
         #{esWorkType},#{esStatus},#{esPlan},#{esIntentionCity},#{esIntentionWork})
     </insert>
 
-    <select id="getStudentLoginInfo" parameterType="Student" resultType="Student">
-        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
-        student_description,student_college_id,student_major_id,student_class_id,student_pwd,student_salt,student_create_time
-        FROM student
-        WHERE student_code=#{studentCode}
-    </select>
-
     <select id="getEStatusById" parameterType="String" resultType="EStatus">
         SELECT * FROM employment_status
         WHERE es_student_id=#{id}
@@ -79,5 +72,17 @@
     <select id="getGrade" resultType="Integer">
         SELECT DISTINCT cls_grade
         FROM cls
+    </select>
+
+    <select id="getUsrLoginInfo" resultType="Usr" parameterType="String">
+        SELECT * FROM usr
+        WHERE usr_account=#{key}
+    </select>
+
+    <select id="getStudentLoginInfo" parameterType="String" resultType="Student">
+        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
+        student_description,student_college_id,student_major_id,student_cls_id,student_pwd,student_salt,student_create_time
+        FROM student
+        WHERE student_code=#{key}
     </select>
 </mapper>

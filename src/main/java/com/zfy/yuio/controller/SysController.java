@@ -2,7 +2,6 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +31,7 @@ public class SysController {
 
     @PostMapping("login")
     public ResultBody login(@RequestBody Map<String, Object> map) {
-        int status = sysService.login(map);
-        if (status == 1) {
-            return new ResultBody(1, "账号不正确", "error");
-        } else if (status == 2) {
-            return new ResultBody(2, "密码错误", "error");
-        }
-        return new ResultBody(0, "登录成功", "success");
+        return sysService.login(map);
     }
 
     @PostMapping("saveEmploymentStatus")
@@ -48,11 +41,6 @@ public class SysController {
             return new ResultBody(1, "提交失败", "error");
         }
         return new ResultBody(0, "提交成功", "success");
-    }
-
-    @PostMapping("studentLogin")
-    public ResultBody login(@RequestBody Student student) {
-        return sysService.studentLogin(student);
     }
 
     @GetMapping("getEStatus")
