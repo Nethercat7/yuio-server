@@ -41,7 +41,7 @@
         WHERE urr_usr_id=#{id}
     </delete>
 
-    <select id="get" resultType="Usr" parameterType="String">
+    <select id="getByCode" parameterType="String" resultType="Usr">
         SELECT usr_id,usr_name,usr_code,usr_gender,usr_phone,usr_email,usr_status,usr_description
         FROM usr
         WHERE usr_code=#{param}
