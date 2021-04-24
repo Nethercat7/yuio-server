@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("work")
+@RequestMapping("sys/work")
 public class SysWorkController {
     @Autowired
     private SysWorkService workService;
@@ -27,7 +27,7 @@ public class SysWorkController {
         return new ResultBody(0, workService.get());
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     public ResultBody del(@RequestParam("id") String id){
         int status= workService.del(id);
         if(status!=1){
@@ -36,7 +36,7 @@ public class SysWorkController {
         return new ResultBody(0, "成功删除","success");
     }
 
-    @PostMapping("upd")
+    @PutMapping("upd")
     public ResultBody upd(@RequestBody SysWork params){
         int status=workService.upd(params);
         if(status!=1){
