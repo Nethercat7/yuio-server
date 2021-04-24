@@ -8,7 +8,6 @@ import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,26 +63,6 @@ public class SysServiceImpl implements SysService {
         String pwd = String.valueOf(map.get("pwd"));
         if (isUser) return usrLogin(key, pwd);
         return studentLogin(key, pwd);
-    }
-
-    @Override
-    public int saveEmploymentStatus(StatsEmplInfo eStatus) {
-        eStatus.setEmplId(snowflakeIdGeneratorUtil.getId());
-        SysStudent student = studentDao.getById(eStatus.getEmplStudentId());
-        //如果是已存在的就进行更新
-        if (!ObjectUtils.isEmpty(student)) {
-            return sysDao.updEStatus(eStatus);
-        }
-        eStatus.setEmplClassId(student.getStudentClassId());
-        eStatus.setEmplMajorId(student.getStudentMajorId());
-        eStatus.setEmplCollegeId(student.getStudentCollegeId());
-        eStatus.setEmplGrade(student.getStudentGrade());
-        return sysDao.saveEmploymentStatus(eStatus);
-    }
-
-    @Override
-    public StatsEmplInfo getEStatusById(String id) {
-        return sysDao.getEStatusById(id);
     }
 
     @Override

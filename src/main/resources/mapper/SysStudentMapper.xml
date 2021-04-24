@@ -74,7 +74,7 @@
         s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,
         s.student_remark,s.student_college_id,s.student_major_id,s.student_class_id,s.student_create_time,
         c.college_name AS student_college_name,m.major_name AS student_major_name,class.class_name AS student_class_name,
-        e.es_id,e.es_employment,e.es_work_city,e.es_work_type,e.es_status,e.es_plan,e.es_intention_city,e.es_intention_work
+        e.empl_id,e.empl_status,e.empl_work_city,e.empl_work_type,e.empl_status,e.empl_plan,e.empl_intention_city,e.empl_intention_work
         FROM sys_student s
         LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
@@ -82,8 +82,8 @@
         ON s.student_major_id=m.major_id
         LEFT JOIN sys_class class
         ON s.student_class_id=class.class_id
-        LEFT JOIN sys_empl_stats e
-        ON s.student_id=e.es_student_id
+        LEFT JOIN stats_empl_info e
+        ON s.student_id=e.empl_student_id
         WHERE 1=1
         <if test="studentId!=null">
             AND s.student_id=#{studentId}
@@ -104,15 +104,15 @@
             AND s.student_grade=#{grade}
         </if>
         <if test="employment!=null and employment!=''">
-            AND e.es_employment=#{employment}
+            AND e.empl_status=#{employment}
         </if>
         <if test="write==0 and write!=''">
-            AND e.es_employment IS NULL
+            AND e.empl_status IS NULL
         </if>
         <if test="write==1">
-            AND e.es_employment IS NOT NULL
+            AND e.empl_status IS NOT NULL
         </if>
-        ORDER BY e.es_employment
+        ORDER BY e.empl_status
     </select>
 
     <select id="getByCode" parameterType="String" resultType="SysStudent">

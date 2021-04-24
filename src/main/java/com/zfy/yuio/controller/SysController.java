@@ -1,6 +1,5 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.StatsEmplInfo;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class SysController {
     @Autowired
     private SysService sysService;
 
-    @PostMapping("resetPwd")
+    @PutMapping("resetPwd")
     public ResultBody resetPwd(@RequestBody Map<String, Object> map) {
         int status = sysService.resetPwd(map);
         if (status == 1) {
@@ -34,28 +33,13 @@ public class SysController {
         return sysService.login(map);
     }
 
-    @PostMapping("saveEmploymentStatus")
-    public ResultBody saveEmploymentStatus(@RequestBody StatsEmplInfo eStatus) {
-        int status = sysService.saveEmploymentStatus(eStatus);
-        if (status != 1) {
-            return new ResultBody(1, "提交失败", "error");
-        }
-        return new ResultBody(0, "提交成功", "success");
-    }
-
-    @GetMapping("getEStatus")
-    public ResultBody getEStatus(@RequestParam("id") String id) {
-        return new ResultBody(0,sysService.getEStatusById(id));
-    }
-
     @GetMapping("getCollegeAndMajor")
     public ResultBody getCollegeAndMajor(){
         return new ResultBody(0,sysService.getCollegeAndMajor(),"success");
     }
 
     @GetMapping("getFullOrg")
-    public ResultBody getFullOrg(@RequestParam Map<String,Object> map){
-        int grade=Integer.parseInt(String.valueOf(map.get("grade")));
+    public ResultBody getFullOrg(@RequestParam("grade") int grade){
         return new ResultBody(0,sysService.getFullOrg(grade),"success");
     }
 
