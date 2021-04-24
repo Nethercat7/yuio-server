@@ -87,9 +87,9 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public List<College> getCollegeAndMajor() {
-        List<College> colleges = collegeDao.get();
-        for (College c : colleges
+    public List<SysCollege> getCollegeAndMajor() {
+        List<SysCollege> colleges = collegeDao.get();
+        for (SysCollege c : colleges
         ) {
             c.setChildren(majorDao.getByPid(c.getCollegeId()));
         }
@@ -97,10 +97,10 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public List<College> getFullOrg(int grade) {
-        List<College> collegeList = collegeDao.get();
+    public List<SysCollege> getFullOrg(int grade) {
+        List<SysCollege> collegeList = collegeDao.get();
         //添加之间的关联
-        for (College c : collegeList
+        for (SysCollege c : collegeList
         ) {
             //获取院系下的专业
             List<Major> majors = majorDao.getByPid(c.getCollegeId());

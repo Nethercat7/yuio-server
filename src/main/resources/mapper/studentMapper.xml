@@ -17,7 +17,7 @@
         s.student_description,s.student_college_id,s.student_major_id,s.student_cls_id,s.student_create_time,
         c.college_name AS student_college_name,m.major_name AS student_major_name,cls.cls_name AS student_cls_name
         FROM student s
-        LEFT JOIN college c
+        LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
         LEFT JOIN major m
         ON s.student_major_id=m.major_id
@@ -76,7 +76,7 @@
         c.college_name AS student_college_name,m.major_name AS student_major_name,cls.cls_name AS student_cls_name,
         e.es_id,e.es_employment,e.es_work_city,e.es_work_type,e.es_status,e.es_plan,e.es_intention_city,e.es_intention_work
         FROM student s
-        LEFT JOIN college c
+        LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
         LEFT JOIN major m
         ON s.student_major_id=m.major_id
@@ -121,7 +121,7 @@
         s.student_description,s.student_college_id,s.student_major_id,s.student_cls_id,s.student_create_time,
         c.college_name AS student_college_name,m.major_name AS student_major_name,cls.cls_name AS student_cls_name
         FROM student s
-        LEFT JOIN college c
+        LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
         LEFT JOIN major m
         ON s.student_major_id=m.major_id

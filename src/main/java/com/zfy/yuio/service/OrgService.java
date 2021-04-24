@@ -22,7 +22,7 @@ public interface OrgService {
      *@Author Nethercat7
      *@Description 查找院系
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.College>
+     *@Return java.util.List<com.zfy.yuio.entity.SysCollege>
      */
     List<Org> get();
 

@@ -24,7 +24,7 @@ public interface OrgDao {
      *@Author Nethercat7
      *@Description 查找院系
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.College>
+     *@Return java.util.List<com.zfy.yuio.entity.SysCollege>
     */
     List<Org> get();
 
@@ -48,7 +48,7 @@ public interface OrgDao {
      *@Author Nethercat7
      *@Description 通过上级组织的ID来获取属于其的下级组织
      *@param id
-     *@Return java.util.List<com.zfy.yuio.entity.College>
+     *@Return java.util.List<com.zfy.yuio.entity.SysCollege>
     */
     List<Org> getSubordinate(String id);
 

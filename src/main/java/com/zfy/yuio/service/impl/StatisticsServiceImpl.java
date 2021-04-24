@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.*;
-import com.zfy.yuio.entity.College;
+import com.zfy.yuio.entity.SysCollege;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.Statistics;
 import com.zfy.yuio.entity.Student;
@@ -62,14 +62,14 @@ public class StatisticsServiceImpl implements StatisticsService {
     @Override
     public Map<String, Object> getCollegeEmploymentInfo(int grade) {
         //获取所有院系
-        List<College> collegeList = collegeDao.get();
+        List<SysCollege> collegeList = collegeDao.get();
         //定义柱状图的X和Y轴数据
         List<String> collegeNameList = new ArrayList<>();
         List<String> collegeEmploymentRate = new ArrayList<>();
         List<Integer> collegeEmploymentPeople = new ArrayList<>();
         List<Map<String, Object>> tableData = new ArrayList<>();
         DecimalFormat df = new DecimalFormat("0.00");
-        for (College c : collegeList
+        for (SysCollege c : collegeList
         ) {
             Map<String, Object> map = new HashMap<>();
             //获取该院系下的就业情况信息

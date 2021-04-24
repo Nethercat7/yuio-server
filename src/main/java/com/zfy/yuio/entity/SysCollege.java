@@ -10,18 +10,15 @@ import java.util.List;
  *@Author:Nethercat7
  *@CreateDate:2021/4/8 18:18
 */
-public class College {
+public class SysCollege {
     @JsonProperty("id")
     private String collegeId;
     @JsonProperty("name")
     private String collegeName;
-    @JsonProperty("status")
-    private String collegeStatus;
+    private String status;
     @JsonProperty("create_time")
-    private LocalDateTime collegeCreateTime;
-    @JsonProperty("description")
-    private String collegeDescription;
-
+    private LocalDateTime createTime;
+    private String remark;
     private List<Major> children;
 
     public String getCollegeId() {
@@ -40,28 +37,28 @@ public class College {
         this.collegeName = collegeName;
     }
 
-    public String getCollegeStatus() {
-        return collegeStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCollegeStatus(String collegeStatus) {
-        this.collegeStatus = collegeStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public LocalDateTime getCollegeCreateTime() {
-        return collegeCreateTime;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setCollegeCreateTime(LocalDateTime collegeCreateTime) {
-        this.collegeCreateTime = collegeCreateTime;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
-    public String getCollegeDescription() {
-        return collegeDescription;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setCollegeDescription(String collegeDescription) {
-        this.collegeDescription = collegeDescription;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public List<Major> getChildren() {

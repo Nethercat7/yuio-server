@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.College;
+import com.zfy.yuio.entity.SysCollege;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.ResultBody;
 
@@ -50,17 +50,17 @@ public interface SysService {
      *@Author Nethercat7
      *@Description 获取院系以及旗下的专业
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.College>
+     *@Return java.util.List<com.zfy.yuio.entity.SysCollege>
      */
-    List<College> getCollegeAndMajor();
+    List<SysCollege> getCollegeAndMajor();
 
     /**
      *@Author Nethercat7
      *@Description 获取关联的院系、专业以及班级信息
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.College>
+     *@Return java.util.List<com.zfy.yuio.entity.SysCollege>
     */
-    List<College> getFullOrg(int grade);
+    List<SysCollege> getFullOrg(int grade);
 
     List<Map<String,Object>> getGrade();
 }

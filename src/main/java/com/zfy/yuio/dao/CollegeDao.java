@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.College;
+import com.zfy.yuio.entity.SysCollege;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,18 +15,18 @@ public interface CollegeDao {
     /**
      *@Author Nethercat7
      *@Description 添加院系
-     *@param college
+     *@param params
      *@Return int
     */
-    int add(College college);
+    int add(SysCollege params);
 
     /**
      *@Author Nethercat7
      *@Description 查找院系
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.College>
+     *@Return java.util.List<com.zfy.yuio.entity.SysCollege>
     */
-    List<College> get();
+    List<SysCollege> get();
 
     /**
      *@Author Nethercat7
@@ -39,18 +39,18 @@ public interface CollegeDao {
     /**
      *@Author Nethercat7
      *@Description 修改院系信息
-     *@param college
+     *@param params
      *@Return int
     */
-    int upd(College college);
+    int upd(SysCollege params);
 
     /**
      *@Author Nethercat7
      *@Description 通过ID获取院系信息
      *@param id
-     *@Return com.zfy.yuio.entity.College
+     *@Return com.zfy.yuio.entity.SysCollege
     */
-    College getById(String id);
+    SysCollege getById(String id);
 
     /**
      *@Author Nethercat7

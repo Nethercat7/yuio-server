@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.CollegeDao;
-import com.zfy.yuio.entity.College;
+import com.zfy.yuio.entity.SysCollege;
 import com.zfy.yuio.service.CollegeService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ public class CollegeServiceImpl implements CollegeService {
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(0, 0);
 
     @Override
-    public int add(College college) {
-        college.setCollegeId(snowflakeIdGeneratorUtil.getId());
-        return collegeDao.add(college);
+    public int add(SysCollege params) {
+        params.setCollegeId(snowflakeIdGeneratorUtil.getId());
+        return collegeDao.add(params);
     }
 
     @Override
-    public List<College> get() {
+    public List<SysCollege> get() {
         return collegeDao.get();
     }
 
@@ -38,7 +38,7 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
     @Override
-    public int upd(College college) {
-        return collegeDao.upd(college);
+    public int upd(SysCollege params) {
+        return collegeDao.upd(params);
     }
 }

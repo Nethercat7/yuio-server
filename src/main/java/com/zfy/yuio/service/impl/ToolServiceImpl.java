@@ -43,8 +43,8 @@ public class ToolServiceImpl implements ToolService {
 
     @Override
     public int randomCls(int num, int grade) {
-        List<College> colleges = collegeDao.get();
-        for (College college : colleges
+        List<SysCollege> colleges = collegeDao.get();
+        for (SysCollege college : colleges
         ) {
             List<Major> majors = majorDao.getByPid(college.getCollegeId());
             for (Major major : majors
@@ -62,10 +62,10 @@ public class ToolServiceImpl implements ToolService {
     public int randomStudent(int num, int grade) {
         Random random = new Random();
         //获取所有院系
-        List<College> collegeList = collegeDao.get();
+        List<SysCollege> collegeList = collegeDao.get();
         for (int i = 0; i < num; i++) {
             //随机获取一个院系
-            College college = collegeList.get(random.nextInt(collegeList.size()));
+            SysCollege college = collegeList.get(random.nextInt(collegeList.size()));
             //根据院系ID获取旗下的所有专业
             List<Major> majorList = majorDao.getByPid(college.getCollegeId());
             //随机获取一个专业
