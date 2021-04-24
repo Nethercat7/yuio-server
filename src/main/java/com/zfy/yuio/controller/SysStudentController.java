@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("student")
+@RequestMapping("sys/student")
 public class SysStudentController {
     @Autowired
     private SysStudentService studentService;
@@ -33,7 +33,7 @@ public class SysStudentController {
         return new ResultBody(0, studentService.get(), "success");
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     public ResultBody del(@RequestParam("id") String id) {
         int status = studentService.del(id);
         if (status == 1) {
@@ -42,7 +42,7 @@ public class SysStudentController {
         return new ResultBody(1, "删除失败", "error");
     }
 
-    @PostMapping("upd")
+    @PutMapping("upd")
     public ResultBody upd(@RequestBody SysStudent params) {
         int status = studentService.upd(params);
         if (status == 1) {
