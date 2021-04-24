@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("role")
+@RequestMapping("sys/role")
 public class SysRoleController {
     @Autowired
     private SysRoleService roleService;
@@ -27,7 +27,7 @@ public class SysRoleController {
         return new ResultBody(0, roleService.get());
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     public ResultBody del(@RequestParam("id") String id) {
         int status = roleService.del(id);
         if (status != 1) {
@@ -36,7 +36,7 @@ public class SysRoleController {
         return new ResultBody(0, "成功删除", "success");
     }
 
-    @PostMapping("upd")
+    @PutMapping("upd")
     public ResultBody upd(@RequestBody SysRole params) {
         int status = roleService.upd(params);
         if (status != 1) {
