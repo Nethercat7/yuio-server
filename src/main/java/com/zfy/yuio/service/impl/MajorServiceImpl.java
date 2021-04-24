@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.MajorDao;
-import com.zfy.yuio.entity.Major;
+import com.zfy.yuio.entity.SysMajor;
 import com.zfy.yuio.service.MajorService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ public class MajorServiceImpl implements MajorService {
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(1, 0);
 
     @Override
-    public int add(Major major) {
-        major.setMajorId(snowflakeIdGeneratorUtil.getId());
-        return majorDao.add(major);
+    public int add(SysMajor params) {
+        params.setMajorId(snowflakeIdGeneratorUtil.getId());
+        return majorDao.add(params);
     }
 
     @Override
-    public List<Major> get() {
+    public List<SysMajor> get() {
         return majorDao.get();
     }
 
@@ -38,7 +38,7 @@ public class MajorServiceImpl implements MajorService {
     }
 
     @Override
-    public int upd(Major major) {
-        return majorDao.upd(major);
+    public int upd(SysMajor params) {
+        return majorDao.upd(params);
     }
 }

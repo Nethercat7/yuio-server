@@ -46,8 +46,8 @@ public class ToolServiceImpl implements ToolService {
         List<SysCollege> colleges = collegeDao.get();
         for (SysCollege college : colleges
         ) {
-            List<Major> majors = majorDao.getByPid(college.getCollegeId());
-            for (Major major : majors
+            List<SysMajor> majors = majorDao.getByPid(college.getCollegeId());
+            for (SysMajor major : majors
             ) {
                 //为每个专业设置3个班级
                 for (int i = 0; i < 3; i++) {
@@ -67,9 +67,9 @@ public class ToolServiceImpl implements ToolService {
             //随机获取一个院系
             SysCollege college = collegeList.get(random.nextInt(collegeList.size()));
             //根据院系ID获取旗下的所有专业
-            List<Major> majorList = majorDao.getByPid(college.getCollegeId());
+            List<SysMajor> majorList = majorDao.getByPid(college.getCollegeId());
             //随机获取一个专业
-            Major major = majorList.get(random.nextInt(majorList.size()));
+            SysMajor major = majorList.get(random.nextInt(majorList.size()));
             //根据专业Id获取旗下所有的班级
             List<Cls> clsList = clsDao.getByPid(major.getMajorId(), grade);
             //随机获取一个班级

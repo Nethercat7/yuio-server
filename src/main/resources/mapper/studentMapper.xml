@@ -19,7 +19,7 @@
         FROM student s
         LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
-        LEFT JOIN major m
+        LEFT JOIN sys_major m
         ON s.student_major_id=m.major_id
         LEFT JOIN cls cls
         ON s.student_cls_id=cls.cls_id
@@ -78,7 +78,7 @@
         FROM student s
         LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
-        LEFT JOIN major m
+        LEFT JOIN sys_major m
         ON s.student_major_id=m.major_id
         LEFT JOIN cls cls
         ON s.student_cls_id=cls.cls_id
@@ -123,7 +123,7 @@
         FROM student s
         LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
-        LEFT JOIN major m
+        LEFT JOIN sys_major m
         ON s.student_major_id=m.major_id
         LEFT JOIN cls cls
         ON s.student_cls_id=cls.cls_id

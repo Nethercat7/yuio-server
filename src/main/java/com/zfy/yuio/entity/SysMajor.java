@@ -10,7 +10,7 @@ import java.util.List;
  *@Author:Nethercat7
  *@CreateDate:2021/4/9 16:34
 */
-public class Major {
+public class SysMajor {
     @JsonProperty("id")
     private String majorId;
     @JsonProperty("name")
@@ -20,12 +20,13 @@ public class Major {
     @JsonProperty("create_time")
     private LocalDateTime majorCreateTime;
     @JsonProperty("description")
-    private String majorDescription;
+    private String majorRemark;
     @JsonProperty("college_id")
     private String majorCollegeId;
-    @JsonProperty("college_name")
-    private String majorCollegeName;
 
+    //非数据库字段
+    @JsonProperty("college_name")
+    private String collegeName;
     private List<Cls> children;
 
     public String getMajorId() {
@@ -60,12 +61,12 @@ public class Major {
         this.majorCreateTime = majorCreateTime;
     }
 
-    public String getMajorDescription() {
-        return majorDescription;
+    public String getMajorRemark() {
+        return majorRemark;
     }
 
-    public void setMajorDescription(String majorDescription) {
-        this.majorDescription = majorDescription;
+    public void setMajorRemark(String majorRemark) {
+        this.majorRemark = majorRemark;
     }
 
     public String getMajorCollegeId() {
@@ -76,12 +77,12 @@ public class Major {
         this.majorCollegeId = majorCollegeId;
     }
 
-    public String getMajorCollegeName() {
-        return majorCollegeName;
+    public String getCollegeName() {
+        return collegeName;
     }
 
-    public void setMajorCollegeName(String majorCollegeName) {
-        this.majorCollegeName = majorCollegeName;
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
     }
 
     public List<Cls> getChildren() {

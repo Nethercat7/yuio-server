@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.Major;
+import com.zfy.yuio.entity.SysMajor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,18 +15,18 @@ public interface MajorDao {
     /**
      *@Author Nethercat7
      *@Description 添加专业
-     *@param major
+     *@param params
      *@Return int
     */
-    int add(Major major);
+    int add(SysMajor params);
 
     /**
      *@Author Nethercat7
      *@Description 查找专业
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.Major>
+     *@Return java.util.List<com.zfy.yuio.entity.SysMajor>
     */
-    List<Major> get();
+    List<SysMajor> get();
 
     /**
      *@Author Nethercat7
@@ -39,18 +39,18 @@ public interface MajorDao {
     /**
      *@Author Nethercat7
      *@Description 修改专业信息
-     *@param major
+     *@param params
      *@Return int
     */
-    int upd(Major major);
+    int upd(SysMajor params);
 
     /**
      *@Author Nethercat7
      *@Description 通过院系ID获取专业
      *@param pid
-     *@Return java.util.List<com.zfy.yuio.entity.Major>
+     *@Return java.util.List<com.zfy.yuio.entity.SysMajor>
     */
-    List<Major> getByPid(String pid);
+    List<SysMajor> getByPid(String pid);
 
     /**
      *@Author Nethercat7

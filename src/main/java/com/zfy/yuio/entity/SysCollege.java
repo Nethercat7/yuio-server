@@ -19,7 +19,7 @@ public class SysCollege {
     @JsonProperty("create_time")
     private LocalDateTime createTime;
     private String remark;
-    private List<Major> children;
+    private List<SysMajor> children;
 
     public String getCollegeId() {
         return collegeId;
@@ -61,11 +61,11 @@ public class SysCollege {
         this.remark = remark;
     }
 
-    public List<Major> getChildren() {
+    public List<SysMajor> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Major> children) {
+    public void setChildren(List<SysMajor> children) {
         this.children = children;
     }
 }

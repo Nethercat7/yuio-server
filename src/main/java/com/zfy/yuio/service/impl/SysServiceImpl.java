@@ -103,8 +103,8 @@ public class SysServiceImpl implements SysService {
         for (SysCollege c : collegeList
         ) {
             //获取院系下的专业
-            List<Major> majors = majorDao.getByPid(c.getCollegeId());
-            for (Major m : majors
+            List<SysMajor> majors = majorDao.getByPid(c.getCollegeId());
+            for (SysMajor m : majors
             ) {
                 //获取专业下的班级
                 m.setChildren(clsDao.getByPid(m.getMajorId(), grade));
