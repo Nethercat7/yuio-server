@@ -5,8 +5,8 @@
 
 <mapper namespace="com.zfy.yuio.dao.CollegeDao">
     <insert id="add" parameterType="SysCollege">
-        INSERT INTO sys_college(college_id,college_name,status,remark)
-        VALUES (#{collegeId},#{collegeName},#{status},#{remark})
+        INSERT INTO sys_college(college_id,college_name,college_status,college_remark)
+        VALUES (#{collegeId},#{collegeName},#{collegeStatus},#{collegeRemark})
     </insert>
 
     <select id="get" resultType="SysCollege">
@@ -20,7 +20,7 @@
 
     <update id="upd" parameterType="SysCollege">
         UPDATE sys_college
-        SET college_name=#{collegeName},status=#{status},remark=#{remark}
+        SET college_name=#{collegeName},college_status=#{collegeStatus},college_remark=#{collegeRemark}
         WHERE college_id=#{collegeId}
     </update>
 

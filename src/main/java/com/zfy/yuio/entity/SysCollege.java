@@ -15,10 +15,13 @@ public class SysCollege {
     private String collegeId;
     @JsonProperty("name")
     private String collegeName;
-    private String status;
+    @JsonProperty("status")
+    private String collegeStatus;
     @JsonProperty("create_time")
-    private LocalDateTime createTime;
-    private String remark;
+    private LocalDateTime collegeCreateTime;
+    @JsonProperty("remark")
+    private String collegeRemark;
+    //非数据库字段
     private List<SysMajor> children;
 
     public String getCollegeId() {
@@ -37,28 +40,28 @@ public class SysCollege {
         this.collegeName = collegeName;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCollegeStatus() {
+        return collegeStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCollegeStatus(String collegeStatus) {
+        this.collegeStatus = collegeStatus;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public LocalDateTime getCollegeCreateTime() {
+        return collegeCreateTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public void setCollegeCreateTime(LocalDateTime collegeCreateTime) {
+        this.collegeCreateTime = collegeCreateTime;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getCollegeRemark() {
+        return collegeRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setCollegeRemark(String collegeRemark) {
+        this.collegeRemark = collegeRemark;
     }
 
     public List<SysMajor> getChildren() {
