@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 */
 @CrossOrigin
 @RestController
-@RequestMapping("usr")
+@RequestMapping("/sys/user")
 public class SysUserController {
     @Autowired
     private SysUsrService usrService;
@@ -32,7 +32,7 @@ public class SysUserController {
         return new ResultBody(0,usrService.get());
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     private ResultBody del(@RequestParam("id")String id){
         int status=usrService.del(id);
         if(status!=1){
@@ -41,7 +41,7 @@ public class SysUserController {
         return new ResultBody(0,"成功删除","success");
     }
 
-    @PostMapping("upd")
+    @PutMapping("upd")
     public ResultBody upd(@RequestBody SysUser params){
         int status=usrService.upd(params);
         if(status!=1){
