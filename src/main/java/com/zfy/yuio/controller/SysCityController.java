@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("city")
+@RequestMapping("sys/city")
 public class SysCityController {
     @Autowired
     private SysCityService cityService;
@@ -27,7 +27,7 @@ public class SysCityController {
         return new ResultBody(0, cityService.get());
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     public ResultBody del(@RequestParam("id") String id){
         int status= cityService.del(id);
         if(status!=1){
@@ -36,7 +36,7 @@ public class SysCityController {
         return new ResultBody(0, "成功删除","success");
     }
 
-    @PostMapping("upd")
+    @PutMapping("upd")
     public ResultBody upd(@RequestBody SysCity params){
         int status=cityService.upd(params);
         if(status!=1){
