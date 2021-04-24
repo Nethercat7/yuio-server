@@ -74,4 +74,9 @@ public class MenuServiceImpl implements MenuService {
         }
         return children;
     }
+
+    @Override
+    public List<String> getUserPerms(String id) {
+        return menuDao.getUserPerms(id);
+    }
 }

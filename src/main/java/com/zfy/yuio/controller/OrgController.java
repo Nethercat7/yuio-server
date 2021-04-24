@@ -3,6 +3,7 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.Org;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.OrgService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("org")
+@RequiresPermissions("system:org:mgt")
 public class OrgController {
     @Autowired
     private OrgService orgService;

@@ -3,6 +3,7 @@ package com.zfy.yuio.realms;
 import com.zfy.yuio.entity.Student;
 import com.zfy.yuio.entity.Token;
 import com.zfy.yuio.entity.Usr;
+import com.zfy.yuio.service.MenuService;
 import com.zfy.yuio.service.StudentService;
 import com.zfy.yuio.service.UsrService;
 import com.zfy.yuio.utils.JWTUtil;
@@ -11,10 +12,13 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 public class AuthRealm extends AuthorizingRealm {
     @Autowired
@@ -23,6 +27,9 @@ public class AuthRealm extends AuthorizingRealm {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private MenuService menuService;
+
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof Token;
@@ -30,7 +37,12 @@ public class AuthRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
+        String id=JWTUtil.getId((String)principalCollection.getPrimaryPrincipal());
+        //获取使用者拥有的权限
+        List<String> perms=menuService.getUserPerms(id);
+        simpleAuthorizationInfo.addStringPermissions(perms);
+        return simpleAuthorizationInfo;
     }
 
     @Override

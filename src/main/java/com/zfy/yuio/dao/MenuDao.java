@@ -12,35 +12,13 @@ import java.util.List;
 */
 @Repository
 public interface MenuDao {
-    /**
-     *@Author Nethercat7
-     *@Description Add menu
-     *@param menu
-     *@Return int
-    */
     int add(Menu menu);
 
-    /**
-     *@Author Nethercat7
-     *@Description Get menu
-     *@param
-     *@Return java.util.List<com.zfy.yuio.entity.Menu>
-    */
     List<Menu> get();
 
-    /**
-     *@Author Nethercat7
-     *@Description Delete menu
-     *@param id
-     *@Return int
-    */
     int del(String id);
 
-    /**
-     *@Author Nethercat7
-     *@Description Update menu
-     *@param menu
-     *@Return int
-    */
     int upd(Menu menu);
+
+    List<String> getUserPerms(String id);
 }

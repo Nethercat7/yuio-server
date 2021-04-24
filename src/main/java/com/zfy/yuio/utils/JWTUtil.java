@@ -52,4 +52,8 @@ public class JWTUtil {
     public static String getType(String token) {
         return JWT.require(ALGORITHM).build().verify(token).getClaim("type").asString();
     }
+
+    public static String getId(String token){
+        return JWT.require(ALGORITHM).build().verify(token).getClaim("id").asString();
+    }
 }

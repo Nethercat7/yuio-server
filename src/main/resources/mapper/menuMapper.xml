@@ -23,4 +23,17 @@
         SET menu_name=#{menuName},menu_mark=#{menuMark},menu_url=#{menuUrl},menu_icon=#{menuIcon},menu_description=#{menuDescription},menu_status=#{menuStatus},menu_level=#{menuLevel},menu_pid=#{menuPid},menu_type=#{menuType}
         WHERE menu_id=#{menuId}
     </update>
+
+    <select id="getUserPerms" parameterType="String" resultType="String">
+        SELECT m.menu_mark FROM menu m
+        LEFT JOIN role_perms_relation rp
+        ON rp.rpr_perms_id=m.menu_id
+        LEFT JOIN role r
+        ON rp.rpr_role_id=r.role_id
+        LEFT JOIN usr_role_relation ur
+        ON ur.urr_role_id=r.role_id
+        LEFT JOIN usr u
+        ON ur.urr_usr_id=u.usr_id
+        WHERE u.usr_id=#{id}
+    </select>
 </mapper>
