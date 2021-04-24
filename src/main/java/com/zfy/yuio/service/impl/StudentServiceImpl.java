@@ -69,6 +69,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getByCode(String code) {
+        return studentDao.getByCode(code);
+    }
+
+    @Override
     public int del(String id) {
         return studentDao.del(id);
     }

@@ -9,12 +9,9 @@
         VALUES (#{usrId},#{usrName},#{usrAccount},#{usrGender},#{usrPhone},#{usrEmail},#{usrStatus},#{usrDescription},#{usrPwd},#{usrSalt})
     </insert>
 
-    <select id="get" resultType="Usr" parameterType="String">
+    <select id="get" resultType="Usr">
         SELECT usr_id,usr_name,usr_code,usr_gender,usr_phone,usr_email,usr_status,usr_description
         FROM usr
-        <if test="code!=null">
-            WHERE usr_code=#{param}
-        </if>
     </select>
 
     <delete id="del" parameterType="String">
@@ -43,4 +40,10 @@
         DELETE FROM usr_role_relation
         WHERE urr_usr_id=#{id}
     </delete>
+
+    <select id="get" resultType="Usr" parameterType="String">
+        SELECT usr_id,usr_name,usr_code,usr_gender,usr_phone,usr_email,usr_status,usr_description
+        FROM usr
+        WHERE usr_code=#{param}
+    </select>
 </mapper>

@@ -26,8 +26,6 @@ public interface UsrService {
      */
     List<Usr> get();
 
-    Usr get(String param);
-
     /**
      *@Author Nethercat7
      *@Description Delete user
@@ -43,4 +41,6 @@ public interface UsrService {
      *@Return int
      */
     int upd(Usr usr);
+
+    Usr getByCode(String param);
 }

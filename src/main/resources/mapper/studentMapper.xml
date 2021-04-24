@@ -23,8 +23,9 @@
         ON s.student_major_id=m.major_id
         LEFT JOIN cls cls
         ON s.student_cls_id=cls.cls_id
-        <if test="grade!=0">
-            WHERE student_grade=#{grade}
+        WHERE 1=1
+        <if test="grade!=null and grade!=0">
+            AND s.student_grade=#{grade}
         </if>
     </select>
 
@@ -112,5 +113,20 @@
             AND e.es_employment IS NOT NULL
         </if>
         ORDER BY e.es_employment
+    </select>
+
+    <select id="getByCode" parameterType="String" resultType="Student">
+        SELECT
+        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,
+        s.student_description,s.student_college_id,s.student_major_id,s.student_cls_id,s.student_create_time,
+        c.college_name AS student_college_name,m.major_name AS student_major_name,cls.cls_name AS student_cls_name
+        FROM student s
+        LEFT JOIN college c
+        ON s.student_college_id=c.college_id
+        LEFT JOIN major m
+        ON s.student_major_id=m.major_id
+        LEFT JOIN cls cls
+        ON s.student_cls_id=cls.cls_id
+        WHERE student_code=#{code}
     </select>
 </mapper>

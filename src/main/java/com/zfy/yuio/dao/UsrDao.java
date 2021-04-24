@@ -16,8 +16,6 @@ public interface UsrDao {
 
     List<Usr> get();
 
-    Usr get(String param);
-
     int del(String id);
 
     int upd(Usr usr);
@@ -27,4 +25,6 @@ public interface UsrDao {
     List<String> getRoles(String id);
 
     int delRole(String id);
+
+    Usr getByCode(String param);
 }

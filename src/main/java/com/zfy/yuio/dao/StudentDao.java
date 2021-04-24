@@ -13,68 +13,19 @@ import java.util.List;
  */
 @Repository
 public interface StudentDao {
-    /**
-     * @param student
-     * @Author Nethercat7
-     * @Description 添加班级
-     * @Return int
-     */
     int add(Student student);
 
-    /**
-     * @param
-     * @Author Nethercat7
-     * @Description 获取所有班级
-     * @Return java.util.List<com.zfy.yuio.entity.Student>
-     */
     List<Student> get(int grade);
 
-    /**
-     * @param id
-     * @Author Nethercat7
-     * @Description 通过ID删除班级
-     * @Return int
-     */
     int del(String id);
 
-    /**
-     * @param student
-     * @Author Nethercat7
-     * @Description 修改班级信息
-     * @Return int
-     */
     int upd(Student student);
 
-    /**
-     * @param id
-     * @Author Nethercat7
-     * @Description 通过ID获取学生信息
-     * @Return com.zfy.yuio.entity.Student
-     */
     Student getById(String id);
 
-    /**
-     *@Author Nethercat7
-     *@Description 查询学院中的学生信息
-     *@param id
-     *@param grade
-     *@Return java.util.List<com.zfy.yuio.entity.Student>
-    */
     List<Student> getByCollegeId(String id, int grade);
 
-    /**
-     * @param queryParam
-     * @Author Nethercat7
-     * @Description 查询学生信息以及就业情况填写信息
-     * @Return java.util.List<com.zfy.yuio.entity.Student>
-     */
     List<Student> getWithEStatusInfo(QueryParam queryParam);
 
-    /**
-     * @param
-     * @Author Nethercat7
-     * @Description 获取学生年级
-     * @Return java.util.List<java.lang.Integer>
-     */
-    List<Integer> getStudentGrade();
+    Student getByCode(String code);
 }

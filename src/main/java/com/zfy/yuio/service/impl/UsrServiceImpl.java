@@ -50,13 +50,6 @@ public class UsrServiceImpl implements UsrService {
     }
 
     @Override
-    public Usr get(String param) {
-        Usr usr=usrDao.get(param);
-        usr.setRoles(usrDao.getRoles(usr.getUsrId()));
-        return usr;
-    }
-
-    @Override
     public int del(String id) {
         usrDao.delRole(id);
         return usrDao.del(id);
@@ -72,5 +65,10 @@ public class UsrServiceImpl implements UsrService {
             usrDao.addRole(snowflakeIdGeneratorUtil.getId(),usr.getUsrId(),r);
         }
         return usrDao.upd(usr);
+    }
+
+    @Override
+    public Usr getByCode(String param) {
+        return usrDao.getByCode(param);
     }
 }
