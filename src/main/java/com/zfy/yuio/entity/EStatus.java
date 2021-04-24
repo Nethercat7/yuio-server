@@ -12,7 +12,7 @@ public class EStatus {
     private String esId;
     @JsonProperty("student_id")
     private String esStudentId;
-    @JsonProperty("cls_id")
+    @JsonProperty("class_id")
     private String esClsId;
     @JsonProperty("major_id")
     private String esMajorId;

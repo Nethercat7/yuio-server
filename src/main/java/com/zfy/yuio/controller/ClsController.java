@@ -1,6 +1,6 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.Cls;
+import com.zfy.yuio.entity.SysClass;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.ClsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("cls")
+@RequestMapping("sys/class")
 public class ClsController {
     @Autowired
-    private ClsService clsService;
+    private ClsService classService;
 
     @PostMapping("add")
-    public ResultBody add(@RequestBody Cls cls){
-        int status=clsService.add(cls);
+    public ResultBody add(@RequestBody SysClass params){
+        int status=classService.add(params);
         if(status==1){
             return new ResultBody(0,"成功添加","success");
         }
@@ -24,22 +24,21 @@ public class ClsController {
 
     @GetMapping("get")
     public ResultBody get(){
-        return new ResultBody(0,clsService.get(),"success");
+        return new ResultBody(0,classService.get(),"success");
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     public ResultBody add(@RequestParam("id") String id){
-        int status=clsService.del(id);
+        int status=classService.del(id);
         if(status==1){
             return new ResultBody(0,"成功删除","success");
         }
         return new ResultBody(1,"删除失败","error");
     }
 
-    @PostMapping("upd")
-    public ResultBody upd(@RequestBody Cls cls){
-        int status=clsService.upd(cls);
-        //int status=1;
+    @PutMapping("upd")
+    public ResultBody upd(@RequestBody SysClass params){
+        int status=classService.upd(params);
         if(status==1){
             return new ResultBody(0,"成功修改","success");
         }

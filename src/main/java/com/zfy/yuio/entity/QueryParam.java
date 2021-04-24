@@ -14,8 +14,8 @@ public class QueryParam {
     private String collegeId;
     @JsonProperty("major_id")
     private String majorId;
-    @JsonProperty("cls_id")
-    private String clsId;
+    @JsonProperty("class_id")
+    private String classId;
     private String employment;
     private String write;
     private int grade;
@@ -45,12 +45,12 @@ public class QueryParam {
         this.majorId = majorId;
     }
 
-    public String getClsId() {
-        return clsId;
+    public String getClassId() {
+        return classId;
     }
 
-    public void setClsId(String clsId) {
-        this.clsId = clsId;
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public String getEmployment() {

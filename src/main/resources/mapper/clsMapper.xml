@@ -4,36 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.ClsDao">
-    <insert id="add" parameterType="Cls">
-        INSERT INTO cls(cls_id,cls_name,cls_status,cls_description,cls_major_id,cls_grade,cls_college_id)
-        VALUES (#{clsId},#{clsName},#{clsStatus},#{clsDescription},#{clsMajorId},#{clsGrade},#{clsCollegeId})
+    <insert id="add" parameterType="SysClass">
+        INSERT INTO sys_class(class_id,class_name,class_status,class_remark,class_major_id,class_grade,class_college_id)
+        VALUES (#{classId},#{className},#{classStatus},#{classRemark},#{classMajorId},#{classGrade},#{classCollegeId})
     </insert>
 
-    <select id="get" resultType="Cls">
-        SELECT * FROM cls
+    <select id="get" resultType="SysClass">
+        SELECT * FROM sys_class
     </select>
 
     <delete id="del" parameterType="String">
-        DELETE FROM cls
-        WHERE cls_id=#{id}
+        DELETE FROM sys_class
+        WHERE class_id=#{id}
     </delete>
 
-    <update id="upd" parameterType="Cls">
-        UPDATE cls
-        SET cls_name=#{clsName},cls_status=#{clsStatus},cls_description=#{clsDescription},cls_major_id=#{clsMajorId},cls_grade=#{clsGrade},cls_college_id=#{clsCollegeId}
-        WHERE cls_id=#{clsId}
+    <update id="upd" parameterType="SysClass">
+        UPDATE sys_class
+        SET class_name=#{className},class_status=#{classStatus},class_remark=#{classRemark},class_major_id=#{classMajorId},class_grade=#{classGrade},class_college_id=#{classCollegeId}
+        WHERE class_id=#{classId}
     </update>
 
-    <select id="getByPid" parameterType="String" resultType="Cls">
-        SELECT * FROM cls
-        WHERE cls_major_id=#{pid}
+    <select id="getByPid" parameterType="String" resultType="SysClass">
+        SELECT * FROM sys_class
+        WHERE class_major_id=#{pid}
         <if test="grade!=0">
-            AND cls_grade=#{grade}
+            AND class_grade=#{grade}
         </if>
     </select>
 
     <select id="getNameById" parameterType="String" resultType="String">
-        SELECT cls_name FROM cls
-        WHERE cls_id=#{id}
+        SELECT class_name FROM sys_class
+        WHERE class_id=#{id}
     </select>
 </mapper>

@@ -27,7 +27,7 @@ public class SysMajor {
     //非数据库字段
     @JsonProperty("college_name")
     private String collegeName;
-    private List<Cls> children;
+    private List<SysClass> children;
 
     public String getMajorId() {
         return majorId;
@@ -85,11 +85,11 @@ public class SysMajor {
         this.collegeName = collegeName;
     }
 
-    public List<Cls> getChildren() {
+    public List<SysClass> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Cls> children) {
+    public void setChildren(List<SysClass> children) {
         this.children = children;
     }
 }

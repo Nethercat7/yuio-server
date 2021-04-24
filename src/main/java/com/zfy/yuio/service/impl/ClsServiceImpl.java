@@ -3,7 +3,7 @@ package com.zfy.yuio.service.impl;
 import com.zfy.yuio.dao.ClsDao;
 import com.zfy.yuio.dao.CollegeDao;
 import com.zfy.yuio.dao.MajorDao;
-import com.zfy.yuio.entity.Cls;
+import com.zfy.yuio.entity.SysClass;
 import com.zfy.yuio.service.ClsService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ClsServiceImpl implements ClsService {
     @Autowired
-    private ClsDao clsDao;
+    private ClsDao classDao;
 
     @Autowired
     private CollegeDao collegeDao;
@@ -26,28 +26,28 @@ public class ClsServiceImpl implements ClsService {
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(2, 0);
 
     @Override
-    public int add(Cls cls) {
-        String collegeId = cls.getContainer().get(0);
-        String majorId = cls.getContainer().get(1);
+    public int add(SysClass params) {
+        String collegeId = params.getContainer().get(0);
+        String majorId = params.getContainer().get(1);
         //设置班级所属的学院和专业ID
-        cls.setClsCollegeId(collegeId);
-        cls.setClsMajorId(majorId);
+        params.setClassCollegeId(collegeId);
+        params.setClassMajorId(majorId);
         //设置班级ID
-        cls.setClsId(snowflakeIdGeneratorUtil.getId());
-        return clsDao.add(cls);
+        params.setClassId(snowflakeIdGeneratorUtil.getId());
+        return classDao.add(params);
     }
 
     @Override
-    public List<Cls> get() {
-        List<Cls> cls=clsDao.get();
+    public List<SysClass> get() {
+        List<SysClass> cls=classDao.get();
         //设置班级所属学院和专业的名称
-        for (Cls c:cls
+        for (SysClass c:cls
              ) {
-            c.setClsCollegeName(collegeDao.getNameById(c.getClsCollegeId()));
-            c.setClsMajorName(majorDao.getNameById(c.getClsMajorId()));
+            c.setClassCollegeName(collegeDao.getNameById(c.getClassCollegeId()));
+            c.setClassMajorName(majorDao.getNameById(c.getClassMajorId()));
             List<String> container=new ArrayList<>();
-            container.add(c.getClsCollegeId());
-            container.add(c.getClsMajorId());
+            container.add(c.getClassCollegeId());
+            container.add(c.getClassMajorId());
             c.setContainer(container);
         }
         return cls;
@@ -55,16 +55,16 @@ public class ClsServiceImpl implements ClsService {
 
     @Override
     public int del(String id) {
-        return clsDao.del(id);
+        return classDao.del(id);
     }
 
     @Override
-    public int upd(Cls cls) {
-        String collegeId = cls.getContainer().get(0);
-        String majorId = cls.getContainer().get(1);
+    public int upd(SysClass params) {
+        String collegeId = params.getContainer().get(0);
+        String majorId = params.getContainer().get(1);
         //设置班级所属的学院和专业ID
-        cls.setClsCollegeId(collegeId);
-        cls.setClsMajorId(majorId);
-        return clsDao.upd(cls);
+        params.setClassCollegeId(collegeId);
+        params.setClassMajorId(majorId);
+        return classDao.upd(params);
     }
 }

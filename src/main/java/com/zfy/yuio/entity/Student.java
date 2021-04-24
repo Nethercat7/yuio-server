@@ -31,13 +31,13 @@ public class Student {
     private String studentCollegeId;
     @JsonProperty("major_id")
     private String studentMajorId;
-    @JsonProperty("cls_id")
+    @JsonProperty("class_id")
     private String studentClsId;
     @JsonProperty("college_name")
     private String studentCollegeName;
     @JsonProperty("major_name")
     private String studentMajorName;
-    @JsonProperty("cls_name")
+    @JsonProperty("class_name")
     private String studentClsName;
     @JsonProperty("gender")
     private String studentGender;

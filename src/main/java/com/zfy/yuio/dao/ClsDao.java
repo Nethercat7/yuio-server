@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.Cls;
+import com.zfy.yuio.entity.SysClass;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,18 +15,18 @@ public interface ClsDao {
     /**
      *@Author Nethercat7
      *@Description 添加班级
-     *@param cls
+     *@param params
      *@Return int
     */
-    int add(Cls cls);
+    int add(SysClass params);
 
     /**
      *@Author Nethercat7
      *@Description 获取所有班级
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.Cls>
+     *@Return java.util.List<com.zfy.yuio.entity.SysClass>
     */
-    List<Cls> get();
+    List<SysClass> get();
 
     /**
      *@Author Nethercat7
@@ -39,24 +39,16 @@ public interface ClsDao {
     /**
      *@Author Nethercat7
      *@Description 修改班级信息
-     *@param cls
+     *@param params
      *@Return int
     */
-    int upd(Cls cls);
+    int upd(SysClass params);
 
     /**
      *@Author Nethercat7
      *@Description 通过院系ID获取专业
      *@param pid
-     *@Return java.util.List<com.zfy.yuio.entity.Cls>
+     *@Return java.util.List<com.zfy.yuio.entity.SysClass>
      */
-    List<Cls> getByPid(String pid,int grade);
-
-    /**
-     *@Author Nethercat7
-     *@Description 根据ID获取专业名称
-     *@param id
-     *@Return
-     */
-    String getNameById(String id);
+    List<SysClass> getByPid(String pid, int grade);
 }

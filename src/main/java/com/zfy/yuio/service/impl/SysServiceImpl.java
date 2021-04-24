@@ -35,7 +35,7 @@ public class SysServiceImpl implements SysService {
     private MajorDao majorDao;
 
     @Autowired
-    private ClsDao clsDao;
+    private ClsDao classDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 
@@ -107,7 +107,7 @@ public class SysServiceImpl implements SysService {
             for (SysMajor m : majors
             ) {
                 //获取专业下的班级
-                m.setChildren(clsDao.getByPid(m.getMajorId(), grade));
+                m.setChildren(classDao.getByPid(m.getMajorId(), grade));
             }
             c.setChildren(majors);
         }

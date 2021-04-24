@@ -38,7 +38,7 @@ public class StudentServiceImpl implements StudentService {
     private MajorDao majorDao;
 
     @Autowired
-    private ClsDao clsDao;
+    private ClsDao classDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(3, 0);
 
@@ -108,9 +108,9 @@ public class StudentServiceImpl implements StudentService {
     private void setBaseInfo(Student student) {
         String collegeId = student.getContainer().get(0);
         String majorId = student.getContainer().get(1);
-        String clsId = student.getContainer().get(2);
+        String classId = student.getContainer().get(2);
         student.setStudentCollegeId(collegeId);
         student.setStudentMajorId(majorId);
-        student.setStudentClsId(clsId);
+        student.setStudentClsId(classId);
     }
 }

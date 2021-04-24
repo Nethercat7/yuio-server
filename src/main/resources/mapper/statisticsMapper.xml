@@ -17,8 +17,8 @@
         <if test="esMajorId!=null">
             AND es_major_id=#{esMajorId}
         </if>
-        <if test="esClsId!=null">
-            AND es_cls_id=#{esClsId}
+        <if test="esClassId!=null">
+            AND es_class_id=#{esClassId}
         </if>
         GROUP BY city
         ORDER BY people desc
@@ -37,8 +37,8 @@
         <if test="esMajorId!=null">
             AND e.es_major_id=#{esMajorId}
         </if>
-        <if test="esClsId!=null">
-            AND e.es_cls_id=#{esClsId}
+        <if test="esClassId!=null">
+            AND e.es_class_id=#{esClassId}
         </if>
         GROUP BY type
         ORDER BY people desc
@@ -55,8 +55,8 @@
         <if test="esMajorId!=null">
             AND es_major_id=#{esMajorId}
         </if>
-        <if test="esClsId!=null">
-            AND es_cls_id=#{esClsId}
+        <if test="esClassId!=null">
+            AND es_class_id=#{esClassId}
         </if>
         GROUP BY plan
         ORDER BY people desc
@@ -75,8 +75,8 @@
         <if test="esMajorId!=null">
             AND es_major_id=#{esMajorId}
         </if>
-        <if test="esClsId!=null">
-            AND es_cls_id=#{esClsId}
+        <if test="esClassId!=null">
+            AND es_class_id=#{esClassId}
         </if>
         GROUP BY city
         ORDER BY people desc
@@ -95,8 +95,8 @@
         <if test="esMajorId!=null">
             AND e.es_major_id=#{esMajorId}
         </if>
-        <if test="esClsId!=null">
-            AND e.es_cls_id=#{esClsId}
+        <if test="esClassId!=null">
+            AND e.es_class_id=#{esClassId}
         </if>
         GROUP BY type
         ORDER BY people desc
