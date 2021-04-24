@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 */
 @CrossOrigin
 @RestController
-@RequestMapping("menu")
-public class SysMenuController {
+@RequestMapping("sys/perms")
+public class SysPermsController {
     @Autowired
     private SysMenuService menuService;
 
@@ -32,7 +32,7 @@ public class SysMenuController {
         return new ResultBody(0,menuService.get());
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     public ResultBody del(@RequestParam("id")String id){
         int status=menuService.del(id);
         if(status!=1){
@@ -41,7 +41,7 @@ public class SysMenuController {
         return new ResultBody(0,"成功删除","success");
     }
 
-    @PostMapping("upd")
+    @PutMapping("upd")
     public ResultBody upd(@RequestBody SysPerms params){
         int status=menuService.upd(params);
         if(status!=1){
