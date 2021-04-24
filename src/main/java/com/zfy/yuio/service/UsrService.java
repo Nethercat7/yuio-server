@@ -26,6 +26,8 @@ public interface UsrService {
      */
     List<Usr> get();
 
+    Usr get(String param);
+
     /**
      *@Author Nethercat7
      *@Description Delete user

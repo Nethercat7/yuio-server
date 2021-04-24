@@ -59,11 +59,11 @@ public class SysServiceImpl implements SysService {
 
     @Override
     public ResultBody login(Map<String, Object> map) {
-        boolean isUser=Boolean.parseBoolean(String.valueOf(map.get("isUser")));
-        String key=String.valueOf(map.get("key"));
-        String pwd=String.valueOf(map.get("pwd"));
-        if(isUser) return usrLogin(key,pwd);
-        return studentLogin(key,pwd);
+        boolean isUser = Boolean.parseBoolean(String.valueOf(map.get("isUser")));
+        String key = String.valueOf(map.get("key"));
+        String pwd = String.valueOf(map.get("pwd"));
+        if (isUser) return usrLogin(key, pwd);
+        return studentLogin(key, pwd);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class SysServiceImpl implements SysService {
             for (Major m : majors
             ) {
                 //获取专业下的班级
-                m.setChildren(clsDao.getByPid(m.getMajorId(),grade));
+                m.setChildren(clsDao.getByPid(m.getMajorId(), grade));
             }
             c.setChildren(majors);
         }
@@ -115,7 +115,7 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public List<Map<String,Object>> getGrade() {
+    public List<Map<String, Object>> getGrade() {
         List<Integer> grade = sysDao.getGrade();
         List<Map<String, Object>> gradeList = new ArrayList<>();
         for (Integer g : grade
@@ -128,7 +128,7 @@ public class SysServiceImpl implements SysService {
         return gradeList;
     }
 
-    private ResultBody studentLogin(String code,String pwd) {
+    private ResultBody studentLogin(String code, String pwd) {
         Student loginInfo = sysDao.getStudentLoginInfo(code);
         if (loginInfo != null) {
             String currentPwd = loginInfo.getStudentPwd();
@@ -137,10 +137,10 @@ public class SysServiceImpl implements SysService {
         } else {
             return new ResultBody(1, "账号不存在", "error");
         }
-        return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode()));
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode(),"student"));
     }
 
-    private ResultBody usrLogin(String account,String pwd) {
+    private ResultBody usrLogin(String account, String pwd) {
         Usr loginInfo = sysDao.getUsrLoginInfo(account);
         if (loginInfo != null) {
             String currentPwd = loginInfo.getUsrPwd();
@@ -149,6 +149,6 @@ public class SysServiceImpl implements SysService {
         } else {
             return new ResultBody(1, "账号不存在", "error");
         }
-        return new ResultBody(0, JWTUtil.createToken(loginInfo.getUsrId(), loginInfo.getUsrName()));
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getUsrId(), loginInfo.getUsrName(), loginInfo.getUsrCode(),"usr"));
     }
 }
