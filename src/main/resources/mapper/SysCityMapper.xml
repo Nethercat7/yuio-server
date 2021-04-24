@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.SysCityDao">
+    <insert  id="add" parameterType="SysCity">
+        INSERT INTO sys_city(city_id,city_name,city_pid,city_status,city_level)
+        VALUES(#{cityId},#{cityName},#{cityPid},#{cityStatus},#{cityLevel})
+    </insert>
+
+    <select id="get" resultType="SysCity">
+        SELECT * FROM sys_city
+        WHERE city_level=0 OR city_level=1
+    </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM sys_city
+        WHERE city_id=#{id}
+    </delete>
+
+    <update id="upd" parameterType="SysCity">
+        UPDATE sys_city
+        SET city_name=#{cityName},city_pid=#{cityPid},city_status=#{cityStatus},city_level=#{cityLevel}
+        WHERE city_id=#{cityId}
+    </update>
+
+    <select id="getById" parameterType="String" resultType="SysCity">
+        SELECT * FROM sys_city
+        WHERE city_id=#{id}
+    </select>
+
+    <select id="getByPid" parameterType="String" resultType="SysCity">
+        SELECT * FROM sys_city
+        WHERE city_pid=#{pid}
+        AND city_level=1
+    </select>
+
+    <select id="getCityName" parameterType="String" resultType="String">
+        SELECT city_name FROM sys_city
+        WHERE city_id=#{id}
+    </select>
+</mapper>

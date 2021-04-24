@@ -6,8 +6,8 @@
 <mapper namespace="com.zfy.yuio.dao.StatisticsDao">
     <select id="getEmploymentCityInfo" resultType="Statistics">
         SELECT COUNT(e.es_id) as people,c.city_name as city
-        FROM employment_status e
-        LEFT JOIN city c
+        FROM sys_empl_stats e
+        LEFT JOIN sys_city c
         ON e.es_work_city=c.city_id
         WHERE es_employment=1
         AND es_grade=#{esGrade}
@@ -26,8 +26,8 @@
 
     <select id="getEmploymentWorkInfo" resultType="Statistics">
         SELECT COUNT(e.es_id) as people,w.work_name as type
-        FROM employment_status e
-        LEFT JOIN work w
+        FROM sys_empl_stats e
+        LEFT JOIN sys_work w
         ON e.es_work_type=w.work_id
         WHERE e.es_employment=1
         AND e.es_grade=#{esGrade}
@@ -46,7 +46,7 @@
 
     <select id="getUnEmploymentStudentPlan" resultType="Statistics">
         SELECT COUNT(es_id) as people,es_plan as plan
-        FROM employment_status
+        FROM sys_empl_stats
         WHERE es_employment=0
         AND es_grade=#{esGrade}
         <if test="esCollegeId!=null">
@@ -64,8 +64,8 @@
 
     <select id="getIntentionCityInfo" resultType="Statistics">
         SELECT COUNT(e.es_id) as people,c.city_name as city
-        FROM employment_status e
-        LEFT JOIN city c
+        FROM sys_empl_stats e
+        LEFT JOIN sys_city c
         ON e.es_intention_city=c.city_id
         WHERE es_employment=1
         AND es_grade=#{esGrade}
@@ -84,8 +84,8 @@
 
     <select id="getIntentionWorkInfo" resultType="Statistics">
         SELECT COUNT(e.es_id) as people,w.work_name as type
-        FROM employment_status e
-        LEFT JOIN work w
+        FROM sys_empl_stats e
+        LEFT JOIN sys_work w
         ON e.es_intention_work=w.work_id
         WHERE e.es_employment=1
         AND e.es_grade=#{esGrade}
@@ -104,6 +104,6 @@
 
     <select id="getGrade" resultType="Integer">
         SELECT DISTINCT es_grade
-        FROM employment_status
+        FROM sys_empl_stats
     </select>
 </mapper>

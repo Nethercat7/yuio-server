@@ -22,22 +22,22 @@ import java.util.Random;
 @Service
 public class ToolServiceImpl implements ToolService {
     @Autowired
-    private CollegeDao collegeDao;
+    private SysCollegeDao collegeDao;
 
     @Autowired
-    private MajorDao majorDao;
+    private SysMajorDao majorDao;
 
     @Autowired
-    private ClsDao classDao;
+    private SysClsDao classDao;
 
     @Autowired
-    private StudentDao studentDao;
+    private SysStudentDao studentDao;
 
     @Autowired
     private SysDao sysDao;
 
     @Autowired
-    private CityDao cityDao;
+    private SysCityDao cityDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(8, 0);
 
@@ -84,13 +84,13 @@ public class ToolServiceImpl implements ToolService {
     public int randomEStatus(int num, int grade) {
         Random random = new Random();
         //获取学生信息
-        List<Student> studentList = studentDao.get(grade);
+        List<SysStudent> studentList = studentDao.get(grade);
         //获取城市
         String[] cities = {"504637296813838336", "504637298156015616", "504637302073495555", "504637301532430336", "504637297333932034", "504637298118266883", "504637298759995392", "504637300655820803", "504637298197958657"};
         String[] works = {"504656117557665792", "504656171731296256", "504656362937032704", "504656429500637184", "504656462774050816", "504656499461627904", "504656798368702464", "504656835991609344", "504656536077901824", "504656392129388544"};
         for (int i = 0; i < num; i++) {
             String studentId = studentList.get(i).getStudentId();
-            String classId = studentList.get(i).getStudentClsId();
+            String classId = studentList.get(i).getStudentClassId();
             String majorId = studentList.get(i).getStudentMajorId();
             String collegeId = studentList.get(i).getStudentCollegeId();
             String employment = String.valueOf(random.nextInt(2));
@@ -118,19 +118,19 @@ public class ToolServiceImpl implements ToolService {
     }
 
     private void generateStudent(String collegeId, String majorId, String classId, int grade) {
-        Student student = new Student();
+        SysStudent student = new SysStudent();
         student.setStudentId(snowflakeIdGeneratorUtil.getId());
         student.setStudentCode(snowflakeIdGeneratorUtil.getId());
         student.setStudentGender(RandomInfoGenerateUntil.randomGender());
         student.setStudentPhone(RandomInfoGenerateUntil.randomChinaPhoneNumber());
-        student.setStudentDescription("自动生成的学生数据");
+        student.setStudentRemark("自动生成的学生数据");
         student.setStudentSalt(ShiroUtil.getSalt(7));
         student.setStudentPwd(ShiroUtil.pwd2MD5("123456", student.getStudentSalt(), 1739));
         student.setStudentName(RandomInfoGenerateUntil.randomChineseName(Integer.parseInt(student.getStudentGender())));
         student.setStudentGrade(grade);
         student.setStudentCollegeId(collegeId);
         student.setStudentMajorId(majorId);
-        student.setStudentClsId(classId);
+        student.setStudentClassId(classId);
         studentDao.add(student);
     }
 
@@ -153,10 +153,10 @@ public class ToolServiceImpl implements ToolService {
         sysDao.saveEmploymentStatus(eStatus);
     }
 
-    private List<City> getCities() {
-        List<City> cities = cityDao.get();
-        List<City> cityList = new ArrayList<>();
-        for (City c : cities
+    private List<SysCity> getCities() {
+        List<SysCity> cities = cityDao.get();
+        List<SysCity> cityList = new ArrayList<>();
+        for (SysCity c : cities
         ) {
             if (ObjectUtils.isEmpty(cityDao.getByPid(c.getCityId()))) cityList.add(c);
         }

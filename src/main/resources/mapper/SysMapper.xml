@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.SysDao">
+    <update id="resetPwd" parameterType="String">
+        <choose>
+            <when test="isUser">
+                UPDATE sys_user
+                SET user_pwd=#{pwd}
+                WHERE user_id=#{key}
+            </when>
+            <otherwise>
+                UPDATE sys_student
+                SET student_pwd=#{pwd}
+                WHERE student_id=#{key}
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="getPwd" parameterType="String" resultType="Map">
+        <choose>
+            <when test="isUser">
+                SELECT user_pwd,user_salt
+                FROM sys_user
+                WHERE user_id=#{key}
+                OR user_code=#{key}
+            </when>
+            <otherwise>
+                SELECT student_pwd,student_salt
+                FROM sys_student
+                WHERE student_id=#{key}
+                OR student_code=#{key}
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="saveEmploymentStatus" parameterType="EStatus">
+        INSERT INTO sys_empl_stats(es_id,es_student_id,es_class_id,es_major_id,es_college_id,es_grade,es_employment,es_company,
+        es_work_city,es_work_type,es_status,es_plan,es_intention_city,es_intention_work)
+        VALUES(#{esId},#{esStudentId},#{esClassId},#{esMajorId},#{esCollegeId},#{esGrade},#{esEmployment},#{esCompany},#{esWorkCity},
+        #{esWorkType},#{esStatus},#{esPlan},#{esIntentionCity},#{esIntentionWork})
+    </insert>
+
+    <select id="getEStatusById" parameterType="String" resultType="EStatus">
+        SELECT * FROM sys_empl_stats
+        WHERE es_student_id=#{id}
+        OR es_class_id=#{id}
+        OR es_major_id=#{id}
+        OR es_college_id=#{id}
+    </select>
+
+    <update id="updEStatus" parameterType="EStatus">
+        UPDATE sys_empl_stats
+        SET es_employment=#{esEmployment},es_company=#{esCompany},es_work_city=#{esWorkCity},es_work_type=#{esWorkType},es_status=#{esStatus},es_plan=#{esPlan},
+        es_intention_city=#{esIntentionCity},es_intention_work=#{esIntentionWork}
+        WHERE es_student_id=#{esStudentId}
+    </update>
+
+    <select id="getEStatus" resultType="EStatus" parameterType="Integer">
+        SELECT * FROM sys_empl_stats
+        WHERE es_grade=#{grade}
+    </select>
+
+    <select id="getEStatusByCollegeId" parameterType="Object" resultType="EStatus">
+        SELECT * FROM sys_empl_stats
+        WHERE es_college_id=#{id}
+        AND es_grade=#{grade}
+    </select>
+
+    <select id="getGrade" resultType="Integer">
+        SELECT DISTINCT class_grade
+        FROM sys_class
+    </select>
+
+    <select id="getUsrLoginInfo" resultType="SysUser" parameterType="String">
+        SELECT * FROM sys_user
+        WHERE user_code=#{key}
+    </select>
+
+    <select id="getStudentLoginInfo" parameterType="String" resultType="SysStudent">
+        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
+        student_remark,student_college_id,student_major_id,student_class_id,student_pwd,student_salt,student_create_time
+        FROM sys_student
+        WHERE student_code=#{key}
+    </select>
+</mapper>

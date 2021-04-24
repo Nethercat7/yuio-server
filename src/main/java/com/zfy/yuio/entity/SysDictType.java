@@ -2,8 +2,6 @@ package com.zfy.yuio.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
-
 /**
  *@Description:字典类型实体
  *@Author:Nethercat7
@@ -16,10 +14,14 @@ public class SysDictType {
     private String dictName;
     @JsonProperty("type")
     private String dictType;
-    private String status;
+    @JsonProperty("status")
+    private String dictStatus;
     @JsonProperty("create_time")
-    private LocalDateTime createTime;
-    private String remark;
+    private String createTime;
+    @JsonProperty("remark")
+    private String dictRemark;
+    @JsonProperty("value")
+    private String dictValue;
 
     public String getDictId() {
         return dictId;
@@ -45,27 +47,35 @@ public class SysDictType {
         this.dictType = dictType;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDictStatus() {
+        return dictStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDictStatus(String dictStatus) {
+        this.dictStatus = dictStatus;
     }
 
-    public LocalDateTime getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getDictRemark() {
+        return dictRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setDictRemark(String dictRemark) {
+        this.dictRemark = dictRemark;
+    }
+
+    public String getDictValue() {
+        return dictValue;
+    }
+
+    public void setDictValue(String dictValue) {
+        this.dictValue = dictValue;
     }
 }

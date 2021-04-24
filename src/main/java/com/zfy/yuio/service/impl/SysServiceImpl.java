@@ -26,16 +26,16 @@ public class SysServiceImpl implements SysService {
     private SysDao sysDao;
 
     @Autowired
-    private StudentDao studentDao;
+    private SysStudentDao studentDao;
 
     @Autowired
-    private CollegeDao collegeDao;
+    private SysCollegeDao collegeDao;
 
     @Autowired
-    private MajorDao majorDao;
+    private SysMajorDao majorDao;
 
     @Autowired
-    private ClsDao classDao;
+    private SysClsDao classDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 
@@ -69,12 +69,12 @@ public class SysServiceImpl implements SysService {
     @Override
     public int saveEmploymentStatus(EStatus eStatus) {
         eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
-        Student student = studentDao.getById(eStatus.getEsStudentId());
+        SysStudent student = studentDao.getById(eStatus.getEsStudentId());
         //如果是已存在的就进行更新
         if (!ObjectUtils.isEmpty(student)) {
             return sysDao.updEStatus(eStatus);
         }
-        eStatus.setEsClsId(student.getStudentClsId());
+        eStatus.setEsClsId(student.getStudentClassId());
         eStatus.setEsMajorId(student.getStudentMajorId());
         eStatus.setEsCollegeId(student.getStudentCollegeId());
         eStatus.setEsGrade(student.getStudentGrade());
@@ -129,7 +129,7 @@ public class SysServiceImpl implements SysService {
     }
 
     private ResultBody studentLogin(String code, String pwd) {
-        Student loginInfo = sysDao.getStudentLoginInfo(code);
+        SysStudent loginInfo = sysDao.getStudentLoginInfo(code);
         if (loginInfo != null) {
             String currentPwd = loginInfo.getStudentPwd();
             String salt = loginInfo.getStudentSalt();
@@ -141,14 +141,14 @@ public class SysServiceImpl implements SysService {
     }
 
     private ResultBody usrLogin(String account, String pwd) {
-        Usr loginInfo = sysDao.getUsrLoginInfo(account);
+        SysUser loginInfo = sysDao.getUsrLoginInfo(account);
         if (loginInfo != null) {
-            String currentPwd = loginInfo.getUsrPwd();
-            String salt = loginInfo.getUsrSalt();
+            String currentPwd = loginInfo.getUserPwd();
+            String salt = loginInfo.getUserSalt();
             if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, 1739))) return new ResultBody(2, "密码不正确", "error");
         } else {
             return new ResultBody(1, "账号不存在", "error");
         }
-        return new ResultBody(0, JWTUtil.createToken(loginInfo.getUsrId(), loginInfo.getUsrName(), loginInfo.getUsrCode(),"usr"));
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getUserId(), loginInfo.getUserName(), loginInfo.getUserCode(),"usr"));
     }
 }

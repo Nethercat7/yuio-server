@@ -1,8 +1,8 @@
 package com.zfy.yuio.dao;
 
 import com.zfy.yuio.entity.EStatus;
-import com.zfy.yuio.entity.Student;
-import com.zfy.yuio.entity.Usr;
+import com.zfy.yuio.entity.SysStudent;
+import com.zfy.yuio.entity.SysUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public interface SysDao {
 
     List<Integer> getGrade();
 
-    Usr getUsrLoginInfo(String account);
+    SysUser getUsrLoginInfo(String account);
 
-    Student getStudentLoginInfo(String code);
+    SysStudent getStudentLoginInfo(String code);
 }

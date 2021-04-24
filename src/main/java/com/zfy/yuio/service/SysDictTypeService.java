@@ -10,11 +10,11 @@ import java.util.List;
  *@CreateDate:2021/4/22 20:29
 */
 public interface SysDictTypeService {
-    int add(SysDictType sysDictType);
+    int add(SysDictType params);
 
     List<SysDictType> get();
 
     int del(String id);
 
-    int upd(SysDictType sysDictType);
+    int upd(SysDictType params);
 }

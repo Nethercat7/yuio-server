@@ -14,10 +14,12 @@ public class SysDictData {
     private String dictLabel;
     @JsonProperty("type")
     private String dictType;
-    private String status;
+    @JsonProperty("status")
+    private String dictStatus;
     @JsonProperty("create_time")
     private String createTime;
-    private String remark;
+    @JsonProperty("remark")
+    private String dictRemark;
     @JsonProperty("value")
     private String dictValue;
 
@@ -45,12 +47,12 @@ public class SysDictData {
         this.dictType = dictType;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDictStatus() {
+        return dictStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDictStatus(String dictStatus) {
+        this.dictStatus = dictStatus;
     }
 
     public String getCreateTime() {
@@ -61,12 +63,12 @@ public class SysDictData {
         this.createTime = createTime;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getDictRemark() {
+        return dictRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setDictRemark(String dictRemark) {
+        this.dictRemark = dictRemark;
     }
 
     public String getDictValue() {

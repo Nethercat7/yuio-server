@@ -19,8 +19,8 @@ public class SysDictDataController {
     private SysDictDataService sysDictDataService;
 
     @PostMapping("add")
-    public ResultBody add(@RequestBody SysDictData data){
-        int status=sysDictDataService.add(data);
+    public ResultBody add(@RequestBody SysDictData params){
+        int status=sysDictDataService.add(params);
         if(status!=1){
             return new ResultBody(1,"添加失败","error");
         }
@@ -42,8 +42,8 @@ public class SysDictDataController {
     }
 
     @PutMapping("upd")
-    public ResultBody upd(@RequestBody SysDictData data){
-        int status=sysDictDataService.upd(data);
+    public ResultBody upd(@RequestBody SysDictData params){
+        int status=sysDictDataService.upd(params);
         if(status!=1){
             return new ResultBody(1,"修改失败","error");
         }

@@ -12,11 +12,11 @@ import java.util.List;
 */
 @Repository
 public interface SysDictTypeDao {
-    int add(SysDictType sysDictType);
+    int add(SysDictType params);
 
     List<SysDictType> get();
 
     int del(String id);
 
-    int upd(SysDictType sysDictType);
+    int upd(SysDictType params);
 }

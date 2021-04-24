@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.SysDictTypeDao">
+    <insert id="add" parameterType="SysDictType">
+        INSERT INTO sys_dict_type(dict_id,dict_name,dict_type,dict_status,dict_remark)
+        VALUES (#{dictId},#{dictName},#{dictType},#{dictStatus},#{dictRemark})
+    </insert>
+
+    <select id="get" resultType="SysDictType">
+        SELECT * FROM sys_dict_type
+    </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM sys_dict_type
+        WHERE dict_id=#{id}
+    </delete>
+
+    <update id="upd" parameterType="SysDictType">
+        UPDATE sys_dict_type
+        SET dict_name=#{dictName},dict_type=#{dictType},dict_status=#{dictStatus},dict_remark=#{dictRemark}
+        WHERE dict_id=#{dictId}
+    </update>
+</mapper>

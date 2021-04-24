@@ -17,9 +17,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     private SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil=new SnowflakeIdGeneratorUtil(11,0);
 
     @Override
-    public int add(SysDictType sysDictType) {
-        sysDictType.setDictId(snowflakeIdGeneratorUtil.getId());
-        return sysDictTypeDao.add(sysDictType);
+    public int add(SysDictType params) {
+        params.setDictId(snowflakeIdGeneratorUtil.getId());
+        return sysDictTypeDao.add(params);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     }
 
     @Override
-    public int upd(SysDictType sysDictType) {
-        return sysDictTypeDao.upd(sysDictType);
+    public int upd(SysDictType params) {
+        return sysDictTypeDao.upd(params);
     }
 }

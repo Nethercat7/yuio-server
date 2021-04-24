@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.SysStudentDao">
+    <insert id="add" parameterType="SysStudent">
+        INSERT INTO sys_student(student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
+        student_remark,student_college_id,student_major_id,student_class_id,student_pwd,student_salt)
+        VALUES (#{studentId},#{studentName},#{studentCode},#{studentGender},#{studentPhone},#{studentStatus},#{studentGrade},
+        #{studentRemark},#{studentCollegeId},#{studentMajorId},#{studentClassId},#{studentPwd},#{studentSalt})
+    </insert>
+
+    <select id="get" parameterType="Integer" resultType="SysStudent">
+        SELECT
+        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,
+        s.student_remark,s.student_college_id,s.student_major_id,s.student_class_id,s.student_create_time,
+        c.college_name AS student_college_name,m.major_name AS student_major_name,class.class_name AS student_class_name
+        FROM sys_student s
+        LEFT JOIN sys_college c
+        ON s.student_college_id=c.college_id
+        LEFT JOIN sys_major m
+        ON s.student_major_id=m.major_id
+        LEFT JOIN sys_class class
+        ON s.student_class_id=class.class_id
+        WHERE 1=1
+        <if test="grade!=null and grade!=0">
+            AND s.student_grade=#{grade}
+        </if>
+    </select>
+
+    <delete id="del" parameterType="String">
+        DELETE FROM sys_student
+        WHERE student_id=#{id}
+    </delete>
+
+    <update id="upd" parameterType="SysStudent">
+        UPDATE sys_student
+        SET student_name=#{studentName},student_code=#{studentCode},student_gender=#{studentGender},student_phone=#{studentPhone},
+        student_status=#{studentStatus},student_grade=#{studentGrade},student_remark=#{studentRemark},
+        student_college_id=#{studentCollegeId},student_major_id=#{studentMajorId},student_class_id=#{studentClassId}
+        WHERE student_id=#{studentId}
+    </update>
+
+    <select id="getByPid" parameterType="String" resultType="SysStudent">
+        SELECT * FROM sys_student
+        WHERE student_major_id=#{pid}
+    </select>
+
+    <select id="getNameById" parameterType="String" resultType="String">
+        SELECT student_name FROM sys_student
+        WHERE student_id=#{id}
+    </select>
+
+    <select id="getById" parameterType="String" resultType="SysStudent">
+        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
+        student_remark,student_college_id,student_major_id,student_class_id,student_create_time
+        FROM sys_student
+        WHERE student_id=#{id}
+    </select>
+
+    <select id="getByCollegeId" parameterType="Object" resultType="SysStudent">
+        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
+        student_remark,student_college_id,student_major_id,student_class_id,student_create_time
+        FROM sys_student
+        WHERE student_college_id=#{id}
+        <if test="grade!=0">
+            AND student_grade=#{grade}
+        </if>
+    </select>
+
+    <select id="getWithEStatusInfo" parameterType="QueryParam" resultType="SysStudent">
+        SELECT
+        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,
+        s.student_remark,s.student_college_id,s.student_major_id,s.student_class_id,s.student_create_time,
+        c.college_name AS student_college_name,m.major_name AS student_major_name,class.class_name AS student_class_name,
+        e.es_id,e.es_employment,e.es_work_city,e.es_work_type,e.es_status,e.es_plan,e.es_intention_city,e.es_intention_work
+        FROM sys_student s
+        LEFT JOIN sys_college c
+        ON s.student_college_id=c.college_id
+        LEFT JOIN sys_major m
+        ON s.student_major_id=m.major_id
+        LEFT JOIN sys_class class
+        ON s.student_class_id=class.class_id
+        LEFT JOIN sys_empl_stats e
+        ON s.student_id=e.es_student_id
+        WHERE 1=1
+        <if test="studentId!=null">
+            AND s.student_id=#{studentId}
+        </if>
+        <if test="collegeId!=null">
+            AND s.student_college_id=#{collegeId}
+        </if>
+        <if test="majorId!=null">
+            AND s.student_major_id=#{majorId}
+        </if>
+        <if test="classId!=null">
+            AND s.student_class_id=#{classId}
+        </if>
+        <if test="name!=null">
+            AND s.student_name LIKE concat('%',#{name},'%')
+        </if>
+        <if test="grade!=0">
+            AND s.student_grade=#{grade}
+        </if>
+        <if test="employment!=null and employment!=''">
+            AND e.es_employment=#{employment}
+        </if>
+        <if test="write==0 and write!=''">
+            AND e.es_employment IS NULL
+        </if>
+        <if test="write==1">
+            AND e.es_employment IS NOT NULL
+        </if>
+        ORDER BY e.es_employment
+    </select>
+
+    <select id="getByCode" parameterType="String" resultType="SysStudent">
+        SELECT
+        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,
+        s.student_remark,s.student_college_id,s.student_major_id,s.student_class_id,s.student_create_time,
+        c.college_name AS student_college_name,m.major_name AS student_major_name,class.class_name AS student_class_name
+        FROM sys_student s
+        LEFT JOIN sys_college c
+        ON s.student_college_id=c.college_id
+        LEFT JOIN sys_major m
+        ON s.student_major_id=m.major_id
+        LEFT JOIN sys_class class
+        ON s.student_class_id=class.class_id
+        WHERE student_code=#{code}
+    </select>
+</mapper>

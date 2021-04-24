@@ -4,7 +4,7 @@ import com.zfy.yuio.dao.*;
 import com.zfy.yuio.entity.SysCollege;
 import com.zfy.yuio.entity.EStatus;
 import com.zfy.yuio.entity.Statistics;
-import com.zfy.yuio.entity.Student;
+import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +26,10 @@ public class StatisticsServiceImpl implements StatisticsService {
     private SysDao sysDao;
 
     @Autowired
-    private StudentDao studentDao;
+    private SysStudentDao studentDao;
 
     @Autowired
-    private CollegeDao collegeDao;
+    private SysCollegeDao collegeDao;
 
     @Autowired
     private StatisticsDao statisticsDao;
@@ -75,7 +75,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             //获取该院系下的就业情况信息
             List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId(), grade);
             //获取该院系下的所有学生信息
-            List<Student> studentList = studentDao.getByCollegeId(c.getCollegeId(), grade);
+            List<SysStudent> studentList = studentDao.getByCollegeId(c.getCollegeId(), grade);
             //计算该院系下的学生总量
             int totalPeople = studentList.size();
             //计算该院系下已就业的学生数量

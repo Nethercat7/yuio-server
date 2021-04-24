@@ -1,11 +1,11 @@
 package com.zfy.yuio.realms;
 
-import com.zfy.yuio.entity.Student;
+import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.entity.Token;
-import com.zfy.yuio.entity.Usr;
-import com.zfy.yuio.service.MenuService;
-import com.zfy.yuio.service.StudentService;
-import com.zfy.yuio.service.UsrService;
+import com.zfy.yuio.entity.SysUser;
+import com.zfy.yuio.service.SysMenuService;
+import com.zfy.yuio.service.SysStudentService;
+import com.zfy.yuio.service.SysUsrService;
 import com.zfy.yuio.utils.JWTUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -22,13 +22,13 @@ import java.util.List;
 
 public class AuthRealm extends AuthorizingRealm {
     @Autowired
-    private UsrService usrService;
+    private SysUsrService usrService;
 
     @Autowired
-    private StudentService studentService;
+    private SysStudentService studentService;
 
     @Autowired
-    private MenuService menuService;
+    private SysMenuService menuService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -53,13 +53,13 @@ public class AuthRealm extends AuthorizingRealm {
         String type = JWTUtil.getType(token);
         try {
             if (type.equals("usr")) {
-                Usr usr = usrService.getByCode(JWTUtil.getCode(token));
+                SysUser usr = usrService.getByCode(JWTUtil.getCode(token));
                 //验证
-                if (!ObjectUtils.isEmpty(usr) && JWTUtil.verify(token, usr.getUsrId(), usr.getUsrName(), usr.getUsrCode(), type)) {
+                if (!ObjectUtils.isEmpty(usr) && JWTUtil.verify(token, usr.getUserId(), usr.getUserName(), usr.getUserCode(), type)) {
                     return new SimpleAuthenticationInfo(token, token, this.getName());
                 }
             } else {
-                Student student = studentService.getByCode(JWTUtil.getCode(token));
+                SysStudent student = studentService.getByCode(JWTUtil.getCode(token));
                 if (!ObjectUtils.isEmpty(student) && JWTUtil.verify(token, student.getStudentId(), student.getStudentName(), student.getStudentCode(), type)) {
                     return new SimpleAuthenticationInfo(token, token, this.getName());
                 }

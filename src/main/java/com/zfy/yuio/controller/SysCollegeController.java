@@ -1,28 +1,26 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.Org;
+import com.zfy.yuio.entity.SysCollege;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.service.SysOrgService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.zfy.yuio.service.SysCollegeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- *@Description:组织管理模块
+ *@Description:院系管理
  *@Author:Nethercat7
  *@CreateDate:2021/4/8 20:53
  */
 @CrossOrigin
 @RestController
-@RequestMapping("org")
-@RequiresPermissions("system:org:mgt")
-public class OrgController {
+@RequestMapping("sys/college")
+public class SysCollegeController {
     @Autowired
-    private SysOrgService orgService;
+    private SysCollegeService collegeService;
 
     @PostMapping("add")
-    public ResultBody add(@RequestBody Org org){
-        int status=orgService.add(org);
+    public ResultBody add(@RequestBody SysCollege params){
+        int status=collegeService.add(params);
         if(status==1){
             return new ResultBody(0,"成功添加","success");
         }
@@ -31,21 +29,21 @@ public class OrgController {
 
     @GetMapping("get")
     public ResultBody get(){
-        return new ResultBody(0,orgService.get(),"success");
+        return new ResultBody(0,collegeService.get(),"success");
     }
 
-    @GetMapping("del")
+    @DeleteMapping("del")
     public ResultBody del(@RequestParam("id")String id){
-        int status=orgService.del(id);
+        int status=collegeService.del(id);
         if(status==1){
             return new ResultBody(0,"成功删除","success");
         }
         return new ResultBody(1,"删除失败，可能已经被删除","error");
     }
 
-    @PostMapping("upd")
-    public ResultBody upd(@RequestBody Org org){
-        int status=orgService.upd(org);
+    @PutMapping("upd")
+    public ResultBody upd(@RequestBody SysCollege params){
+        int status=collegeService.upd(params);
         if(status==1){
             return new ResultBody(0,"成功修改","success");
         }
