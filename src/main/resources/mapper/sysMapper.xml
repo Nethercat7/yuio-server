@@ -25,7 +25,7 @@
                 SELECT usr_pwd,usr_salt
                 FROM usr
                 WHERE usr_id=#{key}
-                OR usr_account=#{key}
+                OR usr_code=#{key}
             </when>
             <otherwise>
                 SELECT student_pwd,student_salt
@@ -76,7 +76,7 @@
 
     <select id="getUsrLoginInfo" resultType="Usr" parameterType="String">
         SELECT * FROM usr
-        WHERE usr_account=#{key}
+        WHERE usr_code=#{key}
     </select>
 
     <select id="getStudentLoginInfo" parameterType="String" resultType="Student">

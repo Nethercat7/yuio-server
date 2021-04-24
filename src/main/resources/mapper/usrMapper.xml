@@ -5,12 +5,12 @@
 
 <mapper namespace="com.zfy.yuio.dao.UsrDao">
     <insert id="add" parameterType="Usr">
-        INSERT INTO usr(usr_id,usr_name,usr_account,usr_gender,usr_phone,usr_email,usr_status,usr_description,usr_pwd,usr_salt)
+        INSERT INTO usr(usr_id,usr_name,usr_code,usr_gender,usr_phone,usr_email,usr_status,usr_description,usr_pwd,usr_salt)
         VALUES (#{usrId},#{usrName},#{usrAccount},#{usrGender},#{usrPhone},#{usrEmail},#{usrStatus},#{usrDescription},#{usrPwd},#{usrSalt})
     </insert>
 
     <select id="get" resultType="Usr">
-        SELECT usr_id,usr_name,usr_account,usr_gender,usr_phone,usr_email,usr_status,usr_description
+        SELECT usr_id,usr_name,usr_code,usr_gender,usr_phone,usr_email,usr_status,usr_description
         FROM usr
     </select>
 
@@ -21,7 +21,7 @@
 
     <update id="upd" parameterType="Usr">
         UPDATE usr
-        SET usr_name=#{usrName},usr_account=#{usrAccount},usr_gender=#{usrGender},usr_phone=#{usrPhone},usr_email=#{usrEmail},usr_status=#{usrStatus},
+        SET usr_name=#{usrName},usr_code=#{usrAccount},usr_gender=#{usrGender},usr_phone=#{usrPhone},usr_email=#{usrEmail},usr_status=#{usrStatus},
         usr_description=#{usrDescription}
         WHERE usr_id=#{usrId}
     </update>

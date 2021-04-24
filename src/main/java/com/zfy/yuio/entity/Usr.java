@@ -15,8 +15,8 @@ public class Usr {
     private String usrId;
     @JsonProperty("name")
     private String usrName;
-    @JsonProperty("account")
-    private String usrAccount;
+    @JsonProperty("code")
+    private String usrCode;
     @JsonProperty("gender")
     private String usrGender;
     @JsonProperty("phone")
@@ -52,14 +52,13 @@ public class Usr {
         this.usrName = usrName;
     }
 
-    public String getUsrAccount() {
-        return usrAccount;
+    public String getUsrCode() {
+        return usrCode;
     }
 
-    public void setUsrAccount(String usrAccount) {
-        this.usrAccount = usrAccount;
+    public void setUsrCode(String usrCode) {
+        this.usrCode = usrCode;
     }
-
 
     public String getUsrPhone() {
         return usrPhone;

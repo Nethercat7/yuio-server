@@ -29,7 +29,6 @@ public class SysDictDataController {
 
     @GetMapping("get")
     public ResultBody get(@RequestParam("type") String type){
-        System.out.println(type);
         return new ResultBody(0,sysDictDataService.get(type));
     }
 
