@@ -1,7 +1,7 @@
 package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.SysCollege;
-import com.zfy.yuio.entity.EStatus;
+import com.zfy.yuio.entity.StatsEmplInfo;
 import com.zfy.yuio.entity.ResultBody;
 
 import java.util.List;
@@ -35,15 +35,15 @@ public interface SysService {
      *@param eStatus
      *@Return int
      */
-    int saveEmploymentStatus(EStatus eStatus);
+    int saveEmploymentStatus(StatsEmplInfo eStatus);
 
     /**
      *@Author Nethercat7
      *@Description 通过ID获取就业情况统计信息
      *@param id
-     *@Return com.zfy.yuio.entity.EStatus
+     *@Return com.zfy.yuio.entity.StatsEmplInfo
      */
-    EStatus getEStatusById(String id);
+    StatsEmplInfo getEStatusById(String id);
 
 
     /**

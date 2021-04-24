@@ -93,14 +93,14 @@ public class ToolServiceImpl implements ToolService {
             String classId = studentList.get(i).getStudentClassId();
             String majorId = studentList.get(i).getStudentMajorId();
             String collegeId = studentList.get(i).getStudentCollegeId();
-            String employment = String.valueOf(random.nextInt(2));
+            String protocol = String.valueOf(random.nextInt(2));
             String wCity = cities[random.nextInt(cities.length)];
             String wType = works[random.nextInt(works.length)];
             String status = String.valueOf(random.nextInt(3));
             String plan = String.valueOf(random.nextInt(13));
             String iCity = cities[random.nextInt(cities.length)];
             String iType = works[random.nextInt(works.length)];
-            generateEStatus(studentId, classId, majorId, collegeId, employment, wCity, wType, status, plan, iCity, iType, grade);
+            generateEStatus(studentId, classId, majorId, collegeId, protocol, wCity, wType, status, plan, iCity, iType, grade);
         }
         return 0;
     }
@@ -134,22 +134,22 @@ public class ToolServiceImpl implements ToolService {
         studentDao.add(student);
     }
 
-    private void generateEStatus(String studentId, String classId, String majorId, String collegeId, String employment, String wCity, String wType, String status, String plan, String iCity, String iType, int grade) {
-        EStatus eStatus = new EStatus();
-        eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
-        eStatus.setEsStudentId(studentId);
-        eStatus.setEsClsId(classId);
-        eStatus.setEsMajorId(majorId);
-        eStatus.setEsCollegeId(collegeId);
-        eStatus.setEsGrade(grade);
-        eStatus.setEsEmployment(employment);
-        eStatus.setEsCompany("自动生成的公司名称");
-        eStatus.setEsWorkCity(wCity);
-        eStatus.setEsWorkType(wType);
-        eStatus.setEsStatus(status);
-        eStatus.setEsPlan(plan);
-        eStatus.setEsIntentionCity(iCity);
-        eStatus.setEsIntentionWork(iType);
+    private void generateEStatus(String studentId, String classId, String majorId, String collegeId, String protocol, String wCity, String wType, String status, String plan, String iCity, String iType, int grade) {
+        StatsEmplInfo eStatus = new StatsEmplInfo();
+        eStatus.setEmplId(snowflakeIdGeneratorUtil.getId());
+        eStatus.setEmplStudentId(studentId);
+        eStatus.setEmplClassId(classId);
+        eStatus.setEmplMajorId(majorId);
+        eStatus.setEmplCollegeId(collegeId);
+        eStatus.setEmplGrade(grade);
+        eStatus.setEmplProtocol(protocol);
+        eStatus.setEmplCompany("自动生成的公司名称");
+        eStatus.setEmplWorkCity(wCity);
+        eStatus.setEmplWorkType(wType);
+        eStatus.setEmplStatus(status);
+        eStatus.setEmplPlan(plan);
+        eStatus.setEmplIntentionCity(iCity);
+        eStatus.setEmplIntentionWork(iType);
         sysDao.saveEmploymentStatus(eStatus);
     }
 

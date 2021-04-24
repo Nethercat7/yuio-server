@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.EStatus;
+import com.zfy.yuio.entity.StatsEmplInfo;
 import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.entity.SysUser;
 import org.springframework.stereotype.Repository;
@@ -20,15 +20,11 @@ public interface SysDao {
 
     Map<String,String> getPwd(boolean isUser,String key);
 
-    int saveEmploymentStatus(EStatus eStatus);
+    int saveEmploymentStatus(StatsEmplInfo eStatus);
 
-    EStatus getEStatusById(String id);
+    StatsEmplInfo getEStatusById(String id);
 
-    int updEStatus(EStatus eStatus);
-
-    List<EStatus> getEStatus(int grade);
-
-    List<EStatus> getEStatusByCollegeId(String id,int grade);
+    int updEStatus(StatsEmplInfo eStatus);
 
     List<Integer> getGrade();
 

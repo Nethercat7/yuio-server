@@ -1,11 +1,12 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.*;
+import com.zfy.yuio.dao.StatsRateDao;
+import com.zfy.yuio.dao.SysCollegeDao;
+import com.zfy.yuio.dao.SysStudentDao;
+import com.zfy.yuio.entity.StatsEmplInfo;
 import com.zfy.yuio.entity.SysCollege;
-import com.zfy.yuio.entity.EStatus;
-import com.zfy.yuio.entity.Statistics;
 import com.zfy.yuio.entity.SysStudent;
-import com.zfy.yuio.service.StatisticsService;
+import com.zfy.yuio.service.StatsRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,36 +16,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Description:数据统计模块
- * @Author:Nethercat7
- * @CreateDate:2021/4/19 17:19
- */
 @Service
-public class StatisticsServiceImpl implements StatisticsService {
+public class StatsRateServiceImpl implements StatsRateService {
     @Autowired
-    private SysDao sysDao;
-
+    private StatsRateDao statsRateDao;
     @Autowired
-    private SysStudentDao studentDao;
-
+    private SysStudentDao sysStudentDao;
     @Autowired
-    private SysCollegeDao collegeDao;
-
-    @Autowired
-    private StatisticsDao statisticsDao;
+    private SysCollegeDao sysCollegeDao;
 
     @Override
-    public Map<String, Object> getTotalEmploymentInfo(int grade) {
+    public  Map<String, Object> getEmplInfo(int grade) {
         //获取所有的就业情况统计信息
-        List<EStatus> eStatuses = sysDao.getEStatus(grade);
+        List<StatsEmplInfo> info = statsRateDao.getEmplInfo(grade);
         //计算总人数
-        int totalPeople = studentDao.get(grade).size();
+        int totalPeople = sysStudentDao.get(grade).size();
         //计算各学院就业人数
         int employmentPeople = 0;
-        for (EStatus es : eStatuses
+        for (StatsEmplInfo i : info
         ) {
-            if (es.getEsEmployment().equals("1")) employmentPeople += 1;
+            if (i.getEmplStatus().equals("1")) employmentPeople += 1;
         }
         //计算各学院未就业人数
         int unEmploymentPeople = totalPeople - employmentPeople;
@@ -60,9 +51,9 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public Map<String, Object> getCollegeEmploymentInfo(int grade) {
+    public Map<String, Object> getCollegeEmplInfo(int grade) {
         //获取所有院系
-        List<SysCollege> collegeList = collegeDao.get();
+        List<SysCollege> collegeList = sysCollegeDao.get();
         //定义柱状图的X和Y轴数据
         List<String> collegeNameList = new ArrayList<>();
         List<String> collegeEmploymentRate = new ArrayList<>();
@@ -73,16 +64,16 @@ public class StatisticsServiceImpl implements StatisticsService {
         ) {
             Map<String, Object> map = new HashMap<>();
             //获取该院系下的就业情况信息
-            List<EStatus> eStatusList = sysDao.getEStatusByCollegeId(c.getCollegeId(), grade);
+            List<StatsEmplInfo> eStatusList = statsRateDao.getCollegeEmplInfo(c.getCollegeId(), grade);
             //获取该院系下的所有学生信息
-            List<SysStudent> studentList = studentDao.getByCollegeId(c.getCollegeId(), grade);
+            List<SysStudent> studentList = sysStudentDao.getByCollegeId(c.getCollegeId(), grade);
             //计算该院系下的学生总量
             int totalPeople = studentList.size();
             //计算该院系下已就业的学生数量
             int employmentPeople = 0;
-            for (EStatus e : eStatusList
+            for (StatsEmplInfo e : eStatusList
             ) {
-                if (e.getEsEmployment().equals("1")) employmentPeople += 1;
+                if (e.getEmplStatus().equals("1")) employmentPeople += 1;
             }
             //计算未就业的学生总数量
             int unEmploymentPeople = totalPeople - employmentPeople;
@@ -107,44 +98,5 @@ public class StatisticsServiceImpl implements StatisticsService {
         map.put("college_employment_people", collegeEmploymentPeople);
         map.put("data", tableData);
         return map;
-    }
-
-    @Override
-    public List<Statistics> getEmploymentCityInfo(EStatus eStatus) {
-        return statisticsDao.getEmploymentCityInfo(eStatus);
-    }
-
-    @Override
-    public List<Statistics> getEmploymentWorkInfo(EStatus eStatus) {
-        return statisticsDao.getEmploymentWorkInfo(eStatus);
-    }
-
-    @Override
-    public List<Statistics> getUnEmploymentStudentPlan(EStatus eStatus) {
-        return statisticsDao.getUnEmploymentStudentPlan(eStatus);
-    }
-
-    @Override
-    public List<Statistics> getIntentionCityInfo(EStatus eStatus) {
-        return statisticsDao.getIntentionCityInfo(eStatus);
-    }
-
-    @Override
-    public List<Statistics> getIntentionWorkInfo(EStatus eStatus) {
-        return statisticsDao.getIntentionWorkInfo(eStatus);
-    }
-
-    @Override
-    public List<Map<String, Object>> getGrade() {
-        List<Integer> grades = statisticsDao.getGrade();
-        List<Map<String, Object>> maps = new ArrayList<>();
-        for (Integer i : grades
-        ) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("value", i);
-            map.put("label", i + "届");
-            maps.add(map);
-        }
-        return maps;
     }
 }

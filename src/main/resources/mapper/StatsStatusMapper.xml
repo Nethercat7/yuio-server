@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zfy.yuio.dao.StatsStatusDao">
+    <select id="getCityInfo" resultType="StatsEmplResult" parameterType="StatsEmplInfo">
+        SELECT COUNT(e.empl_id) as people,c.city_name as city
+        FROM stats_empl_info e
+        LEFT JOIN sys_city c
+        ON e.empl_work_city=c.city_id
+        WHERE empl_status=1
+        AND empl_grade=#{emplGrade}
+        <if test="emplCollegeId!=null">
+            AND empl_college_id=#{emplCollegeId}
+        </if>
+        <if test="emplMajorId!=null">
+            AND empl_major_id=#{emplMajorId}
+        </if>
+        <if test="emplClassId!=null">
+            AND empl_class_id=#{emplClassId}
+        </if>
+        GROUP BY city
+        ORDER BY people desc
+    </select>
+
+    <select id="getWorkInfo" resultType="StatsEmplResult" parameterType="StatsEmplInfo">
+        SELECT COUNT(e.empl_id) as people,w.work_name as type
+        FROM stats_empl_info e
+        LEFT JOIN sys_work w
+        ON e.empl_work_type=w.work_id
+        WHERE e.empl_status=1
+        AND e.empl_grade=#{emplGrade}
+        <if test="emplCollegeId!=null">
+            AND e.empl_college_id=#{emplCollegeId}
+        </if>
+        <if test="emplMajorId!=null">
+            AND e.empl_major_id=#{emplMajorId}
+        </if>
+        <if test="emplClassId!=null">
+            AND e.empl_class_id=#{emplClassId}
+        </if>
+        GROUP BY type
+        ORDER BY people desc
+    </select>
+
+    <select id="getStudentPlan" resultType="StatsEmplResult" parameterType="StatsEmplInfo">
+        SELECT COUNT(empl_id) as people,empl_plan as plan
+        FROM stats_empl_info
+        WHERE empl_status=0
+        AND empl_grade=#{emplGrade}
+        <if test="emplCollegeId!=null">
+            AND empl_college_id=#{emplCollegeId}
+        </if>
+        <if test="emplMajorId!=null">
+            AND empl_major_id=#{emplMajorId}
+        </if>
+        <if test="emplClassId!=null">
+            AND empl_class_id=#{emplClassId}
+        </if>
+        GROUP BY plan
+        ORDER BY people desc
+    </select>
+</mapper>

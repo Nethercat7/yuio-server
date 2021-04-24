@@ -67,22 +67,22 @@ public class SysServiceImpl implements SysService {
     }
 
     @Override
-    public int saveEmploymentStatus(EStatus eStatus) {
-        eStatus.setEsId(snowflakeIdGeneratorUtil.getId());
-        SysStudent student = studentDao.getById(eStatus.getEsStudentId());
+    public int saveEmploymentStatus(StatsEmplInfo eStatus) {
+        eStatus.setEmplId(snowflakeIdGeneratorUtil.getId());
+        SysStudent student = studentDao.getById(eStatus.getEmplStudentId());
         //如果是已存在的就进行更新
         if (!ObjectUtils.isEmpty(student)) {
             return sysDao.updEStatus(eStatus);
         }
-        eStatus.setEsClsId(student.getStudentClassId());
-        eStatus.setEsMajorId(student.getStudentMajorId());
-        eStatus.setEsCollegeId(student.getStudentCollegeId());
-        eStatus.setEsGrade(student.getStudentGrade());
+        eStatus.setEmplClassId(student.getStudentClassId());
+        eStatus.setEmplMajorId(student.getStudentMajorId());
+        eStatus.setEmplCollegeId(student.getStudentCollegeId());
+        eStatus.setEmplGrade(student.getStudentGrade());
         return sysDao.saveEmploymentStatus(eStatus);
     }
 
     @Override
-    public EStatus getEStatusById(String id) {
+    public StatsEmplInfo getEStatusById(String id) {
         return sysDao.getEStatusById(id);
     }
 

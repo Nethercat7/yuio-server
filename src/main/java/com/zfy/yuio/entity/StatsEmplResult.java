@@ -4,7 +4,7 @@ package com.zfy.yuio.entity;
  *@Author:Nethercat7
  *@CreateDate:2021/4/22 0:37
 */
-public class Statistics {
+public class StatsEmplResult {
     private int people;
     private String city;
     private String type;
