@@ -1,5 +1,6 @@
 package com.zfy.yuio.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -17,7 +18,8 @@ public class SysDictType {
     @JsonProperty("status")
     private String dictStatus;
     @JsonProperty("create_time")
-    private String createTime;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private String dictCreateTime;
     @JsonProperty("remark")
     private String dictRemark;
     @JsonProperty("value")
@@ -55,12 +57,12 @@ public class SysDictType {
         this.dictStatus = dictStatus;
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public String getDictCreateTime() {
+        return dictCreateTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setDictCreateTime(String dictCreateTime) {
+        this.dictCreateTime = dictCreateTime;
     }
 
     public String getDictRemark() {

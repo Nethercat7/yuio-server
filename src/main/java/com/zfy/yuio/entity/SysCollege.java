@@ -1,5 +1,6 @@
 package com.zfy.yuio.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class SysCollege {
     @JsonProperty("status")
     private String collegeStatus;
     @JsonProperty("create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime collegeCreateTime;
     @JsonProperty("remark")
     private String collegeRemark;
