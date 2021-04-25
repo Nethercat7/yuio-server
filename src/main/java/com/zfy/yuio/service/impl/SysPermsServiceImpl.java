@@ -1,8 +1,8 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.SysMenuDao;
+import com.zfy.yuio.dao.SysPermsDao;
 import com.zfy.yuio.entity.SysPerms;
-import com.zfy.yuio.service.SysMenuService;
+import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SysMenuServiceImpl implements SysMenuService {
+public class SysPermsServiceImpl implements SysPermsService {
     @Autowired
-    private SysMenuDao menuDao;
+    private SysPermsDao permsDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil =new SnowflakeIdGeneratorUtil(6,0);
 
@@ -24,13 +24,13 @@ public class SysMenuServiceImpl implements SysMenuService {
             params.setPermsPid("0");
         }
         params.setPermsLevel(1);
-        return menuDao.add(params);
+        return permsDao.add(params);
     }
 
     @Override
     public List<SysPerms> get() {
         //获取所有的menu
-        List<SysPerms> menus= menuDao.get();
+        List<SysPerms> menus= permsDao.get();
         //存放最上级的menu
         List<SysPerms> menuList=new ArrayList<>();
         for (SysPerms m:menus
@@ -48,7 +48,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public int del(String id) {
-        return menuDao.del(id);
+        return permsDao.del(id);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         if(params.getPermsPid()==null||params.getPermsPid().isEmpty()){
             params.setPermsPid("0");
         }
-        return menuDao.upd(params);
+        return permsDao.upd(params);
     }
 
     private List<SysPerms> getChildren(String pid, List<SysPerms> list){
@@ -77,6 +77,6 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public List<String> getUserPerms(String id) {
-        return menuDao.getUserPerms(id);
+        return permsDao.getUserPerms(id);
     }
 }

@@ -2,7 +2,7 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.SysPerms;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.service.SysMenuService;
+import com.zfy.yuio.service.SysPermsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("sys/perms")
 public class SysPermsController {
     @Autowired
-    private SysMenuService menuService;
+    private SysPermsService permsService;
 
     @PostMapping("add")
     public ResultBody add(@RequestBody SysPerms params){
-        int status=menuService.add(params);
+        int status=permsService.add(params);
         if(status!=1){
             return new ResultBody(1,"添加失败","error");
         }
@@ -29,12 +29,12 @@ public class SysPermsController {
 
     @GetMapping("get")
     public ResultBody get(){
-        return new ResultBody(0,menuService.get());
+        return new ResultBody(0,permsService.get());
     }
 
     @DeleteMapping("del")
     public ResultBody del(@RequestParam("id")String id){
-        int status=menuService.del(id);
+        int status=permsService.del(id);
         if(status!=1){
             return new ResultBody(1,"删除失败","error");
         }
@@ -43,7 +43,7 @@ public class SysPermsController {
 
     @PutMapping("upd")
     public ResultBody upd(@RequestBody SysPerms params){
-        int status=menuService.upd(params);
+        int status=permsService.upd(params);
         if(status!=1){
             return new ResultBody(1,"修改失败","error");
         }

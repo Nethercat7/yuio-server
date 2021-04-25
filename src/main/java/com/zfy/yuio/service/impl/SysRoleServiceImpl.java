@@ -1,5 +1,6 @@
 package com.zfy.yuio.service.impl;
 
+import com.zfy.yuio.dao.SysPermsDao;
 import com.zfy.yuio.dao.SysRoleDao;
 import com.zfy.yuio.entity.SysRole;
 import com.zfy.yuio.service.SysRoleService;
@@ -10,16 +11,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- *@Description:Role mgt
- *@Author:Nethercat7
- *@CreateDate:2021/4/13 22:41
-*/
+ * @Description:Role mgt
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/13 22:41
+ */
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
     @Autowired
     private SysRoleDao roleDao;
 
-    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil =new SnowflakeIdGeneratorUtil(5,0);
+    @Autowired
+    private SysPermsDao permsDao;
+
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(5, 0);
 
     @Override
     public int add(SysRole params) {
@@ -28,19 +32,16 @@ public class SysRoleServiceImpl implements SysRoleService {
         //set pid
         params.setRolePid("0");
         //保存角色权限
-        for (String perms:params.getPerms()
-             ) {
-            roleDao.addPerms(snowflakeIdGeneratorUtil.getId(),params.getRoleId(),perms);
-        }
+        savePerms(params);
         return roleDao.add(params);
     }
 
     @Override
     public List<SysRole> get() {
-        List<SysRole> roles= roleDao.get();
+        List<SysRole> roles = roleDao.get();
         //获取当前角色所拥有的权限
-        for (SysRole r:roles
-             ) {
+        for (SysRole r : roles
+        ) {
             r.setPerms(roleDao.getRolePerms(r.getRoleId()));
         }
         return roles;
@@ -58,10 +59,14 @@ public class SysRoleServiceImpl implements SysRoleService {
         //先删除该角色下的所有权限
         roleDao.delPerms(params.getRoleId());
         //再添加权限
-        for (String perms:params.getPerms()
-             ) {
-            roleDao.addPerms(snowflakeIdGeneratorUtil.getId(),params.getRoleId(),perms);
-        }
+        savePerms(params);
         return roleDao.upd(params);
+    }
+
+    private void savePerms(SysRole params) {
+        for (String perms : params.getPerms()
+        ) {
+            roleDao.addPerms(snowflakeIdGeneratorUtil.getId(), params.getRoleId(), perms);
+        }
     }
 }

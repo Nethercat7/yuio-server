@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zfy.yuio.dao.SysMenuDao">
+<mapper namespace="com.zfy.yuio.dao.SysPermsDao">
     <insert id="add" parameterType="SysPerms">
         INSERT INTO sys_perms(perms_id,perms_name,perms_mark,perms_url,perms_icon,perms_remark,perms_status,perms_level,perms_pid,perms_type)
         VALUES(#{permsId},#{permsName},#{permsMark},#{permsUrl},#{permsIcon},#{permsRemark},#{permsStatus},#{permsLevel},#{permsPid},#{permsType})
@@ -27,9 +27,9 @@
     <select id="getUserPerms" parameterType="String" resultType="String">
         SELECT m.perms_mark FROM sys_perms m
         LEFT JOIN sys_role_perms rp
-        ON rp.rpr_perms_id=m.perms_id
+        ON rp.rp_perms_id=m.perms_id
         LEFT JOIN sys_role r
-        ON rp.rpr_role_id=r.role_id
+        ON rp.rp_role_id=r.role_id
         LEFT JOIN sys_user_role ur
         ON ur.ur_role_id=r.role_id
         LEFT JOIN sys_user u

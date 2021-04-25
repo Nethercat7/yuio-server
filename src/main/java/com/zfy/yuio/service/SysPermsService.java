@@ -9,13 +9,11 @@ import java.util.List;
  *@Author:Nethercat7
  *@CreateDate:2021/4/16 21:11
 */
-public interface SysMenuService {
+public interface SysPermsService {
 
     int add(SysPerms params);
 
-
     List<SysPerms> get();
-
 
     int del(String id);
 

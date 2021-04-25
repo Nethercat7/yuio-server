@@ -11,7 +11,7 @@ import java.util.List;
  *@CreateDate:2021/4/16 21:08
 */
 @Repository
-public interface SysMenuDao {
+public interface SysPermsDao {
     int add(SysPerms params);
 
     List<SysPerms> get();

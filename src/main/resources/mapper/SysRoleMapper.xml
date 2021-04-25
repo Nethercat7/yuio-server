@@ -25,18 +25,18 @@
     </update>
 
     <insert id="addPerms" parameterType="String">
-        INSERT INTO sys_role_perms(rpr_id,rpr_role_id,rpr_perms_id)
+        INSERT INTO sys_role_perms(rp_id,rp_role_id,rp_perms_id)
         VALUES(#{rprId},#{rprRoleId},#{rprPermsId})
     </insert>
 
     <select id="getRolePerms" parameterType="String" resultType="String">
-        SELECT rpr_perms_id
+        SELECT rp_perms_id
         FROM sys_role_perms
-        WHERE rpr_role_id=#{id}
+        WHERE rp_role_id=#{id}
     </select>
 
     <delete id="delPerms" parameterType="String">
         DELETE FROM sys_role_perms
-        WHERE rpr_role_id=#{id}
+        WHERE rp_role_id=#{id}
     </delete>
 </mapper>

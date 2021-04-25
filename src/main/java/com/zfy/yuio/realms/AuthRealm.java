@@ -3,7 +3,7 @@ package com.zfy.yuio.realms;
 import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.entity.Token;
 import com.zfy.yuio.entity.SysUser;
-import com.zfy.yuio.service.SysMenuService;
+import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.service.SysUsrService;
 import com.zfy.yuio.utils.JWTUtil;
@@ -28,7 +28,7 @@ public class AuthRealm extends AuthorizingRealm {
     private SysStudentService studentService;
 
     @Autowired
-    private SysMenuService menuService;
+    private SysPermsService menuService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
