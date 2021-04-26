@@ -20,7 +20,7 @@ public class StatsEmplInfo {
     private String emplCollegeId;
     @JsonProperty("grade")
     private int emplGrade;
-    @JsonProperty("Protocol")
+    @JsonProperty("protocol")
     private String emplProtocol;
     @JsonProperty("company")
     private String emplCompany;
