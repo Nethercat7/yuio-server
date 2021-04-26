@@ -3,6 +3,7 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.StatsEmplInfo;
 import com.zfy.yuio.service.WriteEmplService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ public class WriteEmplController {
     private WriteEmplService emplService;
 
     @PostMapping("add")
+    @RequiresPermissions("write:empl:write")
     public ResultBody add(@RequestBody StatsEmplInfo params){
         int status=emplService.add(params);
         if(status!=1){
@@ -33,6 +35,7 @@ public class WriteEmplController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("write:empl:write")
     public ResultBody upd(@RequestBody StatsEmplInfo params){
         int status=emplService.upd(params);
         if(status!=1){

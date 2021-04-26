@@ -43,6 +43,8 @@ public class SysStudentServiceImpl implements SysStudentService {
         params.setStudentSalt(ShiroUtil.getSalt(SALT));
         //默认密码
         params.setStudentPwd(ShiroUtil.pwd2MD5("123456", params.getStudentSalt(), HASH));
+        //设置角色为学生,字符串的ID为数据库初始角色“学生”的ID
+        userDao.addRole(snowflakeIdGeneratorUtil.getId(),params.getStudentId(),"506870876013088768");
         return studentDao.add(params);
     }
 

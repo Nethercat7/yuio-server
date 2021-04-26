@@ -39,6 +39,9 @@ public class ToolServiceImpl implements ToolService {
     @Autowired
     private SysCityDao cityDao;
 
+    @Autowired
+    private SysUserDao userDao;
+
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(8, 0);
 
     @Override
@@ -131,6 +134,8 @@ public class ToolServiceImpl implements ToolService {
         student.setStudentCollegeId(collegeId);
         student.setStudentMajorId(majorId);
         student.setStudentClassId(classId);
+        //添加角色
+        userDao.addRole(snowflakeIdGeneratorUtil.getId(), student.getStudentId(), "506870876013088768");
         studentDao.add(student);
     }
 
