@@ -3,6 +3,7 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysDictData;
 import com.zfy.yuio.service.SysDictDataService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class SysDictDataController {
     private SysDictDataService sysDictDataService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:dict:add")
     public ResultBody add(@RequestBody SysDictData params){
         int status=sysDictDataService.add(params);
         if(status!=1){
@@ -33,6 +35,7 @@ public class SysDictDataController {
     }
 
     @DeleteMapping("del")
+    @RequiresPermissions("system:dict:del")
     public ResultBody del(@RequestParam("id")String id){
         int status=sysDictDataService.del(id);
         if(status!=1){
@@ -42,6 +45,7 @@ public class SysDictDataController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:dict:upd")
     public ResultBody upd(@RequestBody SysDictData params){
         int status=sysDictDataService.upd(params);
         if(status!=1){

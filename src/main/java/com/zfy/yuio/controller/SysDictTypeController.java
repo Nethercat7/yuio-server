@@ -3,6 +3,7 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysDictType;
 import com.zfy.yuio.service.SysDictTypeService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ public class SysDictTypeController {
     private SysDictTypeService sysDictTypeService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:dict:add")
     public ResultBody add(@RequestBody SysDictType params){
         int status=sysDictTypeService.add(params);
         if(status!=1){
@@ -37,6 +39,7 @@ public class SysDictTypeController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:dict:upd")
     public ResultBody upd(@RequestBody SysDictType params){
         int status=sysDictTypeService.upd(params);
         if(status!=1){

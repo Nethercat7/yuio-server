@@ -1,8 +1,9 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.SysMajor;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.SysMajor;
 import com.zfy.yuio.service.SysMajorService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class SysMajorController {
     private SysMajorService majorService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:major:add")
     public ResultBody add(@RequestBody SysMajor params){
         int status=majorService.add(params);
         if(status==1){
@@ -28,11 +30,13 @@ public class SysMajorController {
     }
 
     @GetMapping("get")
+    //@RequiresPermissions("system:major:get")
     public ResultBody get(){
         return new ResultBody(0,majorService.get(),"success");
     }
 
     @DeleteMapping("del")
+    @RequiresPermissions("system:major:del")
     public ResultBody del(@RequestParam("id")String id){
         int status=majorService.del(id);
         if(status==1){
@@ -42,6 +46,7 @@ public class SysMajorController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:major:upd")
     public ResultBody upd(@RequestBody SysMajor params){
         int status=majorService.upd(params);
         if(status==1){

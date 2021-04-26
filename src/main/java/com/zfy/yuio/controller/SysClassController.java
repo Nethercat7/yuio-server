@@ -1,8 +1,9 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.SysClass;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.SysClass;
 import com.zfy.yuio.service.SysClassService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ public class SysClassController {
     private SysClassService classService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:class:add")
     public ResultBody add(@RequestBody SysClass params){
         int status=classService.add(params);
         if(status==1){
@@ -23,11 +25,13 @@ public class SysClassController {
     }
 
     @GetMapping("get")
+    //@RequiresPermissions("system:class:get")
     public ResultBody get(){
         return new ResultBody(0,classService.get(),"success");
     }
 
     @DeleteMapping("del")
+    @RequiresPermissions("system:class:del")
     public ResultBody add(@RequestParam("id") String id){
         int status=classService.del(id);
         if(status==1){
@@ -37,6 +41,7 @@ public class SysClassController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:class:upd")
     public ResultBody upd(@RequestBody SysClass params){
         int status=classService.upd(params);
         if(status==1){

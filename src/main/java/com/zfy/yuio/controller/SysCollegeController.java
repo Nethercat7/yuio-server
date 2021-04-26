@@ -1,8 +1,9 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.SysCollege;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.SysCollege;
 import com.zfy.yuio.service.SysCollegeService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class SysCollegeController {
     private SysCollegeService collegeService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:college:add")
     public ResultBody add(@RequestBody SysCollege params){
         int status=collegeService.add(params);
         if(status==1){
@@ -28,11 +30,13 @@ public class SysCollegeController {
     }
 
     @GetMapping("get")
+    //@RequiresPermissions(value = {"system:college:get","system:major:*"},logical = Logical.OR)
     public ResultBody get(){
         return new ResultBody(0,collegeService.get(),"success");
     }
 
     @DeleteMapping("del")
+    @RequiresPermissions("system:college:del")
     public ResultBody del(@RequestParam("id")String id){
         int status=collegeService.del(id);
         if(status==1){
@@ -42,6 +46,7 @@ public class SysCollegeController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:college:upd")
     public ResultBody upd(@RequestBody SysCollege params){
         int status=collegeService.upd(params);
         if(status==1){

@@ -2,7 +2,8 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysUser;
-import com.zfy.yuio.service.SysUsrService;
+import com.zfy.yuio.service.SysUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sys/user")
 public class SysUserController {
     @Autowired
-    private SysUsrService usrService;
+    private SysUserService userService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:user:add")
     public ResultBody add(@RequestBody SysUser params){
-        int status=usrService.add(params);
+        int status=userService.add(params);
         if(status!=1){
             return new ResultBody(1,"添加失败","error");
         }
@@ -28,13 +30,14 @@ public class SysUserController {
     }
 
     @GetMapping("get")
-    private ResultBody get(){
-        return new ResultBody(0,usrService.get());
+    public ResultBody get(){
+        return new ResultBody(0,userService.get(),"success");
     }
 
     @DeleteMapping("del")
-    private ResultBody del(@RequestParam("id")String id){
-        int status=usrService.del(id);
+    @RequiresPermissions("system:user:del")
+    public ResultBody del(@RequestParam("id")String id){
+        int status=userService.del(id);
         if(status!=1){
             return new ResultBody(1,"删除失败","error");
         }
@@ -42,8 +45,9 @@ public class SysUserController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:user:upd")
     public ResultBody upd(@RequestBody SysUser params){
-        int status=usrService.upd(params);
+        int status=userService.upd(params);
         if(status!=1){
             return new ResultBody(1,"修改失败","error");
         }

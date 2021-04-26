@@ -2,7 +2,6 @@ package com.zfy.yuio.config;
 
 import com.zfy.yuio.filter.AuthFilter;
 import com.zfy.yuio.realms.AuthRealm;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -20,12 +19,12 @@ import java.util.Map;
 public class ShiroConfig {
    //创建Filter
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager defaultWebSecurityManager){
         //创建Filter
         ShiroFilterFactoryBean shiroFilterFactoryBean=new ShiroFilterFactoryBean();
 
         //注入安全管理器
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
 
         //设置自定义Filter
         Map<String, Filter> filters=new HashMap<>();
@@ -63,9 +62,9 @@ public class ShiroConfig {
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager defaultWebSecurityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        authorizationAttributeSourceAdvisor.setSecurityManager(defaultWebSecurityManager);
         return authorizationAttributeSourceAdvisor;
     }
 

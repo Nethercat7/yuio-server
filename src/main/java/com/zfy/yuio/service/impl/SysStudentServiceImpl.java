@@ -1,9 +1,7 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.SysClsDao;
-import com.zfy.yuio.dao.SysCollegeDao;
-import com.zfy.yuio.dao.SysMajorDao;
 import com.zfy.yuio.dao.SysStudentDao;
+import com.zfy.yuio.dao.SysUserDao;
 import com.zfy.yuio.entity.QueryParam;
 import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.service.SysStudentService;
@@ -32,13 +30,7 @@ public class SysStudentServiceImpl implements SysStudentService {
     private SysStudentDao studentDao;
 
     @Autowired
-    private SysCollegeDao collegeDao;
-
-    @Autowired
-    private SysMajorDao majorDao;
-
-    @Autowired
-    private SysClsDao classDao;
+    private SysUserDao userDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(3, 0);
 

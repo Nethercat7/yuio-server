@@ -5,7 +5,7 @@ import com.zfy.yuio.entity.Token;
 import com.zfy.yuio.entity.SysUser;
 import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.service.SysStudentService;
-import com.zfy.yuio.service.SysUsrService;
+import com.zfy.yuio.service.SysUserService;
 import com.zfy.yuio.utils.JWTUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class AuthRealm extends AuthorizingRealm {
     @Autowired
-    private SysUsrService usrService;
+    private SysUserService usrService;
 
     @Autowired
     private SysStudentService studentService;

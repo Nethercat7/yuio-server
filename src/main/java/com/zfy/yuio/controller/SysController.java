@@ -2,6 +2,8 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.SysService;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,7 @@ public class SysController {
     private SysService sysService;
 
     @PutMapping("resetPwd")
+    @RequiresPermissions(value = {"system:user:reset","system:student:reset"},logical = Logical.OR)
     public ResultBody resetPwd(@RequestBody Map<String, Object> map) {
         int status = sysService.resetPwd(map);
         if (status == 1) {
@@ -34,16 +37,19 @@ public class SysController {
     }
 
     @GetMapping("getCollegeAndMajor")
+    //@RequiresPermissions("system:class:*")
     public ResultBody getCollegeAndMajor(){
         return new ResultBody(0,sysService.getCollegeAndMajor(),"success");
     }
 
     @GetMapping("getFullOrg")
+    //@RequiresPermissions(value = {"system:student:*","statistics:rate:*","statistics:intention:*"},logical = Logical.OR)
     public ResultBody getFullOrg(@RequestParam("grade") int grade){
         return new ResultBody(0,sysService.getFullOrg(grade),"success");
     }
 
     @GetMapping("getGrade")
+    //@RequiresPermissions(value = {"system:student:*","statistics:rate:*","statistics:rate:*","statistics:intention:*"},logical = Logical.OR)
     public ResultBody getGrade(){
         return new ResultBody(0,sysService.getGrade(),"success");
     }

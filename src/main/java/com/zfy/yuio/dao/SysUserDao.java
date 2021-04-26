@@ -11,10 +11,12 @@ import java.util.List;
  * @CreateDate:2021/4/12 17:05
  */
 @Repository
-public interface SysUsrDao {
+public interface SysUserDao {
     int add(SysUser params);
 
     List<SysUser> get();
+
+    List<SysUser> getAll();
 
     int del(String id);
 

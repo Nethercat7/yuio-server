@@ -3,6 +3,7 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.StatsEmplInfo;
 import com.zfy.yuio.service.StatsIntentionService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +20,13 @@ public class StatsIntentionController {
     private StatsIntentionService intentionService;
 
     @PostMapping("getCityInfo")
+    @RequiresPermissions("statistics:intention:stats")
     public ResultBody getCityInfo(@RequestBody StatsEmplInfo params){
         return new ResultBody(0,intentionService.getCityInfo(params),"success");
     }
 
     @PostMapping("getWorkInfo")
+    @RequiresPermissions("statistics:intention:stats")
     public ResultBody getWorkInfo(@RequestBody StatsEmplInfo params){
         return new ResultBody(0,intentionService.getWorkInfo(params),"success");
     }

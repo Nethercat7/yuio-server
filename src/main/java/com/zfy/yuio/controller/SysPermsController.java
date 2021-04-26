@@ -1,8 +1,9 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.SysPerms;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.SysPerms;
 import com.zfy.yuio.service.SysPermsService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class SysPermsController {
     private SysPermsService permsService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:perms:add")
     public ResultBody add(@RequestBody SysPerms params){
         int status=permsService.add(params);
         if(status!=1){
@@ -28,11 +30,13 @@ public class SysPermsController {
     }
 
     @GetMapping("get")
+    //@RequiresPermissions(value={"system:perms:get","system:role:*"},logical = Logical.OR)
     public ResultBody get(){
         return new ResultBody(0,permsService.get());
     }
 
     @DeleteMapping("del")
+    @RequiresPermissions("system:perms:del")
     public ResultBody del(@RequestParam("id")String id){
         int status=permsService.del(id);
         if(status!=1){
@@ -42,6 +46,7 @@ public class SysPermsController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:perms:upd")
     public ResultBody upd(@RequestBody SysPerms params){
         int status=permsService.upd(params);
         if(status!=1){

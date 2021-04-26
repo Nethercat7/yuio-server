@@ -4,6 +4,7 @@ import com.zfy.yuio.entity.QueryParam;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.service.SysStudentService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class SysStudentController {
     private SysStudentService studentService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:student:add")
     public ResultBody add(@RequestBody SysStudent params) {
         int status = studentService.add(params);
         if (status == 1) {
@@ -29,11 +31,13 @@ public class SysStudentController {
     }
 
     @GetMapping("get")
+    //@RequiresPermissions("system:student:get")
     public ResultBody get() {
         return new ResultBody(0, studentService.get(), "success");
     }
 
     @DeleteMapping("del")
+    @RequiresPermissions("system:student:del")
     public ResultBody del(@RequestParam("id") String id) {
         int status = studentService.del(id);
         if (status == 1) {
@@ -43,6 +47,7 @@ public class SysStudentController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:student:upd")
     public ResultBody upd(@RequestBody SysStudent params) {
         int status = studentService.upd(params);
         if (status == 1) {

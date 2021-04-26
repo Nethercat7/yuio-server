@@ -1,8 +1,9 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.SysWork;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.SysWork;
 import com.zfy.yuio.service.SysWorkService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ public class SysWorkController {
     private SysWorkService workService;
 
     @PostMapping("add")
+    @RequiresPermissions("system:work:add")
     public ResultBody add(@RequestBody SysWork params){
         int status=workService.add(params);
         if(status!=1){
@@ -23,11 +25,13 @@ public class SysWorkController {
     }
 
     @GetMapping("get")
+    //@RequiresPermissions("system:work:get")
     public ResultBody get(){
         return new ResultBody(0, workService.get());
     }
 
     @DeleteMapping("del")
+    @RequiresPermissions("system:work:del")
     public ResultBody del(@RequestParam("id") String id){
         int status= workService.del(id);
         if(status!=1){
@@ -37,6 +41,7 @@ public class SysWorkController {
     }
 
     @PutMapping("upd")
+    @RequiresPermissions("system:work:upd")
     public ResultBody upd(@RequestBody SysWork params){
         int status=workService.upd(params);
         if(status!=1){
