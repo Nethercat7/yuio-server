@@ -30,12 +30,9 @@
     </insert>
 
     <select id="getRolePerms" parameterType="String" resultType="String">
-        SELECT rp.rp_perms_id
-        FROM sys_role_perms rp
-        LEFT JOIN sys_perms p
-        ON p.perms_id=rp.rp_perms_id
-        WHERE rp.rp_role_id=#{id}
-        AND p.perms_type='2'
+        SELECT rp_perms_id
+        FROM sys_role_perms
+        WHERE rp_role_id=#{id}
     </select>
 
     <delete id="delPerms" parameterType="String">

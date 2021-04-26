@@ -1,5 +1,6 @@
 package com.zfy.yuio.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class SysCity {
     @JsonProperty("status")
     private String cityStatus;
     @JsonProperty("create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime cityCreateTime;
     @JsonProperty("level")
     private int cityLevel;
