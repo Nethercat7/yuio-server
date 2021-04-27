@@ -1,8 +1,7 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.QueryParam;
+import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.SysStudent;
-import com.zfy.yuio.entity.SysUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,9 +25,7 @@ public interface SysStudentDao {
 
     List<SysStudent> getByCollegeId(String id, int grade);
 
-    List<SysStudent> getWithEStatusInfo(QueryParam queryParam);
+    List<SysStudent> getWithEStatusInfo(QueryParams queryParams);
 
     SysStudent getByCode(String code);
-
-    List<SysUser> getUsers();
 }

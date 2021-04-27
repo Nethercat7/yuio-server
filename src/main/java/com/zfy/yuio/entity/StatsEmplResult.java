@@ -1,4 +1,7 @@
 package com.zfy.yuio.entity;
+
+import java.util.List;
+
 /**
  *@Description:数据统计返回体
  *@Author:Nethercat7
@@ -9,6 +12,8 @@ public class StatsEmplResult {
     private String city;
     private String type;
     private String plan;
+    private List<Integer> grades;
+    private List<String> rates;
 
     public int getPeople() {
         return people;
@@ -40,5 +45,21 @@ public class StatsEmplResult {
 
     public void setPlan(String plan) {
         this.plan = plan;
+    }
+
+    public List<Integer> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Integer> grades) {
+        this.grades = grades;
+    }
+
+    public List<String> getRates() {
+        return rates;
+    }
+
+    public void setRates(List<String> rates) {
+        this.rates = rates;
     }
 }

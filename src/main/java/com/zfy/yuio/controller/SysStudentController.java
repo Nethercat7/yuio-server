@@ -1,6 +1,6 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.QueryParam;
+import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.service.SysStudentService;
@@ -57,7 +57,7 @@ public class SysStudentController {
     }
 
     @PostMapping("getWithEStatusInfo")
-    public ResultBody getWithEStatusInfo(@RequestBody QueryParam queryParam) {
-        return new ResultBody(0, studentService.getWithEStatusInfo(queryParam),"success");
+    public ResultBody getWithEStatusInfo(@RequestBody QueryParams queryParams) {
+        return new ResultBody(0, studentService.getWithEStatusInfo(queryParams),"success");
     }
 }

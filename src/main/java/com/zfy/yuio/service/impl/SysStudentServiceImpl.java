@@ -2,7 +2,7 @@ package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.SysUserDao;
-import com.zfy.yuio.entity.QueryParam;
+import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.utils.ShiroUtil;
@@ -80,8 +80,8 @@ public class SysStudentServiceImpl implements SysStudentService {
     }
 
     @Override
-    public List<SysStudent> getWithEStatusInfo(QueryParam queryParam) {
-        List<SysStudent> students = studentDao.getWithEStatusInfo(queryParam);
+    public List<SysStudent> getWithEStatusInfo(QueryParams queryParams) {
+        List<SysStudent> students = studentDao.getWithEStatusInfo(queryParams);
         for (SysStudent student : students
         ) {
             if (ObjectUtils.isEmpty(student.getEsId())) {

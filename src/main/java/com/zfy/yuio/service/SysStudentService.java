@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.QueryParam;
+import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.SysStudent;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface SysStudentService {
 
     int upd(SysStudent params);
 
-    List<SysStudent> getWithEStatusInfo(QueryParam queryParam);
+    List<SysStudent> getWithEStatusInfo(QueryParams queryParams);
 
     SysStudent getByCode(String code);
 }

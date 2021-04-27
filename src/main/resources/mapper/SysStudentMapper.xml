@@ -69,7 +69,7 @@
         </if>
     </select>
 
-    <select id="getWithEStatusInfo" parameterType="QueryParam" resultType="SysStudent">
+    <select id="getWithEStatusInfo" parameterType="QueryParams" resultType="SysStudent">
         SELECT
         s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,
         s.student_remark,s.student_college_id,s.student_major_id,s.student_class_id,s.student_create_time,
