@@ -84,10 +84,10 @@ public class SysStudentServiceImpl implements SysStudentService {
         List<SysStudent> students = studentDao.getWithEStatusInfo(queryParams);
         for (SysStudent student : students
         ) {
-            if (ObjectUtils.isEmpty(student.getEsId())) {
-                student.setWrite(0);
+            if (ObjectUtils.isEmpty(student.getEmplId())) {
+                student.setWrite("0");
             } else {
-                student.setWrite(1);
+                student.setWrite("1");
             }
             //设置院系、专业和班级信息
             List<String> container = new ArrayList<>();

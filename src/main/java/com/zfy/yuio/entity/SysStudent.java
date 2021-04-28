@@ -49,26 +49,26 @@ public class SysStudent {
     private String studentMajorName;
     @JsonProperty("class_name")
     private String studentClassName;
-    @JsonProperty("employment")
-    private int esEmployment;
+    @JsonProperty("protocol")
+    private int emplProtocol;
     @JsonProperty("company")
-    private String esCompany;
+    private String emplCompany;
     @JsonProperty("work_city")
-    private String esWorkCity;
+    private String emplWorkCity;
     @JsonProperty("work_type")
-    private String esWorkType;
-    @JsonProperty("es_status")
-    private String esStatus;
+    private String emplWorkType;
+    @JsonProperty("empl_status")
+    private String emplStatus;
     @JsonProperty("plan")
-    private String esPlan;
+    private String emplPlan;
     @JsonProperty("intention_city")
-    private String esIntentionCity;
+    private String emplIntentionCity;
     @JsonProperty("intention_work")
-    private String esIntentionWork;
-    @JsonProperty("es_id")
-    private String esId;
+    private String emplIntentionWork;
+    @JsonProperty("empl_id")
+    private String emplId;
     private List<String> container;
-    private int write;//是否填写就业信息
+    private String write;//是否填写就业信息
 
     public String getStudentId() {
         return studentId;
@@ -206,76 +206,76 @@ public class SysStudent {
         this.studentClassName = studentClassName;
     }
 
-    public int getEsEmployment() {
-        return esEmployment;
+    public int getEmplProtocol() {
+        return emplProtocol;
     }
 
-    public void setEsEmployment(int esEmployment) {
-        this.esEmployment = esEmployment;
+    public void setEmplProtocol(int emplProtocol) {
+        this.emplProtocol = emplProtocol;
     }
 
-    public String getEsCompany() {
-        return esCompany;
+    public String getEmplCompany() {
+        return emplCompany;
     }
 
-    public void setEsCompany(String esCompany) {
-        this.esCompany = esCompany;
+    public void setEmplCompany(String emplCompany) {
+        this.emplCompany = emplCompany;
     }
 
-    public String getEsWorkCity() {
-        return esWorkCity;
+    public String getEmplWorkCity() {
+        return emplWorkCity;
     }
 
-    public void setEsWorkCity(String esWorkCity) {
-        this.esWorkCity = esWorkCity;
+    public void setEmplWorkCity(String emplWorkCity) {
+        this.emplWorkCity = emplWorkCity;
     }
 
-    public String getEsWorkType() {
-        return esWorkType;
+    public String getEmplWorkType() {
+        return emplWorkType;
     }
 
-    public void setEsWorkType(String esWorkType) {
-        this.esWorkType = esWorkType;
+    public void setEmplWorkType(String emplWorkType) {
+        this.emplWorkType = emplWorkType;
     }
 
-    public String getEsStatus() {
-        return esStatus;
+    public String getEmplStatus() {
+        return emplStatus;
     }
 
-    public void setEsStatus(String esStatus) {
-        this.esStatus = esStatus;
+    public void setEmplStatus(String emplStatus) {
+        this.emplStatus = emplStatus;
     }
 
-    public String getEsPlan() {
-        return esPlan;
+    public String getEmplPlan() {
+        return emplPlan;
     }
 
-    public void setEsPlan(String esPlan) {
-        this.esPlan = esPlan;
+    public void setEmplPlan(String emplPlan) {
+        this.emplPlan = emplPlan;
     }
 
-    public String getEsIntentionCity() {
-        return esIntentionCity;
+    public String getEmplIntentionCity() {
+        return emplIntentionCity;
     }
 
-    public void setEsIntentionCity(String esIntentionCity) {
-        this.esIntentionCity = esIntentionCity;
+    public void setEmplIntentionCity(String emplIntentionCity) {
+        this.emplIntentionCity = emplIntentionCity;
     }
 
-    public String getEsIntentionWork() {
-        return esIntentionWork;
+    public String getEmplIntentionWork() {
+        return emplIntentionWork;
     }
 
-    public void setEsIntentionWork(String esIntentionWork) {
-        this.esIntentionWork = esIntentionWork;
+    public void setEmplIntentionWork(String emplIntentionWork) {
+        this.emplIntentionWork = emplIntentionWork;
     }
 
-    public String getEsId() {
-        return esId;
+    public String getEmplId() {
+        return emplId;
     }
 
-    public void setEsId(String esId) {
-        this.esId = esId;
+    public void setEmplId(String emplId) {
+        this.emplId = emplId;
     }
 
     public List<String> getContainer() {
@@ -286,11 +286,11 @@ public class SysStudent {
         this.container = container;
     }
 
-    public int getWrite() {
+    public String getWrite() {
         return write;
     }
 
-    public void setWrite(int write) {
+    public void setWrite(String write) {
         this.write = write;
     }
 }

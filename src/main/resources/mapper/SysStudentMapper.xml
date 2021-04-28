@@ -73,8 +73,9 @@
         SELECT
         s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,
         s.student_remark,s.student_college_id,s.student_major_id,s.student_class_id,s.student_create_time,
-        c.college_name AS student_college_name,m.major_name AS student_major_name,class.class_name AS student_class_name,
-        e.empl_id,e.empl_status,e.empl_work_city,e.empl_work_type,e.empl_status,e.empl_plan,e.empl_intention_city,e.empl_intention_work
+        c.college_name AS studentCollegeName,m.major_name AS studentMajorName,class.class_name AS studentClassName,
+        e.empl_id AS emplId,e.empl_status AS emplStatus,e.empl_work_city AS emplWorkCity,e.empl_work_type AS emplWorkType,
+        e.empl_protocol AS emplProtocol,e.empl_plan AS emplPlan,e.empl_intention_city AS emplIntentionCity,e.empl_intention_work AS emplIntentionWork
         FROM sys_student s
         LEFT JOIN sys_college c
         ON s.student_college_id=c.college_id
@@ -106,10 +107,10 @@
         <if test="employment!=null and employment!=''">
             AND e.empl_status=#{employment}
         </if>
-        <if test="write==0 and write!=''">
+        <if test="write=='0'.toString()">
             AND e.empl_status IS NULL
         </if>
-        <if test="write==1">
+        <if test="write=='1'.toString()">
             AND e.empl_status IS NOT NULL
         </if>
         ORDER BY e.empl_status

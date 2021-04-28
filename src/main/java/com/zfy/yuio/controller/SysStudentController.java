@@ -57,7 +57,7 @@ public class SysStudentController {
     }
 
     @PostMapping("getWithEStatusInfo")
-    public ResultBody getWithEStatusInfo(@RequestBody QueryParams queryParams) {
-        return new ResultBody(0, studentService.getWithEStatusInfo(queryParams),"success");
+    public ResultBody getWithEStatusInfo(@RequestBody QueryParams params) {
+        return new ResultBody(0, studentService.getWithEStatusInfo(params), "success");
     }
 }
