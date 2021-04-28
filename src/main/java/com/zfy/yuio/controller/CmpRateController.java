@@ -20,7 +20,7 @@ public class CmpRateController {
     @Autowired
     private CmpRateService rateService;
 
-    @PostMapping("get")
+    @PostMapping("getSelf")
     public ResultBody get(@RequestBody QueryParams params){
         StatsEmplResult result=rateService.get(params);
         if(ObjectUtils.isEmpty(result)){

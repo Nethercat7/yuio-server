@@ -57,10 +57,10 @@ public class CmpRateServiceImpl implements CmpRateService {
             grades.add(grade);
             rates.add(rate);
             //添加主体的标题
-            if(!ObjectUtils.isEmpty(params.getCollegeId())&&!ObjectUtils.isEmpty(params.getMajorId())){
-                type=students.get(0).getStudentMajorName();//因为所有的学生都是处于同一院系和班级下的所以index为0即可
-            }else if(!ObjectUtils.isEmpty(params.getCollegeId())){
-                type=students.get(0).getStudentCollegeName();
+            if (!ObjectUtils.isEmpty(params.getCollegeId()) && !ObjectUtils.isEmpty(params.getMajorId())) {
+                type = students.get(0).getStudentMajorName();//因为所有的学生都是处于同一院系和班级下的所以index为0即可
+            } else if (!ObjectUtils.isEmpty(params.getCollegeId())) {
+                type = students.get(0).getStudentCollegeName();
             }
         }
         result.setGrades(grades);
@@ -68,7 +68,7 @@ public class CmpRateServiceImpl implements CmpRateService {
         //设置标题
         if (ObjectUtils.isEmpty(type)) {
             result.setType("总就业率");
-        }else{
+        } else {
             result.setType(type);
         }
         return result;
