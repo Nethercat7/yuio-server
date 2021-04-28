@@ -21,5 +21,5 @@ public interface SysService {
 
     List<SysCollege> getFullOrg(int grade);
 
-    List<Map<String,Object>> getGrade();
+    List<Integer> getGrade();
 }
