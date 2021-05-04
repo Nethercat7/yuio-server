@@ -23,7 +23,7 @@ public class SysMajorServiceImpl implements SysMajorService {
 
     @Override
     public int add(SysMajor params) {
-        params.setMajorId(snowflakeIdGeneratorUtil.getId());
+        params.setMajorId(snowflakeIdGeneratorUtil.nextId());
         return majorDao.add(params);
     }
 
@@ -33,7 +33,7 @@ public class SysMajorServiceImpl implements SysMajorService {
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         return majorDao.del(id);
     }
 

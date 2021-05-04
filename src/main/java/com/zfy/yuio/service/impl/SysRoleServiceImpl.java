@@ -1,6 +1,5 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.SysPermsDao;
 import com.zfy.yuio.dao.SysRoleDao;
 import com.zfy.yuio.entity.SysRole;
 import com.zfy.yuio.service.SysRoleService;
@@ -20,20 +19,14 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Autowired
     private SysRoleDao roleDao;
 
-    @Autowired
-    private SysPermsDao permsDao;
-
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(5, 0);
 
     @Override
     public int add(SysRole params) {
-        //set id
-        params.setRoleId(snowflakeIdGeneratorUtil.getId());
-        //set pid
-        params.setRolePid("0");
-        //保存角色权限
-        savePerms(params);
-        return roleDao.add(params);
+        params.setRoleId(snowflakeIdGeneratorUtil.nextId());
+        int status = roleDao.add(params);
+        if (status == 1) savePerms(params);
+        return status;
     }
 
     @Override
@@ -48,7 +41,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         //先删除角色权限
         roleDao.delPerms(id);
         return roleDao.del(id);
@@ -64,9 +57,9 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     private void savePerms(SysRole params) {
-        for (String perms : params.getPerms()
+        for (Long perms : params.getPerms()
         ) {
-            roleDao.addPerms(snowflakeIdGeneratorUtil.getId(), params.getRoleId(), perms);
+            roleDao.addPerms(params.getRoleId(), perms);
         }
     }
 }

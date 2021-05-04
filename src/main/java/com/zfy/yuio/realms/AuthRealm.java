@@ -1,8 +1,8 @@
 package com.zfy.yuio.realms;
 
 import com.zfy.yuio.entity.SysStudent;
-import com.zfy.yuio.entity.Token;
 import com.zfy.yuio.entity.SysUser;
+import com.zfy.yuio.entity.Token;
 import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.service.SysUserService;
@@ -28,7 +28,7 @@ public class AuthRealm extends AuthorizingRealm {
     private SysStudentService studentService;
 
     @Autowired
-    private SysPermsService menuService;
+    private SysPermsService permsService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -37,10 +37,17 @@ public class AuthRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
-        String id=JWTUtil.getId((String)principalCollection.getPrimaryPrincipal());
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        String token = (String) principalCollection.getPrimaryPrincipal();
+        Long id = JWTUtil.getId(token);
+        String type = JWTUtil.getType(token);
+        List<String> perms;
         //获取使用者拥有的权限
-        List<String> perms=menuService.getUserPerms(id);
+        if (type.equals("usr")) {
+            perms = permsService.getUserPerms(id);
+        } else {
+            perms = permsService.getStudentPerms(id);
+        }
         simpleAuthorizationInfo.addStringPermissions(perms);
         return simpleAuthorizationInfo;
     }
@@ -53,13 +60,13 @@ public class AuthRealm extends AuthorizingRealm {
         String type = JWTUtil.getType(token);
         try {
             if (type.equals("usr")) {
-                SysUser usr = usrService.getByCode(JWTUtil.getCode(token));
+                SysUser usr = usrService.getById(JWTUtil.getId(token));
                 //验证
                 if (!ObjectUtils.isEmpty(usr) && JWTUtil.verify(token, usr.getUserId(), usr.getUserName(), usr.getUserCode(), type)) {
                     return new SimpleAuthenticationInfo(token, token, this.getName());
                 }
             } else {
-                SysStudent student = studentService.getByCode(JWTUtil.getCode(token));
+                SysStudent student = studentService.getById(JWTUtil.getId(token));
                 if (!ObjectUtils.isEmpty(student) && JWTUtil.verify(token, student.getStudentId(), student.getStudentName(), student.getStudentCode(), type)) {
                     return new SimpleAuthenticationInfo(token, token, this.getName());
                 }

@@ -37,7 +37,7 @@ public class SysMajorController {
 
     @DeleteMapping("del")
     @RequiresPermissions("system:major:del")
-    public ResultBody del(@RequestParam("id")String id){
+    public ResultBody del(@RequestParam("id")Long id){
         int status=majorService.del(id);
         if(status==1){
             return new ResultBody(0,"成功删除","success");

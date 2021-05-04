@@ -1,7 +1,9 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.StatsEmplInfo;
+import com.zfy.yuio.entity.WriteEmplInfo;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  *@Description:就业情况填写
@@ -10,9 +12,21 @@ import org.springframework.stereotype.Repository;
 */
 @Repository
 public interface WriteEmplDao {
-    int add(StatsEmplInfo params);
+    int add(WriteEmplInfo params);
 
-    StatsEmplInfo get(String id);
+    WriteEmplInfo get(Long id);
 
-    int upd(StatsEmplInfo params);
+    int upd(WriteEmplInfo params);
+
+    int addIntentionCities(Long studentId,Long cityId);
+
+    int addIntentionWorks(Long studentId,Long workId);
+
+    int delIntentionCities(Long id);
+
+    int delIntentionWorks(Long id);
+
+    List<Long> getIntentionCities(Long id);
+
+    List<Long> getIntentionWorks(Long id);
 }

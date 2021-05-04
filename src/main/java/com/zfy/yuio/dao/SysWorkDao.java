@@ -34,7 +34,7 @@ public interface SysWorkDao {
      *@param id
      *@Return int
     */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7
@@ -50,7 +50,7 @@ public interface SysWorkDao {
      *@param id
      *@Return com.zfy.yuio.entity.SysWork
     */
-    SysWork getById(String id);
+    SysWork getById(Long id);
 
     /**
      *@Author Nethercat7
@@ -58,7 +58,7 @@ public interface SysWorkDao {
      *@param pid
      *@Return com.zfy.yuio.entity.SysWork
     */
-    List<SysWork> getByPid(String pid);
+    List<SysWork> getByPid(Long pid);
 
     /**
      *@Author Nethercat7
@@ -66,5 +66,5 @@ public interface SysWorkDao {
      *@param id
      *@Return java.lang.String
     */
-    String getWorkName(String id);
+    String getWorkName(Long id);
 }

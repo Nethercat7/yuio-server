@@ -32,7 +32,7 @@ public class SysCityController {
 
     @DeleteMapping("del")
     @RequiresPermissions("system:city:del")
-    public ResultBody del(@RequestParam("id") String id) {
+    public ResultBody del(@RequestParam("id") Long id) {
         int status = cityService.del(id);
         if (status != 1) {
             return new ResultBody(1, "删除失败", "error");
@@ -48,10 +48,5 @@ public class SysCityController {
             return new ResultBody(1, "修改失败", "error");
         }
         return new ResultBody(0, "成功修改", "success");
-    }
-
-    @PostMapping("initial")
-    public void initial(@RequestBody SysCity params) {
-        cityService.initial(params);
     }
 }

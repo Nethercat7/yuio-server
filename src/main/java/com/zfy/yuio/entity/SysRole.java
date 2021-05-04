@@ -13,11 +13,9 @@ import java.util.List;
 */
 public class SysRole {
     @JsonProperty("id")
-    private String roleId;
+    private Long roleId;
     @JsonProperty("name")
     private String roleName;
-    @JsonProperty("pid")
-    private String rolePid;
     @JsonProperty("status")
     private String roleStatus;
     @JsonProperty("remark")
@@ -26,13 +24,13 @@ public class SysRole {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime roleCreateTime;
     //非数据库字段
-    private List<String> perms;
+    private List<Long> perms;
 
-    public String getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -42,14 +40,6 @@ public class SysRole {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
-    }
-
-    public String getRolePid() {
-        return rolePid;
-    }
-
-    public void setRolePid(String rolePid) {
-        this.rolePid = rolePid;
     }
 
     public String getRoleStatus() {
@@ -76,11 +66,11 @@ public class SysRole {
         this.roleCreateTime = roleCreateTime;
     }
 
-    public List<String> getPerms() {
+    public List<Long> getPerms() {
         return perms;
     }
 
-    public void setPerms(List<String> perms) {
+    public void setPerms(List<Long> perms) {
         this.perms = perms;
     }
 }

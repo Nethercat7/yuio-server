@@ -14,7 +14,7 @@
         WHERE city_level=0 OR city_level=1
     </select>
 
-    <delete id="del" parameterType="String">
+    <delete id="del" parameterType="Long">
         DELETE FROM sys_city
         WHERE city_id=#{id}
     </delete>
@@ -25,18 +25,18 @@
         WHERE city_id=#{cityId}
     </update>
 
-    <select id="getById" parameterType="String" resultType="SysCity">
+    <select id="getById" parameterType="Long" resultType="SysCity">
         SELECT * FROM sys_city
         WHERE city_id=#{id}
     </select>
 
-    <select id="getByPid" parameterType="String" resultType="SysCity">
+    <select id="getByPid" parameterType="Long" resultType="SysCity">
         SELECT * FROM sys_city
         WHERE city_pid=#{pid}
         AND city_level=1
     </select>
 
-    <select id="getCityName" parameterType="String" resultType="String">
+    <select id="getCityName" parameterType="Long" resultType="String">
         SELECT city_name FROM sys_city
         WHERE city_id=#{id}
     </select>

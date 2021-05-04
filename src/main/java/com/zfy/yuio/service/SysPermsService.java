@@ -15,9 +15,11 @@ public interface SysPermsService {
 
     List<SysPerms> get();
 
-    int del(String id);
+    int del(Long id);
 
     int upd(SysPerms params);
 
-    List<String> getUserPerms(String id);
+    List<String> getUserPerms(Long id);
+
+    List<String> getStudentPerms(Long id);
 }

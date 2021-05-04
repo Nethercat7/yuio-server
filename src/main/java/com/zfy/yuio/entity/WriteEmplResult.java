@@ -7,7 +7,7 @@ import java.util.List;
  *@Author:Nethercat7
  *@CreateDate:2021/4/22 0:37
 */
-public class StatsEmplResult {
+public class WriteEmplResult {
     private int people;
     private String city;
     private String type;

@@ -1,7 +1,7 @@
 package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.StatsEmplInfo;
+import com.zfy.yuio.entity.WriteEmplInfo;
 import com.zfy.yuio.service.StatsStatusService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +21,19 @@ public class StatsStatusController {
 
     @PostMapping("getCityInfo")
     @RequiresPermissions("statistics:status:stats")
-    public ResultBody getCityInfo(@RequestBody StatsEmplInfo params){
-        return new ResultBody(0,statusService.getCityInfo(params),"success");
+    public ResultBody getCityInfo(@RequestBody WriteEmplInfo params){
+        return null;
     }
 
     @PostMapping("getWorkInfo")
     @RequiresPermissions("statistics:status:stats")
-    public ResultBody getWorkInfo(@RequestBody StatsEmplInfo params){
-        return new ResultBody(0,statusService.getWorkInfo(params),"success");
+    public ResultBody getWorkInfo(@RequestBody WriteEmplInfo params){
+        return null;
     }
 
     @PostMapping("getStudentPlan")
     @RequiresPermissions("statistics:status:stats")
-    public ResultBody getStudentPlan(@RequestBody StatsEmplInfo params){
-        return new ResultBody(0,statusService.getStudentPlan(params),"success");
+    public ResultBody getStudentPlan(@RequestBody WriteEmplInfo params){
+        return null;
     }
 }

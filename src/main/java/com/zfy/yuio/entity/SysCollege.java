@@ -13,7 +13,7 @@ import java.util.List;
 */
 public class SysCollege {
     @JsonProperty("id")
-    private String collegeId;
+    private Long collegeId;
     @JsonProperty("name")
     private String collegeName;
     @JsonProperty("status")
@@ -26,11 +26,11 @@ public class SysCollege {
     //非数据库字段
     private List<SysMajor> children;
 
-    public String getCollegeId() {
+    public Long getCollegeId() {
         return collegeId;
     }
 
-    public void setCollegeId(String collegeId) {
+    public void setCollegeId(Long collegeId) {
         this.collegeId = collegeId;
     }
 

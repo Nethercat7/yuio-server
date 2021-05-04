@@ -15,17 +15,13 @@ import java.util.List;
 public interface SysStudentDao {
     int add(SysStudent params);
 
-    List<SysStudent> get(int grade);
+    List<SysStudent> get(QueryParams params);
 
-    int del(String id);
+    int del(Long id);
 
     int upd(SysStudent params);
 
-    SysStudent getById(String id);
+    SysStudent getById(Long id);
 
-    List<SysStudent> getByCollegeId(String id, int grade);
-
-    List<SysStudent> getWithEStatusInfo(QueryParams queryParams);
-
-    SysStudent getByCode(String code);
+    int addRole(Long studentId,Long roleId);
 }

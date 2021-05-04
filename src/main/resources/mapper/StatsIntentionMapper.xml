@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.StatsIntentionDao">
-    <select id="getCityInfo" resultType="StatsEmplResult" parameterType="StatsEmplInfo">
+    <select id="getCityInfo" resultType="WriteEmplResult" parameterType="WriteEmplInfo">
         SELECT COUNT(e.empl_id) as people,c.city_name as city
-        FROM stats_empl_info e
+        FROM write_empl_info e
         LEFT JOIN sys_city c
         ON e.empl_intention_city=c.city_id
         WHERE e.empl_status=1
@@ -24,9 +24,9 @@
         ORDER BY people desc
     </select>
 
-    <select id="getWorkInfo" resultType="StatsEmplResult" parameterType="StatsEmplInfo">
+    <select id="getWorkInfo" resultType="WriteEmplResult" parameterType="WriteEmplInfo">
         SELECT COUNT(e.empl_id) as people,w.work_name as type
-        FROM stats_empl_info e
+        FROM write_empl_info e
         LEFT JOIN sys_work w
         ON e.empl_intention_work=w.work_id
         WHERE e.empl_status=1

@@ -1,7 +1,7 @@
 package com.zfy.yuio.dao;
 
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.StatsEmplInfo;
+import com.zfy.yuio.entity.WriteEmplInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface CmpRateDao {
-    List<StatsEmplInfo> get(QueryParams params);
+    List<WriteEmplInfo> get(QueryParams params);
 }
 

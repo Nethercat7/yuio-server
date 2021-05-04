@@ -13,11 +13,11 @@ import java.util.List;
 */
 public class SysWork {
     @JsonProperty("id")
-    private String workId;
+    private Long workId;
     @JsonProperty("name")
     private String workName;
     @JsonProperty("pid")
-    private String workPid;
+    private Long workPid;
     @JsonProperty("status")
     private String workStatus;
     @JsonProperty("create_time")
@@ -25,16 +25,8 @@ public class SysWork {
     private LocalDateTime workCreateTime;
     @JsonProperty("level")
     private int workLevel;
-
+    //非数据库字段
     private List<SysWork> children;
-
-    public String getWorkId() {
-        return workId;
-    }
-
-    public void setWorkId(String workId) {
-        this.workId = workId;
-    }
 
     public String getWorkName() {
         return workName;
@@ -44,11 +36,11 @@ public class SysWork {
         this.workName = workName;
     }
 
-    public String getWorkPid() {
+    public Long getWorkPid() {
         return workPid;
     }
 
-    public void setWorkPid(String workPid) {
+    public void setWorkPid(Long workPid) {
         this.workPid = workPid;
     }
 
@@ -82,5 +74,13 @@ public class SysWork {
 
     public void setChildren(List<SysWork> children) {
         this.children = children;
+    }
+
+    public Long getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(Long workId) {
+        this.workId = workId;
     }
 }

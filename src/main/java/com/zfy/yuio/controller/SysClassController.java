@@ -32,7 +32,7 @@ public class SysClassController {
 
     @DeleteMapping("del")
     @RequiresPermissions("system:class:del")
-    public ResultBody add(@RequestParam("id") String id){
+    public ResultBody add(@RequestParam("id") Long id){
         int status=classService.del(id);
         if(status==1){
             return new ResultBody(0,"成功删除","success");

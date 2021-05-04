@@ -37,7 +37,7 @@ public class SysCollegeController {
 
     @DeleteMapping("del")
     @RequiresPermissions("system:college:del")
-    public ResultBody del(@RequestParam("id")String id){
+    public ResultBody del(@RequestParam("id")Long id){
         int status=collegeService.del(id);
         if(status==1){
             return new ResultBody(0,"成功删除","success");

@@ -1,7 +1,7 @@
 package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.StatsEmplInfo;
+import com.zfy.yuio.entity.WriteEmplInfo;
 import com.zfy.yuio.service.WriteEmplService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class WriteEmplController {
 
     @PostMapping("add")
     @RequiresPermissions("write:empl:write")
-    public ResultBody add(@RequestBody StatsEmplInfo params){
+    public ResultBody add(@RequestBody WriteEmplInfo params){
         int status=emplService.add(params);
         if(status!=1){
             return new ResultBody(1,"提交失败","error");
@@ -26,8 +26,8 @@ public class WriteEmplController {
     }
 
     @GetMapping("get")
-    public ResultBody get(@RequestParam("id") String id){
-        StatsEmplInfo emplInfo=emplService.get(id);
+    public ResultBody get(@RequestParam("id") Long id){
+        WriteEmplInfo emplInfo=emplService.get(id);
         if(ObjectUtils.isEmpty(emplInfo)){
             return new ResultBody(1,"未找到相关信息","success");
         }
@@ -36,7 +36,7 @@ public class WriteEmplController {
 
     @PutMapping("upd")
     @RequiresPermissions("write:empl:write")
-    public ResultBody upd(@RequestBody StatsEmplInfo params){
+    public ResultBody upd(@RequestBody WriteEmplInfo params){
         int status=emplService.upd(params);
         if(status!=1){
             return new ResultBody(1,"提交失败","error");

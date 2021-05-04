@@ -32,7 +32,7 @@ public class SysRoleController {
 
     @DeleteMapping("del")
     @RequiresPermissions("system:role:del")
-    public ResultBody del(@RequestParam("id") String id) {
+    public ResultBody del(@RequestParam("id") Long id) {
         int status = roleService.del(id);
         if (status != 1) {
             return new ResultBody(1, "删除失败", "error");

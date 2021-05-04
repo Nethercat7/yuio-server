@@ -32,7 +32,7 @@ public interface SysMajorService {
      *@param id
      *@Return int
      */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7

@@ -13,7 +13,7 @@
         SELECT * FROM sys_work
     </select>
 
-    <delete id="del" parameterType="String">
+    <delete id="del" parameterType="Long">
         DELETE FROM sys_work
         WHERE work_id=#{id}
     </delete>
@@ -24,17 +24,17 @@
         WHERE work_id=#{workId}
     </update>
 
-    <select id="getById" parameterType="String" resultType="SysWork">
+    <select id="getById" parameterType="Long" resultType="SysWork">
         SELECT * FROM sys_work
         WHERE work_id=#{id}
     </select>
 
-    <select id="getByPid" parameterType="String" resultType="SysWork">
+    <select id="getByPid" parameterType="Long" resultType="SysWork">
         SELECT * FROM sys_work
         WHERE work_pid=#{pid}
     </select>
 
-    <select id="getWorkName" parameterType="String" resultType="String">
+    <select id="getWorkName" parameterType="Long" resultType="String">
         SELECT work_name FROM sys_work
         WHERE work_id=#{id}
     </select>

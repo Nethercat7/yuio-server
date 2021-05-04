@@ -34,7 +34,7 @@ public interface SysCollegeDao {
      *@param id
      *@Return int
     */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7
@@ -50,7 +50,7 @@ public interface SysCollegeDao {
      *@param id
      *@Return com.zfy.yuio.entity.SysCollege
     */
-    SysCollege getById(String id);
+    SysCollege getById(Long id);
 
     /**
      *@Author Nethercat7
@@ -58,5 +58,5 @@ public interface SysCollegeDao {
      *@param id
      *@Return
     */
-    String getNameById(String id);
+    String getNameById(Long id);
 }

@@ -13,7 +13,7 @@ import java.util.List;
 */
 public class SysMajor {
     @JsonProperty("id")
-    private String majorId;
+    private Long majorId;
     @JsonProperty("name")
     private String majorName;
     @JsonProperty("status")
@@ -21,21 +21,21 @@ public class SysMajor {
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime majorCreateTime;
-    @JsonProperty("description")
+    @JsonProperty("remark")
     private String majorRemark;
     @JsonProperty("college_id")
-    private String majorCollegeId;
+    private Long majorCollegeId;
 
     //非数据库字段
     @JsonProperty("college_name")
     private String collegeName;
     private List<SysClass> children;
 
-    public String getMajorId() {
+    public Long getMajorId() {
         return majorId;
     }
 
-    public void setMajorId(String majorId) {
+    public void setMajorId(Long majorId) {
         this.majorId = majorId;
     }
 
@@ -71,11 +71,11 @@ public class SysMajor {
         this.majorRemark = majorRemark;
     }
 
-    public String getMajorCollegeId() {
+    public Long getMajorCollegeId() {
         return majorCollegeId;
     }
 
-    public void setMajorCollegeId(String majorCollegeId) {
+    public void setMajorCollegeId(Long majorCollegeId) {
         this.majorCollegeId = majorCollegeId;
     }
 

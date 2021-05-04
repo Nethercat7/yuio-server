@@ -13,13 +13,11 @@ import java.util.List;
 public interface SysStudentService {
     int add(SysStudent params);
 
-    List<SysStudent> get();
+    List<SysStudent> get(QueryParams params);
 
-    int del(String id);
+    int del(Long id);
 
     int upd(SysStudent params);
 
-    List<SysStudent> getWithEStatusInfo(QueryParams queryParams);
-
-    SysStudent getByCode(String code);
+    SysStudent getById(Long id);
 }

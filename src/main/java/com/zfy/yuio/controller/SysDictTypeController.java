@@ -30,7 +30,7 @@ public class SysDictTypeController {
     }
 
     @DeleteMapping("del")
-    public ResultBody del(@RequestParam("id")String id){
+    public ResultBody del(@RequestParam("id")Long id){
         int status=sysDictTypeService.del(id);
         if(status!=1){
             return new ResultBody(1,"删除失败","error");

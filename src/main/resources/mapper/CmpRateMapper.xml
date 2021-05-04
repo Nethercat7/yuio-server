@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.CmpRateDao">
-    <select id="get" parameterType="QueryParams" resultType="StatsEmplInfo">
+    <select id="get" parameterType="QueryParams" resultType="WriteEmplInfo">
         SELECT empl_status,empl_college_id,empl_major_id
-        FROM stats_empl_info
+        FROM write_empl_info
         WHERE 1=1
         <if test="grade!=0">
             AND empl_grade=#{grade}

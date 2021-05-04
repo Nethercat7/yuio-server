@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SysPerms {
     @JsonProperty("id")
-    private String permsId;
+    private Long permsId;
     @JsonProperty("name")
     private String permsName;
     @JsonProperty("mark")
@@ -30,7 +30,7 @@ public class SysPerms {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime permsCreateTime;
     @JsonProperty("pid")
-    private String permsPid;
+    private Long permsPid;
     @JsonProperty("level")
     private int permsLevel;
     @JsonProperty("type")
@@ -38,11 +38,11 @@ public class SysPerms {
     //非数据库字段
     private List<SysPerms> children;
 
-    public String getPermsId() {
+    public Long getPermsId() {
         return permsId;
     }
 
-    public void setPermsId(String permsId) {
+    public void setPermsId(Long permsId) {
         this.permsId = permsId;
     }
 
@@ -86,6 +86,14 @@ public class SysPerms {
         this.permsRemark = permsRemark;
     }
 
+    public String getPermsStatus() {
+        return permsStatus;
+    }
+
+    public void setPermsStatus(String permsStatus) {
+        this.permsStatus = permsStatus;
+    }
+
     public LocalDateTime getPermsCreateTime() {
         return permsCreateTime;
     }
@@ -94,20 +102,12 @@ public class SysPerms {
         this.permsCreateTime = permsCreateTime;
     }
 
-    public String getPermsPid() {
+    public Long getPermsPid() {
         return permsPid;
     }
 
-    public void setPermsPid(String permsPid) {
+    public void setPermsPid(Long permsPid) {
         this.permsPid = permsPid;
-    }
-
-    public String getPermsStatus() {
-        return permsStatus;
-    }
-
-    public void setPermsStatus(String permsStatus) {
-        this.permsStatus = permsStatus;
     }
 
     public int getPermsLevel() {

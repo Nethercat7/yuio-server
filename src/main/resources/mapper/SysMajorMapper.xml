@@ -17,7 +17,7 @@
         ON m.major_college_id=c.college_id
     </select>
 
-    <delete id="del" parameterType="String">
+    <delete id="del" parameterType="Long">
         DELETE FROM sys_major
         WHERE major_id=#{id}
     </delete>
@@ -28,12 +28,12 @@
         WHERE major_id=#{majorId}
     </update>
 
-    <select id="getByPid" parameterType="String" resultType="SysMajor">
+    <select id="getByPid" parameterType="Long" resultType="SysMajor">
         SELECT * FROM sys_major
         WHERE major_college_id=#{pid}
     </select>
 
-    <select id="getNameById" parameterType="String" resultType="String">
+    <select id="getNameById" parameterType="Long" resultType="String">
         SELECT major_name FROM sys_major
         WHERE major_id=#{id}
     </select>

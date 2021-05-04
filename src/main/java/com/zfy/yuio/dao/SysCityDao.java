@@ -34,7 +34,7 @@ public interface SysCityDao {
      *@param id
      *@Return int
     */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7
@@ -50,7 +50,7 @@ public interface SysCityDao {
      *@param id
      *@Return com.zfy.yuio.entity.SysCity
     */
-    SysCity getById(String id);
+    SysCity getById(Long id);
 
     /**
      *@Author Nethercat7
@@ -66,5 +66,5 @@ public interface SysCityDao {
      *@param id
      *@Return java.lang.String
     */
-    String getCityName(String id);
+    String getCityName(Long id);
 }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SysClass {
     @JsonProperty("id")
-    private String classId;
+    private Long classId;
     @JsonProperty("name")
     private String className;
     @JsonProperty("status")
@@ -23,24 +23,23 @@ public class SysClass {
     private LocalDateTime classCreateTime;
     @JsonProperty("remark")
     private String classRemark;
-    @JsonProperty("college_id")
-    private String classCollegeId;
-    @JsonProperty("college_name")
-    private String classCollegeName;
     @JsonProperty("major_id")
-    private String classMajorId;
-    @JsonProperty("major_name")
-    private String classMajorName;
+    private Long classMajorId;
     @JsonProperty("grade")
     private int classGrade;
-    //非数据库字段
-    private List<String> container;//用于装院系和专业ID配合前端的级联选择器
 
-    public String getClassId() {
+    //非数据库字段
+    @JsonProperty("college_name")
+    private String classCollegeName;
+    @JsonProperty("major_name")
+    private String classMajorName;
+    private List<Long> container;//用于装院系和专业ID配合前端的级联选择器
+
+    public Long getClassId() {
         return classId;
     }
 
-    public void setClassId(String classId) {
+    public void setClassId(Long classId) {
         this.classId = classId;
     }
 
@@ -76,36 +75,12 @@ public class SysClass {
         this.classRemark = classRemark;
     }
 
-    public String getClassCollegeId() {
-        return classCollegeId;
-    }
-
-    public void setClassCollegeId(String classCollegeId) {
-        this.classCollegeId = classCollegeId;
-    }
-
-    public String getClassCollegeName() {
-        return classCollegeName;
-    }
-
-    public void setClassCollegeName(String classCollegeName) {
-        this.classCollegeName = classCollegeName;
-    }
-
-    public String getClassMajorId() {
+    public Long getClassMajorId() {
         return classMajorId;
     }
 
-    public void setClassMajorId(String classMajorId) {
+    public void setClassMajorId(Long classMajorId) {
         this.classMajorId = classMajorId;
-    }
-
-    public String getClassMajorName() {
-        return classMajorName;
-    }
-
-    public void setClassMajorName(String classMajorName) {
-        this.classMajorName = classMajorName;
     }
 
     public int getClassGrade() {
@@ -116,11 +91,27 @@ public class SysClass {
         this.classGrade = classGrade;
     }
 
-    public List<String> getContainer() {
+    public String getClassCollegeName() {
+        return classCollegeName;
+    }
+
+    public void setClassCollegeName(String classCollegeName) {
+        this.classCollegeName = classCollegeName;
+    }
+
+    public String getClassMajorName() {
+        return classMajorName;
+    }
+
+    public void setClassMajorName(String classMajorName) {
+        this.classMajorName = classMajorName;
+    }
+
+    public List<Long> getContainer() {
         return container;
     }
 
-    public void setContainer(List<String> container) {
+    public void setContainer(List<Long> container) {
         this.container = container;
     }
 }

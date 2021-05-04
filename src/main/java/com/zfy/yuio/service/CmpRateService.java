@@ -1,7 +1,7 @@
 package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.StatsEmplResult;
+import com.zfy.yuio.entity.WriteEmplResult;
 
 /**
  *@Description:就业率对比
@@ -9,5 +9,5 @@ import com.zfy.yuio.entity.StatsEmplResult;
  *@CreateDate:2021/4/27 21:36
 */
 public interface CmpRateService {
-    StatsEmplResult get(QueryParams params);
+    WriteEmplResult get(QueryParams params);
 }

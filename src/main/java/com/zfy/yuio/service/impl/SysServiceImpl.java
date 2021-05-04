@@ -44,8 +44,7 @@ public class SysServiceImpl implements SysService {
         Map<String, String> info = sysDao.getPwd(isUser, key);
         String pwd = "";
         if (isUser) {
-            //do user op
-            String salt = info.get("usr_slat");
+            String salt = info.get("user_salt");
             pwd = ShiroUtil.pwd2MD5("123456", salt, 1739);
         } else {
             String salt = info.get("student_salt");

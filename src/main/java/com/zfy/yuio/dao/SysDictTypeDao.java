@@ -16,7 +16,7 @@ public interface SysDictTypeDao {
 
     List<SysDictType> get();
 
-    int del(String id);
+    int del(Long id);
 
     int upd(SysDictType params);
 }

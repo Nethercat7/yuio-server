@@ -13,11 +13,11 @@ import java.util.List;
 */
 public class SysCity {
     @JsonProperty("id")
-    private String cityId;
+    private Long cityId;
     @JsonProperty("name")
     private String cityName;
     @JsonProperty("pid")
-    private String cityPid;
+    private Long cityPid;
     @JsonProperty("status")
     private String cityStatus;
     @JsonProperty("create_time")
@@ -25,14 +25,14 @@ public class SysCity {
     private LocalDateTime cityCreateTime;
     @JsonProperty("level")
     private int cityLevel;
-
+    //非数据库字段
     private List<SysCity> children;
 
-    public String getCityId() {
+    public Long getCityId() {
         return cityId;
     }
 
-    public void setCityId(String cityId) {
+    public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
 
@@ -44,11 +44,11 @@ public class SysCity {
         this.cityName = cityName;
     }
 
-    public String getCityPid() {
+    public Long getCityPid() {
         return cityPid;
     }
 
-    public void setCityPid(String cityPid) {
+    public void setCityPid(Long cityPid) {
         this.cityPid = cityPid;
     }
 

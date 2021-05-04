@@ -17,7 +17,7 @@ public class JWTUtil {
     private final static String SECRET = "*******";
     private final static Algorithm ALGORITHM = Algorithm.HMAC256(SECRET);
 
-    public static String createToken(String id, String name, String code, String type) {
+    public static String createToken(Long id, String name, String code, String type) {
         //设置Token过期时间
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, EXPIRE_TIME);
@@ -35,7 +35,7 @@ public class JWTUtil {
         JWT.require(ALGORITHM).build().verify(token);
     }
 
-    public static boolean verify(String token, String id, String name, String code, String type) throws Exception {
+    public static boolean verify(String token, Long id, String name, String code, String type) throws Exception {
         JWT.require(ALGORITHM).withClaim("id", id).withClaim("name", name).withClaim("code", code).withClaim("type", type).build().verify(token);
         return true;
     }
@@ -53,7 +53,7 @@ public class JWTUtil {
         return JWT.require(ALGORITHM).build().verify(token).getClaim("type").asString();
     }
 
-    public static String getId(String token){
-        return JWT.require(ALGORITHM).build().verify(token).getClaim("id").asString();
+    public static Long getId(String token){
+        return JWT.require(ALGORITHM).build().verify(token).getClaim("id").asLong();
     }
 }

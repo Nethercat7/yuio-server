@@ -13,7 +13,7 @@
         SELECT * FROM sys_perms
     </select>
 
-    <delete id="del" parameterType="String">
+    <delete id="del" parameterType="Long">
         DELETE FROM sys_perms
         WHERE perms_id=#{id}
     </delete>
@@ -24,7 +24,7 @@
         WHERE perms_id=#{permsId}
     </update>
 
-    <select id="getUserPerms" parameterType="String" resultType="String">
+    <select id="getUserPerms" parameterType="Long" resultType="String">
         SELECT m.perms_mark FROM sys_perms m
         LEFT JOIN sys_role_perms rp
         ON rp.rp_perms_id=m.perms_id
@@ -38,5 +38,18 @@
         ON ur.ur_user_id=s.student_id
         WHERE u.user_id=#{id}
         OR s.student_id=#{id}
+    </select>
+
+    <select id="getStudentPerms" parameterType="Long" resultType="String">
+        SELECT m.perms_mark FROM sys_perms m
+        LEFT JOIN sys_role_perms rp
+        ON rp.rp_perms_id=m.perms_id
+        LEFT JOIN sys_role r
+        ON rp.rp_role_id=r.role_id
+        LEFT JOIN sys_student_role sr
+        ON sr.sr_role_id=r.role_id
+        LEFT JOIN sys_student s
+        ON sr.sr_student_id=s.student_id
+        WHERE s.student_id=#{id}
     </select>
 </mapper>

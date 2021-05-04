@@ -6,6 +6,7 @@ import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,9 @@ public class SysPermsServiceImpl implements SysPermsService {
 
     @Override
     public int add(SysPerms params) {
-        params.setPermsId(snowflakeIdGeneratorUtil.getId());
-        if(params.getPermsPid()==null||params.getPermsPid().isEmpty()){
-            params.setPermsPid("0");
+        params.setPermsId(snowflakeIdGeneratorUtil.nextId());
+        if(ObjectUtils.isEmpty(params.getPermsPid())){
+            params.setPermsPid(0L);
         }
         params.setPermsLevel(1);
         return permsDao.add(params);
@@ -29,42 +30,40 @@ public class SysPermsServiceImpl implements SysPermsService {
 
     @Override
     public List<SysPerms> get() {
-        //获取所有的menu
-        List<SysPerms> menus= permsDao.get();
-        //存放最上级的menu
-        List<SysPerms> menuList=new ArrayList<>();
-        for (SysPerms m:menus
+        List<SysPerms> perms= permsDao.get();
+        List<SysPerms> permsList=new ArrayList<>();
+        for (SysPerms p:perms
              ) {
-            if(m.getPermsPid().equals("0")){
-                menuList.add(m);
+            if(p.getPermsPid()==0){
+                permsList.add(p);
             }
         }
-        for (SysPerms m:menuList
+        for (SysPerms m:permsList
              ) {
-            m.setChildren(getChildren(m.getPermsId(),menus));
+            m.setChildren(getChildren(m.getPermsId(),perms));
         }
-        return menuList;
+        return permsList;
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         return permsDao.del(id);
     }
 
     @Override
     public int upd(SysPerms params) {
-        if(params.getPermsPid()==null||params.getPermsPid().isEmpty()){
-            params.setPermsPid("0");
+        if(ObjectUtils.isEmpty(params.getPermsPid())){
+            params.setPermsPid(0L);
         }
         return permsDao.upd(params);
     }
 
-    private List<SysPerms> getChildren(String pid, List<SysPerms> list){
+    private List<SysPerms> getChildren(Long pid, List<SysPerms> list){
         List<SysPerms> children=new ArrayList<>();
-        for (SysPerms m:list
+        for (SysPerms p:list
              ) {
-            if(m.getPermsPid().equals(pid)){
-                children.add(m);
+            if(p.getPermsPid().equals(pid)){
+                children.add(p);
             }
         }
 
@@ -76,7 +75,12 @@ public class SysPermsServiceImpl implements SysPermsService {
     }
 
     @Override
-    public List<String> getUserPerms(String id) {
+    public List<String> getUserPerms(Long id) {
         return permsDao.getUserPerms(id);
+    }
+
+    @Override
+    public List<String> getStudentPerms(Long id) {
+        return permsDao.getStudentPerms(id);
     }
 }

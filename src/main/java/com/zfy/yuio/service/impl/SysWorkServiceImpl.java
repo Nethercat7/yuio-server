@@ -25,13 +25,13 @@ public class SysWorkServiceImpl implements SysWorkService {
 
     @Override
     public int add(SysWork params) {
-        params.setWorkId(snowflakeIdGeneratorUtil.getId());
+        params.setWorkId(snowflakeIdGeneratorUtil.nextId());
         if (ObjectUtils.isEmpty(params.getWorkPid())) {
-            params.setWorkPid("0");
+            params.setWorkPid(0L);
             params.setWorkLevel(0);
-        }else{
-            SysWork c=workDao.getById(params.getWorkPid());
-            params.setWorkLevel(c.getWorkLevel()+1);
+        } else {
+            SysWork c = workDao.getById(params.getWorkPid());
+            params.setWorkLevel(c.getWorkLevel() + 1);
         }
         return workDao.add(params);
     }
@@ -42,50 +42,37 @@ public class SysWorkServiceImpl implements SysWorkService {
         List<SysWork> works = new ArrayList<>();
         for (SysWork c : workList
         ) {
-            if (c.getWorkPid().equals("0")) works.add(c);
+            if (c.getWorkPid() == 0) works.add(c);
         }
         for (SysWork c : works
         ) {
             c.setChildren(getChildren(c.getWorkId(), workList));
-            if(ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
+            if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return works;
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         return workDao.del(id);
     }
 
     @Override
     public int upd(SysWork params) {
-        if (ObjectUtils.isEmpty(params.getWorkPid())||params.getWorkPid().equals("0")) {
+        if (ObjectUtils.isEmpty(params.getWorkPid())) {
+            params.setWorkPid(0L);
             params.setWorkLevel(0);
-        }else{
-            SysWork c=workDao.getById(params.getWorkPid());
-            params.setWorkLevel(c.getWorkLevel()+1);
+        } else {
+            SysWork c = workDao.getById(params.getWorkPid());
+            if (!ObjectUtils.isEmpty(c)) params.setWorkLevel(c.getWorkLevel() + 1);
         }
         return workDao.upd(params);
     }
 
-    @Override
-    public void initial(SysWork params) {
-        params.setWorkId(snowflakeIdGeneratorUtil.getId());
-        params.setWorkStatus("0");
-        if (params.getWorkPid() == null) {
-            params.setWorkPid("0");
-            params.setWorkLevel(0);
-        }
-        workDao.add(params);
-        if (params.getChildren() != null) {
-            setChildren(params.getChildren(), params.getWorkId(), params.getWorkLevel());
-        }
-    }
-
-    private void setChildren(List<SysWork> children, String pid, int level) {
+    private void setChildren(List<SysWork> children, Long pid, int level) {
         for (SysWork c : children
         ) {
-            c.setWorkId(snowflakeIdGeneratorUtil.getId());
+            c.setWorkId(snowflakeIdGeneratorUtil.nextId());
             c.setWorkStatus("0");
             c.setWorkPid(pid);
             c.setWorkLevel(level + 1);
@@ -96,7 +83,7 @@ public class SysWorkServiceImpl implements SysWorkService {
         }
     }
 
-    private List<SysWork> getChildren(String pid, List<SysWork> workList) {
+    private List<SysWork> getChildren(Long pid, List<SysWork> workList) {
         List<SysWork> children = new ArrayList<>();
         for (SysWork c : workList
         ) {
@@ -106,7 +93,7 @@ public class SysWorkServiceImpl implements SysWorkService {
         for (SysWork c : children
         ) {
             c.setChildren(getChildren(c.getWorkId(), workList));
-            if(ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
+            if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return children;
     }

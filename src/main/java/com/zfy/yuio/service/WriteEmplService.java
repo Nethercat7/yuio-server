@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.StatsEmplInfo;
+import com.zfy.yuio.entity.WriteEmplInfo;
 
 /**
  *@Description:就业情况填写
@@ -8,9 +8,9 @@ import com.zfy.yuio.entity.StatsEmplInfo;
  *@CreateDate:2021/4/26 23:47
 */
 public interface WriteEmplService {
-    int add(StatsEmplInfo params);
+    int add(WriteEmplInfo params);
 
-    StatsEmplInfo get(String id);
+    WriteEmplInfo get(Long id);
 
-    int upd(StatsEmplInfo params);
+    int upd(WriteEmplInfo params);
 }

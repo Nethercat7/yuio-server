@@ -18,7 +18,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 
     @Override
     public int add(SysDictType params) {
-        params.setDictId(snowflakeIdGeneratorUtil.getId());
+        params.setDictId(snowflakeIdGeneratorUtil.nextId());
         return sysDictTypeDao.add(params);
     }
 
@@ -28,7 +28,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         return sysDictTypeDao.del(id);
     }
 

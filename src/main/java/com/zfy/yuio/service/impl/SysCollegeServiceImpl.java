@@ -23,7 +23,7 @@ public class SysCollegeServiceImpl implements SysCollegeService {
 
     @Override
     public int add(SysCollege params) {
-        params.setCollegeId(snowflakeIdGeneratorUtil.getId());
+        params.setCollegeId(snowflakeIdGeneratorUtil.nextId());
         return collegeDao.add(params);
     }
 
@@ -33,7 +33,7 @@ public class SysCollegeServiceImpl implements SysCollegeService {
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         return collegeDao.del(id);
     }
 

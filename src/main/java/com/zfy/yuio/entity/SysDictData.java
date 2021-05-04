@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 */
 public class SysDictData {
     @JsonProperty("id")
-    private String dictId;
+    private Long dictId;
     @JsonProperty("label")
     private String dictLabel;
     @JsonProperty("type")
@@ -25,11 +25,11 @@ public class SysDictData {
     @JsonProperty("value")
     private String dictValue;
 
-    public String getDictId() {
+    public Long getDictId() {
         return dictId;
     }
 
-    public void setDictId(String dictId) {
+    public void setDictId(Long dictId) {
         this.dictId = dictId;
     }
 

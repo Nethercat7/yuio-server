@@ -3,8 +3,8 @@ package com.zfy.yuio.service.impl;
 import com.zfy.yuio.dao.CmpRateDao;
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.StatsEmplInfo;
-import com.zfy.yuio.entity.StatsEmplResult;
+import com.zfy.yuio.entity.WriteEmplInfo;
+import com.zfy.yuio.entity.WriteEmplResult;
 import com.zfy.yuio.entity.SysStudent;
 import com.zfy.yuio.service.CmpRateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class CmpRateServiceImpl implements CmpRateService {
     private SysStudentDao studentDao;
 
     @Override
-    public StatsEmplResult get(QueryParams params) {
-        StatsEmplResult result = new StatsEmplResult();
+    public WriteEmplResult get(QueryParams params) {
+        WriteEmplResult result = new WriteEmplResult();
         List<Integer> grades = new ArrayList<>();
         List<String> rates = new ArrayList<>();
         String type = null;
@@ -38,14 +38,14 @@ public class CmpRateServiceImpl implements CmpRateService {
         ) {
             //设置年级
             params.setGrade(grade);
-            List<StatsEmplInfo> infos = rateDao.get(params);
-            List<SysStudent> students = studentDao.getWithEStatusInfo(params);
+            List<WriteEmplInfo> infos = rateDao.get(params);
+            List<SysStudent> students = studentDao.get(params);
             //毕业生总人数
             int total = students.size();
             //未就业人数
             int unEmplPeople = 0;
             //筛选未就业人数
-            for (StatsEmplInfo info : infos
+            for (WriteEmplInfo info : infos
             ) {
                 if (info.getEmplStatus().equals("0")) {
                     unEmplPeople += 1;

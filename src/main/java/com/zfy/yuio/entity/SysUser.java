@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SysUser {
     @JsonProperty("id")
-    private String userId;
+    private Long userId;
     @JsonProperty("name")
     private String userName;
     @JsonProperty("code")
@@ -36,13 +36,13 @@ public class SysUser {
     @JsonProperty("salt")
     private String userSalt;
     //非数据库字段
-    private List<String> roles;
+    private List<Long> roles;
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -111,11 +111,11 @@ public class SysUser {
         this.userSalt = userSalt;
     }
 
-    public List<String> getRoles() {
+    public List<Long> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Long> roles) {
         this.roles = roles;
     }
 

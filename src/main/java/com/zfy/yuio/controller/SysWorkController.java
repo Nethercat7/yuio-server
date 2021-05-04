@@ -32,7 +32,7 @@ public class SysWorkController {
 
     @DeleteMapping("del")
     @RequiresPermissions("system:work:del")
-    public ResultBody del(@RequestParam("id") String id){
+    public ResultBody del(@RequestParam("id") Long id){
         int status= workService.del(id);
         if(status!=1){
             return new ResultBody(1,"删除失败","error");
@@ -48,10 +48,5 @@ public class SysWorkController {
             return new ResultBody(1,"修改失败","error");
         }
         return new ResultBody(0, "成功修改","success");
-    }
-
-    @PostMapping("initial")
-    public void initial(@RequestBody SysWork params){
-        workService.initial(params);
     }
 }

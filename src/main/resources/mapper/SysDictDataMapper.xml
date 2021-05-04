@@ -14,7 +14,7 @@
         WHERE dict_type=#{dictType}
     </select>
 
-    <delete id="del" parameterType="String">
+    <delete id="del" parameterType="Long">
         DELETE FROM sys_dict_data
         WHERE dict_id=#{id}
     </delete>

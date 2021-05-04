@@ -16,17 +16,15 @@ public interface SysUserDao {
 
     List<SysUser> get();
 
-    List<SysUser> getAll();
-
-    int del(String id);
+    int del(Long id);
 
     int upd(SysUser params);
 
-    int addRole(String id, String userId, String roleId);
+    int addRole(Long userId, Long roleId);
 
-    List<String> getRoles(String id);
+    List<Long> getRoles(Long id);
 
-    int delRole(String id);
+    int delRole(Long id);
 
-    SysUser getByCode(String param);
+    SysUser getById(Long id);
 }

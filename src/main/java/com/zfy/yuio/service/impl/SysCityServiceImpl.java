@@ -25,13 +25,13 @@ public class SysCityServiceImpl implements SysCityService {
 
     @Override
     public int add(SysCity params) {
-        params.setCityId(snowflakeIdGeneratorUtil.getId());
+        params.setCityId(snowflakeIdGeneratorUtil.nextId());
         if (ObjectUtils.isEmpty(params.getCityPid())) {
-            params.setCityPid("0");
+            params.setCityPid(0L);
             params.setCityLevel(0);
-        }else{
-            SysCity c=cityDao.getById(params.getCityPid());
-            params.setCityLevel(c.getCityLevel()+1);
+        } else {
+            SysCity c = cityDao.getById(params.getCityPid());
+            params.setCityLevel(c.getCityLevel() + 1);
         }
         return cityDao.add(params);
     }
@@ -42,51 +42,37 @@ public class SysCityServiceImpl implements SysCityService {
         List<SysCity> cities = new ArrayList<>();
         for (SysCity c : cityList
         ) {
-            if (c.getCityPid().equals("0")) cities.add(c);
+            if (c.getCityPid() == 0) cities.add(c);
         }
         for (SysCity c : cities
         ) {
             c.setChildren(getChildren(c.getCityId(), cityList));
-            if(ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
+            if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return cities;
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         return cityDao.del(id);
     }
 
     @Override
     public int upd(SysCity params) {
         if (ObjectUtils.isEmpty(params.getCityPid())) {
-            params.setCityPid("0");
+            params.setCityPid(0L);
             params.setCityLevel(0);
-        }else{
-            SysCity c=cityDao.getById(params.getCityPid());
-            params.setCityLevel(c.getCityLevel()+1);
+        } else {
+            SysCity c = cityDao.getById(params.getCityPid());
+            if (!ObjectUtils.isEmpty(c)) params.setCityLevel(c.getCityLevel() + 1);
         }
         return cityDao.upd(params);
     }
 
-    @Override
-    public void initial(SysCity params) {
-        params.setCityId(snowflakeIdGeneratorUtil.getId());
-        params.setCityStatus("0");
-        if (params.getCityPid() == null) {
-            params.setCityPid("0");
-            params.setCityLevel(0);
-        }
-        cityDao.add(params);
-        if (params.getChildren() != null) {
-            setChildren(params.getChildren(), params.getCityId(), params.getCityLevel());
-        }
-    }
-
-    private void setChildren(List<SysCity> children, String pid, int level) {
+    private void setChildren(List<SysCity> children, Long pid, int level) {
         for (SysCity c : children
         ) {
-            c.setCityId(snowflakeIdGeneratorUtil.getId());
+            c.setCityId(snowflakeIdGeneratorUtil.nextId());
             c.setCityStatus("0");
             c.setCityPid(pid);
             c.setCityLevel(level + 1);
@@ -97,7 +83,7 @@ public class SysCityServiceImpl implements SysCityService {
         }
     }
 
-    private List<SysCity> getChildren(String pid, List<SysCity> cityList) {
+    private List<SysCity> getChildren(Long pid, List<SysCity> cityList) {
         List<SysCity> children = new ArrayList<>();
         for (SysCity c : cityList
         ) {
@@ -107,7 +93,7 @@ public class SysCityServiceImpl implements SysCityService {
         for (SysCity c : children
         ) {
             c.setChildren(getChildren(c.getCityId(), cityList));
-            if(ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
+            if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return children;
     }

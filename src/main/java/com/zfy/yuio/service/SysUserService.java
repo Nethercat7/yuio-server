@@ -14,9 +14,9 @@ public interface SysUserService {
 
     List<SysUser> get();
 
-    int del(String id);
+    int del(Long id);
 
     int upd(SysUser params);
 
-    SysUser getByCode(String param);
+    SysUser getById(Long id);
 }

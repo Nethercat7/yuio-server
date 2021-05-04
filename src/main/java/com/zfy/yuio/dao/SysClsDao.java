@@ -34,7 +34,7 @@ public interface SysClsDao {
      *@param id
      *@Return int
     */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7
@@ -50,5 +50,5 @@ public interface SysClsDao {
      *@param pid
      *@Return java.util.List<com.zfy.yuio.entity.SysClass>
      */
-    List<SysClass> getByPid(String pid, int grade);
+    List<SysClass> getByPid(Long pid, int grade);
 }

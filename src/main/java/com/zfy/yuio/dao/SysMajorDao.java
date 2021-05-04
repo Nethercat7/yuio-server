@@ -34,7 +34,7 @@ public interface SysMajorDao {
      *@param id
      *@Return int
     */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7
@@ -50,7 +50,7 @@ public interface SysMajorDao {
      *@param pid
      *@Return java.util.List<com.zfy.yuio.entity.SysMajor>
     */
-    List<SysMajor> getByPid(String pid);
+    List<SysMajor> getByPid(Long pid);
 
     /**
      *@Author Nethercat7
@@ -58,5 +58,5 @@ public interface SysMajorDao {
      *@param id
      *@Return
      */
-    String getNameById(String id);
+    String getNameById(Long id);
 }

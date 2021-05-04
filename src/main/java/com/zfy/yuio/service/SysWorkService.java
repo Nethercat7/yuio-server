@@ -32,7 +32,7 @@ public interface SysWorkService {
      *@param id
      *@Return int
      */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7
@@ -41,12 +41,4 @@ public interface SysWorkService {
      *@Return int
      */
     int upd(SysWork params);
-
-    /**
-     *@Author Nethercat7
-     *@Description 城市信息初始化
-     *@param params
-     *@Return
-    */
-    void initial(SysWork params);
 }

@@ -17,13 +17,13 @@ public interface SysRoleDao {
 
     List<SysRole> get();
 
-    int del(String id);
+    int del(Long id);
 
     int upd(SysRole params);
 
-    int addPerms(String rprId, String rprRoleId, String rprPermsId);
+    int addPerms(Long rprRoleId, Long rprPermsId);
 
-    List<String> getRolePerms(String id);
+    List<Long> getRolePerms(Long id);
 
-    int delPerms(String id);
+    int delPerms(Long id);
 }

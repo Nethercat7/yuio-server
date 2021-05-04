@@ -3,7 +3,6 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysUser;
 import com.zfy.yuio.service.SysUserService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,7 @@ public class SysUserController {
     private SysUserService userService;
 
     @PostMapping("add")
-    @RequiresPermissions("system:user:add")
+    //@RequiresPermissions("system:user:add")
     public ResultBody add(@RequestBody SysUser params){
         int status=userService.add(params);
         if(status!=1){
@@ -35,8 +34,8 @@ public class SysUserController {
     }
 
     @DeleteMapping("del")
-    @RequiresPermissions("system:user:del")
-    public ResultBody del(@RequestParam("id")String id){
+    //@RequiresPermissions("system:user:del")
+    public ResultBody del(@RequestParam("id")Long id){
         int status=userService.del(id);
         if(status!=1){
             return new ResultBody(1,"删除失败","error");
@@ -45,7 +44,7 @@ public class SysUserController {
     }
 
     @PutMapping("upd")
-    @RequiresPermissions("system:user:upd")
+    //@RequiresPermissions("system:user:upd")
     public ResultBody upd(@RequestBody SysUser params){
         int status=userService.upd(params);
         if(status!=1){

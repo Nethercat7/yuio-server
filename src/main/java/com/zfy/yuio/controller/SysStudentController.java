@@ -30,15 +30,15 @@ public class SysStudentController {
         return new ResultBody(1, "添加失败", "error");
     }
 
-    @GetMapping("get")
+    @PostMapping("get")
     //@RequiresPermissions("system:student:get")
-    public ResultBody get() {
-        return new ResultBody(0, studentService.get(), "success");
+    public ResultBody get(@RequestBody QueryParams params) {
+        return new ResultBody(0, studentService.get(params), "success");
     }
 
     @DeleteMapping("del")
     @RequiresPermissions("system:student:del")
-    public ResultBody del(@RequestParam("id") String id) {
+    public ResultBody del(@RequestParam("id") Long id) {
         int status = studentService.del(id);
         if (status == 1) {
             return new ResultBody(0, "成功删除", "success");
@@ -54,10 +54,5 @@ public class SysStudentController {
             return new ResultBody(0, "成功修改", "success");
         }
         return new ResultBody(1, "修改失败", "error");
-    }
-
-    @PostMapping("getWithEStatusInfo")
-    public ResultBody getWithEStatusInfo(@RequestBody QueryParams params) {
-        return new ResultBody(0, studentService.getWithEStatusInfo(params), "success");
     }
 }

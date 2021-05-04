@@ -11,46 +11,39 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- *@Description:User mgt
- *@Author:Nethercat7
- *@CreateDate:2021/4/12 17:08
-*/
+ * @Description:User mgt
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/12 17:08
+ */
 @Service
 public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserDao userDao;
 
-    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil =new SnowflakeIdGeneratorUtil(4,0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(4, 0);
 
     @Override
     public int add(SysUser params) {
-        String userId= snowflakeIdGeneratorUtil.getId();
-        //Add role before add user
-        for (String role:params.getRoles()
-             ) {
-            String urrId= snowflakeIdGeneratorUtil.getId();
-            userDao.addRole(urrId,userId,role);
-        }
-        params.setUserId(userId);
-        //set random salt
+        params.setUserId(snowflakeIdGeneratorUtil.nextId());
         params.setUserSalt(ShiroUtil.getSalt(7));
-        //set default password
-        params.setUserPwd(ShiroUtil.pwd2MD5("123456",params.getUserSalt(),1739));
-        return userDao.add(params);
+        params.setUserPwd(ShiroUtil.pwd2MD5("123456", params.getUserSalt(), 1739));
+        int status = userDao.add(params);
+        if (status == 1) saveUserRole(params);
+        return status;
     }
 
     @Override
     public List<SysUser> get() {
-        List<SysUser> usrList=userDao.get();
-        for (SysUser u:usrList
-             ) {
+        List<SysUser> usrList = userDao.get();
+        for (SysUser u : usrList
+        ) {
             u.setRoles(userDao.getRoles(u.getUserId()));
         }
         return usrList;
     }
 
     @Override
-    public int del(String id) {
+    public int del(Long id) {
         userDao.delRole(id);
         return userDao.del(id);
     }
@@ -60,15 +53,19 @@ public class SysUserServiceImpl implements SysUserService {
         //先删除关系表中的用户角色信息
         userDao.delRole(params.getUserId());
         //再重新添加
-        for (String r: params.getRoles()
-             ) {
-            userDao.addRole(snowflakeIdGeneratorUtil.getId(),params.getUserId(),r);
-        }
+        saveUserRole(params);
         return userDao.upd(params);
     }
 
     @Override
-    public SysUser getByCode(String param) {
-        return userDao.getByCode(param);
+    public SysUser getById(Long id) {
+        return userDao.getById(id);
+    }
+
+    private void saveUserRole(SysUser params) {
+        for (Long role : params.getRoles()
+        ) {
+            userDao.addRole(params.getUserId(), role);
+        }
     }
 }

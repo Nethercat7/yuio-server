@@ -32,7 +32,7 @@ public interface SysCityService {
      *@param id
      *@Return int
      */
-    int del(String id);
+    int del(Long id);
 
     /**
      *@Author Nethercat7
@@ -41,12 +41,4 @@ public interface SysCityService {
      *@Return int
      */
     int upd(SysCity params);
-
-    /**
-     *@Author Nethercat7
-     *@Description 城市信息初始化
-     *@param params
-     *@Return
-    */
-    void initial(SysCity params);
 }

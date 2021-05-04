@@ -4,21 +4,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.WriteEmplDao">
-    <insert id="add" parameterType="StatsEmplInfo">
-        INSERT INTO stats_empl_info(empl_id,empl_student_id,empl_class_id,empl_major_id,empl_college_id,empl_grade,empl_status,
-        empl_company,empl_work_city,empl_work_type,empl_protocol,empl_plan,empl_intention_city,empl_intention_work)
-        VALUES(#{emplId},#{emplStudentId},#{emplClassId},#{emplMajorId},#{emplCollegeId},#{emplGrade},#{emplStatus},#{emplCompany},
-        #{emplWorkCity},#{emplWorkType},#{emplProtocol},#{emplPlan},#{emplIntentionCity},#{emplIntentionWork})
+    <insert id="add" parameterType="WriteEmplInfo">
+        INSERT INTO write_empl_info(empl_id,empl_status,empl_company,empl_protocol,empl_plan,empl_student_id,empl_city_id,empl_work_id)
+        VALUES(#{emplId},#{emplStatus},#{emplCompany},#{emplProtocol},#{emplPlan},#{emplStudentId},#{emplCityId},#{emplWorkId})
     </insert>
 
-    <select id="get" parameterType="String" resultType="StatsEmplInfo">
-        SELECT * FROM stats_empl_info
+    <select id="get" parameterType="Long" resultType="WriteEmplInfo">
+        SELECT * FROM write_empl_info
         WHERE empl_student_id=#{emplStudentId}
     </select>
 
-    <update id="upd" parameterType="StatsEmplInfo">
-        UPDATE stats_empl_info SET empl_status=#{emplStatus},empl_company=#{emplCompany},empl_work_city=#{emplWorkCity},empl_work_type=#{emplWorkType},
-        empl_protocol=#{emplProtocol},empl_plan=#{emplPlan},empl_intention_city=#{emplIntentionCity},empl_intention_work=#{emplIntentionWork}
+    <update id="upd" parameterType="WriteEmplInfo">
+        UPDATE write_empl_info SET empl_status=#{emplStatus},empl_company=#{emplCompany},empl_protocol=#{emplProtocol},
+        empl_plan=#{emplPlan},empl_city_id=#{emplCityId},empl_work_id=#{emplWorkId}
         WHERE empl_student_id=#{emplStudentId}
     </update>
+
+    <insert id="addIntentionCities" parameterType="Long">
+        INSERT INTO write_student_city(sc_student_id,sc_city_id)
+        VALUES(#{studentId},#{cityId})
+    </insert>
+
+    <insert id="addIntentionWorks" parameterType="Long">
+        INSERT INTO write_student_work(sw_student_id,sw_work_id)
+        VALUES(#{studentId},#{workId})
+    </insert>
+
+    <delete id="delIntentionCities" parameterType="Long">
+        DELETE FROM write_student_city
+        WHERE sc_student_id=#{id}
+    </delete>
+
+    <delete id="delIntentionWorks" parameterType="Long">
+        DELETE FROM write_student_work
+        WHERE sw_student_id=#{id}
+    </delete>
+
+    <select id="getIntentionCities" parameterType="Long" resultType="Long">
+        SELECT sc_city_id FROM write_student_city
+        WHERE sc_student_id=#{id}
+    </select>
+
+    <select id="getIntentionWorks" parameterType="Long" resultType="Long">
+        SELECT sw_work_id FROM write_student_work
+        WHERE sw_student_id=#{id}
+    </select>
 </mapper>

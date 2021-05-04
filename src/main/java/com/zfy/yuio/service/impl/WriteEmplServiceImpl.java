@@ -1,13 +1,12 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.WriteEmplDao;
-import com.zfy.yuio.entity.StatsEmplInfo;
-import com.zfy.yuio.entity.SysStudent;
+import com.zfy.yuio.entity.WriteEmplInfo;
 import com.zfy.yuio.service.WriteEmplService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 /**
  * @Description:就业情况填写
@@ -19,30 +18,57 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     @Autowired
     private WriteEmplDao emplDao;
 
-    @Autowired
-    private SysStudentDao studentDao;
-
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(13, 0);
 
     @Override
-    public int add(StatsEmplInfo params) {
-        params.setEmplId(snowflakeIdGeneratorUtil.getId());
-        //获取院系等信息
-        SysStudent student = studentDao.getById(params.getEmplStudentId());
-        params.setEmplCollegeId(student.getStudentCollegeId());
-        params.setEmplMajorId(student.getStudentMajorId());
-        params.setEmplClassId(student.getStudentClassId());
-        params.setEmplGrade(student.getStudentGrade());
-        return emplDao.add(params);
+    public int add(WriteEmplInfo params) {
+        params.setEmplId(snowflakeIdGeneratorUtil.nextId());
+        int status = emplDao.add(params);
+        //添加意向城市和意向岗位
+        if (status == 1) {
+            if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
+                for (Long id : params.getIntentionCities()
+                ) {
+                    emplDao.addIntentionCities(params.getEmplStudentId(), id);
+                }
+            }
+
+            if (!ObjectUtils.isEmpty(params.getIntentionWorks())) {
+                for (Long id : params.getIntentionWorks()
+                ) {
+                    emplDao.addIntentionWorks(params.getEmplStudentId(), id);
+                }
+            }
+        }
+        return status;
     }
 
     @Override
-    public StatsEmplInfo get(String id) {
-        return emplDao.get(id);
+    public WriteEmplInfo get(Long id) {
+        WriteEmplInfo info = emplDao.get(id);
+        info.setIntentionCities(emplDao.getIntentionCities(id));
+        info.setIntentionWorks(emplDao.getIntentionWorks(id));
+        return info;
     }
 
     @Override
-    public int upd(StatsEmplInfo params) {
+    public int upd(WriteEmplInfo params) {
+        //修改意向城市和意向岗位
+        if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
+            emplDao.delIntentionCities(params.getEmplStudentId());
+            for (Long id : params.getIntentionCities()
+            ) {
+                emplDao.addIntentionCities(params.getEmplStudentId(), id);
+            }
+        }
+
+        if (!ObjectUtils.isEmpty(params.getIntentionWorks())) {
+            emplDao.delIntentionWorks(params.getEmplStudentId());
+            for (Long id : params.getIntentionWorks()
+            ) {
+                emplDao.addIntentionWorks(params.getEmplStudentId(), id);
+            }
+        }
         return emplDao.upd(params);
     }
 }

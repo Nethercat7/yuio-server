@@ -48,7 +48,7 @@
 
     <select id="getStudentLoginInfo" parameterType="String" resultType="SysStudent">
         SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
-        student_remark,student_college_id,student_major_id,student_class_id,student_pwd,student_salt,student_create_time
+        student_remark,student_class_id,student_pwd,student_salt,student_create_time
         FROM sys_student
         WHERE student_code=#{key}
     </select>

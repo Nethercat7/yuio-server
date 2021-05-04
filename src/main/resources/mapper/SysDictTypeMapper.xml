@@ -13,7 +13,7 @@
         SELECT * FROM sys_dict_type
     </select>
 
-    <delete id="del" parameterType="String">
+    <delete id="del" parameterType="Long">
         DELETE FROM sys_dict_type
         WHERE dict_id=#{id}
     </delete>
