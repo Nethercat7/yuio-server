@@ -1,7 +1,7 @@
 package com.zfy.yuio.dao;
 
 import com.zfy.yuio.entity.WriteEmplInfo;
-import com.zfy.yuio.entity.WriteEmplResult;
+import com.zfy.yuio.entity.StatsEmplResult;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface StatsIntentionDao {
-    List<WriteEmplResult> getCityInfo(WriteEmplInfo params);
-    List<WriteEmplResult> getWorkInfo(WriteEmplInfo params);
+    List<StatsEmplResult> getCityInfo(WriteEmplInfo params);
+    List<StatsEmplResult> getWorkInfo(WriteEmplInfo params);
 }

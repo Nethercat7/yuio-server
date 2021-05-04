@@ -4,43 +4,5 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.StatsIntentionDao">
-    <select id="getCityInfo" resultType="WriteEmplResult" parameterType="WriteEmplInfo">
-        SELECT COUNT(e.empl_id) as people,c.city_name as city
-        FROM write_empl_info e
-        LEFT JOIN sys_city c
-        ON e.empl_intention_city=c.city_id
-        WHERE e.empl_status=1
-        AND e.empl_grade=#{emplGrade}
-        <if test="emplCollegeId!=null">
-            AND e.empl_college_id=#{emplCollegeId}
-        </if>
-        <if test="emplMajorId!=null">
-            AND e.empl_major_id=#{emplMajorId}
-        </if>
-        <if test="emplClassId!=null">
-            AND e.empl_class_id=#{emplClassId}
-        </if>
-        GROUP BY city
-        ORDER BY people desc
-    </select>
 
-    <select id="getWorkInfo" resultType="WriteEmplResult" parameterType="WriteEmplInfo">
-        SELECT COUNT(e.empl_id) as people,w.work_name as type
-        FROM write_empl_info e
-        LEFT JOIN sys_work w
-        ON e.empl_intention_work=w.work_id
-        WHERE e.empl_status=1
-        AND e.empl_grade=#{emplGrade}
-        <if test="emplCollegeId!=null">
-            AND e.empl_college_id=#{emplCollegeId}
-        </if>
-        <if test="emplMajorId!=null">
-            AND e.empl_major_id=#{emplMajorId}
-        </if>
-        <if test="emplClassId!=null">
-            AND e.empl_class_id=#{emplClassId}
-        </if>
-        GROUP BY type
-        ORDER BY people desc
-    </select>
 </mapper>

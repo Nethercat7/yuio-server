@@ -4,14 +4,5 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.StatsRateDao">
-    <select id="getEmplInfo"  parameterType="Integer" resultType="WriteEmplInfo">
-        SELECT * FROM write_empl_info
-        WHERE empl_grade=#{grade}
-    </select>
 
-    <select id="getCollegeEmplInfo" parameterType="Object" resultType="WriteEmplInfo">
-        SELECT * FROM write_empl_info
-        WHERE empl_college_id=#{id}
-        AND empl_grade=#{grade}
-    </select>
 </mapper>

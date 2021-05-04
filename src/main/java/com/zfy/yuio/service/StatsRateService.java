@@ -1,5 +1,7 @@
 package com.zfy.yuio.service;
 
-public interface StatsRateService {
+import com.zfy.yuio.entity.StatsEmplResult;
 
+public interface StatsRateService {
+    StatsEmplResult getEmplInfo(int grade);
 }

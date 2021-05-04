@@ -18,8 +18,10 @@ public class QueryParams {
     private String majorId;
     @JsonProperty("class_id")
     private String classId;
-    private String employment;
-    private String write;
+    @JsonProperty("empl_status")
+    private String emplStatus;
+    @JsonProperty("empl_write")
+    private String emplWrite;
     private int grade;
     private String name;
     private List<Integer> grades;
@@ -56,22 +58,6 @@ public class QueryParams {
         this.classId = classId;
     }
 
-    public String getEmployment() {
-        return employment;
-    }
-
-    public void setEmployment(String employment) {
-        this.employment = employment;
-    }
-
-    public String getWrite() {
-        return write;
-    }
-
-    public void setWrite(String write) {
-        this.write = write;
-    }
-
     public int getGrade() {
         return grade;
     }
@@ -94,5 +80,21 @@ public class QueryParams {
 
     public void setGrades(List<Integer> grades) {
         this.grades = grades;
+    }
+
+    public String getEmplStatus() {
+        return emplStatus;
+    }
+
+    public void setEmplStatus(String emplStatus) {
+        this.emplStatus = emplStatus;
+    }
+
+    public String getEmplWrite() {
+        return emplWrite;
+    }
+
+    public void setEmplWrite(String emplWrite) {
+        this.emplWrite = emplWrite;
     }
 }

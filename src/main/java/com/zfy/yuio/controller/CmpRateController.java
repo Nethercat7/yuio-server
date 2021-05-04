@@ -2,10 +2,8 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.WriteEmplResult;
 import com.zfy.yuio.service.CmpRateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,10 +20,6 @@ public class CmpRateController {
 
     @PostMapping("getSelf")
     public ResultBody get(@RequestBody QueryParams params){
-        WriteEmplResult result=rateService.get(params);
-        if(ObjectUtils.isEmpty(result)){
-            return new ResultBody(1,"未找到相关信息","success");
-        }
-        return new ResultBody(0,result,"success");
+        return null;
     }
 }

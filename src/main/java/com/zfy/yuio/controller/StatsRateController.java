@@ -16,7 +16,7 @@ public class StatsRateController {
     @GetMapping("getEmplInfo")
     @RequiresPermissions("statistics:rate:stats")
     public ResultBody getEmplInfo(@RequestParam("grade") int grade){
-        return null;
+        return new ResultBody(0,statsRateService.getEmplInfo(grade));
     }
 
     @GetMapping("getCollegeEmplInfo")

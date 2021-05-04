@@ -39,13 +39,23 @@ public class SysStudent {
 
     //非数据库字段
     @JsonProperty("college_name")
-    private String studentCollegeName;
+    private String collegeName;
     @JsonProperty("major_name")
-    private String studentMajorName;
+    private String majorName;
     @JsonProperty("class_name")
-    private String studentClassName;
-    @JsonProperty("empl_info")
-    private WriteEmplInfo studentEmplInfo;
+    private String className;
+    @JsonProperty("empl_status")
+    private String emplStatus;
+    @JsonProperty("empl_company")
+    private String emplCompany;
+    @JsonProperty("empl_protocol")
+    private String emplProtocol;
+    @JsonProperty("empl_plan")
+    private String emplPlan;
+    @JsonProperty("empl_city")
+    private String emplCityId;
+    @JsonProperty("empl_work")
+    private String emplWorkId;
 
     public Long getStudentId() {
         return studentId;
@@ -143,35 +153,75 @@ public class SysStudent {
         this.studentSalt = studentSalt;
     }
 
-    public String getStudentCollegeName() {
-        return studentCollegeName;
+    public String getCollegeName() {
+        return collegeName;
     }
 
-    public void setStudentCollegeName(String studentCollegeName) {
-        this.studentCollegeName = studentCollegeName;
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
     }
 
-    public String getStudentMajorName() {
-        return studentMajorName;
+    public String getMajorName() {
+        return majorName;
     }
 
-    public void setStudentMajorName(String studentMajorName) {
-        this.studentMajorName = studentMajorName;
+    public void setMajorName(String majorName) {
+        this.majorName = majorName;
     }
 
-    public String getStudentClassName() {
-        return studentClassName;
+    public String getClassName() {
+        return className;
     }
 
-    public void setStudentClassName(String studentClassName) {
-        this.studentClassName = studentClassName;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
-    public WriteEmplInfo getStudentEmplInfo() {
-        return studentEmplInfo;
+    public String getEmplStatus() {
+        return emplStatus;
     }
 
-    public void setStudentEmplInfo(WriteEmplInfo studentEmplInfo) {
-        this.studentEmplInfo = studentEmplInfo;
+    public void setEmplStatus(String emplStatus) {
+        this.emplStatus = emplStatus;
+    }
+
+    public String getEmplCompany() {
+        return emplCompany;
+    }
+
+    public void setEmplCompany(String emplCompany) {
+        this.emplCompany = emplCompany;
+    }
+
+    public String getEmplProtocol() {
+        return emplProtocol;
+    }
+
+    public void setEmplProtocol(String emplProtocol) {
+        this.emplProtocol = emplProtocol;
+    }
+
+    public String getEmplPlan() {
+        return emplPlan;
+    }
+
+    public void setEmplPlan(String emplPlan) {
+        this.emplPlan = emplPlan;
+    }
+
+    public String getEmplCityId() {
+        return emplCityId;
+    }
+
+    public void setEmplCityId(String emplCityId) {
+        this.emplCityId = emplCityId;
+    }
+
+    public String getEmplWorkId() {
+        return emplWorkId;
+    }
+
+    public void setEmplWorkId(String emplWorkId) {
+        this.emplWorkId = emplWorkId;
     }
 }
