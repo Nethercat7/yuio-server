@@ -11,13 +11,13 @@ import java.util.List;
 */
 public class QueryParams {
     @JsonProperty("student_id")
-    private String studentId;
+    private Long studentId;
     @JsonProperty("college_id")
-    private String collegeId;
+    private Long collegeId;
     @JsonProperty("major_id")
-    private String majorId;
+    private Long majorId;
     @JsonProperty("class_id")
-    private String classId;
+    private Long classId;
     @JsonProperty("empl_status")
     private String emplStatus;
     @JsonProperty("empl_write")
@@ -26,35 +26,35 @@ public class QueryParams {
     private String name;
     private List<Integer> grades;
 
-    public String getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
-    public String getCollegeId() {
+    public Long getCollegeId() {
         return collegeId;
     }
 
-    public void setCollegeId(String collegeId) {
+    public void setCollegeId(Long collegeId) {
         this.collegeId = collegeId;
     }
 
-    public String getMajorId() {
+    public Long getMajorId() {
         return majorId;
     }
 
-    public void setMajorId(String majorId) {
+    public void setMajorId(Long majorId) {
         this.majorId = majorId;
     }
 
-    public String getClassId() {
+    public Long getClassId() {
         return classId;
     }
 
-    public void setClassId(String classId) {
+    public void setClassId(Long classId) {
         this.classId = classId;
     }
 

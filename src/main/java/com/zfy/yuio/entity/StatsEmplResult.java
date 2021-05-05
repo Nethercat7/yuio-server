@@ -16,6 +16,8 @@ public class StatsEmplResult {
    private int unEmplPeople;
    @JsonProperty("empl_rate")
    private String emplRate;
+   @JsonProperty("college_name")
+   private String collegeName;
 
    public int getTotalPeople() {
       return totalPeople;
@@ -47,5 +49,13 @@ public class StatsEmplResult {
 
    public void setEmplRate(String emplRate) {
       this.emplRate = emplRate;
+   }
+
+   public String getCollegeName() {
+      return collegeName;
+   }
+
+   public void setCollegeName(String collegeName) {
+      this.collegeName = collegeName;
    }
 }
