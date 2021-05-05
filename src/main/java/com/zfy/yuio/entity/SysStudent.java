@@ -29,7 +29,7 @@ public class SysStudent {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime studentCreateTime;
     @JsonProperty("class_id")
-    private String studentClassId;
+    private Long studentClassId;
     @JsonProperty("gender")
     private String studentGender;
     @JsonProperty("pwd")
@@ -52,10 +52,14 @@ public class SysStudent {
     private String emplProtocol;
     @JsonProperty("empl_plan")
     private String emplPlan;
-    @JsonProperty("empl_city")
-    private String emplCityId;
-    @JsonProperty("empl_work")
-    private String emplWorkId;
+    @JsonProperty("empl_city_id")
+    private Long emplCityId;
+    @JsonProperty("empl_work_id")
+    private Long emplWorkId;
+    @JsonProperty("empl_city_name")
+    private String emplCityName;
+    @JsonProperty("empl_work_name")
+    private String emplWorkName;
 
     public Long getStudentId() {
         return studentId;
@@ -121,11 +125,11 @@ public class SysStudent {
         this.studentCreateTime = studentCreateTime;
     }
 
-    public String getStudentClassId() {
+    public Long getStudentClassId() {
         return studentClassId;
     }
 
-    public void setStudentClassId(String studentClassId) {
+    public void setStudentClassId(Long studentClassId) {
         this.studentClassId = studentClassId;
     }
 
@@ -209,19 +213,64 @@ public class SysStudent {
         this.emplPlan = emplPlan;
     }
 
-    public String getEmplCityId() {
+    public Long getEmplCityId() {
         return emplCityId;
     }
 
-    public void setEmplCityId(String emplCityId) {
+    public void setEmplCityId(Long emplCityId) {
         this.emplCityId = emplCityId;
     }
 
-    public String getEmplWorkId() {
+    public Long getEmplWorkId() {
         return emplWorkId;
     }
 
-    public void setEmplWorkId(String emplWorkId) {
+    public void setEmplWorkId(Long emplWorkId) {
         this.emplWorkId = emplWorkId;
+    }
+
+    public String getEmplCityName() {
+        return emplCityName;
+    }
+
+    public void setEmplCityName(String emplCityName) {
+        this.emplCityName = emplCityName;
+    }
+
+    public String getEmplWorkName() {
+        return emplWorkName;
+    }
+
+    public void setEmplWorkName(String emplWorkName) {
+        this.emplWorkName = emplWorkName;
+    }
+
+    @Override
+    public String toString() {
+        return "SysStudent{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", studentCode='" + studentCode + '\'' +
+                ", studentPhone='" + studentPhone + '\'' +
+                ", studentStatus='" + studentStatus + '\'' +
+                ", studentGrade=" + studentGrade +
+                ", studentRemark='" + studentRemark + '\'' +
+                ", studentCreateTime=" + studentCreateTime +
+                ", studentClassId='" + studentClassId + '\'' +
+                ", studentGender='" + studentGender + '\'' +
+                ", studentPwd='" + studentPwd + '\'' +
+                ", studentSalt='" + studentSalt + '\'' +
+                ", collegeName='" + collegeName + '\'' +
+                ", majorName='" + majorName + '\'' +
+                ", className='" + className + '\'' +
+                ", emplStatus='" + emplStatus + '\'' +
+                ", emplCompany='" + emplCompany + '\'' +
+                ", emplProtocol='" + emplProtocol + '\'' +
+                ", emplPlan='" + emplPlan + '\'' +
+                ", emplCityId='" + emplCityId + '\'' +
+                ", emplWorkId='" + emplWorkId + '\'' +
+                ", emplCityName='" + emplCityName + '\'' +
+                ", emplWorkName='" + emplWorkName + '\'' +
+                '}';
     }
 }

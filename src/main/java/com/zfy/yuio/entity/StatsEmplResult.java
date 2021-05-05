@@ -18,6 +18,11 @@ public class StatsEmplResult {
    private String emplRate;
    @JsonProperty("college_name")
    private String collegeName;
+   @JsonProperty("city_name")
+   private String cityName;
+   @JsonProperty("work_name")
+   private String workName;
+   private String plan;
 
    public int getTotalPeople() {
       return totalPeople;
@@ -57,5 +62,29 @@ public class StatsEmplResult {
 
    public void setCollegeName(String collegeName) {
       this.collegeName = collegeName;
+   }
+
+   public String getCityName() {
+      return cityName;
+   }
+
+   public void setCityName(String cityName) {
+      this.cityName = cityName;
+   }
+
+   public String getWorkName() {
+      return workName;
+   }
+
+   public void setWorkName(String workName) {
+      this.workName = workName;
+   }
+
+   public String getPlan() {
+      return plan;
+   }
+
+   public void setPlan(String plan) {
+      this.plan = plan;
    }
 }

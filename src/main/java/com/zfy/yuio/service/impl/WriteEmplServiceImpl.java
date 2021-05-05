@@ -46,8 +46,10 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     @Override
     public WriteEmplInfo get(Long id) {
         WriteEmplInfo info = emplDao.get(id);
-        info.setIntentionCities(emplDao.getIntentionCities(id));
-        info.setIntentionWorks(emplDao.getIntentionWorks(id));
+        if(!ObjectUtils.isEmpty(info)){
+            info.setIntentionCities(emplDao.getIntentionCities(id));
+            info.setIntentionWorks(emplDao.getIntentionWorks(id));
+        }
         return info;
     }
 
