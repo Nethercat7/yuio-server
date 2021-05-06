@@ -4,4 +4,6 @@ public interface ToolDataGeneratorService {
     void generateClass(int num,int grade);
 
     void generateStudent(int num,int grade);
+
+    void generateEmplInfo(int grade);
 }

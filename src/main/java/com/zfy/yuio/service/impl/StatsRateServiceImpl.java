@@ -34,7 +34,7 @@ public class StatsRateServiceImpl implements StatsRateService {
         //计算未就业人数
         for (SysStudent student : students
         ) {
-            if (student.getEmplStatus().equals("0") || ObjectUtils.isEmpty(student.getEmplStatus())) {
+            if (ObjectUtils.isEmpty(student.getEmplStatus()) || student.getEmplStatus().equals("0")) {
                 unEmplPeople += 1;
             }
         }
@@ -56,10 +56,10 @@ public class StatsRateServiceImpl implements StatsRateService {
         QueryParams params = new QueryParams();
         params.setGrade(grade);
         List<SysCollege> colleges = collegeDao.get();
-        List<StatsEmplResult> results=new ArrayList<>();
+        List<StatsEmplResult> results = new ArrayList<>();
         for (SysCollege college : colleges
         ) {
-            StatsEmplResult result=new StatsEmplResult();
+            StatsEmplResult result = new StatsEmplResult();
             params.setCollegeId(college.getCollegeId());
             //获取该院系下的学生数量
             List<SysStudent> students = studentDao.get(params);
@@ -68,7 +68,7 @@ public class StatsRateServiceImpl implements StatsRateService {
             //计算未就业人数
             for (SysStudent student : students
             ) {
-                if (student.getEmplStatus().equals("0") || ObjectUtils.isEmpty(student.getEmplStatus())) {
+                if (ObjectUtils.isEmpty(student.getEmplStatus()) || student.getEmplStatus().equals("0")) {
                     unEmplPeople += 1;
                 }
             }

@@ -20,4 +20,9 @@ public class ToolDataGeneratorController {
     public void generateStudent(@RequestParam("num") int num,@RequestParam("grade") int grade){
         toolDataGeneratorService.generateStudent(num,grade);
     }
+
+    @GetMapping("generateEmplInfo")
+    public void generateEmplInfo(@RequestParam("grade") int grade){
+        toolDataGeneratorService.generateEmplInfo(grade);
+    }
 }
