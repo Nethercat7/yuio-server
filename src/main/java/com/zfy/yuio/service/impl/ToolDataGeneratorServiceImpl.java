@@ -39,7 +39,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
             for (SysMajor major : majors
             ) {
                 SysClass cls = setClassBaseInfo();
-                cls.setClassName(major.getMajorName() + "的班级" + i);
+                cls.setClassName(grade+major.getMajorName() + "的班级" + i);
                 cls.setClassGrade(grade);
                 cls.setClassMajorId(major.getMajorId());
                 classDao.add(cls);
@@ -50,7 +50,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
     @Override
     public void generateStudent(int num, int grade) {
         for (int i = 0; i < num; i++) {
-            List<SysClass> classes = classDao.get();
+            List<SysClass> classes = classDao.getByGrade(grade);
             for (SysClass cls : classes
             ) {
                 SysStudent student = setStudentBaseInfo();
@@ -125,7 +125,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
         student.setStudentCode(snowflakeIdGeneratorUtil.getId());
         student.setStudentGender(RandomInfoGenerateUntil.randomGender());
         student.setStudentPhone(RandomInfoGenerateUntil.randomChinaPhoneNumber());
-        student.setEmplStatus("0");
+        student.setStudentStatus("0");
         student.setStudentRemark("自动生成的学生数据");
         student.setStudentSalt(ShiroUtil.getSalt(7));
         student.setStudentPwd(ShiroUtil.pwd2MD5("123456", student.getStudentSalt(), 1739));

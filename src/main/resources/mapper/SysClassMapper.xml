@@ -48,4 +48,15 @@
         ON m.major_college_id=c.college_id
         WHERE class_name LIKE concat('%',#{keyword},'%')
     </select>
+
+    <select id="getByGrade" parameterType="Integer" resultType="SysClass">
+        SELECT cls.class_id,cls.class_name,cls.class_status,cls.class_create_time,cls.class_remark,cls.class_major_id,cls.class_grade,
+        m.major_name AS class_major_name,c.college_name AS class_college_name
+        FROM sys_class cls
+        LEFT JOIN sys_major m
+        ON cls.class_major_id=m.major_id
+        LEFT JOIN sys_college c
+        ON m.major_college_id=c.college_id
+        WHERE cls.class_grade=#{grade}
+    </select>
 </mapper>

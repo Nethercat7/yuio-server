@@ -23,4 +23,6 @@ public interface SysClassDao {
     List<SysClass> getByPid(Long pid, int grade);
 
     List<SysClass> getByKeyword(String keyword);
+
+    List<SysClass> getByGrade(int grade);
 }
