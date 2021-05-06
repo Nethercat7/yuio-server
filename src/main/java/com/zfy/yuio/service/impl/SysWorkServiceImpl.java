@@ -69,6 +69,11 @@ public class SysWorkServiceImpl implements SysWorkService {
         return workDao.upd(params);
     }
 
+    @Override
+    public List<SysWork> getByKeyword(String keyword) {
+        return workDao.getByKeyword(keyword);
+    }
+
     private void setChildren(List<SysWork> children, Long pid, int level) {
         for (SysWork c : children
         ) {

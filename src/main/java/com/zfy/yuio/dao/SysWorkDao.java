@@ -52,19 +52,5 @@ public interface SysWorkDao {
     */
     SysWork getById(Long id);
 
-    /**
-     *@Author Nethercat7
-     *@Description 通过PID获取城市
-     *@param pid
-     *@Return com.zfy.yuio.entity.SysWork
-    */
-    List<SysWork> getByPid(Long pid);
-
-    /**
-     *@Author Nethercat7
-     *@Description 通过Id获取岗位名称
-     *@param id
-     *@Return java.lang.String
-    */
-    String getWorkName(Long id);
+    List<SysWork> getByKeyword(String keyword);
 }

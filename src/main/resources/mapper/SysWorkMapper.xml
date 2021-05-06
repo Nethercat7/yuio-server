@@ -29,13 +29,8 @@
         WHERE work_id=#{id}
     </select>
 
-    <select id="getByPid" parameterType="Long" resultType="SysWork">
+    <select id="getByKeyword" parameterType="String" resultType="SysWork">
         SELECT * FROM sys_work
-        WHERE work_pid=#{pid}
-    </select>
-
-    <select id="getWorkName" parameterType="Long" resultType="String">
-        SELECT work_name FROM sys_work
-        WHERE work_id=#{id}
+        WHERE work_name LIKE concat('%',#{keyword},'%')
     </select>
 </mapper>

@@ -41,4 +41,6 @@ public interface SysWorkService {
      *@Return int
      */
     int upd(SysWork params);
+
+    List<SysWork> getByKeyword(String keyword);
 }
