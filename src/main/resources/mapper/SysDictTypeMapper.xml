@@ -23,4 +23,10 @@
         SET dict_name=#{dictName},dict_type=#{dictType},dict_status=#{dictStatus},dict_remark=#{dictRemark}
         WHERE dict_id=#{dictId}
     </update>
+
+    <select id="getByKeyword" parameterType="String" resultType="SysDictType">
+        SELECT * FROM sys_dict_type
+        WHERE dict_name LIKE concat('%',#{keyword},'%')
+        OR dict_type LIKE concat('%',#{keyword},'%')
+    </select>
 </mapper>

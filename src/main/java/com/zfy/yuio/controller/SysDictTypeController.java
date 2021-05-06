@@ -47,4 +47,9 @@ public class SysDictTypeController {
         }
         return new ResultBody(0,"修改成功","success");
     }
+
+    @GetMapping("getByKeyword")
+    public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
+        return new ResultBody(0,sysDictTypeService.getByKeyword(keyword));
+    }
 }

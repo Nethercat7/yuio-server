@@ -36,4 +36,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     public int upd(SysDictType params) {
         return sysDictTypeDao.upd(params);
     }
+
+    @Override
+    public List<SysDictType> getByKeyword(String keyword) {
+        return sysDictTypeDao.getByKeyword(keyword);
+    }
 }

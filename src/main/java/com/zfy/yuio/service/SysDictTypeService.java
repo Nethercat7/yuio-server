@@ -17,4 +17,6 @@ public interface SysDictTypeService {
     int del(Long id);
 
     int upd(SysDictType params);
+
+    List<SysDictType> getByKeyword(String keyword);
 }
