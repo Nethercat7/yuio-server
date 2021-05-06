@@ -2,7 +2,6 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.WriteEmplInfo;
 import com.zfy.yuio.service.StatsIntentionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class StatsIntentionController {
 
     @PostMapping("getWorkInfo")
     @RequiresPermissions("statistics:intention:stats")
-    public ResultBody getWorkInfo(@RequestBody WriteEmplInfo params){
-        return null;
+    public ResultBody getWorkInfo(@RequestBody QueryParams params){
+        return new ResultBody(0,intentionService.getIntentionWorks(params));
     }
 }

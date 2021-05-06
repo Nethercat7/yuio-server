@@ -23,4 +23,9 @@ public class StatsIntentionServiceImpl implements StatsIntentionService {
     public List<StatsEmplResult> getIntentionCities(QueryParams params) {
         return intentionDao.getIntentionCities(params);
     }
+
+    @Override
+    public List<StatsEmplResult> getIntentionWorks(QueryParams params) {
+        return intentionDao.getIntentionWorks(params);
+    }
 }
