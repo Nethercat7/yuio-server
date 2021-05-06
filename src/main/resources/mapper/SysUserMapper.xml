@@ -46,4 +46,11 @@
         FROM sys_user
         WHERE user_id=#{id}
     </select>
+
+    <select id="getByKeyword" parameterType="String" resultType="SysUser">
+        SELECT user_id,user_name,user_code,user_gender,user_phone,user_email,user_status,user_remark,user_create_time
+        FROM sys_user
+        WHERE user_name LIKE concat('%',#{keyword},'%')
+        OR user_code LIKE concat('%',#{keyword},'%')
+    </select>
 </mapper>

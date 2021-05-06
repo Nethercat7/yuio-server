@@ -62,6 +62,11 @@ public class SysUserServiceImpl implements SysUserService {
         return userDao.getById(id);
     }
 
+    @Override
+    public List<SysUser> getByKeyword(String keyword) {
+        return userDao.getByKeyword(keyword);
+    }
+
     private void saveUserRole(SysUser params) {
         for (Long role : params.getRoles()
         ) {

@@ -27,4 +27,6 @@ public interface SysUserDao {
     int delRole(Long id);
 
     SysUser getById(Long id);
+
+    List<SysUser> getByKeyword(String keyword);
 }
