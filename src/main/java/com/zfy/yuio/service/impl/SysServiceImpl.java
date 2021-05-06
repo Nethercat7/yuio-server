@@ -32,7 +32,7 @@ public class SysServiceImpl implements SysService {
     private SysMajorDao majorDao;
 
     @Autowired
-    private SysClsDao classDao;
+    private SysClassDao classDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
 

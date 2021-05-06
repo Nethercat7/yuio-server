@@ -49,4 +49,9 @@ public class SysClassController {
         }
         return new ResultBody(1,"修改失败","error");
     }
+
+    @GetMapping("getByKeyword")
+    public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
+        return new ResultBody(0,classService.getByKeyword(keyword));
+    }
 }

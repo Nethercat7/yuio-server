@@ -41,4 +41,6 @@ public interface SysClassService {
      *@Return int
      */
     int upd(SysClass params);
+
+    List<SysClass> getByKeyword(String keyword);
 }

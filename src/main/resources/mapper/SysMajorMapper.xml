@@ -34,7 +34,11 @@
     </select>
 
     <select id="getByKeyword" parameterType="String" resultType="SysMajor">
-        SELECT * FROM sys_major
+        SELECT m.major_id,m.major_name,m.major_status,m.major_create_time,m.major_remark,m.major_college_id,
+        c.college_name
+        FROM sys_major m
+        LEFT JOIN sys_college c
+        ON m.major_college_id=c.college_id
         WHERE major_name LIKE concat('%',#{keyword},'%')
     </select>
 </mapper>
