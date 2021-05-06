@@ -41,4 +41,9 @@ public class SysCollegeServiceImpl implements SysCollegeService {
     public int upd(SysCollege params) {
         return collegeDao.upd(params);
     }
+
+    @Override
+    public List<SysCollege> getByKeyword(String keyword) {
+        return collegeDao.getByKeyword(keyword);
+    }
 }

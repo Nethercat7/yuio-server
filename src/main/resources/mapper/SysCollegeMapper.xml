@@ -29,8 +29,8 @@
         WHERE college_id=#{id}
     </select>
 
-    <select id="getNameById" parameterType="Long" resultType="String">
-        SELECT college_name FROM sys_college
-        WHERE college_id=#{id}
+    <select id="getByKeyword" parameterType="String" resultType="SysCollege">
+        SELECT * FROM sys_college
+        where college_name LIKE concat('%',#{keyword},'%')
     </select>
 </mapper>

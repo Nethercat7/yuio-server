@@ -41,4 +41,6 @@ public interface SysCollegeService {
      *@Return int
      */
     int upd(SysCollege params);
+
+    List<SysCollege> getByKeyword(String keyword);
 }
