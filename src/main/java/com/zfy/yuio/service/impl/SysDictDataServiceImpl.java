@@ -36,4 +36,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     public int upd(SysDictData sysDictData) {
         return sysDictDataDao.upd(sysDictData);
     }
+
+    @Override
+    public List<SysDictData> getByKeyword(String keyword) {
+        return sysDictDataDao.getByKeyword(keyword);
+    }
 }

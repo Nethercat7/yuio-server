@@ -19,4 +19,6 @@ public interface SysDictDataDao {
     int del(Long id);
 
     int upd(SysDictData sysDictData);
+
+    List<SysDictData> getByKeyword(String keyword);
 }
