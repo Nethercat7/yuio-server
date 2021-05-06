@@ -33,8 +33,8 @@
         WHERE major_college_id=#{pid}
     </select>
 
-    <select id="getNameById" parameterType="Long" resultType="String">
-        SELECT major_name FROM sys_major
-        WHERE major_id=#{id}
+    <select id="getByKeyword" parameterType="String" resultType="SysMajor">
+        SELECT * FROM sys_major
+        WHERE major_name LIKE concat('%',#{keyword},'%')
     </select>
 </mapper>

@@ -54,4 +54,9 @@ public class SysMajorController {
         }
         return new ResultBody(1,"修改失败，请稍后重试","error");
     }
+
+    @GetMapping("getByKeyword")
+    public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
+        return new ResultBody(0,majorService.getByKeyword(keyword));
+    }
 }

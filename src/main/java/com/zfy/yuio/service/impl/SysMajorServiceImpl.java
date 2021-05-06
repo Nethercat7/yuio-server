@@ -41,4 +41,9 @@ public class SysMajorServiceImpl implements SysMajorService {
     public int upd(SysMajor params) {
         return majorDao.upd(params);
     }
+
+    @Override
+    public List<SysMajor> getByKeyword(String keyword) {
+        return majorDao.getByKeyword(keyword);
+    }
 }
