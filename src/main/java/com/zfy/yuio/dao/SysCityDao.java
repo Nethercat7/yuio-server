@@ -52,19 +52,5 @@ public interface SysCityDao {
     */
     SysCity getById(Long id);
 
-    /**
-     *@Author Nethercat7
-     *@Description 通过PID获取城市
-     *@param pid
-     *@Return com.zfy.yuio.entity.SysCity
-    */
-    List<SysCity> getByPid(String pid);
-
-    /**
-     *@Author Nethercat7
-     *@Description 通过Id获取城市名称
-     *@param id
-     *@Return java.lang.String
-    */
-    String getCityName(Long id);
+    List<SysCity> getByKeyword(String keyword);
 }

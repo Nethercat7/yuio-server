@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.SysCityDao">
-    <insert  id="add" parameterType="SysCity">
+    <insert id="add" parameterType="SysCity">
         INSERT INTO sys_city(city_id,city_name,city_pid,city_status,city_level)
         VALUES(#{cityId},#{cityName},#{cityPid},#{cityStatus},#{cityLevel})
     </insert>
@@ -39,5 +39,14 @@
     <select id="getCityName" parameterType="Long" resultType="String">
         SELECT city_name FROM sys_city
         WHERE city_id=#{id}
+    </select>
+
+    <select id="getByKeyword" parameterType="String" resultType="SysCity">
+        SELECT * FROM sys_city
+        WHERE city_name LIKE concat('%',#{keyword},'%')
+        AND (
+        city_level=0
+        OR city_level=1
+        )
     </select>
 </mapper>

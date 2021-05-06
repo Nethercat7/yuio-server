@@ -69,6 +69,11 @@ public class SysCityServiceImpl implements SysCityService {
         return cityDao.upd(params);
     }
 
+    @Override
+    public List<SysCity> getByKeyword(String keyword) {
+        return cityDao.getByKeyword(keyword);
+    }
+
     private void setChildren(List<SysCity> children, Long pid, int level) {
         for (SysCity c : children
         ) {

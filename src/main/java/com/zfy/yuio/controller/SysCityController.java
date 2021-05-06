@@ -49,4 +49,9 @@ public class SysCityController {
         }
         return new ResultBody(0, "成功修改", "success");
     }
+
+    @GetMapping("getByKeyword")
+    public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
+        return new ResultBody(0,cityService.getByKeyword(keyword));
+    }
 }

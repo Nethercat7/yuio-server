@@ -41,4 +41,6 @@ public interface SysCityService {
      *@Return int
      */
     int upd(SysCity params);
+
+    List<SysCity> getByKeyword(String keyword);
 }
