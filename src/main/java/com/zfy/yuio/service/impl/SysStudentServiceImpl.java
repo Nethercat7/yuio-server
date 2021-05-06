@@ -8,6 +8,7 @@ import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -42,7 +43,16 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Override
     public List<SysStudent> get(QueryParams params) {
-        return studentDao.get(params);
+        List<SysStudent> students=studentDao.get(params);
+        for (SysStudent student:students
+             ) {
+            if(ObjectUtils.isEmpty(student.getEmplStatus())){
+                student.setEmplWrite("0");
+            }else{
+                student.setEmplWrite("1");
+            }
+        }
+        return students;
     }
 
 

@@ -60,6 +60,8 @@ public class SysStudent {
     private String emplCityName;
     @JsonProperty("empl_work_name")
     private String emplWorkName;
+    @JsonProperty("empl_write")
+    private String emplWrite;
 
     public Long getStudentId() {
         return studentId;
@@ -245,32 +247,11 @@ public class SysStudent {
         this.emplWorkName = emplWorkName;
     }
 
-    @Override
-    public String toString() {
-        return "SysStudent{" +
-                "studentId=" + studentId +
-                ", studentName='" + studentName + '\'' +
-                ", studentCode='" + studentCode + '\'' +
-                ", studentPhone='" + studentPhone + '\'' +
-                ", studentStatus='" + studentStatus + '\'' +
-                ", studentGrade=" + studentGrade +
-                ", studentRemark='" + studentRemark + '\'' +
-                ", studentCreateTime=" + studentCreateTime +
-                ", studentClassId='" + studentClassId + '\'' +
-                ", studentGender='" + studentGender + '\'' +
-                ", studentPwd='" + studentPwd + '\'' +
-                ", studentSalt='" + studentSalt + '\'' +
-                ", collegeName='" + collegeName + '\'' +
-                ", majorName='" + majorName + '\'' +
-                ", className='" + className + '\'' +
-                ", emplStatus='" + emplStatus + '\'' +
-                ", emplCompany='" + emplCompany + '\'' +
-                ", emplProtocol='" + emplProtocol + '\'' +
-                ", emplPlan='" + emplPlan + '\'' +
-                ", emplCityId='" + emplCityId + '\'' +
-                ", emplWorkId='" + emplWorkId + '\'' +
-                ", emplCityName='" + emplCityName + '\'' +
-                ", emplWorkName='" + emplWorkName + '\'' +
-                '}';
+    public String getEmplWrite() {
+        return emplWrite;
+    }
+
+    public void setEmplWrite(String emplWrite) {
+        this.emplWrite = emplWrite;
     }
 }

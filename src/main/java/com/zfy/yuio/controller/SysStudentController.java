@@ -33,7 +33,7 @@ public class SysStudentController {
     @PostMapping("get")
     //@RequiresPermissions("system:student:get")
     public ResultBody get(@RequestBody QueryParams params) {
-        return new ResultBody(0, studentService.get(params), "success");
+            return new ResultBody(0, studentService.get(params), "success");
     }
 
     @DeleteMapping("del")

@@ -56,6 +56,12 @@
         <if test="emplStatus!=null">
             AND ei.empl_status=#{emplStatus}
         </if>
+        <if test="emplWrite==0">
+            AND ei.empl_status IS NULL
+        </if>
+        <if test="emplWrite==1">
+            AND ei.empl_status IS NOT NULL
+        </if>
     </select>
 
     <delete id="del" parameterType="Long">
