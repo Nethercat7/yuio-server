@@ -23,4 +23,6 @@ public interface SysPermsDao {
     List<String> getUserPerms(Long id);
 
     List<String> getStudentPerms(Long id);
+
+    List<SysPerms> getByKeyword(String keyword);
 }

@@ -52,4 +52,10 @@
         ON sr.sr_student_id=s.student_id
         WHERE s.student_id=#{id}
     </select>
+
+    <select id="getByKeyword" parameterType="String" resultType="SysPerms">
+         SELECT * FROM sys_perms
+         WHERE perms_name LIKE concat('%',#{keyword},'%')
+         OR perms_mark LIKE concat('%',#{keyword},'%')
+    </select>
 </mapper>

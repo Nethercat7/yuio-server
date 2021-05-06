@@ -83,4 +83,9 @@ public class SysPermsServiceImpl implements SysPermsService {
     public List<String> getStudentPerms(Long id) {
         return permsDao.getStudentPerms(id);
     }
+
+    @Override
+    public List<SysPerms> getByKeyword(String keyword) {
+        return permsDao.getByKeyword(keyword);
+    }
 }
