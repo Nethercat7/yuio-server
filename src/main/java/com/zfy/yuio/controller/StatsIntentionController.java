@@ -1,5 +1,6 @@
 package com.zfy.yuio.controller;
 
+import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.WriteEmplInfo;
 import com.zfy.yuio.service.StatsIntentionService;
@@ -21,8 +22,8 @@ public class StatsIntentionController {
 
     @PostMapping("getCityInfo")
     @RequiresPermissions("statistics:intention:stats")
-    public ResultBody getCityInfo(@RequestBody WriteEmplInfo params){
-        return null;
+    public ResultBody getCityInfo(@RequestBody QueryParams params){
+        return new ResultBody(0,intentionService.getIntentionCities(params));
     }
 
     @PostMapping("getWorkInfo")
