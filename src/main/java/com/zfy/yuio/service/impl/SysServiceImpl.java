@@ -101,27 +101,28 @@ public class SysServiceImpl implements SysService {
         Long id = Long.valueOf(String.valueOf(params.get("id")));
         String oldPwd = String.valueOf(params.get("oldPwd"));
         String newPwd = String.valueOf(params.get("newPwd"));
-        String type=String.valueOf(params.get(("type")));
-        if(type.equals("usr")){
-            SysUser user = userDao.getPwdInfo(id);
-            if (!ObjectUtils.isEmpty(user)) {
-                String salt = user.getUserSalt();
-                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(user.getUserPwd())) {
+        String type = String.valueOf(params.get(("type")));
+        Map<String, String> info;
+        if (type.equals("usr")) {
+            info = sysDao.getPwd(true, id);
+            if (!ObjectUtils.isEmpty(info)) {
+                String salt = info.get("user_salt");
+                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(info.get("user_pwd"))) {
                     String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
-                    return userDao.changePwd(id, pwd);
+                    return sysDao.changePwd(true,id, pwd);
                 } else {
                     return 2;
                 }
             } else {
                 return 0;
             }
-        }else{
-            SysStudent student = studentDao.getPwdInfo(id);
-            if (!ObjectUtils.isEmpty(student)) {
-                String salt = student.getStudentSalt();
-                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(student.getStudentPwd())) {
+        } else {
+            info = sysDao.getPwd(false, id);
+            if (!ObjectUtils.isEmpty(info)) {
+                String salt = info.get("student_salt");
+                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(info.get("student_pwd"))) {
                     String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
-                    return studentDao.changePwd(id, pwd);
+                    return sysDao.changePwd(false,id, pwd);
                 } else {
                     return 2;
                 }
@@ -140,7 +141,7 @@ public class SysServiceImpl implements SysService {
         } else {
             return new ResultBody(1, "账号不存在", "error");
         }
-        return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode(),"student"));
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getStudentId(), loginInfo.getStudentName(), loginInfo.getStudentCode(), "student"));
     }
 
     private ResultBody usrLogin(String account, String pwd) {
@@ -152,6 +153,6 @@ public class SysServiceImpl implements SysService {
         } else {
             return new ResultBody(1, "账号不存在", "error");
         }
-        return new ResultBody(0, JWTUtil.createToken(loginInfo.getUserId(), loginInfo.getUserName(), loginInfo.getUserCode(),"usr"));
+        return new ResultBody(0, JWTUtil.createToken(loginInfo.getUserId(), loginInfo.getUserName(), loginInfo.getUserCode(), "usr"));
     }
 }

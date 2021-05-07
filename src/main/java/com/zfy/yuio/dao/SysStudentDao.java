@@ -26,8 +26,4 @@ public interface SysStudentDao {
     int addRole(Long studentId,Long roleId);
 
     int updProfile(SysStudent params);
-
-    int changePwd(Long id,String pwd);
-
-    SysStudent getPwdInfo(Long id);
 }

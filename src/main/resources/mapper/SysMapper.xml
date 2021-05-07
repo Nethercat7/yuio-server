@@ -19,7 +19,7 @@
         </choose>
     </update>
 
-    <select id="getPwd" parameterType="String" resultType="Map">
+    <select id="getPwd" parameterType="Object" resultType="Map">
         <choose>
             <when test="isUser">
                 SELECT user_pwd,user_salt
@@ -47,9 +47,22 @@
     </select>
 
     <select id="getStudentLoginInfo" parameterType="String" resultType="SysStudent">
-        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
-        student_remark,student_class_id,student_pwd,student_salt,student_create_time
-        FROM sys_student
+        SELECT * FROM sys_student
         WHERE student_code=#{key}
     </select>
+
+    <update id="changePwd" parameterType="Object">
+        <choose>
+            <when test="isUser">
+                UPDATE sys_user
+                SET user_pwd=#{pwd}
+                WHERE user_id=#{id}
+            </when>
+            <otherwise>
+                UPDATE sys_student
+                SET student_pwd=#{pwd}
+                WHERE student_id=#{id}
+            </otherwise>
+        </choose>
+    </update>
 </mapper>
