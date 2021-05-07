@@ -22,8 +22,6 @@ public class SysUser {
     private String userGender;
     @JsonProperty("phone")
     private String userPhone;
-    @JsonProperty("email")
-    private String userEmail;
     @JsonProperty("status")
     private String userStatus;
     @JsonProperty("remark")
@@ -69,15 +67,6 @@ public class SysUser {
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
 
     public String getUserRemark() {
         return userRemark;

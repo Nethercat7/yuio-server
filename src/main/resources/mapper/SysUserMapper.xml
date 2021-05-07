@@ -5,12 +5,12 @@
 
 <mapper namespace="com.zfy.yuio.dao.SysUserDao">
     <insert id="add" parameterType="SysUser">
-        INSERT INTO sys_user(user_id,user_name,user_code,user_gender,user_phone,user_email,user_status,user_remark,user_pwd,user_salt)
+        INSERT INTO sys_user(user_id,user_name,user_code,user_gender,user_phone,user_status,user_remark,user_pwd,user_salt)
         VALUES (#{userId},#{userName},#{userCode},#{userGender},#{userPhone},#{userEmail},#{userStatus},#{userRemark},#{userPwd},#{userSalt})
     </insert>
 
     <select id="get" resultType="SysUser">
-        SELECT user_id,user_name,user_code,user_gender,user_phone,user_email,user_status,user_remark,user_create_time
+        SELECT user_id,user_name,user_code,user_gender,user_phone,user_status,user_remark,user_create_time
         FROM sys_user
     </select>
 
@@ -21,7 +21,7 @@
 
     <update id="upd" parameterType="SysUser">
         UPDATE sys_user
-        SET user_name=#{userName},user_code=#{userCode},user_gender=#{userGender},user_phone=#{userPhone},user_email=#{userEmail},user_status=#{userStatus},
+        SET user_name=#{userName},user_code=#{userCode},user_gender=#{userGender},user_phone=#{userPhone},user_status=#{userStatus},
         user_remark=#{userRemark}
         WHERE user_id=#{userId}
     </update>
@@ -42,13 +42,13 @@
     </delete>
 
     <select id="getById" parameterType="Long" resultType="SysUser">
-        SELECT user_id,user_name,user_code,user_gender,user_phone,user_email,user_status,user_remark,user_create_time
+        SELECT user_id,user_name,user_code,user_gender,user_phone,user_status,user_remark,user_create_time
         FROM sys_user
         WHERE user_id=#{id}
     </select>
 
     <select id="getByKeyword" parameterType="String" resultType="SysUser">
-        SELECT user_id,user_name,user_code,user_gender,user_phone,user_email,user_status,user_remark,user_create_time
+        SELECT user_id,user_name,user_code,user_gender,user_phone,user_status,user_remark,user_create_time
         FROM sys_user
         WHERE user_name LIKE concat('%',#{keyword},'%')
         OR user_code LIKE concat('%',#{keyword},'%')
@@ -56,7 +56,7 @@
 
     <update id="updProfile" parameterType="SysUser">
         UPDATE sys_user
-        SET user_gender=#{userGender},user_phone=#{userPhone},user_email=#{userEmail}
+        SET user_gender=#{userGender},user_phone=#{userPhone}
         WHERE user_id=#{userId}
     </update>
 
