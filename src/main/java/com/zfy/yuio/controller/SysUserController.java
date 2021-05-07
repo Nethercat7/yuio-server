@@ -53,6 +53,11 @@ public class SysUserController {
         return new ResultBody(0,"成功修改","success");
     }
 
+    @GetMapping("getById")
+    public ResultBody getById(@RequestParam("id") Long id){
+        return new ResultBody(0,userService.getById(id));
+    }
+
     @GetMapping("getByKeyword")
     public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
         return new ResultBody(0,userService.getByKeyword(keyword));
