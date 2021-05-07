@@ -6,8 +6,6 @@ import com.zfy.yuio.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
  *@Description:User mgt
  *@Author:Nethercat7
@@ -72,16 +70,5 @@ public class SysUserController {
             return new ResultBody(1,"修改失败","error");
         }
         return new ResultBody(0,"成功修改","success");
-    }
-
-    @PutMapping("changePwd")
-    public ResultBody changePwd(@RequestBody Map<String,Object> params){
-        int status=userService.changePwd(params);
-        if(status==1){
-            return new ResultBody(0,"修改成功，请重新登录","success");
-        }else if(status==2){
-            return new ResultBody(2,"旧密码不正确","error");
-        }
-        return new ResultBody(1,"修改失败","error");
     }
 }

@@ -39,24 +39,32 @@ public class SysController {
     }
 
     @GetMapping("getCollegeAndMajor")
-    //@RequiresPermissions("system:class:*")
     public ResultBody getCollegeAndMajor() {
         return new ResultBody(0, sysService.getCollegeAndMajor(), "success");
     }
 
     @GetMapping("getFullOrg")
-    //@RequiresPermissions(value = {"system:student:*","statistics:rate:*","statistics:intention:*"},logical = Logical.OR)
     public ResultBody getFullOrg(@RequestParam("grade") int grade) {
         return new ResultBody(0, sysService.getFullOrg(grade), "success");
     }
 
     @GetMapping("getGrade")
-    //@RequiresPermissions(value = {"system:student:*","statistics:rate:*","statistics:rate:*","statistics:intention:*"},logical = Logical.OR)
     public ResultBody getGrade() {
         List<Integer> grades = sysService.getGrade();
         if (ObjectUtils.isEmpty(grades)) {
             return new ResultBody(1, "未找到相关数据", "success");
         }
         return new ResultBody(0, grades, "success");
+    }
+
+    @PutMapping("changePwd")
+    public ResultBody changePwd(@RequestBody Map<String,Object> params){
+        int status=sysService.changePwd(params);
+        if(status==1){
+            return new ResultBody(0,"修改成功，请重新登录","success");
+        }else if(status==2){
+            return new ResultBody(2,"旧密码不正确","error");
+        }
+        return new ResultBody(1,"修改失败","error");
     }
 }

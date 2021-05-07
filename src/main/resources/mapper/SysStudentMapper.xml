@@ -104,12 +104,6 @@
         WHERE student_id=#{studentId}
     </update>
 
-    <update id="changePwd" parameterType="Object">
-        UPDATE sys_student
-        SET student_pwd=#{pwd}
-        WHERE student_id=#{id}
-    </update>
-
     <select id="getPwdInfo" parameterType="Long" resultType="SysStudent">
         SELECT student_pwd,student_salt
         FROM sys_student

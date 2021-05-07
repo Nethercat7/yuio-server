@@ -5,9 +5,9 @@ import com.zfy.yuio.entity.*;
 import com.zfy.yuio.service.SysService;
 import com.zfy.yuio.utils.JWTUtil;
 import com.zfy.yuio.utils.ShiroUtil;
-import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +34,8 @@ public class SysServiceImpl implements SysService {
     @Autowired
     private SysClassDao classDao;
 
-    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(7, 0);
+    @Autowired
+    private SysUserDao userDao;
 
     @Override
     public int resetPwd(Map<String, Object> map) {
@@ -93,6 +94,41 @@ public class SysServiceImpl implements SysService {
     @Override
     public List<Integer> getGrade() {
         return sysDao.getGrade();
+    }
+
+    @Override
+    public int changePwd(Map<String, Object> params) {
+        Long id = Long.valueOf(String.valueOf(params.get("id")));
+        String oldPwd = String.valueOf(params.get("oldPwd"));
+        String newPwd = String.valueOf(params.get("newPwd"));
+        String type=String.valueOf(params.get(("type")));
+        if(type.equals("usr")){
+            SysUser user = userDao.getPwdInfo(id);
+            if (!ObjectUtils.isEmpty(user)) {
+                String salt = user.getUserSalt();
+                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(user.getUserPwd())) {
+                    String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
+                    return userDao.changePwd(id, pwd);
+                } else {
+                    return 2;
+                }
+            } else {
+                return 0;
+            }
+        }else{
+            SysStudent student = studentDao.getPwdInfo(id);
+            if (!ObjectUtils.isEmpty(student)) {
+                String salt = student.getStudentSalt();
+                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(student.getStudentPwd())) {
+                    String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
+                    return studentDao.changePwd(id, pwd);
+                } else {
+                    return 2;
+                }
+            } else {
+                return 0;
+            }
+        }
     }
 
     private ResultBody studentLogin(String code, String pwd) {

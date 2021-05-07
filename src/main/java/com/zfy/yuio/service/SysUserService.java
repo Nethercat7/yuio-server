@@ -3,7 +3,6 @@ package com.zfy.yuio.service;
 import com.zfy.yuio.entity.SysUser;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  *@Description:User mgt
@@ -24,6 +23,4 @@ public interface SysUserService {
     List<SysUser> getByKeyword(String keyword);
 
     int updProfile(SysUser params);
-
-    int changePwd(Map<String,Object> params);
 }

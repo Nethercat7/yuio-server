@@ -22,4 +22,6 @@ public interface SysService {
     List<SysCollege> getFullOrg(int grade);
 
     List<Integer> getGrade();
+
+    int changePwd(Map<String,Object> params);
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Description:学生管理模块
@@ -75,24 +74,5 @@ public class SysStudentServiceImpl implements SysStudentService {
     @Override
     public int updProfile(SysStudent params) {
         return studentDao.updProfile(params);
-    }
-
-    @Override
-    public int changePwd(Map<String, Object> params) {
-        Long id = Long.valueOf(String.valueOf(params.get("id")));
-        String oldPwd = String.valueOf(params.get("oldPwd"));
-        String newPwd = String.valueOf(params.get("newPwd"));
-        SysStudent student = studentDao.getPwdInfo(id);
-        if (!ObjectUtils.isEmpty(student)) {
-            String salt = student.getStudentSalt();
-            if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(student.getStudentPwd())) {
-                String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
-                return studentDao.changePwd(id, pwd);
-            } else {
-                return 2;
-            }
-        } else {
-            return 0;
-        }
     }
 }

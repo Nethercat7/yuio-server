@@ -4,7 +4,6 @@ import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.SysStudent;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Description:学生管理模块
@@ -23,6 +22,4 @@ public interface SysStudentService {
     SysStudent getById(Long id);
 
     int updProfile(SysStudent params);
-
-    int changePwd(Map<String,Object> params);
 }
