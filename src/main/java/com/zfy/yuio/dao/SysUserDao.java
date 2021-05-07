@@ -31,4 +31,8 @@ public interface SysUserDao {
     List<SysUser> getByKeyword(String keyword);
 
     int updProfile(SysUser params);
+
+    int changePwd(Long id,String pwd);
+
+    SysUser getPwdInfo(Long id);
 }

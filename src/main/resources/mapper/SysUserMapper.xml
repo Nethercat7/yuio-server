@@ -59,4 +59,16 @@
         SET user_gender=#{userGender},user_phone=#{userPhone},user_email=#{userEmail}
         WHERE user_id=#{userId}
     </update>
+
+    <update id="changePwd" parameterType="Object">
+        UPDATE sys_user
+        SET user_pwd=#{pwd}
+        WHERE user_id=#{id}
+    </update>
+
+    <select id="getPwdInfo" parameterType="Long" resultType="SysUser">
+        SELECT user_pwd,user_salt
+        FROM sys_user
+        WHERE user_id=#{id}
+    </select>
 </mapper>

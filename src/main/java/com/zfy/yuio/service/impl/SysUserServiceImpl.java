@@ -7,8 +7,10 @@ import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:User mgt
@@ -70,6 +72,25 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public int updProfile(SysUser params) {
         return userDao.updProfile(params);
+    }
+
+    @Override
+    public int changePwd(Map<String, Object> params) {
+        Long id = Long.valueOf(String.valueOf(params.get("id")));
+        String oldPwd = String.valueOf(params.get("oldPwd"));
+        String newPwd = String.valueOf(params.get("newPwd"));
+        SysUser user = userDao.getPwdInfo(id);
+        if (!ObjectUtils.isEmpty(user)) {
+            String salt = user.getUserSalt();
+            if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(user.getUserPwd())) {
+                String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
+                return userDao.changePwd(id, pwd);
+            } else {
+                return 2;
+            }
+        } else {
+            return 0;
+        }
     }
 
     private void saveUserRole(SysUser params) {
