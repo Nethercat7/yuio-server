@@ -25,6 +25,7 @@ public class QueryParams {
     private int grade;
     private String name;
     private List<Integer> grades;
+    private String gender;
 
     public Long getStudentId() {
         return studentId;
@@ -96,5 +97,13 @@ public class QueryParams {
 
     public void setEmplWrite(String emplWrite) {
         this.emplWrite = emplWrite;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

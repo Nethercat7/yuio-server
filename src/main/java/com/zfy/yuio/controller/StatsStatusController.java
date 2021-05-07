@@ -22,13 +22,13 @@ public class StatsStatusController {
     @PostMapping("getCityInfo")
     @RequiresPermissions("statistics:status:stats")
     public ResultBody getCityInfo(@RequestBody QueryParams params){
-        return new ResultBody(0,statusService.getEmplCityInfo(params));
+        return new ResultBody(0,statusService.getCityInfo(params));
     }
 
     @PostMapping("getWorkInfo")
     @RequiresPermissions("statistics:status:stats")
     public ResultBody getWorkInfo(@RequestBody QueryParams params){
-        return new ResultBody(0,statusService.getEmplWorkInfo(params));
+        return new ResultBody(0,statusService.getWorkInfo(params));
     }
 
     @PostMapping("getStudentPlan")
