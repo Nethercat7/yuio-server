@@ -29,4 +29,6 @@ public interface SysUserDao {
     SysUser getById(Long id);
 
     List<SysUser> getByKeyword(String keyword);
+
+    int updProfile(SysUser params);
 }

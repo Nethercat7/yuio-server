@@ -67,6 +67,11 @@ public class SysUserServiceImpl implements SysUserService {
         return userDao.getByKeyword(keyword);
     }
 
+    @Override
+    public int updProfile(SysUser params) {
+        return userDao.updProfile(params);
+    }
+
     private void saveUserRole(SysUser params) {
         for (Long role : params.getRoles()
         ) {

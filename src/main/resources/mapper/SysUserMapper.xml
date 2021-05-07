@@ -53,4 +53,10 @@
         WHERE user_name LIKE concat('%',#{keyword},'%')
         OR user_code LIKE concat('%',#{keyword},'%')
     </select>
+
+    <update id="updProfile" parameterType="SysUser">
+        UPDATE sys_user
+        SET user_gender=#{userGender},user_phone=#{userPhone},user_email=#{userEmail}
+        WHERE user_id=#{userId}
+    </update>
 </mapper>

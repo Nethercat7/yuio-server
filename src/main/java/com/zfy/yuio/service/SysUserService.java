@@ -21,4 +21,6 @@ public interface SysUserService {
     SysUser getById(Long id);
 
     List<SysUser> getByKeyword(String keyword);
+
+    int updProfile(SysUser params);
 }

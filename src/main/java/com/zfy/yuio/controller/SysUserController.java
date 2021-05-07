@@ -62,4 +62,13 @@ public class SysUserController {
     public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
         return new ResultBody(0,userService.getByKeyword(keyword));
     }
+
+    @PutMapping("updProfile")
+    public ResultBody updProfile(@RequestBody SysUser params){
+        int status=userService.updProfile(params);
+        if(status!=1){
+            return new ResultBody(1,"修改失败","error");
+        }
+        return new ResultBody(0,"成功修改","success");
+    }
 }
