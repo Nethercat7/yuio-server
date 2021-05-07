@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,9 +24,6 @@ public class SysServiceImpl implements SysService {
     private SysDao sysDao;
 
     @Autowired
-    private SysStudentDao studentDao;
-
-    @Autowired
     private SysCollegeDao collegeDao;
 
     @Autowired
@@ -35,7 +33,7 @@ public class SysServiceImpl implements SysService {
     private SysClassDao classDao;
 
     @Autowired
-    private SysUserDao userDao;
+    private SysPermsDao permsDao;
 
     @Override
     public int resetPwd(Map<String, Object> map) {
@@ -109,7 +107,7 @@ public class SysServiceImpl implements SysService {
                 String salt = info.get("user_salt");
                 if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(info.get("user_pwd"))) {
                     String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
-                    return sysDao.changePwd(true,id, pwd);
+                    return sysDao.changePwd(true, id, pwd);
                 } else {
                     return 2;
                 }
@@ -122,7 +120,7 @@ public class SysServiceImpl implements SysService {
                 String salt = info.get("student_salt");
                 if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(info.get("student_pwd"))) {
                     String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
-                    return sysDao.changePwd(false,id, pwd);
+                    return sysDao.changePwd(false, id, pwd);
                 } else {
                     return 2;
                 }
@@ -130,6 +128,45 @@ public class SysServiceImpl implements SysService {
                 return 0;
             }
         }
+    }
+
+    @Override
+    public List<SysPerms> getMenus(String type, Long id) {
+        List<SysPerms> permsList = new ArrayList<>();
+        List<SysPerms> perms;
+        //选择查询类型
+        if (type.equals("usr")) {
+            perms = permsDao.getUserMenus(id);
+        } else {
+            perms = permsDao.getStudentMenus(id);
+        }
+        for (SysPerms p : perms
+        ) {
+            if (p.getPermsPid() == 0) {
+                permsList.add(p);
+            }
+        }
+        for (SysPerms m : permsList
+        ) {
+            m.setChildren(getChildren(m.getPermsId(), perms));
+        }
+        return permsList;
+    }
+
+    private List<SysPerms> getChildren(Long pid, List<SysPerms> list) {
+        List<SysPerms> children = new ArrayList<>();
+        for (SysPerms p : list
+        ) {
+            if (p.getPermsPid().equals(pid)) {
+                children.add(p);
+            }
+        }
+
+        for (SysPerms m : children
+        ) {
+            m.setChildren(getChildren(m.getPermsId(), list));
+        }
+        return children;
     }
 
     private ResultBody studentLogin(String code, String pwd) {

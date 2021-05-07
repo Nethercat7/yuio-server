@@ -55,4 +55,30 @@
          WHERE perms_name LIKE concat('%',#{keyword},'%')
          OR perms_mark LIKE concat('%',#{keyword},'%')
     </select>
+
+    <select id="getUserMenus" parameterType="Long" resultType="SysPerms">
+        SELECT * FROM sys_perms m
+        LEFT JOIN sys_role_perms rp
+        ON rp.rp_perms_id=m.perms_id
+        LEFT JOIN sys_role r
+        ON rp.rp_role_id=r.role_id
+        LEFT JOIN sys_user_role ur
+        ON ur.ur_role_id=r.role_id
+        LEFT JOIN sys_user u
+        ON ur.ur_user_id=u.user_id
+        WHERE u.user_id=#{id}
+    </select>
+
+    <select id="getStudentMenus" parameterType="Long" resultType="SysPerms">
+        SELECT * FROM sys_perms m
+        LEFT JOIN sys_role_perms rp
+        ON rp.rp_perms_id=m.perms_id
+        LEFT JOIN sys_role r
+        ON rp.rp_role_id=r.role_id
+        LEFT JOIN sys_student_role sr
+        ON sr.sr_role_id=r.role_id
+        LEFT JOIN sys_student s
+        ON sr.sr_student_id=s.student_id
+        WHERE s.student_id=#{id}
+    </select>
 </mapper>

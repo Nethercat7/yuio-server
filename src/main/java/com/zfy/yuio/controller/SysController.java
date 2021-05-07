@@ -67,4 +67,9 @@ public class SysController {
         }
         return new ResultBody(1,"修改失败","error");
     }
+
+    @GetMapping("getMenus")
+    public ResultBody getMenus(@RequestParam("type") String type,@RequestParam("id") Long id){
+        return new ResultBody(0,sysService.getMenus(type,id));
+    }
 }

@@ -2,6 +2,7 @@ package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysCollege;
+import com.zfy.yuio.entity.SysPerms;
 
 import java.util.List;
 import java.util.Map;
@@ -24,4 +25,6 @@ public interface SysService {
     List<Integer> getGrade();
 
     int changePwd(Map<String,Object> params);
+
+    List<SysPerms> getMenus(String type,Long id);
 }
