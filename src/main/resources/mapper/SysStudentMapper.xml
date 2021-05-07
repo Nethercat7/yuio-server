@@ -77,14 +77,42 @@
     </update>
 
     <select id="getById" parameterType="Long" resultType="SysStudent">
-        SELECT student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,
-        student_remark,student_class_id,student_create_time
-        FROM sys_student
-        WHERE student_id=#{id}
+        SELECT
+        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,s.student_remark,
+        s.student_class_id,s.student_create_time,
+        c.college_name,
+        m.major_name,
+        cls.class_name
+        FROM sys_student s
+        LEFT JOIN sys_class cls
+        ON s.student_class_id=cls.class_id
+        LEFT JOIN sys_major m
+        ON cls.class_major_id=m.major_id
+        LEFT JOIN sys_college c
+        ON m.major_college_id=c.college_id
+        WHERE s.student_id=#{id}
     </select>
 
     <insert id="addRole" parameterType="Long">
         INSERT INTO sys_student_role(sr_student_id,sr_role_id)
         VALUES(#{studentId},#{roleId})
     </insert>
+
+    <update id="updProfile" parameterType="SysStudent">
+        UPDATE sys_student
+        SET student_gender=#{studentGender},student_phone=#{studentPhone}
+        WHERE student_id=#{studentId}
+    </update>
+
+    <update id="changePwd" parameterType="Object">
+        UPDATE sys_student
+        SET student_pwd=#{pwd}
+        WHERE student_id=#{id}
+    </update>
+
+    <select id="getPwdInfo" parameterType="Long" resultType="SysStudent">
+        SELECT student_pwd,student_salt
+        FROM sys_student
+        WHERE student_id=#{id}
+    </select>
 </mapper>

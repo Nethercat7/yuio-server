@@ -8,6 +8,8 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @Description:学生管理模块
  * @Author:Nethercat7
@@ -33,7 +35,7 @@ public class SysStudentController {
     @PostMapping("get")
     //@RequiresPermissions("system:student:get")
     public ResultBody get(@RequestBody QueryParams params) {
-            return new ResultBody(0, studentService.get(params), "success");
+            return new ResultBody(0, studentService.get(params));
     }
 
     @DeleteMapping("del")
@@ -54,5 +56,30 @@ public class SysStudentController {
             return new ResultBody(0, "成功修改", "success");
         }
         return new ResultBody(1, "修改失败", "error");
+    }
+
+    @GetMapping("getById")
+    public ResultBody getById(@RequestParam("id") Long id) {
+        return new ResultBody(0, studentService.getById(id));
+    }
+
+    @PutMapping("updProfile")
+    public ResultBody updProfile(@RequestBody SysStudent params){
+        int status=studentService.updProfile(params);
+        if(status!=1){
+            return new ResultBody(1,"修改失败","error");
+        }
+        return new ResultBody(0,"成功修改","success");
+    }
+
+    @PutMapping("changePwd")
+    public ResultBody changePwd(@RequestBody Map<String,Object> params){
+        int status=studentService.changePwd(params);
+        if(status==1){
+            return new ResultBody(0,"修改成功，请重新登录","success");
+        }else if(status==2){
+            return new ResultBody(2,"旧密码不正确","error");
+        }
+        return new ResultBody(1,"修改失败","error");
     }
 }
