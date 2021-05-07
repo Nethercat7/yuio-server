@@ -40,7 +40,14 @@ public class AuthRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         String token = (String) principalCollection.getPrimaryPrincipal();
         Long id = JWTUtil.getId(token);
-        List<String> perms=permsService.getUserPerms(id);
+        String type = JWTUtil.getType(token);
+        List<String> perms;
+        //获取使用者拥有的权限
+        if (type.equals("usr")) {
+            perms = permsService.getUserPerms(id);
+        } else {
+            perms = permsService.getStudentPerms(id);
+        }
         simpleAuthorizationInfo.addStringPermissions(perms);
         return simpleAuthorizationInfo;
     }
