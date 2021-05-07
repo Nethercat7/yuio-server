@@ -43,7 +43,7 @@ public class SysController {
         return new ResultBody(0, sysService.getCollegeAndMajor(), "success");
     }
 
-    @GetMapping("getFullOrg")
+    @GetMapping("getCompleteOrg")
     public ResultBody getFullOrg(@RequestParam("grade") int grade) {
         return new ResultBody(0, sysService.getFullOrg(grade), "success");
     }
