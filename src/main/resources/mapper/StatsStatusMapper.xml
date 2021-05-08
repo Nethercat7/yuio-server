@@ -126,4 +126,46 @@
             </otherwise>
         </choose>
     </select>
+
+    <select id="getMostStudentPlanByGender" parameterType="QueryParams" resultType="StatsEmplResult">
+        SELECT max( total_people ) AS total_people,empl_plan
+        FROM(
+        SELECT COUNT( s.student_id ) AS total_people,ei.empl_plan
+        FROM sys_student s
+        LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
+        LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
+        LEFT JOIN sys_college c ON m.major_college_id = c.college_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+        WHERE 1 = 1
+        <if test="collegeId!=null">
+            AND c.college_id=#{collegeId}
+        </if>
+        <if test="majorId!=null">
+            AND m.major_id=#{majorId}
+        </if>
+        <if test="classId!=null">
+            AND cls.class_id=#{classId}
+        </if>
+        <if test="grade!=0">
+            AND cls.class_grade=#{grade}
+        </if>
+        <if test="emplStatus!=null">
+            AND ei.empl_status=#{emplStatus}
+        </if>
+        <if test="gender!=null">
+            AND s.student_gender=#{gender}
+        </if>
+        GROUP BY ei.empl_plan
+        ) AS m
+        GROUP BY empl_plan
+        ORDER BY total_people DESC
+        <choose>
+            <when test="most==0">
+                LIMIT 1
+            </when>
+            <otherwise>
+                LIMIT 1,1
+            </otherwise>
+        </choose>
+    </select>
 </mapper>
