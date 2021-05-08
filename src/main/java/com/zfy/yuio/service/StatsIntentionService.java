@@ -13,5 +13,5 @@ import java.util.List;
 public interface StatsIntentionService {
     List<StatsEmplResult> getIntentionCities(QueryParams params);
 
-    List<StatsEmplResult> getIntentionWorks(QueryParams params);
+    StatsEmplResult getIntentionWorks(QueryParams params);
 }

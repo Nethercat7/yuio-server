@@ -16,4 +16,6 @@ public interface StatsIntentionDao {
     List<StatsEmplResult> getIntentionCities(QueryParams params);
 
     List<StatsEmplResult> getIntentionWorks(QueryParams params);
+
+    StatsEmplResult getIntentionWorksByGender(QueryParams params);
 }
