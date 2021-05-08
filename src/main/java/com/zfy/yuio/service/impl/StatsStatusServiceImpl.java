@@ -8,6 +8,7 @@ import com.zfy.yuio.service.StatsStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -27,32 +28,53 @@ public class StatsStatusServiceImpl implements StatsStatusService {
 
     @Override
     public StatsEmplResult getCityInfo(QueryParams params) {
-        return null;
+        StatsEmplResult result = new StatsEmplResult();
+        params.setEmplStatus("1");
+        List<StatsEmplResult> results = statusDao.getCityInfo(params);
+        result.setResults(results);
+        return result;
     }
 
     @Override
     public StatsEmplResult getWorkInfo(QueryParams params) {
         StatsEmplResult result = new StatsEmplResult();
+        DecimalFormat df = new DecimalFormat("0.00");
         params.setEmplStatus("1");
         //获取就业岗位信息
         List<StatsEmplResult> results = statusDao.getWorkInfo(params);
         result.setResults(results);
+        //计算总人数
+        int totalPeople = results.stream().mapToInt(StatsEmplResult::getTotalPeople).sum();
         //计算人数最多的就业岗位
-        Optional<StatsEmplResult> max = results.stream().max(Comparator.comparing(StatsEmplResult::getTotalPeople));
-        result.setMax(max.get());
+        Optional<StatsEmplResult> most = results.stream().max(Comparator.comparing(StatsEmplResult::getTotalPeople));
+        String mostRate = df.format((float) (totalPeople - (totalPeople - most.get().getTotalPeople())) / (float) totalPeople * 100);
+        most.get().setEmplRate(mostRate);
+        result.setMost(most.get());
         //获取女性人数最多的岗位
+        params.setMost("0");
         params.setGender("0");
         StatsEmplResult female = statusDao.getMaxWorkInfoByGender(params);
-        result.setFemaleMax(female);
+        result.setFemaleMost(female);
         //获取男性人数最多的岗位
         params.setGender("1");
         StatsEmplResult male = statusDao.getMaxWorkInfoByGender(params);
-        result.setMaleMax(male);
+        result.setMaleMost(male);
+        //获取不同性别其次选择最多的岗位
+        params.setMost("1");
+        StatsEmplResult maleSecond=statusDao.getMaxWorkInfoByGender(params);
+        result.setMaleSecond(maleSecond);
+        params.setGender("0");
+        StatsEmplResult femaleSecond=statusDao.getMaxWorkInfoByGender(params);
+        result.setFemaleSecond(femaleSecond);
         return result;
     }
 
     @Override
     public StatsEmplResult getStudentPlan(QueryParams params) {
-        return null;
+        StatsEmplResult result = new StatsEmplResult();
+        params.setEmplStatus("0");
+        List<StatsEmplResult> results = statusDao.getStudentPlan(params);
+        result.setResults(results);
+        return result;
     }
 }

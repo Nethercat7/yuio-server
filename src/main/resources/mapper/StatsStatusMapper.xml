@@ -4,8 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.StatsStatusDao">
+    <select id="getCityInfo" parameterType="QueryParams" resultType="StatsEmplResult">
+        SELECT COUNT( s.student_id ) AS total_people,ci.city_name
+        FROM sys_student s
+        LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
+        LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
+        LEFT JOIN sys_college c ON m.major_college_id = c.college_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+        LEFT JOIN sys_city ci ON ei.empl_city_id = ci.city_id
+        WHERE 1 = 1
+        <if test="collegeId!=null">
+            AND c.college_id=#{collegeId}
+        </if>
+        <if test="majorId!=null">
+            AND m.major_id=#{majorId}
+        </if>
+        <if test="classId!=null">
+            AND cls.class_id=#{classId}
+        </if>
+        <if test="grade!=0">
+            AND cls.class_grade=#{grade}
+        </if>
+        <if test="emplStatus!=null">
+            AND ei.empl_status=#{emplStatus}
+        </if>
+        GROUP BY ci.city_name
+    </select>
+
     <select id="getWorkInfo" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT( s.student_id ) as total_people,w.work_name
+        SELECT COUNT( s.student_id ) AS total_people,w.work_name
         FROM sys_student s
         LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
         LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
@@ -29,6 +56,32 @@
             AND ei.empl_status=#{emplStatus}
         </if>
         GROUP BY w.work_name
+    </select>
+
+    <select id="getStudentPlan" parameterType="QueryParams" resultType="StatsEmplResult">
+        SELECT COUNT( s.student_id ) AS total_people,ei.empl_plan
+        FROM sys_student s
+        LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
+        LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
+        LEFT JOIN sys_college c ON m.major_college_id = c.college_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+        WHERE 1 = 1
+        <if test="collegeId!=null">
+            AND c.college_id=#{collegeId}
+        </if>
+        <if test="majorId!=null">
+            AND m.major_id=#{majorId}
+        </if>
+        <if test="classId!=null">
+            AND cls.class_id=#{classId}
+        </if>
+        <if test="grade!=0">
+            AND cls.class_grade=#{grade}
+        </if>
+        <if test="emplStatus!=null">
+            AND ei.empl_status=#{emplStatus}
+        </if>
+        GROUP BY ei.empl_plan
     </select>
 
     <select id="getMaxWorkInfoByGender" parameterType="QueryParams" resultType="StatsEmplResult">
@@ -64,6 +117,13 @@
 		) AS m
 		GROUP BY work_name
 		ORDER BY total_people DESC
-        LIMIT 1
+		<choose>
+            <when test="most==0">
+                LIMIT 1
+            </when>
+            <otherwise>
+                LIMIT 1,1
+            </otherwise>
+        </choose>
     </select>
 </mapper>

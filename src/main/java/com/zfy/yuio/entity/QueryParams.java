@@ -26,6 +26,7 @@ public class QueryParams {
     private String name;
     private List<Integer> grades;
     private String gender;
+    private String most;
 
     public Long getStudentId() {
         return studentId;
@@ -105,5 +106,13 @@ public class QueryParams {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getMost() {
+        return most;
+    }
+
+    public void setMost(String most) {
+        this.most = most;
     }
 }

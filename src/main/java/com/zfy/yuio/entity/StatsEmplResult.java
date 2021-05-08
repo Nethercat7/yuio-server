@@ -24,13 +24,19 @@ public class StatsEmplResult {
     private String cityName;
     @JsonProperty("work_name")
     private String workName;
-    private String plan;
+    @JsonProperty("plan")
+    private String emplPlan;
     private List<StatsEmplResult> results;
-    private StatsEmplResult max;
-    @JsonProperty("female_max")
-    private StatsEmplResult femaleMax;
-    @JsonProperty("male_max")
-    private StatsEmplResult maleMax;
+    //以下字段用于分析指标值最多和其次指标。
+    private StatsEmplResult most;
+    @JsonProperty("female_most")
+    private StatsEmplResult femaleMost;
+    @JsonProperty("male_most")
+    private StatsEmplResult maleMost;
+    @JsonProperty("female_second")
+    private StatsEmplResult femaleSecond;
+    @JsonProperty("male_second")
+    private StatsEmplResult maleSecond;
 
     public int getTotalPeople() {
         return totalPeople;
@@ -88,12 +94,12 @@ public class StatsEmplResult {
         this.workName = workName;
     }
 
-    public String getPlan() {
-        return plan;
+    public String getEmplPlan() {
+        return emplPlan;
     }
 
-    public void setPlan(String plan) {
-        this.plan = plan;
+    public void setEmplPlan(String emplPlan) {
+        this.emplPlan = emplPlan;
     }
 
     public List<StatsEmplResult> getResults() {
@@ -104,27 +110,43 @@ public class StatsEmplResult {
         this.results = results;
     }
 
-    public StatsEmplResult getMax() {
-        return max;
+    public StatsEmplResult getMost() {
+        return most;
     }
 
-    public void setMax(StatsEmplResult max) {
-        this.max = max;
+    public void setMost(StatsEmplResult most) {
+        this.most = most;
     }
 
-    public StatsEmplResult getFemaleMax() {
-        return femaleMax;
+    public StatsEmplResult getFemaleMost() {
+        return femaleMost;
     }
 
-    public void setFemaleMax(StatsEmplResult femaleMax) {
-        this.femaleMax = femaleMax;
+    public void setFemaleMost(StatsEmplResult femaleMost) {
+        this.femaleMost = femaleMost;
     }
 
-    public StatsEmplResult getMaleMax() {
-        return maleMax;
+    public StatsEmplResult getMaleMost() {
+        return maleMost;
     }
 
-    public void setMaleMax(StatsEmplResult maleMax) {
-        this.maleMax = maleMax;
+    public void setMaleMost(StatsEmplResult maleMost) {
+        this.maleMost = maleMost;
+    }
+
+    public StatsEmplResult getFemaleSecond() {
+        return femaleSecond;
+    }
+
+    public void setFemaleSecond(StatsEmplResult femaleSecond) {
+        this.femaleSecond = femaleSecond;
+    }
+
+    public StatsEmplResult getMaleSecond() {
+        return maleSecond;
+    }
+
+    public void setMaleSecond(StatsEmplResult maleSecond) {
+        this.maleSecond = maleSecond;
     }
 }
