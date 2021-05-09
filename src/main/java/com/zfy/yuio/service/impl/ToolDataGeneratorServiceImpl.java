@@ -124,17 +124,17 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
             }
 
             if (!ObjectUtils.isEmpty(c.getChildren())) {
-                c.setCityPid(0);
+                c.setCityPid(0L);
                 cityDao.add(c);
                 addChildren(c.getChildren(), c.getCityId(), c.getCityLevel());
             } else {
-                c.setCityPid(0);
+                c.setCityPid(0L);
                 cityDao.add(c);
             }
         }
     }
 
-    private void addChildren(List<SysCity> params, int pid, int level) {
+    private void addChildren(List<SysCity> params, Long pid, int level) {
         for (SysCity c : params
         ) {
             c.setCityPid(pid);

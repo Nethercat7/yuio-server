@@ -1,10 +1,11 @@
 package com.zfy.yuio.controller;
 
+import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.SysCity;
 import com.zfy.yuio.service.SysCityService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -13,7 +14,7 @@ public class SysCityController {
     @Autowired
     private SysCityService cityService;
 
-    /*@PostMapping("add")
+    @PostMapping("add")
     @RequiresPermissions("system:city:add")
     public ResultBody add(@RequestBody SysCity params) {
         int status = cityService.add(params);
@@ -52,5 +53,5 @@ public class SysCityController {
     @GetMapping("getByKeyword")
     public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
         return new ResultBody(0,cityService.getByKeyword(keyword));
-    }*/
+    }
 }

@@ -12,44 +12,14 @@ import java.util.List;
 */
 @Repository
 public interface SysCityDao {
-    /**
-     *@Author Nethercat7
-     *@Description 添加城市
-     *@param params
-     *@Return int
-    */
     int add(SysCity params);
 
-    /**
-     *@Author Nethercat7
-     *@Description 获取城市信息
-     *@param
-     *@Return List<SysCity>
-    */
     List<SysCity> get();
 
-    /**
-     *@Author Nethercat7
-     *@Description 通过Id删除城市
-     *@param id
-     *@Return int
-    */
     int del(Long id);
 
-    /**
-     *@Author Nethercat7
-     *@Description 修改城市
-     *@param params
-     *@Return int
-    */
     int upd(SysCity params);
 
-    /**
-     *@Author Nethercat7
-     *@Description 通过Id获取城市
-     *@param id
-     *@Return com.zfy.yuio.entity.SysCity
-    */
     SysCity getById(Long id);
 
     List<SysCity> getByKeyword(String keyword);

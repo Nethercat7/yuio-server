@@ -1,10 +1,15 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysCityDao;
+import com.zfy.yuio.entity.SysCity;
 import com.zfy.yuio.service.SysCityService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description:城市管理
@@ -18,9 +23,8 @@ public class SysCityServiceImpl implements SysCityService {
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(9, 0);
 
-    /*@Override
+    @Override
     public int add(SysCity params) {
-        params.setCityId(snowflakeIdGeneratorUtil.nextId());
         if (ObjectUtils.isEmpty(params.getCityPid())) {
             params.setCityPid(0L);
             params.setCityLevel(0);
@@ -42,7 +46,7 @@ public class SysCityServiceImpl implements SysCityService {
         for (SysCity c : cities
         ) {
             c.setChildren(getChildren(c.getCityId(), cityList));
-            if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
+            if (ObjectUtils.isEmpty(c.getChildren()) || c.getCityDirect() == 1) c.setChildren(null);
         }
         return cities;
     }
@@ -69,20 +73,6 @@ public class SysCityServiceImpl implements SysCityService {
         return cityDao.getByKeyword(keyword);
     }
 
-    private void setChildren(List<SysCity> children, Long pid, int level) {
-        for (SysCity c : children
-        ) {
-            c.setCityId(snowflakeIdGeneratorUtil.nextId());
-            c.setCityStatus("0");
-            c.setCityPid(pid);
-            c.setCityLevel(level + 1);
-            cityDao.add(c);
-            if (c.getChildren() != null) {
-                setChildren(c.getChildren(), c.getCityId(), c.getCityLevel());
-            }
-        }
-    }
-
     private List<SysCity> getChildren(Long pid, List<SysCity> cityList) {
         List<SysCity> children = new ArrayList<>();
         for (SysCity c : cityList
@@ -96,5 +86,5 @@ public class SysCityServiceImpl implements SysCityService {
             if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return children;
-    }*/
+    }
 }
