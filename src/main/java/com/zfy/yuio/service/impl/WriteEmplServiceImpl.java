@@ -27,9 +27,9 @@ public class WriteEmplServiceImpl implements WriteEmplService {
         //添加意向城市和意向岗位
         if (status == 1) {
             if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
-                for (String name : params.getIntentionCities()
+                for (Long id : params.getIntentionCities()
                 ) {
-                    //emplDao.addIntentionCities(params.getEmplStudentId(), id);
+                    emplDao.addIntentionCities(params.getEmplStudentId(), id);
                 }
             }
 
@@ -47,7 +47,7 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     public WriteEmplInfo get(Long id) {
         WriteEmplInfo info = emplDao.get(id);
         if(!ObjectUtils.isEmpty(info)){
-            //info.setIntentionCities(emplDao.getIntentionCities(id));
+            info.setIntentionCities(emplDao.getIntentionCities(id));
             info.setIntentionWorks(emplDao.getIntentionWorks(id));
         }
         return info;
@@ -58,9 +58,9 @@ public class WriteEmplServiceImpl implements WriteEmplService {
         //修改意向城市和意向岗位
         if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
             emplDao.delIntentionCities(params.getEmplStudentId());
-            for (String name : params.getIntentionCities()
+            for (Long id : params.getIntentionCities()
             ) {
-                //emplDao.addIntentionCities(params.getEmplStudentId(), id);
+                emplDao.addIntentionCities(params.getEmplStudentId(), id);
             }
         }
 

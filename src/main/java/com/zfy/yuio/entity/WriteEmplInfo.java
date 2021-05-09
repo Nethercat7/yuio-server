@@ -32,7 +32,7 @@ public class WriteEmplInfo {
     private String emplWork;
     //非数据库字段
     @JsonProperty("intention_cities")
-    private List<String> intentionCities;
+    private List<Long> intentionCities;
     @JsonProperty("intention_works")
     private List<Long> intentionWorks;
 
@@ -101,11 +101,11 @@ public class WriteEmplInfo {
         this.emplWorkId = emplWorkId;
     }
 
-    public List<String> getIntentionCities() {
+    public List<Long> getIntentionCities() {
         return intentionCities;
     }
 
-    public void setIntentionCities(List<String> intentionCities) {
+    public void setIntentionCities(List<Long> intentionCities) {
         this.intentionCities = intentionCities;
     }
 

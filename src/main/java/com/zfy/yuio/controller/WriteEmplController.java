@@ -18,10 +18,10 @@ public class WriteEmplController {
     @PostMapping("add")
     @RequiresPermissions("write:empl:write")
     public ResultBody add(@RequestBody WriteEmplInfo params){
-//        int status=emplService.add(params);
-//        if(status!=1){
-//            return new ResultBody(1,"提交失败","error");
-//        }
+        int status=emplService.add(params);
+        if(status!=1){
+            return new ResultBody(1,"提交失败","error");
+        }
         return new ResultBody(0,"提交成功","success");
     }
 
