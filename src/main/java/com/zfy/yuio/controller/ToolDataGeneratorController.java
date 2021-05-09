@@ -1,8 +1,11 @@
 package com.zfy.yuio.controller;
 
+import com.zfy.yuio.entity.SysCity;
 import com.zfy.yuio.service.ToolDataGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -24,5 +27,10 @@ public class ToolDataGeneratorController {
     @GetMapping("generateEmplInfo")
     public void generateEmplInfo(@RequestParam("grade") int grade){
         toolDataGeneratorService.generateEmplInfo(grade);
+    }
+
+    @PostMapping("generateCity")
+    public void generateCity(@RequestBody List<SysCity> params){
+        toolDataGeneratorService.generateCity(params);
     }
 }

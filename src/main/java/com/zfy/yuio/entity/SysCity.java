@@ -1,9 +1,7 @@
 package com.zfy.yuio.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -13,26 +11,24 @@ import java.util.List;
 */
 public class SysCity {
     @JsonProperty("id")
-    private Long cityId;
+    private int cityId;
     @JsonProperty("name")
     private String cityName;
     @JsonProperty("pid")
-    private Long cityPid;
-    @JsonProperty("status")
-    private String cityStatus;
-    @JsonProperty("create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime cityCreateTime;
+    private int cityPid;
     @JsonProperty("level")
     private int cityLevel;
+    @JsonProperty("direct")
+    private int cityDirect;
     //非数据库字段
+    @JsonProperty("children")
     private List<SysCity> children;
 
-    public Long getCityId() {
+    public int getCityId() {
         return cityId;
     }
 
-    public void setCityId(Long cityId) {
+    public void setCityId(int cityId) {
         this.cityId = cityId;
     }
 
@@ -44,28 +40,12 @@ public class SysCity {
         this.cityName = cityName;
     }
 
-    public Long getCityPid() {
+    public int getCityPid() {
         return cityPid;
     }
 
-    public void setCityPid(Long cityPid) {
+    public void setCityPid(int cityPid) {
         this.cityPid = cityPid;
-    }
-
-    public String getCityStatus() {
-        return cityStatus;
-    }
-
-    public void setCityStatus(String cityStatus) {
-        this.cityStatus = cityStatus;
-    }
-
-    public LocalDateTime getCityCreateTime() {
-        return cityCreateTime;
-    }
-
-    public void setCityCreateTime(LocalDateTime cityCreateTime) {
-        this.cityCreateTime = cityCreateTime;
     }
 
     public int getCityLevel() {
@@ -74,6 +54,14 @@ public class SysCity {
 
     public void setCityLevel(int cityLevel) {
         this.cityLevel = cityLevel;
+    }
+
+    public int getCityDirect() {
+        return cityDirect;
+    }
+
+    public void setCityDirect(int cityDirect) {
+        this.cityDirect = cityDirect;
     }
 
     public List<SysCity> getChildren() {

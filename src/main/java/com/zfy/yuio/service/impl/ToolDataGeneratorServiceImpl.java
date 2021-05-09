@@ -1,9 +1,6 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.SysClassDao;
-import com.zfy.yuio.dao.SysMajorDao;
-import com.zfy.yuio.dao.SysStudentDao;
-import com.zfy.yuio.dao.WriteEmplDao;
+import com.zfy.yuio.dao.*;
 import com.zfy.yuio.entity.*;
 import com.zfy.yuio.service.ToolDataGeneratorService;
 import com.zfy.yuio.utils.RandomInfoGenerateUntil;
@@ -11,6 +8,7 @@ import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +28,9 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
     @Autowired
     private WriteEmplDao emplDao;
 
+    @Autowired
+    private SysCityDao cityDao;
+
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(13, 0);
 
     @Override
@@ -39,7 +40,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
             for (SysMajor major : majors
             ) {
                 SysClass cls = setClassBaseInfo();
-                cls.setClassName(grade+major.getMajorName() + "的班级" + i);
+                cls.setClassName(grade + major.getMajorName() + "的班级" + i);
                 cls.setClassGrade(grade);
                 cls.setClassMajorId(major.getMajorId());
                 classDao.add(cls);
@@ -89,24 +90,59 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
             info.setEmplStudentId(student.getStudentId());
             emplDao.add(info);
             //就业意向生成,随机选择3个城市和2个岗位
-            int n=0;
-            int x=0;
-            List<Long> temp=new ArrayList<>();
-            while (n<3){
-                Long cityId=cities[random.nextInt(cities.length)];
-                if(!temp.contains(cityId)){
-                    emplDao.addIntentionCities(student.getStudentId(),cityId);
+            int n = 0;
+            int x = 0;
+            List<Long> temp = new ArrayList<>();
+            while (n < 3) {
+                Long cityId = cities[random.nextInt(cities.length)];
+                if (!temp.contains(cityId)) {
+                    emplDao.addIntentionCities(student.getStudentId(), cityId);
                     temp.add(cityId);
                     n++;
                 }
             }
-            while (x<2){
-                Long workId=works[random.nextInt(works.length)];
-                if(!temp.contains(workId)){
-                    emplDao.addIntentionWorks(student.getStudentId(),workId);
+            while (x < 2) {
+                Long workId = works[random.nextInt(works.length)];
+                if (!temp.contains(workId)) {
+                    emplDao.addIntentionWorks(student.getStudentId(), workId);
                     temp.add(workId);
                     x++;
                 }
+            }
+        }
+    }
+
+    @Override
+    public void generateCity(List<SysCity> params) {
+        for (SysCity c : params
+        ) {
+            //设置直辖市
+            if (c.getCityName().equals("北京市") || c.getCityName().equals("上海市") || c.getCityName().equals("天津市") || c.getCityName().equals("重庆市")) {
+                c.setCityDirect(1);
+            } else {
+                c.setCityDirect(0);
+            }
+
+            if (!ObjectUtils.isEmpty(c.getChildren())) {
+                c.setCityPid(0);
+                cityDao.add(c);
+                addChildren(c.getChildren(), c.getCityId(), c.getCityLevel());
+            } else {
+                c.setCityPid(0);
+                cityDao.add(c);
+            }
+        }
+    }
+
+    private void addChildren(List<SysCity> params, int pid, int level) {
+        for (SysCity c : params
+        ) {
+            c.setCityPid(pid);
+            c.setCityDirect(0);
+            c.setCityLevel(level + 1);
+            cityDao.add(c);
+            if (!ObjectUtils.isEmpty(c.getChildren())) {
+                addChildren(c.getChildren(), c.getCityId(), c.getCityLevel());
             }
         }
     }

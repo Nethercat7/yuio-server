@@ -1,15 +1,10 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysCityDao;
-import com.zfy.yuio.entity.SysCity;
 import com.zfy.yuio.service.SysCityService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Description:城市管理
@@ -23,7 +18,7 @@ public class SysCityServiceImpl implements SysCityService {
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(9, 0);
 
-    @Override
+    /*@Override
     public int add(SysCity params) {
         params.setCityId(snowflakeIdGeneratorUtil.nextId());
         if (ObjectUtils.isEmpty(params.getCityPid())) {
@@ -101,5 +96,5 @@ public class SysCityServiceImpl implements SysCityService {
             if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return children;
-    }
+    }*/
 }
