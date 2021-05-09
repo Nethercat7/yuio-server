@@ -31,6 +31,9 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
     @Autowired
     private SysCityDao cityDao;
 
+    @Autowired
+    private SysWorkDao workDao;
+
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(13, 0);
 
     @Override
@@ -68,9 +71,10 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
         params.setGrade(grade);
         List<SysStudent> students = studentDao.get(params);
         Random random = new Random();
-        //10个城市
-        Long[] cities = {504637296813838336L, 504637298156015616L, 504637302073495555L, 504637301532430336L, 504637297333932034L, 504637297925328897L, 504637298235707395L, 504637300655820803L, 504637297484926977L, 504637298197958657L};
-        Long[] works = {504656117557665792L, 504656171731296256L, 504656268921708544L, 504656362937032704L, 504656392129388544L, 504656429500637184L, 504656462774050816L, 504656499461627904L, 504656536077901824L, 504656577651843072L, 504656798368702464L, 504656835991609344L};
+        //获取城市
+        List<SysCity> cities = cityDao.get();
+        //获取岗位
+        List<SysWork> works = workDao.get();
         for (SysStudent student : students
         ) {
             //就业信息生成
@@ -81,8 +85,8 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
                 info.setEmplStatus("1");
                 info.setEmplCompany(student.getStudentName() + "的就业单位");
                 info.setEmplProtocol(String.valueOf(random.nextInt(3)));
-                info.setEmplCityId(cities[random.nextInt(cities.length)]);
-                info.setEmplWorkId(works[random.nextInt(works.length)]);
+                info.setEmplCityId(cities.get(random.nextInt(cities.size())).getCityId());
+                info.setEmplWorkId(works.get(random.nextInt(works.size())).getWorkId());
             } else {
                 info.setEmplStatus("0");
                 info.setEmplPlan(String.valueOf(random.nextInt(12)));
@@ -94,7 +98,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
             int x = 0;
             List<Long> temp = new ArrayList<>();
             while (n < 3) {
-                Long cityId = cities[random.nextInt(cities.length)];
+                Long cityId = cities.get(random.nextInt(cities.size())).getCityId();
                 if (!temp.contains(cityId)) {
                     emplDao.addIntentionCities(student.getStudentId(), cityId);
                     temp.add(cityId);
@@ -102,7 +106,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
                 }
             }
             while (x < 2) {
-                Long workId = works[random.nextInt(works.length)];
+                Long workId = works.get(random.nextInt(works.size())).getWorkId();
                 if (!temp.contains(workId)) {
                     emplDao.addIntentionWorks(student.getStudentId(), workId);
                     temp.add(workId);

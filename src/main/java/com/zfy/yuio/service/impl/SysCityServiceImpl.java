@@ -46,7 +46,7 @@ public class SysCityServiceImpl implements SysCityService {
         for (SysCity c : cities
         ) {
             c.setChildren(getChildren(c.getCityId(), cityList));
-            if (ObjectUtils.isEmpty(c.getChildren()) || c.getCityDirect() == 1) c.setChildren(null);
+            if (ObjectUtils.isEmpty(c.getChildren())) c.setChildren(null);
         }
         return cities;
     }
