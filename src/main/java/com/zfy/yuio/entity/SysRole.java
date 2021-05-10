@@ -1,9 +1,14 @@
 package com.zfy.yuio.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,19 +16,28 @@ import java.util.List;
  *@Author:Nethercat7
  *@CreateDate:2021/4/13 22:01
 */
+@ContentRowHeight(20)
+@HeadRowHeight(20)
+@ColumnWidth(20)
 public class SysRole {
     @JsonProperty("id")
+    @ExcelProperty("角色ID")
     private Long roleId;
     @JsonProperty("name")
+    @ExcelProperty("角色名称")
     private String roleName;
     @JsonProperty("status")
+    @ExcelProperty("角色状态")
     private String roleStatus;
     @JsonProperty("remark")
+    @ExcelProperty("备注")
     private String roleRemark;
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime roleCreateTime;
+    @ExcelProperty("创建时间")
+    private Date roleCreateTime;
     //非数据库字段
+    @ExcelIgnore
     private List<Long> perms;
 
     public Long getRoleId() {
@@ -58,11 +72,11 @@ public class SysRole {
         this.roleRemark = roleRemark;
     }
 
-    public LocalDateTime getRoleCreateTime() {
+    public Date getRoleCreateTime() {
         return roleCreateTime;
     }
 
-    public void setRoleCreateTime(LocalDateTime roleCreateTime) {
+    public void setRoleCreateTime(Date roleCreateTime) {
         this.roleCreateTime = roleCreateTime;
     }
 

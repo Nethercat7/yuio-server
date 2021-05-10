@@ -1,11 +1,16 @@
 package com.zfy.yuio.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysRole;
 import com.zfy.yuio.service.SysRoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 
 @CrossOrigin
 @RestController
@@ -48,5 +53,14 @@ public class SysRoleController {
             return new ResultBody(1, "修改失败", "error");
         }
         return new ResultBody(0, "成功修改", "success");
+    }
+
+    @GetMapping("output")
+    public void output(HttpServletResponse response) throws IOException {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), SysRole.class).sheet("角色").doWrite(roleService.get());
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.List;
 
 /**
  *@Description:User mgt
@@ -84,8 +83,6 @@ public class SysUserController {
         response.setCharacterEncoding("utf-8");
         String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-
-        List<SysUser> users=userService.get();
-        EasyExcel.write(response.getOutputStream(),SysUser.class).sheet("用户").doWrite(users);
+        EasyExcel.write(response.getOutputStream(),SysUser.class).sheet("用户").doWrite(userService.get());
     }
 }
