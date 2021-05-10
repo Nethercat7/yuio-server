@@ -8,6 +8,6 @@ class YuioApplicationTests {
 
     @Test
     void contextLoads() {
-    }
 
+    }
 }

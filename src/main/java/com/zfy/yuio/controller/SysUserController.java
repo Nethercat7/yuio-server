@@ -1,10 +1,16 @@
 package com.zfy.yuio.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.SysUser;
 import com.zfy.yuio.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.List;
 
 /**
  *@Description:User mgt
@@ -70,5 +76,16 @@ public class SysUserController {
             return new ResultBody(1,"修改失败","error");
         }
         return new ResultBody(0,"成功修改","success");
+    }
+
+    @GetMapping("output")
+    public void output(HttpServletResponse response) throws IOException {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+
+        List<SysUser> users=userService.get();
+        EasyExcel.write(response.getOutputStream(),SysUser.class).sheet("用户").doWrite(users);
     }
 }
