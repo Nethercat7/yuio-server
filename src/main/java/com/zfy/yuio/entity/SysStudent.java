@@ -1,66 +1,121 @@
 package com.zfy.yuio.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zfy.yuio.converter.*;
 
 import java.time.LocalDateTime;
 
 /**
- *@Description:学生实体类
- *@Author:Nethercat7
- *@CreateDate:2021/4/9 23:14
-*/
+ * @Description:学生实体类
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/9 23:14
+ */
+@ContentRowHeight(20)
+@HeadRowHeight(20)
+@ColumnWidth(20)
 public class SysStudent {
     @JsonProperty("id")
+    @ExcelIgnore
     private Long studentId;
+
     @JsonProperty("name")
+    @ExcelProperty(index = 0, value = "姓名")
     private String studentName;
+
     @JsonProperty("code")
+    @ExcelProperty(index = 1, value = "学号")
     private String studentCode;
+
     @JsonProperty("phone")
+    @ExcelProperty(index = 2, value = "电话号码")
     private String studentPhone;
+
     @JsonProperty("status")
+    @ExcelProperty(index = 15, value = "状态",converter = UvslStatusConverter.class)
     private String studentStatus;
+
     @JsonProperty("grade")
+    @ExcelProperty(index = 4, value = "年级")
     private int studentGrade;
+
     @JsonProperty("remark")
+    @ExcelProperty(index = 16, value = "备注")
     private String studentRemark;
+
     @JsonProperty("create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ExcelIgnore
     private LocalDateTime studentCreateTime;
+
     @JsonProperty("class_id")
+    @ExcelIgnore
     private Long studentClassId;
+
     @JsonProperty("gender")
+    @ExcelProperty(index = 3, value = "性别", converter = GenderConverter.class)
     private String studentGender;
+
     @JsonProperty("pwd")
+    @ExcelIgnore
     private String studentPwd;
+
     @JsonProperty("salt")
+    @ExcelIgnore
     private String studentSalt;
 
     //非数据库字段
     @JsonProperty("college_name")
+    @ExcelProperty(index = 5, value = "院系")
     private String collegeName;
+
     @JsonProperty("major_name")
+    @ExcelProperty(index = 6, value = "专业")
     private String majorName;
+
     @JsonProperty("class_name")
+    @ExcelProperty(index = 7, value = "班级")
     private String className;
+
     @JsonProperty("empl_status")
+    @ExcelProperty(index = 9, value = "是否就业",converter = EmplStatusConverter.class)
     private String emplStatus;
+
     @JsonProperty("empl_company")
+    @ExcelProperty(index = 10, value = "单位名称")
     private String emplCompany;
+
     @JsonProperty("empl_protocol")
+    @ExcelProperty(index = 13, value = "协议状况",converter = ProtocolConverter.class)
     private String emplProtocol;
+
     @JsonProperty("empl_plan")
+    @ExcelProperty(index = 14, value = "接下来的打算",converter = PlanConverter.class)
     private String emplPlan;
+
     @JsonProperty("empl_city_id")
+    @ExcelIgnore
     private Long emplCityId;
+
     @JsonProperty("empl_work_id")
+    @ExcelIgnore
     private Long emplWorkId;
+
     @JsonProperty("empl_city_name")
+    @ExcelProperty(index = 11, value = "就业所在城市")
     private String emplCityName;
+
     @JsonProperty("empl_work_name")
+    @ExcelProperty(index = 12, value = "工作岗位类型")
     private String emplWorkName;
+
     @JsonProperty("empl_write")
+    @ExcelProperty(index = 8, value = "就业情况填写",converter = EmplWriteConverter.class)
     private String emplWrite;
 
     public Long getStudentId() {
