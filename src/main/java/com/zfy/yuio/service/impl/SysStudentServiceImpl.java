@@ -68,7 +68,13 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Override
     public SysStudent getById(Long id) {
-        return studentDao.getById(id);
+        SysStudent student=studentDao.getById(id);
+        if (ObjectUtils.isEmpty(student.getEmplStatus())){
+            student.setEmplWrite("0");
+        }else{
+            student.setEmplWrite("1");
+        }
+        return student;
     }
 
     @Override
