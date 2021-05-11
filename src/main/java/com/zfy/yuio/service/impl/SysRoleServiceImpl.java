@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysRoleDao;
+import com.zfy.yuio.entity.excel.ExcelRole;
 import com.zfy.yuio.entity.system.SysRole;
 import com.zfy.yuio.service.SysRoleService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -54,6 +55,16 @@ public class SysRoleServiceImpl implements SysRoleService {
         //再添加权限
         savePerms(params);
         return roleDao.upd(params);
+    }
+
+    @Override
+    public void addFromExcel(List<ExcelRole> params) {
+        for (ExcelRole r:params
+             ) {
+            r.setRoleId(snowflakeIdGeneratorUtil.nextId());
+            r.setRoleStatus("0");
+        }
+        roleDao.addFromExcel(params);
     }
 
     private void savePerms(SysRole params) {

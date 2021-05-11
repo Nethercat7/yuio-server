@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelRole;
 import com.zfy.yuio.entity.system.SysRole;
 
 import java.util.List;
@@ -41,4 +42,6 @@ public interface SysRoleService {
      *@Return int
      */
     int upd(SysRole params);
+
+    void addFromExcel(List<ExcelRole> params);
 }

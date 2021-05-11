@@ -1,5 +1,6 @@
 package com.zfy.yuio.dao;
 
+import com.zfy.yuio.entity.excel.ExcelRole;
 import com.zfy.yuio.entity.system.SysRole;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,6 @@ public interface SysRoleDao {
     List<Long> getRolePerms(Long id);
 
     int delPerms(Long id);
+
+    void addFromExcel(List<ExcelRole> params);
 }

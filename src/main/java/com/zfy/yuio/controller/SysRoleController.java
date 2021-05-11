@@ -2,13 +2,16 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.excel.ExcelRole;
 import com.zfy.yuio.entity.system.SysRole;
+import com.zfy.yuio.listener.SysRoleExcelListener;
 import com.zfy.yuio.service.SysRoleService;
 import com.zfy.yuio.utils.UsefulUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -71,5 +74,10 @@ public class SysRoleController {
         String filename = "角色数据上传模板." + type;
         String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath()+ "static/excel/" + type + "/" + filename;
         UsefulUtil.download(filepath,filename,response);
+    }
+
+    @PostMapping("upload")
+    public void upload(MultipartFile file) throws IOException {
+        EasyExcel.read(file.getInputStream(), ExcelRole.class,new SysRoleExcelListener(roleService)).sheet().doRead();
     }
 }

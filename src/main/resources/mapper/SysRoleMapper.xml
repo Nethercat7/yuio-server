@@ -39,4 +39,12 @@
         DELETE FROM sys_role_perms
         WHERE rp_role_id=#{id}
     </delete>
+
+    <insert id="addFromExcel" parameterType="ExcelRole">
+        INSERT INTO sys_role(role_id,role_name,role_status,role_remark)
+        VALUES
+        <foreach collection="params" item="r">
+            (#{r.roleId},#{r.roleName},#{r.roleStatus},#{r.roleRemark})
+        </foreach>
+    </insert>
 </mapper>
