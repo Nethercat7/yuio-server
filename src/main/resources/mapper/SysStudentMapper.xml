@@ -118,4 +118,12 @@
         FROM sys_student
         WHERE student_id=#{id}
     </select>
+
+    <insert id="addFromExcel" parameterType="ExcelStudent">
+        INSERT INTO sys_student(student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,student_remark,student_class_id,student_pwd,student_salt)
+        VALUES
+            <foreach collection="params" item="s" separator=",">
+                (#{s.studentId},#{s.studentName},#{s.studentCode},#{s.studentGender},#{s.studentPhone},#{s.studentStatus},#{s.studentGrade},#{s.studentRemark},#{s.studentClassId},#{s.studentPwd},#{s.studentSalt})
+            </foreach>
+        </insert>
 </mapper>

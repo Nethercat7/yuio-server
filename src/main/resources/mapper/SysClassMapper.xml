@@ -59,4 +59,9 @@
         ON m.major_college_id=c.college_id
         WHERE cls.class_grade=#{grade}
     </select>
+
+    <select id="getIdByName" parameterType="String" resultType="Long">
+        SELECT class_id FROM sys_class
+        WHERE class_name=#{name}
+    </select>
 </mapper>

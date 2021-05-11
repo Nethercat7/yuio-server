@@ -25,4 +25,6 @@ public interface SysClassDao {
     List<SysClass> getByKeyword(String keyword);
 
     List<SysClass> getByGrade(int grade);
+
+    Long getIdByName(String name);
 }

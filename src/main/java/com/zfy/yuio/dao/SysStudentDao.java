@@ -1,6 +1,7 @@
 package com.zfy.yuio.dao;
 
 import com.zfy.yuio.entity.QueryParams;
+import com.zfy.yuio.entity.excel.ExcelStudent;
 import com.zfy.yuio.entity.system.SysStudent;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,6 @@ public interface SysStudentDao {
     int addRole(Long studentId,Long roleId);
 
     int updProfile(SysStudent params);
+
+    void addFromExcel(List<ExcelStudent> params);
 }
