@@ -1,11 +1,19 @@
 package com.zfy.yuio.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.excel.ExcelWork;
 import com.zfy.yuio.entity.system.SysWork;
+import com.zfy.yuio.listener.SysWorkExcelListener;
 import com.zfy.yuio.service.SysWorkService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 
 @CrossOrigin
 @RestController
@@ -53,5 +61,19 @@ public class SysWorkController {
     @GetMapping("getByKeyword")
     public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
         return new ResultBody(0,workService.getByKeyword(keyword));
+    }
+
+    @GetMapping("output")
+    public void output(HttpServletResponse response) throws IOException {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = URLEncoder.encode("岗位数据", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), SysWork.class).sheet("Sheet1").doWrite(workService.getWithoutConvert());
+    }
+
+    @PostMapping("upload")
+    public void upload(MultipartFile file) throws IOException {
+        EasyExcel.read(file.getInputStream(), ExcelWork.class,new SysWorkExcelListener(workService)).sheet().doRead();
     }
 }

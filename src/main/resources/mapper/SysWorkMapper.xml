@@ -5,8 +5,8 @@
 
 <mapper namespace="com.zfy.yuio.dao.SysWorkDao">
     <insert  id="add" parameterType="SysWork">
-        INSERT INTO sys_work(work_id,work_name,work_pid,work_status,work_level)
-        VALUES(#{workId},#{workName},#{workPid},#{workStatus},#{workLevel})
+        INSERT INTO sys_work(work_id,work_name,work_pid,work_status,work_level,work_remark)
+        VALUES(#{workId},#{workName},#{workPid},#{workStatus},#{workLevel},#{workRemark})
     </insert>
 
     <select id="get" resultType="SysWork">
@@ -20,7 +20,7 @@
 
     <update id="upd" parameterType="SysWork">
         UPDATE sys_work
-        SET work_name=#{workName},work_pid=#{workPid},work_status=#{workStatus},work_level=#{workLevel}
+        SET work_name=#{workName},work_pid=#{workPid},work_status=#{workStatus},work_level=#{workLevel},work_remark=#{workRemark}
         WHERE work_id=#{workId}
     </update>
 
@@ -33,4 +33,12 @@
         SELECT * FROM sys_work
         WHERE work_name LIKE concat('%',#{keyword},'%')
     </select>
+
+    <insert  id="addFromExcel" parameterType="ExcelWork">
+        INSERT INTO sys_work(work_id,work_name,work_pid,work_status,work_level,work_remark)
+        VALUES
+        <foreach collection="params" item="w">
+            (#{w.workId},#{w.workName},#{w.workPid},#{w.workStatus},#{w.workLevel},#{w.workRemark})
+        </foreach>
+    </insert>
 </mapper>

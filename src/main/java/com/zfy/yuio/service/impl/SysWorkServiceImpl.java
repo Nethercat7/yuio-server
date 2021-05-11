@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysWorkDao;
+import com.zfy.yuio.entity.excel.ExcelWork;
 import com.zfy.yuio.entity.system.SysWork;
 import com.zfy.yuio.service.SysWorkService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -74,18 +75,14 @@ public class SysWorkServiceImpl implements SysWorkService {
         return workDao.getByKeyword(keyword);
     }
 
-    private void setChildren(List<SysWork> children, Long pid, int level) {
-        for (SysWork c : children
-        ) {
-            c.setWorkId(snowflakeIdGeneratorUtil.nextId());
-            c.setWorkStatus("0");
-            c.setWorkPid(pid);
-            c.setWorkLevel(level + 1);
-            workDao.add(c);
-            if (c.getChildren() != null) {
-                setChildren(c.getChildren(), c.getWorkId(), c.getWorkLevel());
-            }
-        }
+    @Override
+    public List<SysWork> getWithoutConvert() {
+        return workDao.get();
+    }
+
+    @Override
+    public void addFromExcel(List<ExcelWork> params) {
+        workDao.addFromExcel(params);
     }
 
     private List<SysWork> getChildren(Long pid, List<SysWork> workList) {
