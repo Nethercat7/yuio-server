@@ -26,4 +26,6 @@ public interface SysCityDao {
     List<SysCity> getByKeyword(String keyword);
 
     void addFromExcel(List<ExcelCity> params);
+
+    List<SysCity> getWithoutProvinces();
 }

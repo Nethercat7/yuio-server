@@ -74,7 +74,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
         List<SysStudent> students = studentDao.get(params);
         Random random = new Random();
         //获取城市
-        List<SysCity> cities = cityDao.get();
+        List<SysCity> cities = cityDao.getWithoutProvinces();
         //获取岗位
         List<SysWork> works = workDao.getWithoutIndustry();
         for (SysStudent student : students

@@ -58,4 +58,10 @@
             (#{c.cityId},#{c.cityName},#{c.cityPid},#{c.cityLevel},#{c.cityStatus},#{c.cityRemark})
         </foreach>
     </insert>
+
+    <select id="getWithoutProvinces" resultType="SysCity">
+        SELECT * FROM sys_city
+        WHERE (city_level = 1 AND city_direct=0)
+        OR (city_level = 0 AND city_direct =1 )
+    </select>
 </mapper>
