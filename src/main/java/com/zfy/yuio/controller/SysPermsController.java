@@ -2,6 +2,7 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.excel.ExcelPerms;
 import com.zfy.yuio.entity.system.SysPerms;
 import com.zfy.yuio.listener.SysPermsExcelListener;
 import com.zfy.yuio.service.SysPermsService;
@@ -78,6 +79,6 @@ public class SysPermsController {
 
     @PostMapping("upload")
     public void upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), SysPerms.class,new SysPermsExcelListener(permsService)).sheet().doRead();
+        EasyExcel.read(file.getInputStream(), ExcelPerms.class,new SysPermsExcelListener(permsService)).sheet().doRead();
     }
 }

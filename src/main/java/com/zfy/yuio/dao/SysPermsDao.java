@@ -1,5 +1,6 @@
 package com.zfy.yuio.dao;
 
+import com.zfy.yuio.entity.excel.ExcelPerms;
 import com.zfy.yuio.entity.system.SysPerms;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +31,5 @@ public interface SysPermsDao {
 
     List<SysPerms> getStudentMenus(Long id);
 
-    void addFromExcel(List<SysPerms> params);
+    void addFromExcel(List<ExcelPerms> params);
 }

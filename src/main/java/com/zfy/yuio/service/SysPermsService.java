@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelPerms;
 import com.zfy.yuio.entity.system.SysPerms;
 
 import java.util.List;
@@ -27,5 +28,5 @@ public interface SysPermsService {
 
     List<SysPerms> getWithoutConvert();
 
-    void addFromExcel(List<SysPerms> params);
+    void addFromExcel(List<ExcelPerms> params);
 }

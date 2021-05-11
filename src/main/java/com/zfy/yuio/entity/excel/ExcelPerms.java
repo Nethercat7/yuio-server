@@ -1,74 +1,53 @@
-package com.zfy.yuio.entity.system;
+package com.zfy.yuio.entity.excel;
 
-import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.write.style.ColumnWidth;
-import com.alibaba.excel.annotation.write.style.ContentRowHeight;
-import com.alibaba.excel.annotation.write.style.HeadRowHeight;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zfy.yuio.converter.PermsTypeConverter;
-import com.zfy.yuio.converter.UvslStatusConverter;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @Remark:菜单实体
  * @Author:Nethercat7
  * @CreateDate:2021/4/16 21:09
  */
-@ContentRowHeight(20)
-@HeadRowHeight(20)
-@ColumnWidth(20)
-public class SysPerms {
+public class ExcelPerms {
     @JsonProperty("id")
-    @ExcelProperty(value = "ID")
+    @ExcelProperty("ID")
     private Long permsId;
 
     @JsonProperty("name")
-    @ExcelProperty(value = "标签")
+    @ExcelProperty("标签")
     private String permsName;
 
     @JsonProperty("mark")
-    @ExcelProperty(value = "权限字符串")
+    @ExcelProperty("权限字符串")
     private String permsMark;
 
     @JsonProperty("url")
-    @ExcelProperty(value = "请求地址")
+    @ExcelProperty("请求地址")
     private String permsUrl;
 
     @JsonProperty("icon")
-    @ExcelProperty(value = "图标")
+    @ExcelProperty("图标")
     private String permsIcon;
 
     @JsonProperty("status")
-    @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
+    @ExcelProperty("状态")
     private String permsStatus;
 
     @JsonProperty("pid")
-    @ExcelProperty(value = "上级ID")
+    @ExcelProperty("上级ID")
     private Long permsPid;
 
     @JsonProperty("level")
-    @ExcelProperty(value = "层级")
+    @ExcelProperty("层级")
     private int permsLevel;
 
     @JsonProperty("type")
-    @ExcelProperty(value = "类型",converter = PermsTypeConverter.class)
+    @ExcelProperty("类型")
     private String permsType;
 
     @JsonProperty("remark")
-    @ExcelProperty(value = "备注")
+    @ExcelProperty("备注")
     private String permsRemark;
-
-    @JsonProperty("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime permsCreateTime;
-    
-    @ExcelIgnore
-    private List<SysPerms> children;//非数据库字段
 
     public Long getPermsId() {
         return permsId;
@@ -110,28 +89,12 @@ public class SysPerms {
         this.permsIcon = permsIcon;
     }
 
-    public String getPermsRemark() {
-        return permsRemark;
-    }
-
-    public void setPermsRemark(String permsRemark) {
-        this.permsRemark = permsRemark;
-    }
-
     public String getPermsStatus() {
         return permsStatus;
     }
 
     public void setPermsStatus(String permsStatus) {
         this.permsStatus = permsStatus;
-    }
-
-    public LocalDateTime getPermsCreateTime() {
-        return permsCreateTime;
-    }
-
-    public void setPermsCreateTime(LocalDateTime permsCreateTime) {
-        this.permsCreateTime = permsCreateTime;
     }
 
     public Long getPermsPid() {
@@ -158,11 +121,11 @@ public class SysPerms {
         this.permsType = permsType;
     }
 
-    public List<SysPerms> getChildren() {
-        return children;
+    public String getPermsRemark() {
+        return permsRemark;
     }
 
-    public void setChildren(List<SysPerms> children) {
-        this.children = children;
+    public void setPermsRemark(String permsRemark) {
+        this.permsRemark = permsRemark;
     }
 }

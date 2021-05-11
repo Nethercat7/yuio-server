@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysPermsDao;
+import com.zfy.yuio.entity.excel.ExcelPerms;
 import com.zfy.yuio.entity.system.SysPerms;
 import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -79,7 +80,7 @@ public class SysPermsServiceImpl implements SysPermsService {
     }
 
     @Override
-    public void addFromExcel(List<SysPerms> params) {
+    public void addFromExcel(List<ExcelPerms> params) {
         permsDao.addFromExcel(params);
     }
 

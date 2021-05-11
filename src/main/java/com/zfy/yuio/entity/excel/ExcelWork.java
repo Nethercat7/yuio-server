@@ -10,9 +10,6 @@ import com.alibaba.excel.annotation.write.style.HeadRowHeight;
  * @Author:Nethercat7
  * @CreateDate:2021/4/20 18:38
  */
-@ContentRowHeight(20)
-@HeadRowHeight(20)
-@ColumnWidth(20)
 public class ExcelWork {
     @ExcelProperty("ID")
     private Long workId;
