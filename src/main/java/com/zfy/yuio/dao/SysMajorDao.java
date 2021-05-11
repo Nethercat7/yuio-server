@@ -1,5 +1,6 @@
 package com.zfy.yuio.dao;
 
+import com.zfy.yuio.entity.excel.ExcelMajor;
 import com.zfy.yuio.entity.system.SysMajor;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +24,6 @@ public interface SysMajorDao {
     List<SysMajor> getByPid(Long pid);
 
     List<SysMajor> getByKeyword(String keyword);
+
+    void addFromExcel(List<ExcelMajor> params);
 }

@@ -41,4 +41,12 @@
         ON m.major_college_id=c.college_id
         WHERE major_name LIKE concat('%',#{keyword},'%')
     </select>
+
+    <insert id="addFromExcel" parameterType="ExcelMajor">
+        INSERT INTO sys_major(major_id,major_name,major_status,major_remark,major_college_id)
+        VALUES
+        <foreach collection="params" item="m">
+            (#{m.majorId},#{m.majorName},#{m.majorStatus},#{m.majorRemark},#{m.majorCollegeId})
+        </foreach>
+    </insert>
 </mapper>

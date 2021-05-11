@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelMajor;
 import com.zfy.yuio.entity.system.SysMajor;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface SysMajorService {
     int upd(SysMajor params);
 
     List<SysMajor> getByKeyword(String keyword);
+
+    void addFromExcel(List<ExcelMajor> params);
 }

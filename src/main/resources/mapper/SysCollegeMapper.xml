@@ -41,4 +41,9 @@
             (#{c.collegeId},#{c.collegeName},#{c.collegeStatus},#{c.collegeRemark})
         </foreach>
     </insert>
+
+    <select id="getIdByName" parameterType="String" resultType="Long">
+        SELECT college_id FROM sys_college
+        WHERE college_name=#{name}
+    </select>
 </mapper>

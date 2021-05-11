@@ -1,6 +1,8 @@
 package com.zfy.yuio.service.impl;
 
+import com.zfy.yuio.dao.SysCollegeDao;
 import com.zfy.yuio.dao.SysMajorDao;
+import com.zfy.yuio.entity.excel.ExcelMajor;
 import com.zfy.yuio.entity.system.SysMajor;
 import com.zfy.yuio.service.SysMajorService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -18,6 +20,9 @@ import java.util.List;
 public class SysMajorServiceImpl implements SysMajorService {
     @Autowired
     private SysMajorDao majorDao;
+
+    @Autowired
+            private SysCollegeDao  collegeDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(1, 0);
 
@@ -45,5 +50,15 @@ public class SysMajorServiceImpl implements SysMajorService {
     @Override
     public List<SysMajor> getByKeyword(String keyword) {
         return majorDao.getByKeyword(keyword);
+    }
+
+    @Override
+    public void addFromExcel(List<ExcelMajor> params) {
+        for (ExcelMajor m:params
+             ) {
+            m.setMajorId(snowflakeIdGeneratorUtil.nextId());
+            m.setMajorCollegeId(collegeDao.getIdByName(m.getCollegeName()));
+        }
+        majorDao.addFromExcel(params);
     }
 }

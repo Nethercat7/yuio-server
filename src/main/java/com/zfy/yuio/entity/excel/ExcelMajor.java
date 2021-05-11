@@ -1,45 +1,35 @@
-package com.zfy.yuio.entity.system;
+package com.zfy.yuio.entity.excel;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zfy.yuio.converter.UvslStatusConverter;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
- *@Description:专业实体
- *@Author:Nethercat7
- *@CreateDate:2021/4/9 16:34
-*/
+ * @Description:专业实体
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/9 16:34
+ */
 @ContentRowHeight(20)
 @HeadRowHeight(20)
 @ColumnWidth(20)
-public class SysMajor {
+public class ExcelMajor {
     @JsonProperty("id")
     @ExcelIgnore
     private Long majorId;
 
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "专业名称")
+    @ExcelProperty("专业名称")
     private String majorName;
 
     @JsonProperty("status")
-    @ExcelProperty(index = 1,value = "状态",converter = UvslStatusConverter.class)
+    @ExcelProperty("状态")
     private String majorStatus;
 
-    @JsonProperty("create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime majorCreateTime;
-
     @JsonProperty("remark")
-    @ExcelProperty(index = 3,value = "备注")
+    @ExcelProperty("备注")
     private String majorRemark;
 
     @JsonProperty("college_id")
@@ -48,11 +38,8 @@ public class SysMajor {
 
     //非数据库字段
     @JsonProperty("college_name")
-    @ExcelProperty(index = 2,value = "所属院系")
+    @ExcelProperty("所属院系")
     private String collegeName;
-
-    @ExcelIgnore
-    private List<SysClass> children;
 
     public Long getMajorId() {
         return majorId;
@@ -78,14 +65,6 @@ public class SysMajor {
         this.majorStatus = majorStatus;
     }
 
-    public LocalDateTime getMajorCreateTime() {
-        return majorCreateTime;
-    }
-
-    public void setMajorCreateTime(LocalDateTime majorCreateTime) {
-        this.majorCreateTime = majorCreateTime;
-    }
-
     public String getMajorRemark() {
         return majorRemark;
     }
@@ -108,13 +87,5 @@ public class SysMajor {
 
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
-    }
-
-    public List<SysClass> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<SysClass> children) {
-        this.children = children;
     }
 }

@@ -26,4 +26,6 @@ public interface SysCollegeDao {
     List<SysCollege> getByKeyword(String keyword);
 
     void addFromExcel(List<ExcelCollege> params);
+
+    Long getIdByName(String name);
 }
