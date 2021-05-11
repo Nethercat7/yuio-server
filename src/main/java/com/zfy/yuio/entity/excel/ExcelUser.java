@@ -24,7 +24,7 @@ public class ExcelUser {
     @ExcelProperty("备注")
     private String userRemark;
 
-    @ExcelIgnore
+    @ExcelProperty("状态")
     private String userStatus;
 
     @ExcelIgnore

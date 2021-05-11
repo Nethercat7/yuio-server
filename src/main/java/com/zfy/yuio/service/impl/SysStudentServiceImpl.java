@@ -1,11 +1,9 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysClassDao;
-import com.zfy.yuio.dao.SysDictDataDao;
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.excel.ExcelStudent;
-import com.zfy.yuio.entity.system.SysDictData;
 import com.zfy.yuio.entity.system.SysStudent;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.utils.ShiroUtil;
@@ -33,9 +31,6 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Autowired
     private SysClassDao classDao;
-
-    @Autowired
-    private SysDictDataDao dictDataDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(3, 0);
 
@@ -94,27 +89,15 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Override
     public void addFromExcel(List<ExcelStudent> params) {
-        //Get data dict
-        List<SysDictData> dictData = dictDataDao.get("sys_user_gender");
-
         //Add status and class id for students
         for (ExcelStudent s : params
         ) {
-            s.setStudentId(snowflakeIdGeneratorUtil.nextId());
-            s.setStudentStatus("0");
+            s.setStudentId(snowflakeIdGeneratorUtil.nextId());;
             s.setStudentClassId(classDao.getIdByName(s.getClassName()));
 
             //Set default password
             s.setStudentSalt(ShiroUtil.getSalt(7));
             s.setStudentPwd(ShiroUtil.pwd2MD5("123456",s.getStudentSalt(),1739));
-
-            //Convert gender
-            for (SysDictData d : dictData
-            ) {
-                if (s.getStudentGender().equals(d.getDictLabel())) {
-                    s.setStudentGender(d.getDictValue());
-                }
-            }
         }
         studentDao.addFromExcel(params);
         //Add student role

@@ -25,7 +25,7 @@ public class ExcelStudent {
     @ExcelProperty("班级")
     private String className;
 
-    @ExcelIgnore
+    @ExcelProperty("状态")
     private String studentStatus;
 
     @ExcelIgnore
