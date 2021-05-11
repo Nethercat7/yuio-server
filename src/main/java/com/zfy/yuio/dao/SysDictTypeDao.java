@@ -1,5 +1,6 @@
 package com.zfy.yuio.dao;
 
+import com.zfy.yuio.entity.excel.ExcelDictType;
 import com.zfy.yuio.entity.system.SysDictType;
 import org.springframework.stereotype.Repository;
 
@@ -22,5 +23,5 @@ public interface SysDictTypeDao {
 
     List<SysDictType> getByKeyword(String keyword);
 
-    void addFromExcel(List<SysDictType> params);
+    void addFromExcel(List<ExcelDictType> params);
 }

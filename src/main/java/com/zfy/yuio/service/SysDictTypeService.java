@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelDictType;
 import com.zfy.yuio.entity.system.SysDictType;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface SysDictTypeService {
 
     List<SysDictType> getByKeyword(String keyword);
 
-    void addFromExcel(List<SysDictType> params);
+    void addFromExcel(List<ExcelDictType> params);
 }

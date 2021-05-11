@@ -30,7 +30,7 @@
         OR dict_type LIKE concat('%',#{keyword},'%')
     </select>
 
-    <insert id="addFromExcel" parameterType="SysDictType">
+    <insert id="addFromExcel" parameterType="ExcelDictType">
          INSERT INTO sys_dict_type(dict_id,dict_name,dict_type,dict_status,dict_remark)
          VALUES
          <foreach collection="params" item="d">

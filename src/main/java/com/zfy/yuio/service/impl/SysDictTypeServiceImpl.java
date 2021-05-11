@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysDictTypeDao;
+import com.zfy.yuio.entity.excel.ExcelDictType;
 import com.zfy.yuio.entity.system.SysDictType;
 import com.zfy.yuio.service.SysDictTypeService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -43,7 +44,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     }
 
     @Override
-    public void addFromExcel(List<SysDictType> params) {
+    public void addFromExcel(List<ExcelDictType> params) {
         sysDictTypeDao.addFromExcel(params);
     }
 }

@@ -2,6 +2,7 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.excel.ExcelDictType;
 import com.zfy.yuio.entity.system.SysDictType;
 import com.zfy.yuio.listener.SysDictTypeExcelListener;
 import com.zfy.yuio.service.SysDictTypeService;
@@ -71,6 +72,6 @@ public class SysDictTypeController {
 
     @PostMapping("upload")
     public void upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), SysDictType.class,new SysDictTypeExcelListener(sysDictTypeService)).sheet().doRead();
+        EasyExcel.read(file.getInputStream(), ExcelDictType.class,new SysDictTypeExcelListener(sysDictTypeService)).sheet().doRead();
     }
 }

@@ -7,6 +7,7 @@ import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zfy.yuio.converter.UvslStatusConverter;
 
 /**
  *@Description:字典类型实体
@@ -30,11 +31,11 @@ public class SysDictType {
     private String dictType;
 
     @JsonProperty("status")
-    @ExcelProperty("状态")
+    @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
     private String dictStatus;
 
     @JsonProperty("remark")
-    @ExcelProperty("备注")
+    @ExcelProperty(value = "备注")
     private String dictRemark;
 
     @JsonProperty("create_time")
