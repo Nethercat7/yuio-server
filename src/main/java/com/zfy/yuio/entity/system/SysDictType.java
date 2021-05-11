@@ -1,5 +1,10 @@
 package com.zfy.yuio.entity.system;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,22 +13,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *@Author:Nethercat7
  *@CreateDate:2021/4/22 20:25
 */
+@ContentRowHeight(20)
+@HeadRowHeight(20)
+@ColumnWidth(20)
 public class SysDictType {
     @JsonProperty("id")
+    @ExcelProperty(value = "ID")
     private Long dictId;
+
     @JsonProperty("name")
+    @ExcelProperty(value = "标签")
     private String dictName;
+
     @JsonProperty("type")
+    @ExcelProperty(value = "类型")
     private String dictType;
+
     @JsonProperty("status")
+    @ExcelProperty("状态")
     private String dictStatus;
+
+    @JsonProperty("remark")
+    @ExcelProperty("备注")
+    private String dictRemark;
+
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ExcelIgnore
     private String dictCreateTime;
-    @JsonProperty("remark")
-    private String dictRemark;
-    @JsonProperty("value")
-    private String dictValue;
 
     public Long getDictId() {
         return dictId;
@@ -71,13 +88,5 @@ public class SysDictType {
 
     public void setDictRemark(String dictRemark) {
         this.dictRemark = dictRemark;
-    }
-
-    public String getDictValue() {
-        return dictValue;
-    }
-
-    public void setDictValue(String dictValue) {
-        this.dictValue = dictValue;
     }
 }
