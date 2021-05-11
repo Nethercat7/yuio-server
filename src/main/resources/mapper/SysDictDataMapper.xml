@@ -30,4 +30,8 @@
          WHERE dict_type=#{dictType}
          AND dict_label LIKE concat('%',#{keyword},'%')
     </select>
+
+    <select id="getAll" resultType="SysDictData">
+        SELECT * FROM sys_dict_data
+    </select>
 </mapper>

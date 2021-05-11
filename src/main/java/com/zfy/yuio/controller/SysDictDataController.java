@@ -1,11 +1,16 @@
 package com.zfy.yuio.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.system.SysDictData;
 import com.zfy.yuio.service.SysDictDataService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  *@Description:字典数据
@@ -57,5 +62,14 @@ public class SysDictDataController {
     @GetMapping("getByKeyword")
     public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
         return new ResultBody(0,sysDictDataService.getByKeyword(keyword));
+    }
+
+    @GetMapping("output")
+    public void output(HttpServletResponse response) throws IOException {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = URLEncoder.encode("字典数据", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), SysDictData.class).sheet("Sheet1").doWrite(sysDictDataService.getAll());
     }
 }

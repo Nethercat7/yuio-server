@@ -19,4 +19,6 @@ public interface SysDictDataService {
     int upd(SysDictData sysDictData);
 
     List<SysDictData> getByKeyword(String keyword);
+
+    List<SysDictData> getAll();
 }

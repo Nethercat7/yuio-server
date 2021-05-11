@@ -41,4 +41,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     public List<SysDictData> getByKeyword(String keyword) {
         return sysDictDataDao.getByKeyword(keyword);
     }
+
+    @Override
+    public List<SysDictData> getAll() {
+        return sysDictDataDao.getAll();
+    }
 }
