@@ -2,10 +2,16 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.excel.ExcelUser;
 import com.zfy.yuio.entity.system.SysUser;
+import com.zfy.yuio.listener.SysUserExcelListener;
 import com.zfy.yuio.service.SysUserService;
+import com.zfy.yuio.utils.UsefulUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,7 +30,7 @@ public class SysUserController {
     private SysUserService userService;
 
     @PostMapping("add")
-    //@RequiresPermissions("system:user:add")
+    @RequiresPermissions("system:user:add")
     public ResultBody add(@RequestBody SysUser params){
         int status=userService.add(params);
         if(status!=1){
@@ -39,7 +45,7 @@ public class SysUserController {
     }
 
     @DeleteMapping("del")
-    //@RequiresPermissions("system:user:del")
+    @RequiresPermissions("system:user:del")
     public ResultBody del(@RequestParam("id")Long id){
         int status=userService.del(id);
         if(status!=1){
@@ -49,7 +55,7 @@ public class SysUserController {
     }
 
     @PutMapping("upd")
-    //@RequiresPermissions("system:user:upd")
+    @RequiresPermissions("system:user:upd")
     public ResultBody upd(@RequestBody SysUser params){
         int status=userService.upd(params);
         if(status!=1){
@@ -83,6 +89,18 @@ public class SysUserController {
         response.setCharacterEncoding("utf-8");
         String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(),SysUser.class).sheet("用户").doWrite(userService.get());
+        EasyExcel.write(response.getOutputStream(),SysUser.class).sheet("Sheet1").doWrite(userService.get());
+    }
+
+    @GetMapping("download")
+    public void download(@RequestParam("type") String type,HttpServletResponse response) throws IOException {
+        String filename = "用户数据上传模板." + type;
+        String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath()+ "static/excel/" + type + "/" + filename;
+        UsefulUtil.download(filepath,filename,response);
+    }
+
+    @PostMapping("upload")
+    public void upload(MultipartFile file) throws IOException {
+        EasyExcel.read(file.getInputStream(), ExcelUser.class,new SysUserExcelListener(userService)).sheet().doRead();
     }
 }

@@ -2,14 +2,13 @@ package com.zfy.yuio.entity.system;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,35 +23,44 @@ public class SysUser {
     @JsonProperty("id")
     @ExcelProperty("用户ID")
     private Long userId;
+
     @JsonProperty("name")
-    @ExcelProperty("用户名称")
+    @ExcelProperty("名称")
     private String userName;
+
     @JsonProperty("code")
     @ExcelProperty("工号")
     private String userCode;
+
     @JsonProperty("gender")
     @ExcelProperty("性别")
     private String userGender;
+
     @JsonProperty("phone")
     @ExcelProperty("手机号码")
     private String userPhone;
+
     @JsonProperty("status")
     @ExcelProperty("状态")
     private String userStatus;
+
     @JsonProperty("remark")
     @ExcelProperty("备注")
     private String userRemark;
+
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @ExcelProperty("创建时间")
-    @DateTimeFormat("yyyy-MM-dd hh:mm:ss")
-    private Date userCreateTime;
+    @ExcelIgnore
+    private LocalDateTime userCreateTime;
+
     @JsonProperty("pwd")
     @ExcelIgnore
     private String userPwd;
+
     @JsonProperty("salt")
     @ExcelIgnore
     private String userSalt;
+
     //非数据库字段
     @ExcelIgnore
     private List<Long> roles;
@@ -97,11 +105,11 @@ public class SysUser {
         this.userRemark = userRemark;
     }
 
-    public Date getUserCreateTime() {
+    public LocalDateTime getUserCreateTime() {
         return userCreateTime;
     }
 
-    public void setUserCreateTime(Date userCreateTime) {
+    public void setUserCreateTime(LocalDateTime userCreateTime) {
         this.userCreateTime = userCreateTime;
     }
 

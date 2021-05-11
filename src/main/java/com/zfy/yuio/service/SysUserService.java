@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelUser;
 import com.zfy.yuio.entity.system.SysUser;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface SysUserService {
     List<SysUser> getByKeyword(String keyword);
 
     int updProfile(SysUser params);
+
+    void addFromExcel(List<ExcelUser> params);
 }

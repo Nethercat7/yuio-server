@@ -1,6 +1,9 @@
 package com.zfy.yuio.service.impl;
 
+import com.zfy.yuio.dao.SysDictDataDao;
 import com.zfy.yuio.dao.SysUserDao;
+import com.zfy.yuio.entity.excel.ExcelUser;
+import com.zfy.yuio.entity.system.SysDictData;
 import com.zfy.yuio.entity.system.SysUser;
 import com.zfy.yuio.service.SysUserService;
 import com.zfy.yuio.utils.ShiroUtil;
@@ -19,6 +22,9 @@ import java.util.List;
 public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserDao userDao;
+
+    @Autowired
+    private SysDictDataDao dictDataDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(4, 0);
 
@@ -70,6 +76,27 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public int updProfile(SysUser params) {
         return userDao.updProfile(params);
+    }
+
+    @Override
+    public void addFromExcel(List<ExcelUser> params) {
+        List<SysDictData> dictData=dictDataDao.get("sys_user_gender");
+        for (ExcelUser u:params
+             ) {
+            u.setUserId(snowflakeIdGeneratorUtil.nextId());
+            u.setUserStatus("0");
+            //set password
+            u.setUserSalt(ShiroUtil.getSalt(7));
+            u.setUserPwd(ShiroUtil.pwd2MD5("123456",u.getUserSalt(),1739));
+            //convert gender
+            for (SysDictData d:dictData
+                 ) {
+                if(u.getUserGender().equals(d.getDictLabel())){
+                    u.setUserGender(d.getDictValue());
+                }
+            }
+        }
+        userDao.addFromExcel(params);
     }
 
     private void saveUserRole(SysUser params) {
