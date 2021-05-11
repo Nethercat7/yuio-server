@@ -4,8 +4,10 @@ import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.system.SysRole;
 import com.zfy.yuio.service.SysRoleService;
+import com.zfy.yuio.utils.UsefulUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -62,5 +64,12 @@ public class SysRoleController {
         String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         EasyExcel.write(response.getOutputStream(), SysRole.class).sheet("Sheet1").doWrite(roleService.get());
+    }
+
+    @GetMapping("download")
+    public void download(@RequestParam("type") String type,HttpServletResponse response) throws IOException {
+        String filename = "角色数据上传模板." + type;
+        String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath()+ "static/excel/" + type + "/" + filename;
+        UsefulUtil.download(filepath,filename,response);
     }
 }
