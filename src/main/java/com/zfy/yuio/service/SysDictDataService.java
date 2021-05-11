@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelDictData;
 import com.zfy.yuio.entity.system.SysDictData;
 
 import java.util.List;
@@ -22,5 +23,5 @@ public interface SysDictDataService {
 
     List<SysDictData> getAll();
 
-    void addFromExcel(List<SysDictData> params);
+    void addFromExcel(List<ExcelDictData> params);
 }
