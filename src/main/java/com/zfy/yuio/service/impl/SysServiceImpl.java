@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.*;
-import com.zfy.yuio.entity.*;
+import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.system.*;
 import com.zfy.yuio.service.SysService;
 import com.zfy.yuio.utils.JWTUtil;

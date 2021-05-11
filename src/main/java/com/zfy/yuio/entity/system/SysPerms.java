@@ -7,8 +7,6 @@ import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zfy.yuio.converter.PermsTypeConverter;
-import com.zfy.yuio.converter.UvslStatusConverter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,48 +21,48 @@ import java.util.List;
 @ColumnWidth(20)
 public class SysPerms {
     @JsonProperty("id")
-    @ExcelIgnore
+    @ExcelProperty(value = "ID")
     private Long permsId;
 
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "标签")
+    @ExcelProperty(value = "标签")
     private String permsName;
 
     @JsonProperty("mark")
-    @ExcelProperty(index = 1,value = "权限字符串")
+    @ExcelProperty(value = "权限字符串")
     private String permsMark;
 
     @JsonProperty("url")
-    @ExcelProperty(index=2,value = "请求地址")
+    @ExcelProperty(value = "请求地址")
     private String permsUrl;
 
     @JsonProperty("icon")
-    @ExcelProperty(index = 3,value = "图标")
+    @ExcelProperty(value = "图标")
     private String permsIcon;
 
     @JsonProperty("remark")
-    @ExcelProperty(index = 4,value = "备注")
+    @ExcelProperty(value = "备注")
     private String permsRemark;
 
     @JsonProperty("status")
-    @ExcelProperty(index = 5,value = "状态",converter = UvslStatusConverter.class)
+    @ExcelProperty(value = "状态")
     private String permsStatus;
 
     @JsonProperty("create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ExcelIgnore
     private LocalDateTime permsCreateTime;
 
     @JsonProperty("pid")
-    @ExcelProperty(index = 6,value = "上级ID")
+    @ExcelProperty(value = "上级ID")
     private Long permsPid;
 
     @JsonProperty("level")
-    @ExcelProperty(index = 7,value = "成绩")
+    @ExcelProperty(value = "层级")
     private int permsLevel;
 
     @JsonProperty("type")
-    @ExcelProperty(index = 8,value = "类型",converter = PermsTypeConverter.class)
+    @ExcelProperty(value = "类型")
     private String permsType;
 
     //非数据库字段

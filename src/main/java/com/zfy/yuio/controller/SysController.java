@@ -58,18 +58,18 @@ public class SysController {
     }
 
     @PutMapping("changePwd")
-    public ResultBody changePwd(@RequestBody Map<String,Object> params){
-        int status=sysService.changePwd(params);
-        if(status==1){
-            return new ResultBody(0,"修改成功，请重新登录","success");
-        }else if(status==2){
-            return new ResultBody(2,"旧密码不正确","error");
+    public ResultBody changePwd(@RequestBody Map<String, Object> params) {
+        int status = sysService.changePwd(params);
+        if (status == 1) {
+            return new ResultBody(0, "修改成功，请重新登录", "success");
+        } else if (status == 2) {
+            return new ResultBody(2, "旧密码不正确", "error");
         }
-        return new ResultBody(1,"修改失败","error");
+        return new ResultBody(1, "修改失败", "error");
     }
 
     @GetMapping("getMenus")
-    public ResultBody getMenus(@RequestParam("type") String type,@RequestParam("id") Long id){
-        return new ResultBody(0,sysService.getMenus(type,id));
+    public ResultBody getMenus(@RequestParam("type") String type, @RequestParam("id") Long id) {
+        return new ResultBody(0, sysService.getMenus(type, id));
     }
 }
