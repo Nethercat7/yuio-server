@@ -1,7 +1,14 @@
 package com.zfy.yuio.entity.system;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zfy.yuio.converter.PermsTypeConverter;
+import com.zfy.yuio.converter.UvslStatusConverter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,31 +18,57 @@ import java.util.List;
  * @Author:Nethercat7
  * @CreateDate:2021/4/16 21:09
  */
+@ContentRowHeight(20)
+@HeadRowHeight(20)
+@ColumnWidth(20)
 public class SysPerms {
     @JsonProperty("id")
+    @ExcelIgnore
     private Long permsId;
+
     @JsonProperty("name")
+    @ExcelProperty(index = 0,value = "标签")
     private String permsName;
+
     @JsonProperty("mark")
+    @ExcelProperty(index = 1,value = "权限字符串")
     private String permsMark;
+
     @JsonProperty("url")
+    @ExcelProperty(index=2,value = "请求地址")
     private String permsUrl;
+
     @JsonProperty("icon")
+    @ExcelProperty(index = 3,value = "图标")
     private String permsIcon;
+
     @JsonProperty("remark")
+    @ExcelProperty(index = 4,value = "备注")
     private String permsRemark;
+
     @JsonProperty("status")
+    @ExcelProperty(index = 5,value = "状态",converter = UvslStatusConverter.class)
     private String permsStatus;
+
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ExcelIgnore
     private LocalDateTime permsCreateTime;
+
     @JsonProperty("pid")
+    @ExcelProperty(index = 6,value = "上级ID")
     private Long permsPid;
+
     @JsonProperty("level")
+    @ExcelProperty(index = 7,value = "成绩")
     private int permsLevel;
+
     @JsonProperty("type")
+    @ExcelProperty(index = 8,value = "类型",converter = PermsTypeConverter.class)
     private String permsType;
+
     //非数据库字段
+    @ExcelIgnore
     private List<SysPerms> children;
 
     public Long getPermsId() {

@@ -58,22 +58,6 @@ public class SysPermsServiceImpl implements SysPermsService {
         return permsDao.upd(params);
     }
 
-    private List<SysPerms> getChildren(Long pid, List<SysPerms> list){
-        List<SysPerms> children=new ArrayList<>();
-        for (SysPerms p:list
-             ) {
-            if(p.getPermsPid().equals(pid)){
-                children.add(p);
-            }
-        }
-
-        for (SysPerms m:children
-             ) {
-            m.setChildren(getChildren(m.getPermsId(),list));
-        }
-        return children;
-    }
-
     @Override
     public List<String> getUserPerms(Long id) {
         return permsDao.getUserPerms(id);
@@ -87,5 +71,26 @@ public class SysPermsServiceImpl implements SysPermsService {
     @Override
     public List<SysPerms> getByKeyword(String keyword) {
         return permsDao.getByKeyword(keyword);
+    }
+
+    @Override
+    public List<SysPerms> getWithoutConvert() {
+        return permsDao.get();
+    }
+
+    private List<SysPerms> getChildren(Long pid, List<SysPerms> list){
+        List<SysPerms> children=new ArrayList<>();
+        for (SysPerms p:list
+        ) {
+            if(p.getPermsPid().equals(pid)){
+                children.add(p);
+            }
+        }
+
+        for (SysPerms m:children
+        ) {
+            m.setChildren(getChildren(m.getPermsId(),list));
+        }
+        return children;
     }
 }

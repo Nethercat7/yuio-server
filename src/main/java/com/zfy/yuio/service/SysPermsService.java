@@ -24,4 +24,6 @@ public interface SysPermsService {
     List<String> getStudentPerms(Long id);
 
     List<SysPerms> getByKeyword(String keyword);
+
+    List<SysPerms> getWithoutConvert();
 }
