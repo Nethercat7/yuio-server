@@ -31,6 +31,14 @@
 
     <select id="getByKeyword" parameterType="String" resultType="SysCollege">
         SELECT * FROM sys_college
-        where college_name LIKE concat('%',#{keyword},'%')
+        WHERE college_name LIKE concat('%',#{keyword},'%')
     </select>
+
+    <insert id="addFromExcel" parameterType="ExcelCollege">
+        INSERT INTO sys_college(college_id,college_name,college_status,college_remark)
+        VALUES
+        <foreach collection="params" item="c">
+            (#{c.collegeId},#{c.collegeName},#{c.collegeStatus},#{c.collegeRemark})
+        </foreach>
+    </insert>
 </mapper>

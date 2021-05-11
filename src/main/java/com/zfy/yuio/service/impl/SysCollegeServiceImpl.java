@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysCollegeDao;
+import com.zfy.yuio.entity.excel.ExcelCollege;
 import com.zfy.yuio.entity.system.SysCollege;
 import com.zfy.yuio.service.SysCollegeService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -45,5 +46,14 @@ public class SysCollegeServiceImpl implements SysCollegeService {
     @Override
     public List<SysCollege> getByKeyword(String keyword) {
         return collegeDao.getByKeyword(keyword);
+    }
+
+    @Override
+    public void addFromExcel(List<ExcelCollege> params) {
+        for (ExcelCollege c:params
+             ) {
+            c.setCollegeId(snowflakeIdGeneratorUtil.nextId());
+        }
+        collegeDao.addFromExcel(params);
     }
 }

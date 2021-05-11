@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelCollege;
 import com.zfy.yuio.entity.system.SysCollege;
 
 import java.util.List;
@@ -43,4 +44,6 @@ public interface SysCollegeService {
     int upd(SysCollege params);
 
     List<SysCollege> getByKeyword(String keyword);
+
+    void addFromExcel(List<ExcelCollege> params);
 }
