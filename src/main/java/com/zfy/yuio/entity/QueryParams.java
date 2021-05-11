@@ -2,8 +2,6 @@ package com.zfy.yuio.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
 /**
  *@Description:接收前端查询字段
  *@Author:Nethercat7
@@ -12,21 +10,27 @@ import java.util.List;
 public class QueryParams {
     @JsonProperty("student_id")
     private Long studentId;
+
     @JsonProperty("college_id")
     private Long collegeId;
+
     @JsonProperty("major_id")
     private Long majorId;
+
     @JsonProperty("class_id")
     private Long classId;
+
     @JsonProperty("empl_status")
     private String emplStatus;
+
     @JsonProperty("empl_write")
     private String emplWrite;
+
     private int grade;
-    private String name;
-    private List<Integer> grades;
+
     private String gender;
-    private String most;
+
+    private String name;
 
     public Long getStudentId() {
         return studentId;
@@ -68,22 +72,6 @@ public class QueryParams {
         this.grade = grade;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Integer> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(List<Integer> grades) {
-        this.grades = grades;
-    }
-
     public String getEmplStatus() {
         return emplStatus;
     }
@@ -108,11 +96,11 @@ public class QueryParams {
         this.gender = gender;
     }
 
-    public String getMost() {
-        return most;
+    public String getName() {
+        return name;
     }
 
-    public void setMost(String most) {
-        this.most = most;
+    public void setName(String name) {
+        this.name = name;
     }
 }

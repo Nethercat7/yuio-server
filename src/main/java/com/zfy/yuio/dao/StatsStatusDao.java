@@ -14,7 +14,5 @@ public interface StatsStatusDao {
 
     List<StatsEmplResult> getStudentPlan(QueryParams params);
 
-    StatsEmplResult getMaxWorkInfoByGender(QueryParams params);
-
-    StatsEmplResult getMostStudentPlanByGender(QueryParams params);
+    List<StatsEmplResult> getWorkRank(QueryParams params);
 }

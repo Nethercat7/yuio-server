@@ -12,31 +12,40 @@ import java.util.List;
 public class StatsEmplResult {
     @JsonProperty("total_people")
     private int totalPeople;
+
     @JsonProperty("empl_people")
     private int emplPeople;
+
     @JsonProperty("un_empl_people")
     private int unEmplPeople;
+
     @JsonProperty("empl_rate")
     private String emplRate;
+
     @JsonProperty("college_name")
     private String collegeName;
+
     @JsonProperty("city_name")
     private String cityName;
+
     @JsonProperty("work_name")
     private String workName;
+
     @JsonProperty("plan")
     private String emplPlan;
+
     private List<StatsEmplResult> results;
-    //以下字段用于分析指标值最多和其次指标。
-    private StatsEmplResult most;
-    @JsonProperty("female_most")
-    private StatsEmplResult femaleMost;
-    @JsonProperty("male_most")
-    private StatsEmplResult maleMost;
-    @JsonProperty("female_second")
-    private StatsEmplResult femaleSecond;
-    @JsonProperty("male_second")
-    private StatsEmplResult maleSecond;
+
+    private int max;
+
+    @JsonProperty("total_work_rank")
+    private List<StatsEmplResult> totalWorkRank;
+
+    @JsonProperty("female_work_rank")
+    private List<StatsEmplResult> femaleWorkRank;
+
+    @JsonProperty("male_work_rank")
+    private List<StatsEmplResult> maleWorkRank;
 
     public int getTotalPeople() {
         return totalPeople;
@@ -110,43 +119,35 @@ public class StatsEmplResult {
         this.results = results;
     }
 
-    public StatsEmplResult getMost() {
-        return most;
+    public int getMax() {
+        return max;
     }
 
-    public void setMost(StatsEmplResult most) {
-        this.most = most;
+    public void setMax(int max) {
+        this.max = max;
     }
 
-    public StatsEmplResult getFemaleMost() {
-        return femaleMost;
+    public List<StatsEmplResult> getTotalWorkRank() {
+        return totalWorkRank;
     }
 
-    public void setFemaleMost(StatsEmplResult femaleMost) {
-        this.femaleMost = femaleMost;
+    public void setTotalWorkRank(List<StatsEmplResult> totalWorkRank) {
+        this.totalWorkRank = totalWorkRank;
     }
 
-    public StatsEmplResult getMaleMost() {
-        return maleMost;
+    public List<StatsEmplResult> getFemaleWorkRank() {
+        return femaleWorkRank;
     }
 
-    public void setMaleMost(StatsEmplResult maleMost) {
-        this.maleMost = maleMost;
+    public void setFemaleWorkRank(List<StatsEmplResult> femaleWorkRank) {
+        this.femaleWorkRank = femaleWorkRank;
     }
 
-    public StatsEmplResult getFemaleSecond() {
-        return femaleSecond;
+    public List<StatsEmplResult> getMaleWorkRank() {
+        return maleWorkRank;
     }
 
-    public void setFemaleSecond(StatsEmplResult femaleSecond) {
-        this.femaleSecond = femaleSecond;
-    }
-
-    public StatsEmplResult getMaleSecond() {
-        return maleSecond;
-    }
-
-    public void setMaleSecond(StatsEmplResult maleSecond) {
-        this.maleSecond = maleSecond;
+    public void setMaleWorkRank(List<StatsEmplResult> maleWorkRank) {
+        this.maleWorkRank = maleWorkRank;
     }
 }
