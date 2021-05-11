@@ -7,8 +7,10 @@ import com.zfy.yuio.entity.excel.ExcelStudent;
 import com.zfy.yuio.entity.system.SysStudent;
 import com.zfy.yuio.listener.SysStudentExcelListener;
 import com.zfy.yuio.service.SysStudentService;
+import com.zfy.yuio.utils.UsefulUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,7 +43,7 @@ public class SysStudentController {
     @PostMapping("get")
     //@RequiresPermissions("system:student:get")
     public ResultBody get(@RequestBody QueryParams params) {
-            return new ResultBody(0, studentService.get(params));
+        return new ResultBody(0, studentService.get(params));
     }
 
     @DeleteMapping("del")
@@ -70,25 +72,32 @@ public class SysStudentController {
     }
 
     @PutMapping("updProfile")
-    public ResultBody updProfile(@RequestBody SysStudent params){
-        int status=studentService.updProfile(params);
-        if(status!=1){
-            return new ResultBody(1,"修改失败","error");
+    public ResultBody updProfile(@RequestBody SysStudent params) {
+        int status = studentService.updProfile(params);
+        if (status != 1) {
+            return new ResultBody(1, "修改失败", "error");
         }
-        return new ResultBody(0,"成功修改","success");
+        return new ResultBody(0, "成功修改", "success");
     }
 
     @PostMapping("output")
     public void output(@RequestBody QueryParams params, HttpServletResponse response) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
-        String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
+        String fileName = URLEncoder.encode("学生数据", "UTF-8").replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("学生").doWrite(studentService.get(params));
+        EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("sheet1").doWrite(studentService.get(params));
     }
 
     @PostMapping("upload")
     public void upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), ExcelStudent.class,new SysStudentExcelListener(studentService)).sheet().doRead();
+        EasyExcel.read(file.getInputStream(), ExcelStudent.class, new SysStudentExcelListener(studentService)).sheet().doRead();
+    }
+
+    @GetMapping("download")
+    public void download(@RequestParam("type") String type, HttpServletResponse response) throws IOException {
+        String filename = "学生数据上传模板." + type;
+        String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath()+ "static/excel/" + type + "/" + filename;
+        UsefulUtil.download(filepath,filename,response);
     }
 }

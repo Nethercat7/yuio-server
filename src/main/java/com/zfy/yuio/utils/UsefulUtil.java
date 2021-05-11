@@ -1,5 +1,9 @@
 package com.zfy.yuio.utils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+
 /**
  * @Description:一些常用到的方法
  * @Author:赵富源
@@ -21,13 +25,43 @@ public class UsefulUtil {
     }
 
     /**
-     *@param startNumber
-     *@param endNumber
-     *@Author 赵富源
-     *@Description 获取指定范围的整形随机数
-     *@Return int
+     * @param startNumber
+     * @param endNumber
+     * @Author 赵富源
+     * @Description 获取指定范围的整形随机数
+     * @Return int
      */
     public static int getRandomNumber(int startNumber, int endNumber) {
-        return (int)   (Math.random() * (endNumber - startNumber + 1) + startNumber);
+        return (int) (Math.random() * (endNumber - startNumber + 1) + startNumber);
+    }
+
+    /**
+     *@Author Nethercat7
+     *@Description 文件下载
+     *@param filepath
+     *@param filename
+     *@param response
+     *@Return void
+    */
+    public static void download(String filepath,String filename,HttpServletResponse response) throws IOException {
+        File file = new File(filepath);
+        if (file.exists()) {
+            response.addHeader("Content-Length",String.valueOf(file.length()));
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setCharacterEncoding("utf-8");
+            String n = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+            response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + n);
+            byte[] buffer = new byte[1024];
+            FileInputStream fis =new FileInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            OutputStream os = response.getOutputStream();
+            int i = bis.read(buffer);
+            while (i != -1) {
+                os.write(buffer);
+                i = bis.read(buffer);
+            }
+            fis.close();
+            bis.close();
+        }
     }
 }
