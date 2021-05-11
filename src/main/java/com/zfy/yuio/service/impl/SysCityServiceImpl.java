@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysCityDao;
+import com.zfy.yuio.entity.excel.ExcelCity;
 import com.zfy.yuio.entity.system.SysCity;
 import com.zfy.yuio.service.SysCityService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -71,6 +72,16 @@ public class SysCityServiceImpl implements SysCityService {
     @Override
     public List<SysCity> getByKeyword(String keyword) {
         return cityDao.getByKeyword(keyword);
+    }
+
+    @Override
+    public List<SysCity> getWithoutConvert() {
+        return cityDao.get();
+    }
+
+    @Override
+    public void addFromExcel(List<ExcelCity> params) {
+        cityDao.addFromExcel(params);
     }
 
     private List<SysCity> getChildren(Long pid, List<SysCity> cityList) {

@@ -5,8 +5,8 @@
 
 <mapper namespace="com.zfy.yuio.dao.SysCityDao">
     <insert id="add" parameterType="SysCity">
-        INSERT INTO sys_city(city_id,city_name,city_pid,city_level,city_direct)
-        VALUES(#{cityId},#{cityName},#{cityPid},#{cityLevel},#{cityDirect})
+        INSERT INTO sys_city(city_id,city_name,city_pid,city_level,city_direct,city_status,city_remark)
+        VALUES(#{cityId},#{cityName},#{cityPid},#{cityLevel},#{cityDirect},#{cityStatus},#{cityRemark})
     </insert>
 
     <select id="get" resultType="SysCity">
@@ -22,7 +22,7 @@
 
     <update id="upd" parameterType="SysCity">
         UPDATE sys_city
-        SET city_name=#{cityName},city_pid=#{cityPid},city_status=#{cityStatus},city_level=#{cityLevel}
+        SET city_name=#{cityName},city_pid=#{cityPid},city_status=#{cityStatus},city_level=#{cityLevel},city_remark=#{cityRemark}
         WHERE city_id=#{cityId}
     </update>
 
@@ -50,4 +50,12 @@
         OR city_level=1
         )
     </select>
+
+    <insert id="addFromExcel" parameterType="ExcelCity">
+        INSERT INTO sys_city(city_id,city_name,city_pid,city_level,city_status,city_remark)
+        VALUES
+        <foreach collection="params" item="c">
+            (#{c.cityId},#{c.cityName},#{c.cityPid},#{c.cityLevel},#{c.cityStatus},#{c.cityRemark})
+        </foreach>
+    </insert>
 </mapper>

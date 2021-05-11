@@ -2,9 +2,6 @@ package com.zfy.yuio.entity.excel;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.write.style.ColumnWidth;
-import com.alibaba.excel.annotation.write.style.ContentRowHeight;
-import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -12,9 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @Author:Nethercat7
  * @CreateDate:2021/4/9 16:34
  */
-@ContentRowHeight(20)
-@HeadRowHeight(20)
-@ColumnWidth(20)
 public class ExcelMajor {
     @JsonProperty("id")
     @ExcelIgnore

@@ -1,5 +1,6 @@
 package com.zfy.yuio.service;
 
+import com.zfy.yuio.entity.excel.ExcelCity;
 import com.zfy.yuio.entity.system.SysCity;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface SysCityService {
     int upd(SysCity params);
 
     List<SysCity> getByKeyword(String keyword);
+
+    List<SysCity> getWithoutConvert();
+
+    void addFromExcel(List<ExcelCity> params);
 }
