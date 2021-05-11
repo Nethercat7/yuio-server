@@ -19,4 +19,6 @@ public interface SysDictTypeService {
     int upd(SysDictType params);
 
     List<SysDictType> getByKeyword(String keyword);
+
+    void addFromExcel(List<SysDictType> params);
 }

@@ -21,4 +21,6 @@ public interface SysDictTypeDao {
     int upd(SysDictType params);
 
     List<SysDictType> getByKeyword(String keyword);
+
+    void addFromExcel(List<SysDictType> params);
 }

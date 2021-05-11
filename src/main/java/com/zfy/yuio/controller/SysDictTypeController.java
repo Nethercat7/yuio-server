@@ -3,10 +3,12 @@ package com.zfy.yuio.controller;
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.system.SysDictType;
+import com.zfy.yuio.listener.SysDictTypeExcelListener;
 import com.zfy.yuio.service.SysDictTypeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -65,5 +67,10 @@ public class SysDictTypeController {
         String fileName = URLEncoder.encode("字典类型数据", "UTF-8").replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         EasyExcel.write(response.getOutputStream(), SysDictType.class).sheet("Sheet1").doWrite(sysDictTypeService.get());
+    }
+
+    @PostMapping("upload")
+    public void upload(MultipartFile file) throws IOException {
+        EasyExcel.read(file.getInputStream(), SysDictType.class,new SysDictTypeExcelListener(sysDictTypeService)).sheet().doRead();
     }
 }

@@ -41,4 +41,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     public List<SysDictType> getByKeyword(String keyword) {
         return sysDictTypeDao.getByKeyword(keyword);
     }
+
+    @Override
+    public void addFromExcel(List<SysDictType> params) {
+        sysDictTypeDao.addFromExcel(params);
+    }
 }
