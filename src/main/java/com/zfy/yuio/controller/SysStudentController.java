@@ -88,7 +88,8 @@ public class SysStudentController {
     }
 
     @PostMapping("upload")
-    public void upload(MultipartFile file) throws IOException {
+    public ResultBody upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelStudent.class, new SysStudentExcelListener(studentService)).sheet().doRead();
+        return new ResultBody(0,"成功导入数据","success");
     }
 }

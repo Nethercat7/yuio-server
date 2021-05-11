@@ -73,7 +73,8 @@ public class SysCityController {
     }
 
     @PostMapping("upload")
-    public void upload(MultipartFile file) throws IOException {
+    public ResultBody upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelCity.class,new SysCityExcelListener(cityService)).sheet().doRead();
+        return new ResultBody(0,"成功导入数据","success");
     }
 }

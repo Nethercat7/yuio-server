@@ -71,7 +71,8 @@ public class SysDictTypeController {
     }
 
     @PostMapping("upload")
-    public void upload(MultipartFile file) throws IOException {
+    public ResultBody upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelDictType.class,new SysDictTypeExcelListener(sysDictTypeService)).sheet().doRead();
+        return new ResultBody(0,"成功导入数据","success");
     }
 }
