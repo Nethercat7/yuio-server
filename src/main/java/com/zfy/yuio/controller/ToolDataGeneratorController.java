@@ -1,6 +1,6 @@
 package com.zfy.yuio.controller;
 
-import com.zfy.yuio.entity.SysCity;
+import com.zfy.yuio.entity.system.SysCity;
 import com.zfy.yuio.service.ToolDataGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.SysDictType;
+import com.zfy.yuio.entity.system.SysDictType;
 import com.zfy.yuio.service.SysDictTypeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

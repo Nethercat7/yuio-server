@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysMajor;
+import com.zfy.yuio.entity.system.SysMajor;
 
 import java.util.List;
 

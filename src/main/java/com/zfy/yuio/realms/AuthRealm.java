@@ -1,7 +1,7 @@
 package com.zfy.yuio.realms;
 
-import com.zfy.yuio.entity.SysStudent;
-import com.zfy.yuio.entity.SysUser;
+import com.zfy.yuio.entity.system.SysStudent;
+import com.zfy.yuio.entity.system.SysUser;
 import com.zfy.yuio.entity.Token;
 import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.service.SysStudentService;

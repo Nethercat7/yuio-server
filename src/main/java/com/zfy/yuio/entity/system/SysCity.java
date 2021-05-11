@@ -1,4 +1,4 @@
-package com.zfy.yuio.entity;
+package com.zfy.yuio.entity.system;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

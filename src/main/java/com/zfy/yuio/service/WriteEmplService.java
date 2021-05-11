@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.WriteEmplInfo;
+import com.zfy.yuio.entity.write.WriteEmplInfo;
 
 /**
  *@Description:就业情况填写

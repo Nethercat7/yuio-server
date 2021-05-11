@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysDictData;
+import com.zfy.yuio.entity.system.SysDictData;
 
 import java.util.List;
 

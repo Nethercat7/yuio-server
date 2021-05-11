@@ -1,7 +1,7 @@
 package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.WriteEmplInfo;
+import com.zfy.yuio.entity.write.WriteEmplInfo;
 import com.zfy.yuio.service.WriteEmplService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

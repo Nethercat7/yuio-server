@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.SysPerms;
+import com.zfy.yuio.entity.system.SysPerms;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

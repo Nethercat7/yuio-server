@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysRole;
+import com.zfy.yuio.entity.system.SysRole;
 
 import java.util.List;
 

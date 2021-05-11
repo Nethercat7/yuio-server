@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.SysWork;
+import com.zfy.yuio.entity.system.SysWork;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public interface SysWorkDao {
      *@Author Nethercat7
      *@Description 通过Id获取城市
      *@param id
-     *@Return com.zfy.yuio.entity.SysWork
+     *@Return com.zfy.yuio.entity.system.SysWork
     */
     SysWork getById(Long id);
 

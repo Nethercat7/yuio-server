@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysWork;
+import com.zfy.yuio.entity.system.SysWork;
 
 import java.util.List;
 

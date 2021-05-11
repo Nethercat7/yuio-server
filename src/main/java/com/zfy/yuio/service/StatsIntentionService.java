@@ -1,7 +1,7 @@
 package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.StatsEmplResult;
+import com.zfy.yuio.entity.statstics.StatsEmplResult;
 
 import java.util.List;
 

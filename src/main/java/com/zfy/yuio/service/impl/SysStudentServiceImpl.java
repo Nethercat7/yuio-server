@@ -2,7 +2,7 @@ package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.SysStudent;
+import com.zfy.yuio.entity.system.SysStudent;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -80,5 +80,11 @@ public class SysStudentServiceImpl implements SysStudentService {
     @Override
     public int updProfile(SysStudent params) {
         return studentDao.updProfile(params);
+    }
+
+    @Override
+    public int save(List<SysStudent> params) {
+        List<SysStudent> students=params;
+        return 0;
     }
 }

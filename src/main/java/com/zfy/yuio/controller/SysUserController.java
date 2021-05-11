@@ -2,7 +2,7 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.SysUser;
+import com.zfy.yuio.entity.system.SysUser;
 import com.zfy.yuio.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

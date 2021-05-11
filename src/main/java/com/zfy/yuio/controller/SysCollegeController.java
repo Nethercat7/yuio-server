@@ -1,7 +1,7 @@
 package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.SysCollege;
+import com.zfy.yuio.entity.system.SysCollege;
 import com.zfy.yuio.service.SysCollegeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

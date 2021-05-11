@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysCity;
+import com.zfy.yuio.entity.system.SysCity;
 
 import java.util.List;
 

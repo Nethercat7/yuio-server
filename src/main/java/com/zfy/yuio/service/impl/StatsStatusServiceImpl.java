@@ -3,7 +3,7 @@ package com.zfy.yuio.service.impl;
 import com.zfy.yuio.dao.StatsStatusDao;
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.StatsEmplResult;
+import com.zfy.yuio.entity.statstics.StatsEmplResult;
 import com.zfy.yuio.service.StatsStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

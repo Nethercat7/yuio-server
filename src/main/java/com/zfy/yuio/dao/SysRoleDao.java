@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.SysRole;
+import com.zfy.yuio.entity.system.SysRole;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

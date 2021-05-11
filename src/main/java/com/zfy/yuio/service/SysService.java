@@ -1,8 +1,8 @@
 package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.SysCollege;
-import com.zfy.yuio.entity.SysPerms;
+import com.zfy.yuio.entity.system.SysCollege;
+import com.zfy.yuio.entity.system.SysPerms;
 
 import java.util.List;
 import java.util.Map;

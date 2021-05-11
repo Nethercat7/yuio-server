@@ -1,18 +1,18 @@
-package com.zfy.yuio.entity;
+package com.zfy.yuio.entity.system;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- *@Description:字典类型实体
+ *@Description:字典数据实体
  *@Author:Nethercat7
- *@CreateDate:2021/4/22 20:25
+ *@CreateDate:2021/4/22 23:53
 */
-public class SysDictType {
+public class SysDictData {
     @JsonProperty("id")
     private Long dictId;
-    @JsonProperty("name")
-    private String dictName;
+    @JsonProperty("label")
+    private String dictLabel;
     @JsonProperty("type")
     private String dictType;
     @JsonProperty("status")
@@ -33,12 +33,12 @@ public class SysDictType {
         this.dictId = dictId;
     }
 
-    public String getDictName() {
-        return dictName;
+    public String getDictLabel() {
+        return dictLabel;
     }
 
-    public void setDictName(String dictName) {
-        this.dictName = dictName;
+    public void setDictLabel(String dictLabel) {
+        this.dictLabel = dictLabel;
     }
 
     public String getDictType() {

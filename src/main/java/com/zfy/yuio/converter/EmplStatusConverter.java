@@ -5,7 +5,7 @@ import com.alibaba.excel.enums.CellDataTypeEnum;
 import com.alibaba.excel.metadata.CellData;
 import com.alibaba.excel.metadata.GlobalConfiguration;
 import com.alibaba.excel.metadata.property.ExcelContentProperty;
-import com.zfy.yuio.entity.SysDictData;
+import com.zfy.yuio.entity.system.SysDictData;
 import com.zfy.yuio.service.SysDictDataService;
 import com.zfy.yuio.utils.SpringApplicationUtil;
 import org.springframework.util.ObjectUtils;

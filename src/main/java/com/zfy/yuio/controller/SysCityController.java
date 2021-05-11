@@ -1,7 +1,7 @@
 package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.SysCity;
+import com.zfy.yuio.entity.system.SysCity;
 import com.zfy.yuio.service.SysCityService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

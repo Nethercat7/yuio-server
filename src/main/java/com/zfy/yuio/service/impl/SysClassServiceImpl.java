@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysClassDao;
-import com.zfy.yuio.entity.SysClass;
+import com.zfy.yuio.entity.system.SysClass;
 import com.zfy.yuio.service.SysClassService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;

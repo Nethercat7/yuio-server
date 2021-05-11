@@ -1,7 +1,7 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.SysStudent;
-import com.zfy.yuio.entity.SysUser;
+import com.zfy.yuio.entity.system.SysStudent;
+import com.zfy.yuio.entity.system.SysUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysUserDao;
-import com.zfy.yuio.entity.SysUser;
+import com.zfy.yuio.entity.system.SysUser;
 import com.zfy.yuio.service.SysUserService;
 import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;

@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysClass;
+import com.zfy.yuio.entity.system.SysClass;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface SysClassService {
      *@Author Nethercat7
      *@Description 获取所有班级
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.SysClass>
+     *@Return java.util.List<com.zfy.yuio.entity.system.SysClass>
      */
     List<SysClass> get();
 

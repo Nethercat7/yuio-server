@@ -1,6 +1,6 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.SysDictType;
+import com.zfy.yuio.entity.system.SysDictType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

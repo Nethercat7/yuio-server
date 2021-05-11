@@ -2,7 +2,7 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.SysRole;
+import com.zfy.yuio.entity.system.SysRole;
 import com.zfy.yuio.service.SysRoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

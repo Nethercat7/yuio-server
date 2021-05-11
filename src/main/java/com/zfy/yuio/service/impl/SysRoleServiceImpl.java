@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysRoleDao;
-import com.zfy.yuio.entity.SysRole;
+import com.zfy.yuio.entity.system.SysRole;
 import com.zfy.yuio.service.SysRoleService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;

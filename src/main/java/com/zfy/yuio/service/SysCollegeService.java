@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysCollege;
+import com.zfy.yuio.entity.system.SysCollege;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface SysCollegeService {
      *@Author Nethercat7
      *@Description 查找院系
      *@param
-     *@Return java.util.List<com.zfy.yuio.entity.SysCollege>
+     *@Return java.util.List<com.zfy.yuio.entity.system.SysCollege>
      */
     List<SysCollege> get();
 

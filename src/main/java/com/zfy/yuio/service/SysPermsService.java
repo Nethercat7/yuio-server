@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysPerms;
+import com.zfy.yuio.entity.system.SysPerms;
 
 import java.util.List;
 

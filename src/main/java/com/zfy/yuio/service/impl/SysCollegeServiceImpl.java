@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysCollegeDao;
-import com.zfy.yuio.entity.SysCollege;
+import com.zfy.yuio.entity.system.SysCollege;
 import com.zfy.yuio.service.SysCollegeService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;

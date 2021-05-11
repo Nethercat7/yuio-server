@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysPermsDao;
-import com.zfy.yuio.entity.SysPerms;
+import com.zfy.yuio.entity.system.SysPerms;
 import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;

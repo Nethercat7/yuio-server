@@ -1,6 +1,6 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.SysUser;
+import com.zfy.yuio.entity.system.SysUser;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.zfy.yuio.dao;
 
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.WriteEmplInfo;
+import com.zfy.yuio.entity.write.WriteEmplInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
