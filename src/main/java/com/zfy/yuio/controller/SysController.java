@@ -2,12 +2,16 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.service.SysService;
+import com.zfy.yuio.utils.UsefulUtil;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -71,5 +75,12 @@ public class SysController {
     @GetMapping("getMenus")
     public ResultBody getMenus(@RequestParam("type") String type, @RequestParam("id") Long id) {
         return new ResultBody(0, sysService.getMenus(type, id));
+    }
+
+    @GetMapping("getTemplate")
+    public void getTemplate(@RequestParam("template") String template, @RequestParam("type") String type, HttpServletResponse response) throws IOException {
+        String filename = template +"."+ type;
+        String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/excel/" + type + "/" + filename;
+        UsefulUtil.download(filepath, filename, response);
     }
 }

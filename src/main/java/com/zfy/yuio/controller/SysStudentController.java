@@ -7,10 +7,8 @@ import com.zfy.yuio.entity.excel.ExcelStudent;
 import com.zfy.yuio.entity.system.SysStudent;
 import com.zfy.yuio.listener.SysStudentExcelListener;
 import com.zfy.yuio.service.SysStudentService;
-import com.zfy.yuio.utils.UsefulUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -92,12 +90,5 @@ public class SysStudentController {
     @PostMapping("upload")
     public void upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelStudent.class, new SysStudentExcelListener(studentService)).sheet().doRead();
-    }
-
-    @GetMapping("download")
-    public void download(@RequestParam("type") String type, HttpServletResponse response) throws IOException {
-        String filename = "学生数据上传模板." + type;
-        String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath()+ "static/excel/" + type + "/" + filename;
-        UsefulUtil.download(filepath,filename,response);
     }
 }

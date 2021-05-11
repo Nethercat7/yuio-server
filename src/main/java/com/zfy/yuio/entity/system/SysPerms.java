@@ -40,18 +40,9 @@ public class SysPerms {
     @ExcelProperty(value = "图标")
     private String permsIcon;
 
-    @JsonProperty("remark")
-    @ExcelProperty(value = "备注")
-    private String permsRemark;
-
     @JsonProperty("status")
     @ExcelProperty(value = "状态")
     private String permsStatus;
-
-    @JsonProperty("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime permsCreateTime;
 
     @JsonProperty("pid")
     @ExcelProperty(value = "上级ID")
@@ -65,9 +56,17 @@ public class SysPerms {
     @ExcelProperty(value = "类型")
     private String permsType;
 
-    //非数据库字段
+    @JsonProperty("remark")
+    @ExcelProperty(value = "备注")
+    private String permsRemark;
+
+    @JsonProperty("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ExcelIgnore
-    private List<SysPerms> children;
+    private LocalDateTime permsCreateTime;
+    
+    @ExcelIgnore
+    private List<SysPerms> children;//非数据库字段
 
     public Long getPermsId() {
         return permsId;
