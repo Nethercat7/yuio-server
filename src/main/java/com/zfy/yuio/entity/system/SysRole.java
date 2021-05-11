@@ -7,8 +7,9 @@ import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zfy.yuio.converter.UvslStatusConverter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -21,21 +22,26 @@ import java.util.List;
 @ColumnWidth(20)
 public class SysRole {
     @JsonProperty("id")
-    @ExcelProperty("角色ID")
+    @ExcelIgnore
     private Long roleId;
+
     @JsonProperty("name")
-    @ExcelProperty("角色名称")
+    @ExcelProperty(index = 0,value = "角色名称")
     private String roleName;
+
     @JsonProperty("status")
-    @ExcelProperty("角色状态")
+    @ExcelProperty(index = 1,value = "角色状态",converter = UvslStatusConverter.class)
+
     private String roleStatus;
     @JsonProperty("remark")
-    @ExcelProperty("备注")
+    @ExcelProperty(index = 2,value = "备注")
     private String roleRemark;
+
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ExcelProperty("创建时间")
-    private Date roleCreateTime;
+    @ExcelIgnore
+    private LocalDateTime roleCreateTime;
+
     //非数据库字段
     @ExcelIgnore
     private List<Long> perms;
@@ -72,11 +78,11 @@ public class SysRole {
         this.roleRemark = roleRemark;
     }
 
-    public Date getRoleCreateTime() {
+    public LocalDateTime getRoleCreateTime() {
         return roleCreateTime;
     }
 
-    public void setRoleCreateTime(Date roleCreateTime) {
+    public void setRoleCreateTime(LocalDateTime roleCreateTime) {
         this.roleCreateTime = roleCreateTime;
     }
 
