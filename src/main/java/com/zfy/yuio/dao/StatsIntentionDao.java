@@ -17,5 +17,5 @@ public interface StatsIntentionDao {
 
     List<StatsEmplResult> getIntentionWorks(QueryParams params);
 
-    StatsEmplResult getIntentionWorksByGender(QueryParams params);
+    List<StatsEmplResult> getWorkRank(QueryParams params);
 }

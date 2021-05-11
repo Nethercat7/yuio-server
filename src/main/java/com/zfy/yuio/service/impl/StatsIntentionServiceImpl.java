@@ -31,8 +31,17 @@ public class StatsIntentionServiceImpl implements StatsIntentionService {
         List<StatsEmplResult> results = intentionDao.getIntentionWorks(params);
         if (!ObjectUtils.isEmpty(results)) {
             result.setResults(results);
-            //计算总人数
-            int totalPeople = results.stream().mapToInt(StatsEmplResult::getTotalPeople).sum();
+            //获取总工作岗位排名
+            List<StatsEmplResult> totalWorkRank = intentionDao.getWorkRank(params);
+            result.setTotalRank(totalWorkRank);
+            //获取女生工作岗位排名
+            params.setGender("0");
+            List<StatsEmplResult> femaleWorkRank = intentionDao.getWorkRank(params);
+            result.setFemaleRank(femaleWorkRank);
+            //获取男生工作岗位排名
+            params.setGender("1");
+            List<StatsEmplResult> maleWorkRank = intentionDao.getWorkRank(params);
+            result.setMaleRank(maleWorkRank);
         }
         return result;
     }
