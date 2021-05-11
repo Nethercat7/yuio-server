@@ -61,6 +61,6 @@ public class SysRoleController {
         response.setCharacterEncoding("utf-8");
         String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(), SysRole.class).sheet("角色").doWrite(roleService.get());
+        EasyExcel.write(response.getOutputStream(), SysRole.class).sheet("Sheet1").doWrite(roleService.get());
     }
 }
