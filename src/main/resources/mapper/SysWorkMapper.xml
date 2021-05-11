@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zfy.yuio.dao.SysWorkDao">
-    <insert  id="add" parameterType="SysWork">
+    <insert id="add" parameterType="SysWork">
         INSERT INTO sys_work(work_id,work_name,work_pid,work_status,work_level,work_remark)
         VALUES(#{workId},#{workName},#{workPid},#{workStatus},#{workLevel},#{workRemark})
     </insert>
@@ -34,11 +34,16 @@
         WHERE work_name LIKE concat('%',#{keyword},'%')
     </select>
 
-    <insert  id="addFromExcel" parameterType="ExcelWork">
+    <insert id="addFromExcel" parameterType="ExcelWork">
         INSERT INTO sys_work(work_id,work_name,work_pid,work_status,work_level,work_remark)
         VALUES
         <foreach collection="params" item="w">
             (#{w.workId},#{w.workName},#{w.workPid},#{w.workStatus},#{w.workLevel},#{w.workRemark})
         </foreach>
     </insert>
+
+    <select id="getWithoutIndustry" resultType="SysWork">
+        SELECT * FROM sys_work
+        WHERE work_leve>0
+    </select>
 </mapper>

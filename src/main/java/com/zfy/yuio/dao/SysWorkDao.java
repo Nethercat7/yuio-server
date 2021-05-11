@@ -26,4 +26,6 @@ public interface SysWorkDao {
     List<SysWork> getByKeyword(String keyword);
 
     void addFromExcel(List<ExcelWork> params);
+
+    List<SysWork> getWithoutIndustry();
 }
