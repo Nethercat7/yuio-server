@@ -21,4 +21,6 @@ public interface SysDictDataService {
     List<SysDictData> getByKeyword(String keyword);
 
     List<SysDictData> getAll();
+
+    void addFromExcel(List<SysDictData> params);
 }

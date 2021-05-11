@@ -23,4 +23,6 @@ public interface SysDictDataDao {
     List<SysDictData> getByKeyword(String keyword);
 
     List<SysDictData> getAll();
+
+    void addFromExcel(List<SysDictData> params);
 }

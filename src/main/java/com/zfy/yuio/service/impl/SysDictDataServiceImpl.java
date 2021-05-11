@@ -46,4 +46,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     public List<SysDictData> getAll() {
         return sysDictDataDao.getAll();
     }
+
+    @Override
+    public void addFromExcel(List<SysDictData> params) {
+        sysDictDataDao.addFromExcel(params);
+    }
 }
