@@ -7,6 +7,8 @@ import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zfy.yuio.converter.GenderConverter;
+import com.zfy.yuio.converter.UvslStatusConverter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,31 +23,31 @@ import java.util.List;
 @ColumnWidth(20)
 public class SysUser {
     @JsonProperty("id")
-    @ExcelProperty("用户ID")
+    @ExcelIgnore
     private Long userId;
 
     @JsonProperty("name")
-    @ExcelProperty("名称")
+    @ExcelProperty(index = 0,value = "姓名")
     private String userName;
 
     @JsonProperty("code")
-    @ExcelProperty("工号")
+    @ExcelProperty(index = 1,value = "工号")
     private String userCode;
 
     @JsonProperty("gender")
-    @ExcelProperty("性别")
+    @ExcelProperty(index = 2,value = "性别",converter = GenderConverter.class)
     private String userGender;
 
     @JsonProperty("phone")
-    @ExcelProperty("手机号码")
+    @ExcelProperty(index = 3,value = "手机号码")
     private String userPhone;
 
     @JsonProperty("status")
-    @ExcelProperty("状态")
+    @ExcelProperty(index = 4,value = "状态",converter = UvslStatusConverter.class)
     private String userStatus;
 
     @JsonProperty("remark")
-    @ExcelProperty("备注")
+    @ExcelProperty(index = 5,value = "备注")
     private String userRemark;
 
     @JsonProperty("create_time")
