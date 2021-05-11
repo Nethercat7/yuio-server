@@ -38,14 +38,14 @@ public class StatsEmplResult {
 
     private int max;
 
-    @JsonProperty("total_work_rank")
-    private List<StatsEmplResult> totalWorkRank;
+    @JsonProperty("total_rank")
+    private List<StatsEmplResult> totalRank;
 
-    @JsonProperty("female_work_rank")
-    private List<StatsEmplResult> femaleWorkRank;
+    @JsonProperty("female_rank")
+    private List<StatsEmplResult> femaleRank;
 
-    @JsonProperty("male_work_rank")
-    private List<StatsEmplResult> maleWorkRank;
+    @JsonProperty("male_rank")
+    private List<StatsEmplResult> maleRank;
 
     public int getTotalPeople() {
         return totalPeople;
@@ -127,27 +127,27 @@ public class StatsEmplResult {
         this.max = max;
     }
 
-    public List<StatsEmplResult> getTotalWorkRank() {
-        return totalWorkRank;
+    public List<StatsEmplResult> getTotalRank() {
+        return totalRank;
     }
 
-    public void setTotalWorkRank(List<StatsEmplResult> totalWorkRank) {
-        this.totalWorkRank = totalWorkRank;
+    public void setTotalRank(List<StatsEmplResult> totalRank) {
+        this.totalRank = totalRank;
     }
 
-    public List<StatsEmplResult> getFemaleWorkRank() {
-        return femaleWorkRank;
+    public List<StatsEmplResult> getFemaleRank() {
+        return femaleRank;
     }
 
-    public void setFemaleWorkRank(List<StatsEmplResult> femaleWorkRank) {
-        this.femaleWorkRank = femaleWorkRank;
+    public void setFemaleRank(List<StatsEmplResult> femaleRank) {
+        this.femaleRank = femaleRank;
     }
 
-    public List<StatsEmplResult> getMaleWorkRank() {
-        return maleWorkRank;
+    public List<StatsEmplResult> getMaleRank() {
+        return maleRank;
     }
 
-    public void setMaleWorkRank(List<StatsEmplResult> maleWorkRank) {
-        this.maleWorkRank = maleWorkRank;
+    public void setMaleRank(List<StatsEmplResult> maleRank) {
+        this.maleRank = maleRank;
     }
 }

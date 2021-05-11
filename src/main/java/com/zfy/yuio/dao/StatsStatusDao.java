@@ -15,4 +15,6 @@ public interface StatsStatusDao {
     List<StatsEmplResult> getStudentPlan(QueryParams params);
 
     List<StatsEmplResult> getWorkRank(QueryParams params);
+
+    List<StatsEmplResult> getPlanRank(QueryParams params);
 }

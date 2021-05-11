@@ -115,9 +115,7 @@
         ORDER BY total_people DESC
     </select>
 
-    <select id="getMostStudentPlanByGender" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT max( total_people ) AS total_people,empl_plan
-        FROM(
+    <select id="getPlanRank" parameterType="QueryParams" resultType="StatsEmplResult">
         SELECT COUNT( s.student_id ) AS total_people,ei.empl_plan
         FROM sys_student s
         LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
@@ -144,16 +142,6 @@
             AND s.student_gender=#{gender}
         </if>
         GROUP BY ei.empl_plan
-        ) AS m
-        GROUP BY empl_plan
         ORDER BY total_people DESC
-        <choose>
-            <when test="most==0">
-                LIMIT 1
-            </when>
-            <otherwise>
-                LIMIT 1,1
-            </otherwise>
-        </choose>
     </select>
 </mapper>
