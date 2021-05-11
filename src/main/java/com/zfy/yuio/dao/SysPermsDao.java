@@ -29,4 +29,6 @@ public interface SysPermsDao {
     List<SysPerms> getUserMenus(Long id);
 
     List<SysPerms> getStudentMenus(Long id);
+
+    void addFromExcel(List<SysPerms> params);
 }

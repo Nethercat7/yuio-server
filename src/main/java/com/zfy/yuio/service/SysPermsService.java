@@ -26,4 +26,6 @@ public interface SysPermsService {
     List<SysPerms> getByKeyword(String keyword);
 
     List<SysPerms> getWithoutConvert();
+
+    void addFromExcel(List<SysPerms> params);
 }

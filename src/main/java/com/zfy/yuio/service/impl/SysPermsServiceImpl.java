@@ -78,6 +78,11 @@ public class SysPermsServiceImpl implements SysPermsService {
         return permsDao.get();
     }
 
+    @Override
+    public void addFromExcel(List<SysPerms> params) {
+        permsDao.addFromExcel(params);
+    }
+
     private List<SysPerms> getChildren(Long pid, List<SysPerms> list){
         List<SysPerms> children=new ArrayList<>();
         for (SysPerms p:list
