@@ -1,15 +1,11 @@
-package com.zfy.yuio.entity.system;
+package com.zfy.yuio.entity.excel;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zfy.yuio.converter.UvslStatusConverter;
-
-import java.time.LocalDateTime;
 
 /**
  * @Description:专业实体
@@ -19,26 +15,21 @@ import java.time.LocalDateTime;
 @ContentRowHeight(20)
 @HeadRowHeight(20)
 @ColumnWidth(20)
-public class SysClass {
+public class ExcelClass {
     @JsonProperty("id")
     @ExcelIgnore
     private Long classId;
 
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "班级名称")
+    @ExcelProperty("班级名称")
     private String className;
 
     @JsonProperty("status")
-    @ExcelProperty(index = 1,value = "状态",converter = UvslStatusConverter.class)
+    @ExcelProperty("状态")
     private String classStatus;
 
-    @JsonProperty("create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime classCreateTime;
-
     @JsonProperty("remark")
-    @ExcelProperty(index = 5,value = "备注")
+    @ExcelProperty("备注")
     private String classRemark;
 
     @JsonProperty("major_id")
@@ -46,16 +37,11 @@ public class SysClass {
     private Long classMajorId;
 
     @JsonProperty("grade")
-    @ExcelProperty(index = 4,value = "所属年级")
+    @ExcelProperty("所属年级")
     private int classGrade;
 
-    //非数据库字段
-    @JsonProperty("college_name")
-    @ExcelProperty(index = 2,value = "所属院系")
-    private String classCollegeName;
-
     @JsonProperty("major_name")
-    @ExcelProperty(index = 3,value = "所属专业")
+    @ExcelProperty("所属专业")
     private String classMajorName;
 
     public Long getClassId() {
@@ -82,14 +68,6 @@ public class SysClass {
         this.classStatus = classStatus;
     }
 
-    public LocalDateTime getClassCreateTime() {
-        return classCreateTime;
-    }
-
-    public void setClassCreateTime(LocalDateTime classCreateTime) {
-        this.classCreateTime = classCreateTime;
-    }
-
     public String getClassRemark() {
         return classRemark;
     }
@@ -112,14 +90,6 @@ public class SysClass {
 
     public void setClassGrade(int classGrade) {
         this.classGrade = classGrade;
-    }
-
-    public String getClassCollegeName() {
-        return classCollegeName;
-    }
-
-    public void setClassCollegeName(String classCollegeName) {
-        this.classCollegeName = classCollegeName;
     }
 
     public String getClassMajorName() {

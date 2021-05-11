@@ -26,4 +26,6 @@ public interface SysMajorDao {
     List<SysMajor> getByKeyword(String keyword);
 
     void addFromExcel(List<ExcelMajor> params);
+
+    Long getIdByName(String name);
 }

@@ -49,4 +49,9 @@
             (#{m.majorId},#{m.majorName},#{m.majorStatus},#{m.majorRemark},#{m.majorCollegeId})
         </foreach>
     </insert>
+
+    <select id="getIdByName" parameterType="String" resultType="Long">
+        SELECT major_id FROM sys_major
+        WHERE major_name=#{name}
+    </select>
 </mapper>

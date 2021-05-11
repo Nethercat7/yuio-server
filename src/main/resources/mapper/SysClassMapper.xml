@@ -64,4 +64,13 @@
         SELECT class_id FROM sys_class
         WHERE class_name=#{name}
     </select>
+
+    <insert id="addFromExcel" parameterType="ExcelClass">
+        INSERT INTO sys_class(class_id,class_name,class_status,class_remark,class_major_id,class_grade)
+        VALUES
+        <foreach collection="params" item="c">
+            (#{c.classId},#{c.className},#{c.classStatus},#{c.classRemark},#{c.classMajorId},#{c.classGrade})
+        </foreach>
+    </insert>
+
 </mapper>
