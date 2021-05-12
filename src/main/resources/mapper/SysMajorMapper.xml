@@ -54,4 +54,9 @@
         SELECT major_id FROM sys_major
         WHERE major_name=#{name}
     </select>
+
+    <select id="getById" parameterType="Long" resultType="SysMajor">
+        SELECT * FROM sys_major
+        WHERE major_id=#{id}
+    </select>
 </mapper>

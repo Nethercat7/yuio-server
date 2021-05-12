@@ -8,6 +8,7 @@ import com.zfy.yuio.service.SysMajorService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -22,14 +23,18 @@ public class SysMajorServiceImpl implements SysMajorService {
     private SysMajorDao majorDao;
 
     @Autowired
-            private SysCollegeDao  collegeDao;
+    private SysCollegeDao collegeDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(1, 0);
 
     @Override
     public int add(SysMajor params) {
-        params.setMajorId(snowflakeIdGeneratorUtil.nextId());
-        return majorDao.add(params);
+        int status = validator(params, 0);
+        if (status == 0) {
+            params.setMajorId(snowflakeIdGeneratorUtil.nextId());
+            majorDao.add(params);
+        }
+        return status;
     }
 
     @Override
@@ -44,7 +49,11 @@ public class SysMajorServiceImpl implements SysMajorService {
 
     @Override
     public int upd(SysMajor params) {
-        return majorDao.upd(params);
+        int status = validator(params, 1);
+        if(status==0){
+            majorDao.upd(params);
+        }
+        return status;
     }
 
     @Override
@@ -54,11 +63,23 @@ public class SysMajorServiceImpl implements SysMajorService {
 
     @Override
     public void addFromExcel(List<ExcelMajor> params) {
-        for (ExcelMajor m:params
-             ) {
+        for (ExcelMajor m : params
+        ) {
             m.setMajorId(snowflakeIdGeneratorUtil.nextId());
             m.setMajorCollegeId(collegeDao.getIdByName(m.getCollegeName()));
         }
         majorDao.addFromExcel(params);
+    }
+
+    public int validator(SysMajor params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(majorDao.getIdByName(params.getMajorName()))) return 1;
+        } else {
+            SysMajor data = majorDao.getById(params.getMajorId());
+            if (!data.getMajorName().equals(params.getMajorName())) {
+                if (!ObjectUtils.isEmpty(majorDao.getIdByName(params.getMajorName()))) return 1;
+            }
+        }
+        return 0;
     }
 }

@@ -28,4 +28,6 @@ public interface SysMajorDao {
     void addFromExcel(List<ExcelMajor> params);
 
     Long getIdByName(String name);
+
+    SysMajor getById(Long id);
 }
