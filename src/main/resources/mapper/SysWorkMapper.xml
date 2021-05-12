@@ -44,6 +44,6 @@
 
     <select id="getWithoutIndustry" resultType="SysWork">
         SELECT * FROM sys_work
-        WHERE work_leve>0
+        WHERE work_level>0
     </select>
 </mapper>

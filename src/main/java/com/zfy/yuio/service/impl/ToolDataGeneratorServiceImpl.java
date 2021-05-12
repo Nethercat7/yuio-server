@@ -63,6 +63,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
                 student.setStudentGrade(grade);
                 student.setStudentClassId(cls.getClassId());
                 studentDao.add(student);
+                studentDao.addRole(student.getStudentId(),506870876013088768L);
             }
         }
     }
