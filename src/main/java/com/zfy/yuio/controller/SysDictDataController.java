@@ -31,10 +31,12 @@ public class SysDictDataController {
     @RequiresPermissions("system:dict:add")
     public ResultBody add(@RequestBody SysDictData params){
         int status=sysDictDataService.add(params);
-        if(status!=1){
-            return new ResultBody(1,"添加失败","error");
+        if (status == 1) {
+            return new ResultBody(status, "标签已存在", "error");
+        } else if (status == 2) {
+            return new ResultBody(status, "键值已存在", "error");
         }
-        return new ResultBody(0,"添加成功","success");
+        return new ResultBody(status, "添加成功", "success");
     }
 
     @GetMapping("get")
@@ -56,8 +58,10 @@ public class SysDictDataController {
     @RequiresPermissions("system:dict:upd")
     public ResultBody upd(@RequestBody SysDictData params){
         int status=sysDictDataService.upd(params);
-        if(status!=1){
-            return new ResultBody(1,"修改失败","error");
+        if (status == 1) {
+            return new ResultBody(status, "标签已存在", "error");
+        } else if (status == 2) {
+            return new ResultBody(status, "键值已存在", "error");
         }
         return new ResultBody(0,"修改成功","success");
     }

@@ -26,4 +26,8 @@ public interface SysDictDataDao {
     List<SysDictData> getAll();
 
     void addFromExcel(List<ExcelDictData> params);
+
+    SysDictData getById(Long id);
+
+    Long verify(String key);
 }

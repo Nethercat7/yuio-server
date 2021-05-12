@@ -42,4 +42,16 @@
             (#{d.dictId},#{d.dictLabel},#{d.dictType},#{d.dictValue},#{d.dictStatus},#{d.dictRemark})
         </foreach>
     </insert>
+
+    <select id="getById" parameterType="Long" resultType="SysDictData">
+        SELECT * FROM sys_dict_data
+        WHERE dict_id=#{id}
+    </select>
+
+    <select id="verify" parameterType="String" resultType="Long">
+        SELECT dict_id
+        FROM sys_dict_data
+        WHERE dict_label=#{key}
+        OR dict_value=#{key}
+    </select>
 </mapper>
