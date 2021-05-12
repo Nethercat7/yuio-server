@@ -83,6 +83,7 @@ public class SysStudentController {
     }
 
     @PostMapping("output")
+    @RequiresPermissions("system:student:output")
     public void output(@RequestBody QueryParams params, HttpServletResponse response) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
@@ -92,6 +93,7 @@ public class SysStudentController {
     }
 
     @PostMapping("upload")
+    @RequiresPermissions("system:student:import")
     public ResultBody upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelStudent.class, new SysStudentExcelListener(studentService)).sheet().doRead();
         return new ResultBody(0, "成功导入数据", "success");

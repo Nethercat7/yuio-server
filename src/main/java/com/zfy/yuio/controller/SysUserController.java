@@ -86,6 +86,7 @@ public class SysUserController {
     }
 
     @GetMapping("output")
+    @RequiresPermissions("system:user:output")
     public void output(HttpServletResponse response) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
@@ -95,6 +96,7 @@ public class SysUserController {
     }
 
     @PostMapping("upload")
+    @RequiresPermissions("system:user:import")
     public ResultBody upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelUser.class, new SysUserExcelListener(userService)).sheet().doRead();
         return new ResultBody(0, "成功导入数据", "success");

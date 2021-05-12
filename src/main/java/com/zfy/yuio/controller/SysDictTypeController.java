@@ -66,6 +66,7 @@ public class SysDictTypeController {
     }
 
     @GetMapping("output")
+    @RequiresPermissions("system:dict:output")
     public void output(HttpServletResponse response) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
@@ -75,6 +76,7 @@ public class SysDictTypeController {
     }
 
     @PostMapping("upload")
+    @RequiresPermissions("system:dict:import")
     public ResultBody upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelDictType.class, new SysDictTypeExcelListener(sysDictTypeService)).sheet().doRead();
         return new ResultBody(0, "成功导入数据", "success");
