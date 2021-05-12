@@ -29,4 +29,6 @@ public interface SysStudentDao {
     int updProfile(SysStudent params);
 
     void addFromExcel(List<ExcelStudent> params);
+
+    Long verify(String key);
 }

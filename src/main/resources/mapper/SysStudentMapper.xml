@@ -126,4 +126,11 @@
                 (#{s.studentId},#{s.studentName},#{s.studentCode},#{s.studentGender},#{s.studentPhone},#{s.studentStatus},#{s.studentGrade},#{s.studentRemark},#{s.studentClassId},#{s.studentPwd},#{s.studentSalt})
             </foreach>
         </insert>
+
+    <select id="verify" parameterType="String" resultType="Long">
+        SELECT student_id
+        FROM sys_student
+        WHERE student_code=#{key}
+        OR student_phone=#{key}
+    </select>
 </mapper>

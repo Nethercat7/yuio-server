@@ -36,13 +36,16 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Override
     public int add(SysStudent params) {
-        params.setStudentId(snowflakeIdGeneratorUtil.nextId());
-        //设置随机盐
-        params.setStudentSalt(ShiroUtil.getSalt(SALT));
-        //默认密码
-        params.setStudentPwd(ShiroUtil.pwd2MD5("123456", params.getStudentSalt(), HASH));
-        int status = studentDao.add(params);
-        if (status == 1) studentDao.addRole(params.getStudentId(), 506870876013088768L);
+        int status = validator(params, 0);
+        if (status == 0) {
+            params.setStudentId(snowflakeIdGeneratorUtil.nextId());
+            //设置随机盐
+            params.setStudentSalt(ShiroUtil.getSalt(SALT));
+            //默认密码
+            params.setStudentPwd(ShiroUtil.pwd2MD5("123456", params.getStudentSalt(), HASH));
+            studentDao.add(params);
+            studentDao.addRole(params.getStudentId(), 506870876013088768L);
+        }
         return status;
     }
 
@@ -68,7 +71,11 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Override
     public int upd(SysStudent params) {
-        return studentDao.upd(params);
+        int status = validator(params, 1);
+        if (status == 0) {
+            studentDao.upd(params);
+        }
+        return status;
     }
 
     @Override
@@ -92,12 +99,13 @@ public class SysStudentServiceImpl implements SysStudentService {
         //Add status and class id for students
         for (ExcelStudent s : params
         ) {
-            s.setStudentId(snowflakeIdGeneratorUtil.nextId());;
+            s.setStudentId(snowflakeIdGeneratorUtil.nextId());
+            ;
             s.setStudentClassId(classDao.getIdByName(s.getClassName()));
 
             //Set default password
             s.setStudentSalt(ShiroUtil.getSalt(7));
-            s.setStudentPwd(ShiroUtil.pwd2MD5("123456",s.getStudentSalt(),1739));
+            s.setStudentPwd(ShiroUtil.pwd2MD5("123456", s.getStudentSalt(), 1739));
         }
         studentDao.addFromExcel(params);
         //Add student role
@@ -105,5 +113,26 @@ public class SysStudentServiceImpl implements SysStudentService {
         ) {
             studentDao.addRole(s.getStudentId(), 506870876013088768L);
         }
+    }
+
+    public int validator(SysStudent params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(studentDao.verify(params.getStudentCode()))) return 1;
+            if (!ObjectUtils.isEmpty(params.getStudentPhone())) {
+                if (!ObjectUtils.isEmpty(studentDao.verify(params.getStudentPhone()))) return 2;
+            }
+        } else {
+            SysStudent student = studentDao.getById(params.getStudentId());
+            if (!student.getStudentCode().equals(params.getStudentCode())) {
+                if (!ObjectUtils.isEmpty(studentDao.verify(params.getStudentCode()))) return 1;
+            } else if (!ObjectUtils.isEmpty(params.getStudentPhone())) {
+                if (!ObjectUtils.isEmpty(student.getStudentPhone())) {
+                    if (!student.getStudentPhone().equals(params.getStudentPhone())) {
+                        if (!ObjectUtils.isEmpty(studentDao.verify(params.getStudentPhone()))) return 2;
+                    }
+                }
+            }
+        }
+        return 0;
     }
 }

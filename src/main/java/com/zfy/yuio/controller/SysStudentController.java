@@ -33,9 +33,11 @@ public class SysStudentController {
     public ResultBody add(@RequestBody SysStudent params) {
         int status = studentService.add(params);
         if (status == 1) {
-            return new ResultBody(0, "成功添加", "success");
+            return new ResultBody(status, "学号已存在", "error");
+        } else if (status == 2) {
+            return new ResultBody(status, "手机号码已存在", "error");
         }
-        return new ResultBody(1, "添加失败", "error");
+        return new ResultBody(status, "添加成功", "success");
     }
 
     @PostMapping("get")
@@ -59,9 +61,11 @@ public class SysStudentController {
     public ResultBody upd(@RequestBody SysStudent params) {
         int status = studentService.upd(params);
         if (status == 1) {
-            return new ResultBody(0, "成功修改", "success");
+            return new ResultBody(status, "学号已存在", "error");
+        } else if (status == 2) {
+            return new ResultBody(status, "手机号码已存在", "error");
         }
-        return new ResultBody(1, "修改失败", "error");
+        return new ResultBody(status, "修改成功", "success");
     }
 
     @GetMapping("getById")
@@ -90,6 +94,6 @@ public class SysStudentController {
     @PostMapping("upload")
     public ResultBody upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), ExcelStudent.class, new SysStudentExcelListener(studentService)).sheet().doRead();
-        return new ResultBody(0,"成功导入数据","success");
+        return new ResultBody(0, "成功导入数据", "success");
     }
 }
