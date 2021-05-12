@@ -77,9 +77,31 @@ public class StatsStatusServiceImpl implements StatsStatusService {
     }
 
     @Override
-    public StatsEmplResult getStudentPlan(QueryParams params) {
+    public StatsEmplResult getUnEmplStudentPlan(QueryParams params) {
         StatsEmplResult result = new StatsEmplResult();
         params.setEmplStatus("0");
+        List<StatsEmplResult> results = statusDao.getStudentPlan(params);
+        if (!ObjectUtils.isEmpty(results)) {
+            result.setResults(results);
+            //获取总学生计划排行
+            List<StatsEmplResult> totalPlanRank = statusDao.getPlanRank(params);
+            result.setTotalRank(totalPlanRank);
+            //获取女生计划排行
+            params.setGender("0");
+            List<StatsEmplResult> femalePlanRank = statusDao.getPlanRank(params);
+            result.setFemaleRank(femalePlanRank);
+            //获取男生计划排行
+            params.setGender("1");
+            List<StatsEmplResult> malePlanRank = statusDao.getPlanRank(params);
+            result.setMaleRank(malePlanRank);
+        }
+        return result;
+    }
+
+    @Override
+    public StatsEmplResult getEmplStudentPlan(QueryParams params) {
+        StatsEmplResult result = new StatsEmplResult();
+        params.setEmplStatus("1");
         List<StatsEmplResult> results = statusDao.getStudentPlan(params);
         if (!ObjectUtils.isEmpty(results)) {
             result.setResults(results);

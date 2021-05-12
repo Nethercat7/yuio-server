@@ -31,9 +31,15 @@ public class StatsStatusController {
         return new ResultBody(0,statusService.getWorkInfo(params));
     }
 
-    @PostMapping("getStudentPlan")
+    @PostMapping("getUnEmplStudentPlan")
     @RequiresPermissions("statistics:status:stats")
-    public ResultBody getStudentPlan(@RequestBody QueryParams params){
-        return new ResultBody(0,statusService.getStudentPlan(params));
+    public ResultBody getUnEmplStudentPlan(@RequestBody QueryParams params){
+        return new ResultBody(0,statusService.getUnEmplStudentPlan(params));
+    }
+
+    @PostMapping("getEmplStudentPlan")
+    @RequiresPermissions("statistics:status:stats")
+    public ResultBody getEmplStudentPlan(@RequestBody QueryParams params){
+        return new ResultBody(0,statusService.getEmplStudentPlan(params));
     }
 }

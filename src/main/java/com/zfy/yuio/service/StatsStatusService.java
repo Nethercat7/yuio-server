@@ -15,5 +15,7 @@ public interface StatsStatusService {
 
     StatsEmplResult getWorkInfo(QueryParams params);
 
-    StatsEmplResult getStudentPlan(QueryParams params);
+    StatsEmplResult getUnEmplStudentPlan(QueryParams params);
+
+    StatsEmplResult getEmplStudentPlan(QueryParams params);
 }
