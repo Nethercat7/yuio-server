@@ -7,6 +7,7 @@ import com.zfy.yuio.service.SysRoleService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -24,9 +25,12 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public int add(SysRole params) {
-        params.setRoleId(snowflakeIdGeneratorUtil.nextId());
-        int status = roleDao.add(params);
-        if (status == 1) savePerms(params);
+        int status = validator(params,0);
+        if (status == 0) {
+            params.setRoleId(snowflakeIdGeneratorUtil.nextId());
+            roleDao.add(params);
+            savePerms(params);
+        }
         return status;
     }
 
@@ -50,21 +54,39 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public int upd(SysRole params) {
-        //先删除该角色下的所有权限
-        roleDao.delPerms(params.getRoleId());
-        //再添加权限
-        savePerms(params);
-        return roleDao.upd(params);
+        int status = validator(params,1);
+        if (status == 0) {
+            //先删除该角色下的所有权限
+            roleDao.delPerms(params.getRoleId());
+            //再添加权限
+            savePerms(params);
+            roleDao.upd(params);
+        }
+        return status;
     }
 
     @Override
     public void addFromExcel(List<ExcelRole> params) {
-        for (ExcelRole r:params
-             ) {
+        for (ExcelRole r : params
+        ) {
             r.setRoleId(snowflakeIdGeneratorUtil.nextId());
             r.setRoleStatus("0");
         }
         roleDao.addFromExcel(params);
+    }
+
+    private int validator(SysRole params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(roleDao.verify(params.getRoleName()))) {
+                return 1;
+            }
+        } else {
+            SysRole role = roleDao.getById(params.getRoleId());
+            if (!params.getRoleName().equals(role.getRoleName())) {
+                if (!ObjectUtils.isEmpty(roleDao.verify(params.getRoleName()))) return 1;
+            }
+        }
+        return 0;
     }
 
     private void savePerms(SysRole params) {

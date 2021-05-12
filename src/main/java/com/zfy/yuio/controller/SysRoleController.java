@@ -26,10 +26,10 @@ public class SysRoleController {
     @RequiresPermissions("system:role:add")
     public ResultBody add(@RequestBody SysRole params) {
         int status = roleService.add(params);
-        if (status != 1) {
-            return new ResultBody(1, "添加失败", "error");
+        if (status == 1) {
+            return new ResultBody(status, "角色名称已存在", "error");
         }
-        return new ResultBody(0, "成功添加", "success");
+        return new ResultBody(status, "成功添加", "success");
     }
 
     @GetMapping("get")
@@ -52,10 +52,10 @@ public class SysRoleController {
     @RequiresPermissions("system:role:upd")
     public ResultBody upd(@RequestBody SysRole params) {
         int status = roleService.upd(params);
-        if (status != 1) {
-            return new ResultBody(1, "修改失败", "error");
+        if (status == 1) {
+            return new ResultBody(status, "角色名称已存在", "error");
         }
-        return new ResultBody(0, "成功修改", "success");
+        return new ResultBody(status, "成功修改", "success");
     }
 
     @GetMapping("output")

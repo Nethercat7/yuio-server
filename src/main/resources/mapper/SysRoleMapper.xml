@@ -47,4 +47,15 @@
             (#{r.roleId},#{r.roleName},#{r.roleStatus},#{r.roleRemark})
         </foreach>
     </insert>
+
+    <select id="getById" parameterType="Long" resultType="SysRole">
+        SELECT * FROM sys_role
+        WHERE role_id=#{id}
+    </select>
+
+    <select id="verify" parameterType="String" resultType="Long">
+        SELECT role_id
+        FROM sys_role
+        WHERE role_name=#{key}
+    </select>
 </mapper>

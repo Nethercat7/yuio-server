@@ -29,4 +29,8 @@ public interface SysRoleDao {
     int delPerms(Long id);
 
     void addFromExcel(List<ExcelRole> params);
+
+    Long verify(String key);
+
+    SysRole getById(Long id);
 }
