@@ -44,4 +44,6 @@ public interface SysRoleService {
     int upd(SysRole params);
 
     void addFromExcel(List<ExcelRole> params);
+
+    List<SysRole> getByKeyword(String keyword);
 }

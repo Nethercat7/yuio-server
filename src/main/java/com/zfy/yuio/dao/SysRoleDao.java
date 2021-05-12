@@ -33,4 +33,6 @@ public interface SysRoleDao {
     Long verify(String key);
 
     SysRole getById(Long id);
+
+    List<SysRole> getByKeyword(String keyword);
 }

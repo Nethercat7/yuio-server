@@ -58,4 +58,9 @@
         FROM sys_role
         WHERE role_name=#{key}
     </select>
+
+    <select id="getByKeyword" parameterType="String" resultType="SysRole">
+        SELECT * FROM sys_role
+        WHERE role_name LIKE concat('%',#{keyword},'%')
+    </select>
 </mapper>

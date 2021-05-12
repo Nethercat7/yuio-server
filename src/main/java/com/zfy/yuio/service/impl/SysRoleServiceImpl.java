@@ -75,6 +75,11 @@ public class SysRoleServiceImpl implements SysRoleService {
         roleDao.addFromExcel(params);
     }
 
+    @Override
+    public List<SysRole> getByKeyword(String keyword) {
+        return roleDao.getByKeyword(keyword);
+    }
+
     private int validator(SysRole params, int type) {
         if (type == 0) {
             if (!ObjectUtils.isEmpty(roleDao.verify(params.getRoleName()))) {

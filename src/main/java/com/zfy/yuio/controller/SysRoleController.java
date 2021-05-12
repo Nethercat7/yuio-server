@@ -72,4 +72,9 @@ public class SysRoleController {
         EasyExcel.read(file.getInputStream(), ExcelRole.class,new SysRoleExcelListener(roleService)).sheet().doRead();
         return new ResultBody(0,"成功导入数据","success");
     }
+
+    @GetMapping("getByKeyword")
+    public ResultBody getByKeyword(@RequestParam("keyword") String keyword) {
+        return new ResultBody(0, roleService.getByKeyword(keyword));
+    }
 }
