@@ -92,8 +92,8 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
                 info.setEmplWorkId(works.get(random.nextInt(works.size())).getWorkId());
             } else {
                 info.setEmplStatus("0");
-                info.setEmplPlan(String.valueOf(random.nextInt(12)));
             }
+            info.setEmplPlan(String.valueOf(random.nextInt(12)));
             info.setEmplStudentId(student.getStudentId());
             emplDao.add(info);
             //就业意向生成,随机选择3个城市和2个岗位

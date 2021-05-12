@@ -50,6 +50,8 @@ public class StatsEmplResult {
     @JsonProperty("work_pid")
     private Long workPid;
 
+    private List<StatsEmplResult> industries;
+
     public int getTotalPeople() {
         return totalPeople;
     }
@@ -160,5 +162,13 @@ public class StatsEmplResult {
 
     public void setWorkPid(Long workPid) {
         this.workPid = workPid;
+    }
+
+    public List<StatsEmplResult> getIndustries() {
+        return industries;
+    }
+
+    public void setIndustries(List<StatsEmplResult> industries) {
+        this.industries = industries;
     }
 }

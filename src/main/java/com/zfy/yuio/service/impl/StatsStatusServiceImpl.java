@@ -38,8 +38,7 @@ public class StatsStatusServiceImpl implements StatsStatusService {
         //获取就业岗位信息
         List<StatsEmplResult> results = statusDao.getWorkInfo(params);//用于stream分类
         if (!ObjectUtils.isEmpty(results)) {
-            /*  暂时禁用，等待后续开发。
-            //将数据转换为 行业[岗位1,...n] 的List形式
+/*            //将数据转换为 行业[岗位1,...n] 的List形式
             List<StatsEmplResult> rs = new ArrayList<StatsEmplResult>();//用于存放最顶层的行业信息
             //按照行业ID分类
             Map<Long, List<StatsEmplResult>> industries = results.stream().collect(Collectors.groupingBy(StatsEmplResult::getWorkPid));
@@ -55,9 +54,12 @@ public class StatsStatusServiceImpl implements StatsStatusService {
                 String name = workDao.getById(key).getWorkName();
                 r.setResults(industry);
                 r.setWorkName(name);
+                r.setTotalPeople(industry.stream().mapToInt(StatsEmplResult::getTotalPeople).sum());
                 rs.add(r);
-            }*/
-            //添加上面的信息
+            }
+            //添加行业信息
+            result.setIndustries(rs);*/
+            //添加岗位信息
             result.setResults(results);
             //计算工作岗位最多的人数
             result.setMax(results.stream().max(Comparator.comparing(StatsEmplResult::getTotalPeople)).get().getTotalPeople());
