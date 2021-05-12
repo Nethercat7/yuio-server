@@ -26,10 +26,10 @@ public class SysCityController {
     @RequiresPermissions("system:city:add")
     public ResultBody add(@RequestBody SysCity params) {
         int status = cityService.add(params);
-        if (status != 1) {
-            return new ResultBody(1, "添加失败", "error");
+        if (status == 1) {
+            return new ResultBody(status, "城市名称已存在", "error");
         }
-        return new ResultBody(0, "成功添加", "success");
+        return new ResultBody(status, "成功添加", "success");
     }
 
     @GetMapping("get")
@@ -52,10 +52,10 @@ public class SysCityController {
     @RequiresPermissions("system:city:upd")
     public ResultBody upd(@RequestBody SysCity params) {
         int status = cityService.upd(params);
-        if (status != 1) {
-            return new ResultBody(1, "修改失败", "error");
+        if (status == 1) {
+            return new ResultBody(status, "城市名称已存在", "error");
         }
-        return new ResultBody(0, "成功修改", "success");
+        return new ResultBody(status, "成功修改", "success");
     }
 
     @GetMapping("getByKeyword")

@@ -26,14 +26,18 @@ public class SysCityServiceImpl implements SysCityService {
 
     @Override
     public int add(SysCity params) {
-        if (ObjectUtils.isEmpty(params.getCityPid())) {
-            params.setCityPid(0L);
-            params.setCityLevel(0);
-        } else {
-            SysCity c = cityDao.getById(params.getCityPid());
-            params.setCityLevel(c.getCityLevel() + 1);
+        int status = validator(params, 0);
+        if (status == 0) {
+            if (ObjectUtils.isEmpty(params.getCityPid())) {
+                params.setCityPid(0L);
+                params.setCityLevel(0);
+            } else {
+                SysCity c = cityDao.getById(params.getCityPid());
+                params.setCityLevel(c.getCityLevel() + 1);
+            }
+            cityDao.add(params);
         }
-        return cityDao.add(params);
+        return status;
     }
 
     @Override
@@ -59,14 +63,18 @@ public class SysCityServiceImpl implements SysCityService {
 
     @Override
     public int upd(SysCity params) {
-        if (ObjectUtils.isEmpty(params.getCityPid())) {
-            params.setCityPid(0L);
-            params.setCityLevel(0);
-        } else {
-            SysCity c = cityDao.getById(params.getCityPid());
-            if (!ObjectUtils.isEmpty(c)) params.setCityLevel(c.getCityLevel() + 1);
+        int status = validator(params, 1);
+        if(status==0){
+            if (ObjectUtils.isEmpty(params.getCityPid())) {
+                params.setCityPid(0L);
+                params.setCityLevel(0);
+            } else {
+                SysCity c = cityDao.getById(params.getCityPid());
+                if (!ObjectUtils.isEmpty(c)) params.setCityLevel(c.getCityLevel() + 1);
+            }
+            cityDao.upd(params);
         }
-        return cityDao.upd(params);
+        return status;
     }
 
     @Override
@@ -82,6 +90,18 @@ public class SysCityServiceImpl implements SysCityService {
     @Override
     public void addFromExcel(List<ExcelCity> params) {
         cityDao.addFromExcel(params);
+    }
+
+    private int validator(SysCity params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(cityDao.verify(params.getCityName()))) return 1;
+        } else {
+            SysCity data = cityDao.getById(params.getCityId());
+            if (!data.getCityName().equals(params.getCityName())) {
+                if (!ObjectUtils.isEmpty(cityDao.verify(params.getCityName()))) return 1;
+            }
+        }
+        return 0;
     }
 
     private List<SysCity> getChildren(Long pid, List<SysCity> cityList) {

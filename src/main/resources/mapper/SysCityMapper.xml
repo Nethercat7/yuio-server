@@ -64,4 +64,10 @@
         WHERE (city_level = 1 AND city_direct=0)
         OR (city_level = 0 AND city_direct =1 )
     </select>
+
+    <select id="verify" parameterType="String" resultType="Long">
+        SELECT city_id
+        FROM sys_city
+        WHERE city_name=#{key}
+    </select>
 </mapper>

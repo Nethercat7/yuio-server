@@ -28,4 +28,6 @@ public interface SysCityDao {
     void addFromExcel(List<ExcelCity> params);
 
     List<SysCity> getWithoutProvinces();
+
+    Long verify(String key);
 }
