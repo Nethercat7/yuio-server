@@ -24,4 +24,8 @@ public interface SysDictTypeDao {
     List<SysDictType> getByKeyword(String keyword);
 
     void addFromExcel(List<ExcelDictType> params);
+
+    SysDictType getById(Long id);
+
+    Long verify(String key);
 }

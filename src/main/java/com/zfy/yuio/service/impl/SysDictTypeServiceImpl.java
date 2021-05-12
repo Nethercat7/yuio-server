@@ -7,6 +7,7 @@ import com.zfy.yuio.service.SysDictTypeService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -15,12 +16,16 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     @Autowired
     private SysDictTypeDao sysDictTypeDao;
 
-    private SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil=new SnowflakeIdGeneratorUtil(11,0);
+    private SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(11, 0);
 
     @Override
     public int add(SysDictType params) {
-        params.setDictId(snowflakeIdGeneratorUtil.nextId());
-        return sysDictTypeDao.add(params);
+        int status = validator(params, 0);
+        if (status == 0) {
+            params.setDictId(snowflakeIdGeneratorUtil.nextId());
+            sysDictTypeDao.add(params);
+        }
+        return status;
     }
 
     @Override
@@ -35,7 +40,11 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 
     @Override
     public int upd(SysDictType params) {
-        return sysDictTypeDao.upd(params);
+        int status = validator(params, 1);
+        if (status == 0) {
+            sysDictTypeDao.upd(params);
+        }
+        return status;
     }
 
     @Override
@@ -46,5 +55,21 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     @Override
     public void addFromExcel(List<ExcelDictType> params) {
         sysDictTypeDao.addFromExcel(params);
+    }
+
+    private int validator(SysDictType params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(sysDictTypeDao.verify(params.getDictName()))) return 1;
+            if (!ObjectUtils.isEmpty(sysDictTypeDao.verify(params.getDictType()))) return 2;
+        } else {
+            SysDictType data = sysDictTypeDao.getById(params.getDictId());
+            if (!data.getDictName().equals(params.getDictName())) {
+                if (!ObjectUtils.isEmpty(params.getDictName())) return 1;
+            }
+            if (!data.getDictType().equals(params.getDictType())) {
+                if (!ObjectUtils.isEmpty(params.getDictType())) return 2;
+            }
+        }
+        return 0;
     }
 }
