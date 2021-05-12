@@ -34,4 +34,6 @@ public interface SysUserDao {
     int updProfile(SysUser params);
 
     void addFromExcel(List<ExcelUser> params);
+
+    Long verify(String key);
 }

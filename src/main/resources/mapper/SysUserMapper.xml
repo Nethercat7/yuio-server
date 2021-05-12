@@ -73,4 +73,11 @@
             (#{u.userId},#{u.userName},#{u.userCode},#{u.userGender},#{u.userPhone},#{u.userStatus},#{u.userRemark},#{u.userPwd},#{u.userSalt})
         </foreach>
     </insert>
+
+    <select id="verify" parameterType="String" resultType="Long">
+        SELECT user_id
+        FROM sys_user
+        WHERE user_code=#{key}
+        OR user_phone=#{key}
+    </select>
 </mapper>

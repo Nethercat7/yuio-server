@@ -8,6 +8,7 @@ import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -25,11 +26,14 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int add(SysUser params) {
-        params.setUserId(snowflakeIdGeneratorUtil.nextId());
-        params.setUserSalt(ShiroUtil.getSalt(7));
-        params.setUserPwd(ShiroUtil.pwd2MD5("123456", params.getUserSalt(), 1739));
-        int status = userDao.add(params);
-        if (status == 1) saveUserRole(params);
+        int status = validator(params);
+        if (status == 0) {
+            params.setUserId(snowflakeIdGeneratorUtil.nextId());
+            params.setUserSalt(ShiroUtil.getSalt(7));
+            params.setUserPwd(ShiroUtil.pwd2MD5("123456", params.getUserSalt(), 1739));
+            userDao.add(params);
+            saveUserRole(params);
+        }
         return status;
     }
 
@@ -51,10 +55,14 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int upd(SysUser params) {
-        //先删除关系表中的用户角色信息
-        userDao.delRole(params.getUserId());
-        //再重新添加
-        saveUserRole(params);
+        //重复性验证
+        int status = validator(params);
+        if (status == 0) {
+            //先删除关系表中的用户角色信息
+            userDao.delRole(params.getUserId());
+            //再重新添加
+            saveUserRole(params);
+        }
         return userDao.upd(params);
     }
 
@@ -75,14 +83,25 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public void addFromExcel(List<ExcelUser> params) {
-        for (ExcelUser u:params
-             ) {
+        for (ExcelUser u : params
+        ) {
             u.setUserId(snowflakeIdGeneratorUtil.nextId());
             //set password
             u.setUserSalt(ShiroUtil.getSalt(7));
-            u.setUserPwd(ShiroUtil.pwd2MD5("123456",u.getUserSalt(),1739));
+            u.setUserPwd(ShiroUtil.pwd2MD5("123456", u.getUserSalt(), 1739));
         }
         userDao.addFromExcel(params);
+    }
+
+    private int validator(SysUser params) {
+        Long code = userDao.verify(params.getUserCode());
+        if (!ObjectUtils.isEmpty(code)) return 2;
+
+        if (!ObjectUtils.isEmpty(params.getUserPhone())) {
+            Long phone = userDao.verify(params.getUserPhone());
+            if (!ObjectUtils.isEmpty(phone)) return 3;
+        }
+        return 0;
     }
 
     private void saveUserRole(SysUser params) {
