@@ -32,7 +32,7 @@
     </select>
 
     <select id="getWorkInfo" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT( s.student_id ) AS total_people,w.work_name
+        SELECT COUNT( s.student_id ) AS total_people,w.work_name,w.work_pid
         FROM sys_student s
         LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
         LEFT JOIN sys_major m ON cls.class_major_id = m.major_id

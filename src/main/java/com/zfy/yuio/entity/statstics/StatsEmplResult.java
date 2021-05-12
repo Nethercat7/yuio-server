@@ -47,6 +47,9 @@ public class StatsEmplResult {
     @JsonProperty("male_rank")
     private List<StatsEmplResult> maleRank;
 
+    @JsonProperty("work_pid")
+    private Long workPid;
+
     public int getTotalPeople() {
         return totalPeople;
     }
@@ -149,5 +152,13 @@ public class StatsEmplResult {
 
     public void setMaleRank(List<StatsEmplResult> maleRank) {
         this.maleRank = maleRank;
+    }
+
+    public Long getWorkPid() {
+        return workPid;
+    }
+
+    public void setWorkPid(Long workPid) {
+        this.workPid = workPid;
     }
 }

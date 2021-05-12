@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.StatsStatusDao;
+import com.zfy.yuio.dao.SysWorkDao;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.statstics.StatsEmplResult;
 import com.zfy.yuio.service.StatsStatusService;
@@ -21,6 +22,9 @@ public class StatsStatusServiceImpl implements StatsStatusService {
     @Autowired
     private StatsStatusDao statusDao;
 
+    @Autowired
+    private SysWorkDao workDao;
+
     @Override
     public List<StatsEmplResult> getCityInfo(QueryParams params) {
         params.setEmplStatus("1");
@@ -32,8 +36,28 @@ public class StatsStatusServiceImpl implements StatsStatusService {
         StatsEmplResult result = new StatsEmplResult();
         params.setEmplStatus("1");
         //获取就业岗位信息
-        List<StatsEmplResult> results = statusDao.getWorkInfo(params);
+        List<StatsEmplResult> results = statusDao.getWorkInfo(params);//用于stream分类
         if (!ObjectUtils.isEmpty(results)) {
+            /*  暂时禁用，等待后续开发。
+            //将数据转换为 行业[岗位1,...n] 的List形式
+            List<StatsEmplResult> rs = new ArrayList<StatsEmplResult>();//用于存放最顶层的行业信息
+            //按照行业ID分类
+            Map<Long, List<StatsEmplResult>> industries = results.stream().collect(Collectors.groupingBy(StatsEmplResult::getWorkPid));
+            //获取ID集
+            Set<Long> keys = industries.keySet();
+            for (Long key : keys
+            ) {
+                //行业实体
+                StatsEmplResult r = new StatsEmplResult();
+                //获取该行业下的岗位
+                List<StatsEmplResult> industry = industries.get(key);
+                //获取行业的名字
+                String name = workDao.getById(key).getWorkName();
+                r.setResults(industry);
+                r.setWorkName(name);
+                rs.add(r);
+            }*/
+            //添加上面的信息
             result.setResults(results);
             //计算工作岗位最多的人数
             result.setMax(results.stream().max(Comparator.comparing(StatsEmplResult::getTotalPeople)).get().getTotalPeople());
