@@ -26,15 +26,19 @@ public class SysWorkServiceImpl implements SysWorkService {
 
     @Override
     public int add(SysWork params) {
-        params.setWorkId(snowflakeIdGeneratorUtil.nextId());
-        if (ObjectUtils.isEmpty(params.getWorkPid())) {
-            params.setWorkPid(0L);
-            params.setWorkLevel(0);
-        } else {
-            SysWork c = workDao.getById(params.getWorkPid());
-            params.setWorkLevel(c.getWorkLevel() + 1);
+        int status = validator(params, 0);
+        if (status == 0) {
+            params.setWorkId(snowflakeIdGeneratorUtil.nextId());
+            if (ObjectUtils.isEmpty(params.getWorkPid())) {
+                params.setWorkPid(0L);
+                params.setWorkLevel(0);
+            } else {
+                SysWork c = workDao.getById(params.getWorkPid());
+                params.setWorkLevel(c.getWorkLevel() + 1);
+            }
+            workDao.add(params);
         }
-        return workDao.add(params);
+        return status;
     }
 
     @Override
@@ -60,14 +64,18 @@ public class SysWorkServiceImpl implements SysWorkService {
 
     @Override
     public int upd(SysWork params) {
-        if (ObjectUtils.isEmpty(params.getWorkPid())) {
-            params.setWorkPid(0L);
-            params.setWorkLevel(0);
-        } else {
-            SysWork c = workDao.getById(params.getWorkPid());
-            if (!ObjectUtils.isEmpty(c)) params.setWorkLevel(c.getWorkLevel() + 1);
+        int status = validator(params, 1);
+        if (status == 0) {
+            if (ObjectUtils.isEmpty(params.getWorkPid())) {
+                params.setWorkPid(0L);
+                params.setWorkLevel(0);
+            } else {
+                SysWork c = workDao.getById(params.getWorkPid());
+                if (!ObjectUtils.isEmpty(c)) params.setWorkLevel(c.getWorkLevel() + 1);
+            }
+            workDao.upd(params);
         }
-        return workDao.upd(params);
+        return status;
     }
 
     @Override
@@ -83,6 +91,18 @@ public class SysWorkServiceImpl implements SysWorkService {
     @Override
     public void addFromExcel(List<ExcelWork> params) {
         workDao.addFromExcel(params);
+    }
+
+    private int validator(SysWork params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(workDao.verify(params.getWorkName()))) return 1;
+        } else {
+            SysWork data = workDao.getById(params.getWorkId());
+            if (!data.getWorkName().equals(params.getWorkName())) {
+                if (!ObjectUtils.isEmpty(workDao.verify(params.getWorkName()))) return 1;
+            }
+        }
+        return 0;
     }
 
     private List<SysWork> getChildren(Long pid, List<SysWork> workList) {

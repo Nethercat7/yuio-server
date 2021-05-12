@@ -28,4 +28,6 @@ public interface SysWorkDao {
     void addFromExcel(List<ExcelWork> params);
 
     List<SysWork> getWithoutIndustry();
+
+    Long verify(String key);
 }

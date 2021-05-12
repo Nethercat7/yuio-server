@@ -46,4 +46,10 @@
         SELECT * FROM sys_work
         WHERE work_level>0
     </select>
+
+    <select id="verify" parameterType="String" resultType="Long">
+        SELECT work_id
+        FROM sys_work
+        WHERE work_name=#{key}
+    </select>
 </mapper>
