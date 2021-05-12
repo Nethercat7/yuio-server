@@ -16,10 +16,10 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 /**
- *@Description:Menu mgt
- *@Author:Nethercat7
- *@CreateDate:2021/4/16 21:26
-*/
+ * @Description:Menu mgt
+ * @Author:Nethercat7
+ * @CreateDate:2021/4/16 21:26
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("sys/perms")
@@ -29,43 +29,51 @@ public class SysPermsController {
 
     @PostMapping("add")
     @RequiresPermissions("system:perms:add")
-    public ResultBody add(@RequestBody SysPerms params){
-        int status=permsService.add(params);
-        if(status!=1){
-            return new ResultBody(1,"添加失败","error");
+    public ResultBody add(@RequestBody SysPerms params) {
+        int status = permsService.add(params);
+        if (status == 1) {
+            return new ResultBody(status, "名称已存在", "error");
+        } else if (status == 2) {
+            return new ResultBody(status, "标识符已存在", "error");
+        } else if (status == 3) {
+            return new ResultBody(status, "请求地址已存在", "error");
         }
-        return new ResultBody(0,"成功添加","success");
+        return new ResultBody(status, "成功添加", "success");
     }
 
     @GetMapping("get")
     //@RequiresPermissions(value={"system:perms:get","system:role:*"},logical = Logical.OR)
-    public ResultBody get(){
-        return new ResultBody(0,permsService.get());
+    public ResultBody get() {
+        return new ResultBody(0, permsService.get());
     }
 
     @DeleteMapping("del")
     @RequiresPermissions("system:perms:del")
-    public ResultBody del(@RequestParam("id")Long id){
-        int status=permsService.del(id);
-        if(status!=1){
-            return new ResultBody(1,"删除失败","error");
+    public ResultBody del(@RequestParam("id") Long id) {
+        int status = permsService.del(id);
+        if (status != 1) {
+            return new ResultBody(1, "删除失败", "error");
         }
-        return new ResultBody(0,"成功删除","success");
+        return new ResultBody(0, "成功删除", "success");
     }
 
     @PutMapping("upd")
     @RequiresPermissions("system:perms:upd")
-    public ResultBody upd(@RequestBody SysPerms params){
-        int status=permsService.upd(params);
-        if(status!=1){
-            return new ResultBody(1,"修改失败","error");
+    public ResultBody upd(@RequestBody SysPerms params) {
+        int status = permsService.upd(params);
+        if (status == 1) {
+            return new ResultBody(status, "名称已存在", "error");
+        } else if (status == 2) {
+            return new ResultBody(status, "标识符已存在", "error");
+        } else if (status == 3) {
+            return new ResultBody(status, "请求地址已存在", "error");
         }
-        return new ResultBody(0,"成功修改","success");
+        return new ResultBody(status, "成功修改", "success");
     }
 
     @GetMapping("getByKeyword")
-    public ResultBody getByKeyword(@RequestParam("keyword") String keyword){
-        return new ResultBody(0,permsService.getByKeyword(keyword));
+    public ResultBody getByKeyword(@RequestParam("keyword") String keyword) {
+        return new ResultBody(0, permsService.getByKeyword(keyword));
     }
 
     @GetMapping("output")
@@ -79,7 +87,7 @@ public class SysPermsController {
 
     @PostMapping("upload")
     public ResultBody upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), ExcelPerms.class,new SysPermsExcelListener(permsService)).sheet().doRead();
-        return new ResultBody(0,"成功导入数据","success");
+        EasyExcel.read(file.getInputStream(), ExcelPerms.class, new SysPermsExcelListener(permsService)).sheet().doRead();
+        return new ResultBody(0, "成功导入数据", "success");
     }
 }

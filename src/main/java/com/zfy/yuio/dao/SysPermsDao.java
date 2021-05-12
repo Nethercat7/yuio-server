@@ -32,4 +32,8 @@ public interface SysPermsDao {
     List<SysPerms> getStudentMenus(Long id);
 
     void addFromExcel(List<ExcelPerms> params);
+
+    SysPerms getById(Long id);
+
+    Long verify(String key);
 }

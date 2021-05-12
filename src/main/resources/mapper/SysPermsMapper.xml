@@ -91,4 +91,17 @@
             (#{p.permsId},#{p.permsName},#{p.permsMark},#{p.permsUrl},#{p.permsIcon},#{p.permsRemark},#{p.permsStatus},#{p.permsLevel},#{p.permsPid},#{p.permsType})
         </foreach>
     </insert>
+
+    <select id="getById" parameterType="Long" resultType="SysPerms">
+        SELECT * FROM sys_perms
+        WHERE perms_id=#{id}
+    </select>
+
+    <select id="verify" parameterType="String" resultType="Long">
+        SELECT perms_id
+        FROM sys_perms
+        WHERE perms_name=#{key}
+        OR perms_mark=#{key}
+        OR perms_url=#{key}
+    </select>
 </mapper>

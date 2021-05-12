@@ -17,31 +17,38 @@ public class SysPermsServiceImpl implements SysPermsService {
     @Autowired
     private SysPermsDao permsDao;
 
-    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil =new SnowflakeIdGeneratorUtil(6,0);
+    SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(6, 0);
 
     @Override
     public int add(SysPerms params) {
-        params.setPermsId(snowflakeIdGeneratorUtil.nextId());
-        if(ObjectUtils.isEmpty(params.getPermsPid())){
-            params.setPermsPid(0L);
+        int status = validate(params, 0);
+        if (status == 0) {
+            params.setPermsId(snowflakeIdGeneratorUtil.nextId());
+            if (ObjectUtils.isEmpty(params.getPermsPid())) {
+                params.setPermsPid(0L);
+                params.setPermsLevel(0);
+            } else {
+                SysPerms perms = permsDao.getById(params.getPermsPid());
+                params.setPermsLevel(perms.getPermsLevel() + 1);
+            }
+            permsDao.add(params);
         }
-        params.setPermsLevel(1);
-        return permsDao.add(params);
+        return status;
     }
 
     @Override
     public List<SysPerms> get() {
-        List<SysPerms> perms= permsDao.get();
-        List<SysPerms> permsList=new ArrayList<>();
-        for (SysPerms p:perms
-             ) {
-            if(p.getPermsPid()==0){
+        List<SysPerms> perms = permsDao.get();
+        List<SysPerms> permsList = new ArrayList<>();
+        for (SysPerms p : perms
+        ) {
+            if (p.getPermsPid() == 0) {
                 permsList.add(p);
             }
         }
-        for (SysPerms m:permsList
-             ) {
-            m.setChildren(getChildren(m.getPermsId(),perms));
+        for (SysPerms m : permsList
+        ) {
+            m.setChildren(getChildren(m.getPermsId(), perms));
         }
         return permsList;
     }
@@ -53,10 +60,14 @@ public class SysPermsServiceImpl implements SysPermsService {
 
     @Override
     public int upd(SysPerms params) {
-        if(ObjectUtils.isEmpty(params.getPermsPid())){
-            params.setPermsPid(0L);
+        int status = validate(params, 1);
+        if (status == 0) {
+            if (ObjectUtils.isEmpty(params.getPermsPid())) {
+                params.setPermsPid(0L);
+            }
+            permsDao.upd(params);
         }
-        return permsDao.upd(params);
+        return status;
     }
 
     @Override
@@ -84,18 +95,37 @@ public class SysPermsServiceImpl implements SysPermsService {
         permsDao.addFromExcel(params);
     }
 
-    private List<SysPerms> getChildren(Long pid, List<SysPerms> list){
-        List<SysPerms> children=new ArrayList<>();
-        for (SysPerms p:list
+
+    private int validate(SysPerms params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsName()))) return 1;
+            if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsMark()))) return 2;
+            if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsUrl()))) return 3;
+        } else {
+            SysPerms p = permsDao.getById(params.getPermsId());
+            if (!p.getPermsName().equals(params.getPermsName())) {
+                if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsName()))) return 1;
+            } else if (!p.getPermsMark().equals(params.getPermsMark())) {
+                if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsMark()))) return 2;
+            } else if (!p.getPermsUrl().equals(params.getPermsUrl())) {
+                if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsUrl()))) return 3;
+            }
+        }
+        return 0;
+    }
+
+    private List<SysPerms> getChildren(Long pid, List<SysPerms> list) {
+        List<SysPerms> children = new ArrayList<>();
+        for (SysPerms p : list
         ) {
-            if(p.getPermsPid().equals(pid)){
+            if (p.getPermsPid().equals(pid)) {
                 children.add(p);
             }
         }
 
-        for (SysPerms m:children
+        for (SysPerms m : children
         ) {
-            m.setChildren(getChildren(m.getPermsId(),list));
+            m.setChildren(getChildren(m.getPermsId(), list));
         }
         return children;
     }
