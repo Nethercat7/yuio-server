@@ -45,10 +45,8 @@
     <select id="getByKeyword" parameterType="String" resultType="SysCity">
         SELECT * FROM sys_city
         WHERE city_name LIKE concat('%',#{keyword},'%')
-        AND (
-        city_level=0
-        OR city_level=1
-        )
+        AND city_level = 0
+        OR (city_level = 1 AND city_direct =0 )
     </select>
 
     <insert id="addFromExcel" parameterType="ExcelCity">
