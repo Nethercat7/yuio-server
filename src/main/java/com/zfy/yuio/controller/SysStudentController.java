@@ -76,8 +76,8 @@ public class SysStudentController {
     @PutMapping("updProfile")
     public ResultBody updProfile(@RequestBody SysStudent params) {
         int status = studentService.updProfile(params);
-        if (status != 1) {
-            return new ResultBody(1, "修改失败", "error");
+        if (status == 2) {
+            return new ResultBody(status, "手机号码存在", "error");
         }
         return new ResultBody(0, "成功修改", "success");
     }

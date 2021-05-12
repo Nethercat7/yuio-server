@@ -1,5 +1,6 @@
 package com.zfy.yuio.service.impl;
 
+import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.SysUserDao;
 import com.zfy.yuio.entity.excel.ExcelUser;
 import com.zfy.yuio.entity.system.SysUser;
@@ -21,6 +22,9 @@ import java.util.List;
 public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserDao userDao;
+
+    @Autowired
+    private SysStudentDao studentDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(4, 0);
 
@@ -79,7 +83,11 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int updProfile(SysUser params) {
-        return userDao.updProfile(params);
+        int status = validator(params, 1);
+        if (status == 0) {
+            userDao.updProfile(params);
+        }
+        return status;
     }
 
     @Override
@@ -98,7 +106,9 @@ public class SysUserServiceImpl implements SysUserService {
         if (type == 0) {
             if (!ObjectUtils.isEmpty(userDao.verify(params.getUserCode()))) return 1;
             if (!ObjectUtils.isEmpty(params.getUserPhone())) {
-                if (!ObjectUtils.isEmpty(userDao.verify(params.getUserPhone()))) return 2;
+                Long sPhone=studentDao.verify(params.getUserPhone());
+                Long uPhone=userDao.verify(params.getUserPhone());
+                if (!ObjectUtils.isEmpty(sPhone)||!ObjectUtils.isEmpty(uPhone)) return 2;
             }
         } else {
             SysUser user = userDao.getById(params.getUserId());
@@ -107,10 +117,14 @@ public class SysUserServiceImpl implements SysUserService {
             } else if (!ObjectUtils.isEmpty(params.getUserPhone())) {
                 if (!ObjectUtils.isEmpty(user.getUserPhone())) {
                     if (!user.getUserPhone().equals(params.getUserPhone())) {
-                        if (!ObjectUtils.isEmpty(userDao.verify(params.getUserPhone()))) return 2;
+                        Long sPhone=studentDao.verify(params.getUserPhone());
+                        Long uPhone=userDao.verify(params.getUserPhone());
+                        if (!ObjectUtils.isEmpty(sPhone)||!ObjectUtils.isEmpty(uPhone)) return 2;
                     }
                 } else {
-                    if (!ObjectUtils.isEmpty(userDao.verify(params.getUserPhone()))) return 2;
+                    Long sPhone=studentDao.verify(params.getUserPhone());
+                    Long uPhone=userDao.verify(params.getUserPhone());
+                    if (!ObjectUtils.isEmpty(sPhone)||!ObjectUtils.isEmpty(uPhone)) return 2;
                 }
             }
         }
