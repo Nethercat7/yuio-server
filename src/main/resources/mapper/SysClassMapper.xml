@@ -73,4 +73,9 @@
         </foreach>
     </insert>
 
+    <select id="getById" parameterType="Long" resultType="SysClass">
+        SELECT * FROM sys_class
+        WHERE class_id=#{id}
+    </select>
+
 </mapper>

@@ -8,6 +8,7 @@ import com.zfy.yuio.service.SysClassService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -17,15 +18,18 @@ public class SysClassServiceImpl implements SysClassService {
     private SysClassDao classDao;
 
     @Autowired
-            private SysMajorDao majorDao;
+    private SysMajorDao majorDao;
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(2, 0);
 
     @Override
     public int add(SysClass params) {
-        //设置班级ID
-        params.setClassId(snowflakeIdGeneratorUtil.nextId());
-        return classDao.add(params);
+        int status = validator(params, 0);
+        if (status == 0) {
+            params.setClassId(snowflakeIdGeneratorUtil.nextId());
+            classDao.add(params);
+        }
+        return status;
     }
 
     @Override
@@ -40,7 +44,11 @@ public class SysClassServiceImpl implements SysClassService {
 
     @Override
     public int upd(SysClass params) {
-        return classDao.upd(params);
+        int status = validator(params, 1);
+        if (status == 0) {
+            classDao.upd(params);
+        }
+        return status;
     }
 
     @Override
@@ -50,11 +58,23 @@ public class SysClassServiceImpl implements SysClassService {
 
     @Override
     public void addFromExcel(List<ExcelClass> params) {
-        for (ExcelClass c:params
-             ) {
+        for (ExcelClass c : params
+        ) {
             c.setClassId(snowflakeIdGeneratorUtil.nextId());
             c.setClassMajorId(majorDao.getIdByName(c.getClassMajorName()));
         }
         classDao.addFromExcel(params);
+    }
+
+    public int validator(SysClass params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(classDao.getIdByName(params.getClassName()))) return 1;
+        } else {
+            SysClass data = classDao.getById(params.getClassId());
+            if (!data.getClassName().equals(params.getClassName())) {
+                if (!ObjectUtils.isEmpty(classDao.getIdByName(params.getClassName()))) return 1;
+            }
+        }
+        return 0;
     }
 }

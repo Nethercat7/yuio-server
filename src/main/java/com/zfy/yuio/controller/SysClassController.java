@@ -27,9 +27,9 @@ public class SysClassController {
     public ResultBody add(@RequestBody SysClass params){
         int status=classService.add(params);
         if(status==1){
-            return new ResultBody(0,"成功添加","success");
+            return new ResultBody(status,"班级名称已存在","error");
         }
-        return new ResultBody(1,"添加失败","error");
+        return new ResultBody(status,"添加成功","success");
     }
 
     @GetMapping("get")
@@ -53,9 +53,9 @@ public class SysClassController {
     public ResultBody upd(@RequestBody SysClass params){
         int status=classService.upd(params);
         if(status==1){
-            return new ResultBody(0,"成功修改","success");
+            return new ResultBody(status,"班级名称已存在","error");
         }
-        return new ResultBody(1,"修改失败","error");
+        return new ResultBody(status,"修改成功","success");
     }
 
     @GetMapping("getByKeyword")

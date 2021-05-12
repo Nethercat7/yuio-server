@@ -30,4 +30,6 @@ public interface SysClassDao {
     Long getIdByName(String name);
 
     void addFromExcel(List<ExcelClass> params);
+
+    SysClass getById(Long id);
 }
