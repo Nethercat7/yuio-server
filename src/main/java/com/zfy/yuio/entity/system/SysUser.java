@@ -50,9 +50,9 @@ public class SysUser {
     @ExcelProperty(index = 5,value = "备注")
     private String userRemark;
 
-    @JsonProperty("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @ExcelIgnore
+    @JsonProperty("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime userCreateTime;
 
     @JsonProperty("pwd")

@@ -31,9 +31,9 @@ public class SysUserController {
     @RequiresPermissions("system:user:add")
     public ResultBody add(@RequestBody SysUser params) {
         int status = userService.add(params);
-        if (status == 2) {
+        if (status == 1) {
             return new ResultBody(status, "工号已存在", "error");
-        } else if (status == 3) {
+        } else if (status == 2) {
             return new ResultBody(status, "手机号码已被注册", "error");
         }
         return new ResultBody(status, "成功添加", "success");
@@ -58,10 +58,12 @@ public class SysUserController {
     @RequiresPermissions("system:user:upd")
     public ResultBody upd(@RequestBody SysUser params) {
         int status = userService.upd(params);
-        if (status != 1) {
-            return new ResultBody(1, "修改失败", "error");
+        if (status == 1) {
+            return new ResultBody(status, "工号已存在", "error");
+        } else if (status == 2) {
+            return new ResultBody(status, "手机号码已被注册", "error");
         }
-        return new ResultBody(0, "成功修改", "success");
+        return new ResultBody(status, "成功修改", "success");
     }
 
     @GetMapping("getById")

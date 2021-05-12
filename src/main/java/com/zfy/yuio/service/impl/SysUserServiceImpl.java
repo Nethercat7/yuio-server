@@ -26,7 +26,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int add(SysUser params) {
-        int status = validator(params);
+        int status = validator(params, 0);
         if (status == 0) {
             params.setUserId(snowflakeIdGeneratorUtil.nextId());
             params.setUserSalt(ShiroUtil.getSalt(7));
@@ -56,14 +56,15 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public int upd(SysUser params) {
         //重复性验证
-        int status = validator(params);
+        int status = validator(params, 1);
         if (status == 0) {
             //先删除关系表中的用户角色信息
             userDao.delRole(params.getUserId());
             //再重新添加
             saveUserRole(params);
+            userDao.upd(params);
         }
-        return userDao.upd(params);
+        return status;
     }
 
     @Override
@@ -93,13 +94,25 @@ public class SysUserServiceImpl implements SysUserService {
         userDao.addFromExcel(params);
     }
 
-    private int validator(SysUser params) {
-        Long code = userDao.verify(params.getUserCode());
-        if (!ObjectUtils.isEmpty(code)) return 2;
-
-        if (!ObjectUtils.isEmpty(params.getUserPhone())) {
-            Long phone = userDao.verify(params.getUserPhone());
-            if (!ObjectUtils.isEmpty(phone)) return 3;
+    private int validator(SysUser params, int type) {
+        if (type == 0) {
+            if (!ObjectUtils.isEmpty(userDao.verify(params.getUserCode()))) return 1;
+            if (!ObjectUtils.isEmpty(params.getUserPhone())) {
+                if (!ObjectUtils.isEmpty(userDao.verify(params.getUserPhone()))) return 2;
+            }
+        } else {
+            SysUser user = userDao.getById(params.getUserId());
+            if (!user.getUserCode().equals(params.getUserCode())) {
+                if (!ObjectUtils.isEmpty(userDao.verify(params.getUserCode()))) return 1;
+            } else if (!ObjectUtils.isEmpty(params.getUserPhone())) {
+                if (!ObjectUtils.isEmpty(user.getUserPhone())) {
+                    if (!user.getUserPhone().equals(params.getUserPhone())) {
+                        if (!ObjectUtils.isEmpty(userDao.verify(params.getUserPhone()))) return 2;
+                    }
+                } else {
+                    if (!ObjectUtils.isEmpty(userDao.verify(params.getUserPhone()))) return 2;
+                }
+            }
         }
         return 0;
     }
