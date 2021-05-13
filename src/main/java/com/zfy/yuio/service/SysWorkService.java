@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *@Description:岗位管理
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/20 18:47
 */
 public interface SysWorkService {

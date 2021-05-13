@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @Description:学生管理模块
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/10 16:08
  */
 public interface SysStudentService {

@@ -18,7 +18,7 @@ import java.net.URLEncoder;
 
 /**
  * @Description:学生管理模块
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/10 16:11
  */
 @CrossOrigin

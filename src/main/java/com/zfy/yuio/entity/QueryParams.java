@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *@Description:接收前端查询字段
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/21 23:35
 */
 public class QueryParams {

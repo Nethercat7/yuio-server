@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 /**
  * @Description:学生实体类
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/9 23:14
  */
 @ContentRowHeight(20)

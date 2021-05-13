@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *@Description:Menu mgt
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/16 21:11
 */
 public interface SysPermsService {

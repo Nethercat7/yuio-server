@@ -11,9 +11,9 @@ import org.springframework.util.ObjectUtils;
 import java.util.List;
 
 /**
- * @Description:数据统计模块
- * @Author:Nethercat7
- * @CreateDate:2021/4/19 17:19
+ * @Description:数据意向模块
+ * @Author:赵富源
+ * @CreateDate:2021/4/19 18:07
  */
 @Service
 public class StatsIntentionServiceImpl implements StatsIntentionService {

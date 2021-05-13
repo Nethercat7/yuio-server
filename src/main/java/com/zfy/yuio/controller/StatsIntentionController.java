@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @Description:数据统计模块
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/12 0:18
  */
 @CrossOrigin

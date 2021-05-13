@@ -6,12 +6,12 @@ import java.util.Random;
 
 /**
  *@Description:Shirogo工具类
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/11 23:03
 */
 public class ShiroUtil {
     /**
-     *@Author Nethercat7
+     *@Author 赵富源
      *@Description 将密码通过MD5算法加密
      *@param pwd 密码
      *@param salt 随机盐
@@ -23,7 +23,7 @@ public class ShiroUtil {
     }
 
     /**
-     *@Author Nethercat7
+     *@Author 赵富源
      *@Description 生成随机盐
      *@param n 随机盐位数
      *@Return java.lang.String

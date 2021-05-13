@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *@Description:班级管理模块
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/10 0:14
 */
 public interface SysClassService {

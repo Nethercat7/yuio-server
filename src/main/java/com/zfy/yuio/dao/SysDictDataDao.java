@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *@Description:字典数据
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/22 23:55
 */
 @Repository

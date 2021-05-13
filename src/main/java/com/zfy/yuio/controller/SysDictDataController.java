@@ -17,7 +17,7 @@ import java.net.URLEncoder;
 
 /**
  *@Description:字典数据
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/23 0:00
 */
 @CrossOrigin

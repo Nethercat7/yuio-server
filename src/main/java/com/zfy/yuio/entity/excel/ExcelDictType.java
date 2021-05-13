@@ -4,7 +4,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 
 /**
  *@Description:字典类型实体
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/22 20:25
 */
 public class ExcelDictType {

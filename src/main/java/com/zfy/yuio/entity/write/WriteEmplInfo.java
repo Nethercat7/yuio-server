@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @Demplcription:就业信息统计表
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/17 22:31
  */
 public class WriteEmplInfo {

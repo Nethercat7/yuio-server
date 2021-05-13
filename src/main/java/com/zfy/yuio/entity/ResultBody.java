@@ -1,7 +1,7 @@
 package com.zfy.yuio.entity;
 /**
  *@Description:API返回体
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/8 18:23
 */
 public class ResultBody {

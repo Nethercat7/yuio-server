@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @Description:院系管理
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/8 19:58
  */
 @Service

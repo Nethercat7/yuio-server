@@ -7,12 +7,12 @@ import java.util.List;
 
 /**
  *@Description:院系管理
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/8 19:56
 */
 public interface SysCollegeService {
     /**
-     *@Author Nethercat7
+     *@Author 赵富源
      *@Description 添加院系
      *@param params
      *@Return int
@@ -20,7 +20,7 @@ public interface SysCollegeService {
     int add(SysCollege params);
 
     /**
-     *@Author Nethercat7
+     *@Author 赵富源
      *@Description 查找院系
      *@param
      *@Return java.util.List<com.zfy.yuio.entity.system.SysCollege>
@@ -28,7 +28,7 @@ public interface SysCollegeService {
     List<SysCollege> get();
 
     /**
-     *@Author Nethercat7
+     *@Author 赵富源
      *@Description 根据ID删除院系
      *@param id
      *@Return int
@@ -36,7 +36,7 @@ public interface SysCollegeService {
     int del(Long id);
 
     /**
-     *@Author Nethercat7
+     *@Author 赵富源
      *@Description 修改院系信息
      *@param params
      *@Return int

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *@Description:专业实体
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/9 16:34
 */
 @ContentRowHeight(20)

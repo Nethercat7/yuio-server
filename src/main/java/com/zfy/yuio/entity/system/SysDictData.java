@@ -11,7 +11,7 @@ import com.zfy.yuio.converter.UvslStatusConverter;
 
 /**
  *@Description:字典数据实体
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/22 23:53
 */
 @ContentRowHeight(20)

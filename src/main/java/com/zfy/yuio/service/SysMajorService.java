@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *@Description:专业管理
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/8 19:56
 */
 public interface SysMajorService {

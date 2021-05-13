@@ -4,7 +4,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 
 /**
  * @Description:城市实体
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/20 18:38
  */
 public class ExcelCity {

@@ -4,7 +4,7 @@ import com.zfy.yuio.entity.write.WriteEmplInfo;
 
 /**
  *@Description:就业情况填写
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/26 23:47
 */
 public interface WriteEmplService {

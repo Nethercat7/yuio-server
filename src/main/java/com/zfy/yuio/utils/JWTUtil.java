@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 /**
  * @Description:JWT工具类
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/17 22:57
  */
 public class JWTUtil {

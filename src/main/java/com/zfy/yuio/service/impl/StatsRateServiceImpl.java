@@ -15,6 +15,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Description:就业率模块
+ * @Author:赵富源
+ * @CreateDate:2021/4/19 17:19
+ */
 @Service
 public class StatsRateServiceImpl implements StatsRateService {
     @Autowired

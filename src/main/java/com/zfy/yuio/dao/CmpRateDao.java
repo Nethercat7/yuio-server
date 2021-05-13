@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @Description:就业率对比
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/27 21:10
  */
 @Repository

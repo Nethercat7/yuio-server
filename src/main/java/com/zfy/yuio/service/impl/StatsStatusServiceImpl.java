@@ -1,7 +1,6 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.StatsStatusDao;
-import com.zfy.yuio.dao.SysWorkDao;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.statstics.StatsEmplResult;
 import com.zfy.yuio.service.StatsStatusService;
@@ -13,17 +12,14 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * @Description:数据统计模块
- * @Author:Nethercat7
- * @CreateDate:2021/4/19 17:19
+ * @Description:就业情况模块
+ * @Author:赵富源
+ * @CreateDate:2021/4/19 17:45
  */
 @Service
 public class StatsStatusServiceImpl implements StatsStatusService {
     @Autowired
     private StatsStatusDao statusDao;
-
-    @Autowired
-    private SysWorkDao workDao;
 
     @Override
     public List<StatsEmplResult> getCityInfo(QueryParams params) {
@@ -38,27 +34,6 @@ public class StatsStatusServiceImpl implements StatsStatusService {
         //获取就业岗位信息
         List<StatsEmplResult> results = statusDao.getWorkInfo(params);//用于stream分类
         if (!ObjectUtils.isEmpty(results)) {
-/*            //将数据转换为 行业[岗位1,...n] 的List形式
-            List<StatsEmplResult> rs = new ArrayList<StatsEmplResult>();//用于存放最顶层的行业信息
-            //按照行业ID分类
-            Map<Long, List<StatsEmplResult>> industries = results.stream().collect(Collectors.groupingBy(StatsEmplResult::getWorkPid));
-            //获取ID集
-            Set<Long> keys = industries.keySet();
-            for (Long key : keys
-            ) {
-                //行业实体
-                StatsEmplResult r = new StatsEmplResult();
-                //获取该行业下的岗位
-                List<StatsEmplResult> industry = industries.get(key);
-                //获取行业的名字
-                String name = workDao.getById(key).getWorkName();
-                r.setResults(industry);
-                r.setWorkName(name);
-                r.setTotalPeople(industry.stream().mapToInt(StatsEmplResult::getTotalPeople).sum());
-                rs.add(r);
-            }
-            //添加行业信息
-            result.setIndustries(rs);*/
             //添加岗位信息
             result.setResults(results);
             //计算工作岗位最多的人数

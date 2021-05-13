@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Description:数据统计模块
- * @Author:Nethercat7
+ * @Author:赵富源
  * @CreateDate:2021/4/19 17:18
  */
 public interface StatsStatusService {

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *@Description:Shiro请求错误响应
- *@Author:Nethercat7
+ *@Author:赵富源
  *@CreateDate:2021/4/27 16:55
 */
 @ControllerAdvice
