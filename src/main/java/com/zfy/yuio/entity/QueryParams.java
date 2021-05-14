@@ -3,10 +3,10 @@ package com.zfy.yuio.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- *@Description:接收前端查询字段
- *@Author:赵富源
- *@CreateDate:2021/4/21 23:35
-*/
+ * @Description:接收前端查询字段
+ * @Author:赵富源
+ * @CreateDate:2021/4/21 23:35
+ */
 public class QueryParams {
     @JsonProperty("student_id")
     private Long studentId;
@@ -31,6 +31,10 @@ public class QueryParams {
     private String gender;
 
     private String name;
+
+    private Long id;
+
+    private String type;
 
     public Long getStudentId() {
         return studentId;
@@ -102,5 +106,21 @@ public class QueryParams {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

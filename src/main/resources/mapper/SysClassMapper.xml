@@ -77,5 +77,4 @@
         SELECT * FROM sys_class
         WHERE class_id=#{id}
     </select>
-
 </mapper>

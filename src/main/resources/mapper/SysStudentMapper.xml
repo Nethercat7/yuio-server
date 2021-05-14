@@ -62,6 +62,10 @@
         <if test="emplWrite==1">
             AND ei.empl_status IS NOT NULL
         </if>
+        <if test="id!=null">
+            AND (c.college_id=#{id}
+            OR m.major_id=#{id})
+        </if>
     </select>
 
     <delete id="del" parameterType="Long">
