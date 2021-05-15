@@ -20,13 +20,13 @@ public class StatsIntentionController {
     private StatsIntentionService intentionService;
 
     @PostMapping("getCityInfo")
-    @RequiresPermissions("statistics:intention:stats")
+    @RequiresPermissions("statistics:intention:view")
     public ResultBody getCityInfo(@RequestBody QueryParams params){
         return new ResultBody(0,intentionService.getIntentionCities(params));
     }
 
     @PostMapping("getWorkInfo")
-    @RequiresPermissions("statistics:intention:stats")
+    @RequiresPermissions("statistics:intention:view")
     public ResultBody getWorkInfo(@RequestBody QueryParams params){
         return new ResultBody(0,intentionService.getIntentionWorks(params));
     }

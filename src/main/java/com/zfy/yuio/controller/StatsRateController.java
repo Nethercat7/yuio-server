@@ -21,23 +21,25 @@ public class StatsRateController {
     private StatsRateService statsRateService;
 
     @GetMapping("getEmplInfo")
-    @RequiresPermissions("statistics:rate:stats")
+    @RequiresPermissions("statistics:rate:view")
     public ResultBody getEmplInfo(@RequestParam("grade") int grade){
         return new ResultBody(0,statsRateService.getEmplInfo(grade));
     }
 
     @GetMapping("getCollegeEmplInfo")
-    @RequiresPermissions("statistics:rate:stats")
+    @RequiresPermissions("statistics:rate:view")
     public ResultBody getCollegeEmplInfo(@RequestParam("grade") int grade){
         return new ResultBody(0,statsRateService.getCollegeEmplInfo(grade));
     }
 
     @PostMapping("getEmplInfoBy")
+    @RequiresPermissions("statistics:rate:view")
     public ResultBody getEmplInfoBy(@RequestBody QueryParams params){
         return new ResultBody(0,statsRateService.getEmplInfoBy(params));
     }
 
     @PostMapping("output")
+    @RequiresPermissions("statistics:rate:output")
     public void output(@RequestBody QueryParams params, HttpServletResponse response) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
