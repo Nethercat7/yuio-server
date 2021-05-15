@@ -40,7 +40,7 @@ public class AuthFilter extends AuthenticatingFilter {
             JsonUtil.setStatus(response, 401);
         } catch (Exception e) {
             System.out.println("无效的token");
-            JsonUtil.setStatus(response, 400);
+            JsonUtil.setStatus(response, 402);
         }
         return false;
     }
