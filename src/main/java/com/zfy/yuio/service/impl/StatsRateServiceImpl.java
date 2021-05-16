@@ -108,12 +108,16 @@ public class StatsRateServiceImpl implements StatsRateService {
             //计算就业率
             DecimalFormat df = new DecimalFormat("0.00");
             String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
+            //计算已经交了三方协议的人数
+            Map<String,List<SysStudent>> protocol=students.stream().filter(s->s.getEmplProtocol()!=null).collect(Collectors.groupingBy(SysStudent::getEmplProtocol));
+            int protocolNumber=protocol.get("2").size();
             //设置数据
             result.setTotalPeople(totalPeople);
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
             result.setName(college.getCollegeName());
+            result.setProtocolNumber(protocolNumber);
             results.add(result);
         }
         return results;
@@ -144,12 +148,16 @@ public class StatsRateServiceImpl implements StatsRateService {
             //计算就业率
             DecimalFormat df = new DecimalFormat("0.00");
             String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
+            //计算已经交了三方协议的人数
+            Map<String,List<SysStudent>> protocol=students.stream().filter(s->s.getEmplProtocol()!=null).collect(Collectors.groupingBy(SysStudent::getEmplProtocol));
+            int protocolNumber=protocol.get("2").size();
             //设置数据
             result.setTotalPeople(totalPeople);
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
             result.setName(major.getMajorName());
+            result.setProtocolNumber(protocolNumber);
             results.add(result);
         }
         return results;
@@ -180,12 +188,16 @@ public class StatsRateServiceImpl implements StatsRateService {
             //计算就业率
             DecimalFormat df = new DecimalFormat("0.00");
             String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
+            //计算已经交了三方协议的人数
+            Map<String,List<SysStudent>> protocol=students.stream().filter(s->s.getEmplProtocol()!=null).collect(Collectors.groupingBy(SysStudent::getEmplProtocol));
+            int protocolNumber=protocol.get("2").size();
             //设置数据
             result.setTotalPeople(totalPeople);
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
             result.setName(cls.getClassName());
+            result.setProtocolNumber(protocolNumber);
             results.add(result);
         }
         return results;
