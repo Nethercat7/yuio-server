@@ -1,6 +1,9 @@
 package com.zfy.yuio.service.impl;
 
-import com.zfy.yuio.dao.*;
+import com.zfy.yuio.dao.SysClassDao;
+import com.zfy.yuio.dao.SysCollegeDao;
+import com.zfy.yuio.dao.SysMajorDao;
+import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.statstics.StatsEmplResult;
 import com.zfy.yuio.entity.system.SysClass;
@@ -15,6 +18,8 @@ import org.springframework.util.ObjectUtils;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @Description:就业率模块
@@ -36,12 +41,10 @@ public class StatsRateServiceImpl implements StatsRateService {
     private SysClassDao classDao;
 
     @Override
-    public StatsEmplResult getEmplInfo(int grade) {
-        QueryParams params = new QueryParams();
-        params.setGrade(grade);
+    public StatsEmplResult getEmplInfo(QueryParams params) {
         List<SysStudent> students = studentDao.get(params);
-        StatsEmplResult result = new StatsEmplResult();
         int totalPeople = students.size();
+        StatsEmplResult result = new StatsEmplResult();
         int unEmplPeople = 0;
         //计算未就业人数
         for (SysStudent student : students
@@ -55,15 +58,31 @@ public class StatsRateServiceImpl implements StatsRateService {
         //计算就业率
         DecimalFormat df = new DecimalFormat("0.00");
         String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
+        //计算已经交了三方协议的人数
+        Map<String,List<SysStudent>> protocol=students.stream().filter(s->s.getEmplProtocol()!=null).collect(Collectors.groupingBy(SysStudent::getEmplProtocol));
+        int protocolNumber=protocol.get("2").size();
+        //如果院系或者专业的ID等于空的话，那么默认获取所有的院系就业率
+        if (ObjectUtils.isEmpty(params.getId())) {
+            result.setResults(getCollegeEmplInfo(params.getGrade()));
+            result.setLevel(1);
+        } else {
+            if (params.getType().equals("college")) {
+                result.setResults(getMajorEmplInfo(params.getGrade(),params.getId()));
+                result.setLevel(2);
+            } else {
+                result.setResults(getClassEmplInfo(params.getGrade(),params.getId()));
+                result.setLevel(3);
+            }
+        }
         //设置数据
         result.setTotalPeople(totalPeople);
         result.setEmplPeople(emplPeople);
         result.setUnEmplPeople(unEmplPeople);
         result.setEmplRate(emplRate);
+        result.setProtocolNumber(protocolNumber);
         return result;
     }
 
-    @Override
     public List<StatsEmplResult> getCollegeEmplInfo(int grade) {
         QueryParams params = new QueryParams();
         params.setGrade(grade);
@@ -94,46 +113,10 @@ public class StatsRateServiceImpl implements StatsRateService {
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
-            result.setCollegeName(college.getCollegeName());
+            result.setName(college.getCollegeName());
             results.add(result);
         }
         return results;
-    }
-
-    @Override
-    public StatsEmplResult getEmplInfoBy(QueryParams params) {
-        List<SysStudent> students = studentDao.get(params);
-        int totalPeople = students.size();
-        StatsEmplResult result = new StatsEmplResult();
-        int unEmplPeople = 0;
-        //计算未就业人数
-        for (SysStudent student : students
-        ) {
-            if (ObjectUtils.isEmpty(student.getEmplStatus()) || student.getEmplStatus().equals("0")) {
-                unEmplPeople += 1;
-            }
-        }
-        //计算就业人数
-        int emplPeople = totalPeople - unEmplPeople;
-        //计算就业率
-        DecimalFormat df = new DecimalFormat("0.00");
-        String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
-        //如果院系或者专业的ID等于空的话，那么默认获取所有的院系就业率
-        if (ObjectUtils.isEmpty(params.getId())) {
-            result.setResults(getCollegeEmplInfo(params.getGrade()));
-        } else {
-            if (params.getType().equals("college")) {
-                result.setResults(getMajorEmplInfo(params.getGrade(),params.getId()));
-            } else {
-                result.setResults(getClassEmplInfo(params.getGrade(),params.getId()));
-            }
-        }
-        //设置数据
-        result.setTotalPeople(totalPeople);
-        result.setEmplPeople(emplPeople);
-        result.setUnEmplPeople(unEmplPeople);
-        result.setEmplRate(emplRate);
-        return result;
     }
 
     public List<StatsEmplResult> getMajorEmplInfo(int grade,Long pid) {
@@ -166,7 +149,7 @@ public class StatsRateServiceImpl implements StatsRateService {
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
-            result.setCollegeName(major.getMajorName());
+            result.setName(major.getMajorName());
             results.add(result);
         }
         return results;
@@ -202,7 +185,7 @@ public class StatsRateServiceImpl implements StatsRateService {
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
-            result.setCollegeName(cls.getClassName());
+            result.setName(cls.getClassName());
             results.add(result);
         }
         return results;

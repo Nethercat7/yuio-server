@@ -34,9 +34,8 @@ public class StatsEmplResult {
     @JsonProperty("empl_rate")
     private String emplRate;
 
-    @ExcelProperty(index = 0,value = "名称")
-    @JsonProperty("college_name")
-    private String collegeName;
+    @ExcelProperty(index =0,value = "名称")
+    private String name;
 
     @ExcelIgnore
     @JsonProperty("city_name")
@@ -75,6 +74,13 @@ public class StatsEmplResult {
     @ExcelIgnore
     private List<StatsEmplResult> industries;
 
+    @ExcelProperty(index = 5,value = "已交三方人数")
+    @JsonProperty("protocol_number")
+    private int protocolNumber;
+
+    @ExcelIgnore
+    private int level;
+
     public int getTotalPeople() {
         return totalPeople;
     }
@@ -105,14 +111,6 @@ public class StatsEmplResult {
 
     public void setEmplRate(String emplRate) {
         this.emplRate = emplRate;
-    }
-
-    public String getCollegeName() {
-        return collegeName;
-    }
-
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
     }
 
     public String getCityName() {
@@ -193,5 +191,29 @@ public class StatsEmplResult {
 
     public void setIndustries(List<StatsEmplResult> industries) {
         this.industries = industries;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getProtocolNumber() {
+        return protocolNumber;
+    }
+
+    public void setProtocolNumber(int protocolNumber) {
+        this.protocolNumber = protocolNumber;
     }
 }

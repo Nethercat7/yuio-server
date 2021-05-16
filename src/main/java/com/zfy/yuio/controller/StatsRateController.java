@@ -20,22 +20,10 @@ public class StatsRateController {
     @Autowired
     private StatsRateService statsRateService;
 
-    @GetMapping("getEmplInfo")
-    @RequiresPermissions("statistics:rate:view")
-    public ResultBody getEmplInfo(@RequestParam("grade") int grade){
-        return new ResultBody(0,statsRateService.getEmplInfo(grade));
-    }
-
-    @GetMapping("getCollegeEmplInfo")
-    @RequiresPermissions("statistics:rate:view")
-    public ResultBody getCollegeEmplInfo(@RequestParam("grade") int grade){
-        return new ResultBody(0,statsRateService.getCollegeEmplInfo(grade));
-    }
-
-    @PostMapping("getEmplInfoBy")
+    @PostMapping("getEmplInfo")
     @RequiresPermissions("statistics:rate:view")
     public ResultBody getEmplInfoBy(@RequestBody QueryParams params){
-        return new ResultBody(0,statsRateService.getEmplInfoBy(params));
+        return new ResultBody(0,statsRateService.getEmplInfo(params));
     }
 
     @PostMapping("output")
@@ -45,7 +33,7 @@ public class StatsRateController {
         response.setCharacterEncoding("utf-8");
         String fileName = URLEncoder.encode("用户", "UTF-8").replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        StatsEmplResult result=statsRateService.getEmplInfoBy(params);
+        StatsEmplResult result=statsRateService.getEmplInfo(params);
         EasyExcel.write(response.getOutputStream(), StatsEmplResult.class).sheet("Sheet1").doWrite(result.getResults());
     }
 }
