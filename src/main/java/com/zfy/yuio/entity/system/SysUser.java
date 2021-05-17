@@ -63,6 +63,9 @@ public class SysUser {
     @ExcelIgnore
     private String userSalt;
 
+    @JsonProperty("college_id")
+    private String userCollegeId;
+
     //非数据库字段
     @ExcelIgnore
     private List<Long> roles;
@@ -153,5 +156,13 @@ public class SysUser {
 
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getUserCollegeId() {
+        return userCollegeId;
+    }
+
+    public void setUserCollegeId(String userCollegeId) {
+        this.userCollegeId = userCollegeId;
     }
 }
