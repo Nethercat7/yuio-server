@@ -21,9 +21,9 @@ public interface SysPermsDao {
 
     int upd(SysPerms params);
 
-    List<String> getUserPerms(Long id);
+    List<String> getUserPerms(String code);
 
-    List<String> getStudentPerms(Long id);
+    List<String> getStudentPerms(String code);
 
     List<SysPerms> getByKeyword(String keyword);
 

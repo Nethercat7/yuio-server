@@ -24,7 +24,7 @@
         WHERE perms_id=#{permsId}
     </update>
 
-    <select id="getUserPerms" parameterType="Long" resultType="String">
+    <select id="getUserPerms" parameterType="String" resultType="String">
         SELECT m.perms_mark FROM sys_perms m
         LEFT JOIN sys_role_perms rp
         ON rp.rp_perms_id=m.perms_id
@@ -34,10 +34,10 @@
         ON ur.ur_role_id=r.role_id
         LEFT JOIN sys_user u
         ON ur.ur_user_id=u.user_id
-        WHERE u.user_id=#{id}
+        WHERE u.user_code=#{code}
     </select>
 
-    <select id="getStudentPerms" parameterType="Long" resultType="String">
+    <select id="getStudentPerms" parameterType="String" resultType="String">
         SELECT m.perms_mark FROM sys_perms m
         LEFT JOIN sys_role_perms rp
         ON rp.rp_perms_id=m.perms_id
@@ -47,7 +47,7 @@
         ON sr.sr_role_id=r.role_id
         LEFT JOIN sys_student s
         ON sr.sr_student_id=s.student_id
-        WHERE s.student_id=#{id}
+        WHERE s.student_code=#{code}
     </select>
 
     <select id="getByKeyword" parameterType="String" resultType="SysPerms">

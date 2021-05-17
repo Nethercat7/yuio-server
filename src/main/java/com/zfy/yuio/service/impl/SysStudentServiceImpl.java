@@ -1,6 +1,7 @@
 package com.zfy.yuio.service.impl;
 
 import com.zfy.yuio.dao.SysClassDao;
+import com.zfy.yuio.dao.SysPermsDao;
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.SysUserDao;
 import com.zfy.yuio.entity.QueryParams;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Description:学生管理模块
@@ -36,6 +38,9 @@ public class SysStudentServiceImpl implements SysStudentService {
     @Autowired
     private SysClassDao classDao;
 
+    @Autowired
+    private SysPermsDao permsDao;
+
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(3, 0);
 
     @Override
@@ -49,7 +54,7 @@ public class SysStudentServiceImpl implements SysStudentService {
             params.setStudentPwd(ShiroUtil.pwd2MD5("123456", params.getStudentSalt(), HASH));
             studentDao.add(params);
             studentDao.addRole(params.getStudentId(), 506870876013088768L);
-            studentDao.addTutor(params.getStudentTutorsCode(),params.getStudentCode());
+            studentDao.addTutor(params.getStudentTutorsCode(), params.getStudentCode());
         }
         return status;
     }
@@ -64,6 +69,11 @@ public class SysStudentServiceImpl implements SysStudentService {
             } else {
                 student.setStudentEmplWrite("1");
             }
+        }
+        List<String> perms=permsDao.getUserPerms(params.getUserCode());
+        //如果没有查看所有学生的权限，那么只能查看自己所带的学生。
+        if(!perms.contains("system:student:getAll")){
+            students = students.stream().filter(s -> s.getStudentTutorsCode().contains(params.getUserCode())).collect(Collectors.toList());
         }
         return students;
     }

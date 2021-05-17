@@ -76,7 +76,7 @@
         LEFT JOIN sys_student_teacher st ON s.student_code = st.st_student_code
         LEFT JOIN sys_user u ON u.user_code = st.st_teacher_code
         WHERE
-        u.user_code=#{userCode}
+        1 =1
         <if test="studentId!=null">
             AND s.student_id=#{studentId}
         </if>

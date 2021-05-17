@@ -71,13 +71,13 @@ public class SysPermsServiceImpl implements SysPermsService {
     }
 
     @Override
-    public List<String> getUserPerms(Long id) {
-        return permsDao.getUserPerms(id);
+    public List<String> getUserPerms(String code) {
+        return permsDao.getUserPerms(code);
     }
 
     @Override
-    public List<String> getStudentPerms(Long id) {
-        return permsDao.getStudentPerms(id);
+    public List<String> getStudentPerms(String code) {
+        return permsDao.getStudentPerms(code);
     }
 
     @Override
