@@ -21,14 +21,12 @@
         <if test="grade!=0">
             AND s.student_grade=#{grade}
         </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="collegeId!=null">
-            AND co.college_id=#{collegeId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR co.college_id=#{orgId}
+            )
         </if>
         GROUP BY c.city_name
     </select>
@@ -50,14 +48,12 @@
         <if test="grade!=0">
             AND s.student_grade=#{grade}
         </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="collegeId!=null">
-            AND co.college_id=#{collegeId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR co.college_id=#{orgId}
+            )
         </if>
         GROUP BY w.work_name
     </select>
@@ -79,14 +75,12 @@
         <if test="grade!=0">
             AND s.student_grade=#{grade}
         </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="collegeId!=null">
-            AND co.college_id=#{collegeId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR co.college_id=#{orgId}
+            )
         </if>
         <if test="gender!=null">
             AND s.student_gender=#{gender}

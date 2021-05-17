@@ -33,6 +33,8 @@ public class WriteEmplInfo {
     private List<Long> intentionCities;
     @JsonProperty("intention_works")
     private List<Long> intentionWorks;
+    @JsonProperty("student_code")
+    private String studentCode;
 
 
     public Long getEmplId() {
@@ -121,5 +123,13 @@ public class WriteEmplInfo {
 
     public void setEmplProtocolFile(String emplProtocolFile) {
         this.emplProtocolFile = emplProtocolFile;
+    }
+
+    public String getStudentCode() {
+        return studentCode;
+    }
+
+    public void setStudentCode(String studentCode) {
+        this.studentCode = studentCode;
     }
 }

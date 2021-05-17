@@ -13,14 +13,12 @@
         LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
         LEFT JOIN sys_city ci ON ei.empl_city_id = ci.city_id
         WHERE 1 = 1
-        <if test="collegeId!=null">
-            AND c.college_id=#{collegeId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR c.college_id=#{orgId}
+            )
         </if>
         <if test="grade!=0">
             AND cls.class_grade=#{grade}
@@ -40,14 +38,12 @@
         LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
         LEFT JOIN sys_work w ON ei.empl_work_id = w.work_id
         WHERE 1 = 1
-        <if test="collegeId!=null">
-            AND c.college_id=#{collegeId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR c.college_id=#{orgId}
+            )
         </if>
         <if test="grade!=0">
             AND cls.class_grade=#{grade}
@@ -66,14 +62,12 @@
         LEFT JOIN sys_college c ON m.major_college_id = c.college_id
         LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
         WHERE 1 = 1
-        <if test="collegeId!=null">
-            AND c.college_id=#{collegeId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR c.college_id=#{orgId}
+            )
         </if>
         <if test="grade!=0">
             AND cls.class_grade=#{grade}
@@ -93,14 +87,12 @@
 		LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
 		LEFT JOIN sys_work w ON ei.empl_work_id = w.work_id
         WHERE 1 = 1
-        <if test="collegeId!=null">
-            AND c.college_id=#{collegeId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR c.college_id=#{orgId}
+            )
         </if>
         <if test="grade!=0">
             AND cls.class_grade=#{grade}
@@ -123,14 +115,12 @@
         LEFT JOIN sys_college c ON m.major_college_id = c.college_id
         LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
         WHERE 1 = 1
-        <if test="collegeId!=null">
-            AND c.college_id=#{collegeId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR c.college_id=#{orgId}
+            )
         </if>
         <if test="grade!=0">
             AND cls.class_grade=#{grade}

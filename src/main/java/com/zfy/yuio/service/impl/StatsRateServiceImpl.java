@@ -62,15 +62,15 @@ public class StatsRateServiceImpl implements StatsRateService {
         Map<String,List<SysStudent>> protocol=students.stream().filter(s->s.getEmplProtocol()!=null).collect(Collectors.groupingBy(SysStudent::getEmplProtocol));
         int protocolNumber=protocol.get("2").size();
         //如果院系或者专业的ID等于空的话，那么默认获取所有的院系就业率
-        if (ObjectUtils.isEmpty(params.getId())) {
+        if (ObjectUtils.isEmpty(params.getOrgId())) {
             result.setResults(getCollegeEmplInfo(params.getGrade()));
             result.setLevel(1);
         } else {
             if (params.getType().equals("college")) {
-                result.setResults(getMajorEmplInfo(params.getGrade(),params.getId()));
+                result.setResults(getMajorEmplInfo(params.getGrade(),params.getOrgId()));
                 result.setLevel(2);
             } else {
-                result.setResults(getClassEmplInfo(params.getGrade(),params.getId()));
+                result.setResults(getClassEmplInfo(params.getGrade(),params.getOrgId()));
                 result.setLevel(3);
             }
         }
@@ -91,7 +91,7 @@ public class StatsRateServiceImpl implements StatsRateService {
         for (SysCollege college : colleges
         ) {
             StatsEmplResult result = new StatsEmplResult();
-            params.setCollegeId(college.getCollegeId());
+            params.setOrgId(college.getCollegeId());
             //获取该院系下的学生数量
             List<SysStudent> students = studentDao.get(params);
             int totalPeople = students.size();
@@ -131,7 +131,7 @@ public class StatsRateServiceImpl implements StatsRateService {
         for (SysMajor major : majors
         ) {
             StatsEmplResult result = new StatsEmplResult();
-            params.setMajorId(major.getMajorId());
+            params.setOrgId(major.getMajorId());
             //获取该院系下的学生数量
             List<SysStudent> students = studentDao.get(params);
             int totalPeople = students.size();
@@ -171,7 +171,7 @@ public class StatsRateServiceImpl implements StatsRateService {
         for (SysClass cls : classes
         ) {
             StatsEmplResult result = new StatsEmplResult();
-            params.setClassId(cls.getClassId());
+            params.setOrgId(cls.getClassId());
             //获取该院系下的学生数量
             List<SysStudent> students = studentDao.get(params);
             int totalPeople = students.size();

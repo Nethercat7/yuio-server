@@ -38,14 +38,12 @@
         <if test="studentId!=null">
             AND s.student_id=#{studentId}
         </if>
-        <if test="collegeId!=null">
-            AND c.college_id=#{collegeId}
-        </if>
-        <if test="majorId!=null">
-            AND m.major_id=#{majorId}
-        </if>
-        <if test="classId!=null">
-            AND cls.class_id=#{classId}
+        <if test="orgId!=null">
+            AND (
+            cls.class_id=#{orgId}
+            OR m.major_id=#{orgId}
+            OR c.college_id=#{orgId}
+            )
         </if>
         <if test="name!=null">
             AND s.student_name LIKE concat('%',#{name},'%')
@@ -61,10 +59,6 @@
         </if>
         <if test="emplWrite==1">
             AND ei.empl_status IS NOT NULL
-        </if>
-        <if test="id!=null">
-            AND (c.college_id=#{id}
-            OR m.major_id=#{id})
         </if>
     </select>
 
