@@ -81,6 +81,7 @@ public class SysController {
     public void getTemplate(@RequestParam("template") String template, @RequestParam("type") String type, HttpServletResponse response) throws IOException {
         String filename = template +"."+ type;
         String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/excel/" + type + "/" + filename;
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         UsefulUtil.download(filepath, filename, response);
     }
 }

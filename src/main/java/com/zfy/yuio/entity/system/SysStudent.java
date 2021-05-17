@@ -118,6 +118,10 @@ public class SysStudent {
     @ExcelProperty(index = 8, value = "就业情况填写",converter = EmplWriteConverter.class)
     private String emplWrite;
 
+    @ExcelIgnore
+    @JsonProperty("empl_protocol_file")
+    private String emplProtocolFile;
+
     public Long getStudentId() {
         return studentId;
     }
@@ -308,5 +312,13 @@ public class SysStudent {
 
     public void setEmplWrite(String emplWrite) {
         this.emplWrite = emplWrite;
+    }
+
+    public String getEmplProtocolFile() {
+        return emplProtocolFile;
+    }
+
+    public void setEmplProtocolFile(String emplProtocolFile) {
+        this.emplProtocolFile = emplProtocolFile;
     }
 }

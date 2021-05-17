@@ -18,7 +18,7 @@
         c.college_name,
         m.major_name,
         cls.class_name,
-        ei.empl_status,ei.empl_company,ei.empl_protocol,ei.empl_plan,ei.empl_city_id,ei.empl_work_id,
+        ei.empl_status,ei.empl_company,ei.empl_protocol,ei.empl_plan,ei.empl_city_id,ei.empl_work_id,ei.empl_protocol_file,
         city.city_name AS empl_city_name,
         w.work_name AS empl_work_name
         FROM sys_student s
