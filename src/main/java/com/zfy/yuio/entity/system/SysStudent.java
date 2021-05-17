@@ -1,13 +1,11 @@
 package com.zfy.yuio.entity.system;
 
-import com.alibaba.excel.annotation.ExcelIgnore;
-import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zfy.yuio.converter.*;
+import com.zfy.yuio.entity.write.WriteEmplInfo;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,118 +20,69 @@ import java.util.List;
 @ColumnWidth(20)
 public class SysStudent {
     @JsonProperty("id")
-    @ExcelIgnore
     private Long studentId;
 
     @JsonProperty("name")
-    @ExcelProperty(index = 0, value = "姓名")
     private String studentName;
 
     @JsonProperty("code")
-    @ExcelProperty(index = 1, value = "学号")
     private String studentCode;
 
     @JsonProperty("phone")
-    @ExcelProperty(index = 2, value = "电话号码")
     private String studentPhone;
 
     @JsonProperty("status")
-    @ExcelProperty(index = 15, value = "状态",converter = UvslStatusConverter.class)
     private String studentStatus;
 
     @JsonProperty("grade")
-    @ExcelProperty(index = 4, value = "年级")
     private int studentGrade;
 
     @JsonProperty("remark")
-    @ExcelProperty(index = 16, value = "备注")
     private String studentRemark;
 
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
     private LocalDateTime studentCreateTime;
 
     @JsonProperty("class_id")
-    @ExcelIgnore
     private Long studentClassId;
 
     @JsonProperty("gender")
-    @ExcelProperty(index = 3, value = "性别", converter = GenderConverter.class)
     private String studentGender;
 
     @JsonProperty("pwd")
-    @ExcelIgnore
     private String studentPwd;
 
     @JsonProperty("salt")
-    @ExcelIgnore
     private String studentSalt;
 
-    //非数据库字段
-    @JsonProperty("college_name")
-    @ExcelProperty(index = 5, value = "院系")
-    private String collegeName;
+    //NOT DB property
+    @JsonProperty("class")
+    private SysClass studentClass;
 
-    @JsonProperty("major_name")
-    @ExcelProperty(index = 6, value = "专业")
-    private String majorName;
+    @JsonProperty("major")
+    private SysMajor studentMajor;
 
-    @JsonProperty("class_name")
-    @ExcelProperty(index = 7, value = "班级")
-    private String className;
+    @JsonProperty("college")
+    private SysCollege studentCollege;
 
-    @JsonProperty("empl_status")
-    @ExcelProperty(index = 9, value = "是否就业",converter = EmplStatusConverter.class)
-    private String emplStatus;
+    @JsonProperty("work")
+    private SysWork studentWork;
 
-    @JsonProperty("empl_company")
-    @ExcelProperty(index = 10, value = "单位名称")
-    private String emplCompany;
+    @JsonProperty("city")
+    private SysCity studentCity;
 
-    @JsonProperty("empl_protocol")
-    @ExcelProperty(index = 13, value = "协议状况",converter = ProtocolConverter.class)
-    private String emplProtocol;
+    @JsonProperty("empl_info")
+    private WriteEmplInfo studentEmplInfo;
 
-    @JsonProperty("empl_plan")
-    @ExcelProperty(index = 14, value = "接下来的打算",converter = PlanConverter.class)
-    private String emplPlan;
+    @JsonProperty("tutors_code")
+    private List<String> studentTutorsCode;
 
-    @JsonProperty("empl_city_id")
-    @ExcelIgnore
-    private Long emplCityId;
-
-    @JsonProperty("empl_work_id")
-    @ExcelIgnore
-    private Long emplWorkId;
-
-    @JsonProperty("empl_city_name")
-    @ExcelProperty(index = 11, value = "就业所在城市")
-    private String emplCityName;
-
-    @JsonProperty("empl_work_name")
-    @ExcelProperty(index = 12, value = "工作岗位类型")
-    private String emplWorkName;
+    @JsonProperty("tutors_name")
+    private List<String> studentTutorsName;
 
     @JsonProperty("empl_write")
-    @ExcelProperty(index = 8, value = "就业情况填写",converter = EmplWriteConverter.class)
-    private String emplWrite;
-
-    @ExcelIgnore
-    @JsonProperty("empl_protocol_file")
-    private String emplProtocolFile;
-
-    @ExcelIgnore
-    @JsonProperty("college_id")
-    private Long collegeId;
-
-    @ExcelIgnore
-    @JsonProperty("major_id")
-    private Long majorId;
-
-    @ExcelIgnore
-    @JsonProperty("teacher_code")
-    private List<String> studentTeacherCode;
+    private String studentEmplWrite;
 
     public Long getStudentId() {
         return studentId;
@@ -231,131 +180,75 @@ public class SysStudent {
         this.studentSalt = studentSalt;
     }
 
-    public String getCollegeName() {
-        return collegeName;
+    public SysClass getStudentClass() {
+        return studentClass;
     }
 
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
+    public void setStudentClass(SysClass studentClass) {
+        this.studentClass = studentClass;
     }
 
-    public String getMajorName() {
-        return majorName;
+    public SysMajor getStudentMajor() {
+        return studentMajor;
     }
 
-    public void setMajorName(String majorName) {
-        this.majorName = majorName;
+    public void setStudentMajor(SysMajor studentMajor) {
+        this.studentMajor = studentMajor;
     }
 
-    public String getClassName() {
-        return className;
+    public SysCollege getStudentCollege() {
+        return studentCollege;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setStudentCollege(SysCollege studentCollege) {
+        this.studentCollege = studentCollege;
     }
 
-    public String getEmplStatus() {
-        return emplStatus;
+    public SysWork getStudentWork() {
+        return studentWork;
     }
 
-    public void setEmplStatus(String emplStatus) {
-        this.emplStatus = emplStatus;
+    public void setStudentWork(SysWork studentWork) {
+        this.studentWork = studentWork;
     }
 
-    public String getEmplCompany() {
-        return emplCompany;
+    public SysCity getStudentCity() {
+        return studentCity;
     }
 
-    public void setEmplCompany(String emplCompany) {
-        this.emplCompany = emplCompany;
+    public void setStudentCity(SysCity studentCity) {
+        this.studentCity = studentCity;
     }
 
-    public String getEmplProtocol() {
-        return emplProtocol;
+    public WriteEmplInfo getStudentEmplInfo() {
+        return studentEmplInfo;
     }
 
-    public void setEmplProtocol(String emplProtocol) {
-        this.emplProtocol = emplProtocol;
+    public void setStudentEmplInfo(WriteEmplInfo studentEmplInfo) {
+        this.studentEmplInfo = studentEmplInfo;
     }
 
-    public String getEmplPlan() {
-        return emplPlan;
+    public List<String> getStudentTutorsCode() {
+        return studentTutorsCode;
     }
 
-    public void setEmplPlan(String emplPlan) {
-        this.emplPlan = emplPlan;
+    public void setStudentTutorsCode(List<String> studentTutorsCode) {
+        this.studentTutorsCode = studentTutorsCode;
     }
 
-    public Long getEmplCityId() {
-        return emplCityId;
+    public List<String> getStudentTutorsName() {
+        return studentTutorsName;
     }
 
-    public void setEmplCityId(Long emplCityId) {
-        this.emplCityId = emplCityId;
+    public void setStudentTutorsName(List<String> studentTutorsName) {
+        this.studentTutorsName = studentTutorsName;
     }
 
-    public Long getEmplWorkId() {
-        return emplWorkId;
+    public String getStudentEmplWrite() {
+        return studentEmplWrite;
     }
 
-    public void setEmplWorkId(Long emplWorkId) {
-        this.emplWorkId = emplWorkId;
-    }
-
-    public String getEmplCityName() {
-        return emplCityName;
-    }
-
-    public void setEmplCityName(String emplCityName) {
-        this.emplCityName = emplCityName;
-    }
-
-    public String getEmplWorkName() {
-        return emplWorkName;
-    }
-
-    public void setEmplWorkName(String emplWorkName) {
-        this.emplWorkName = emplWorkName;
-    }
-
-    public String getEmplWrite() {
-        return emplWrite;
-    }
-
-    public void setEmplWrite(String emplWrite) {
-        this.emplWrite = emplWrite;
-    }
-
-    public String getEmplProtocolFile() {
-        return emplProtocolFile;
-    }
-
-    public void setEmplProtocolFile(String emplProtocolFile) {
-        this.emplProtocolFile = emplProtocolFile;
-    }
-
-    public Long getCollegeId() {
-        return collegeId;
-    }
-
-    public void setCollegeId(Long collegeId) {
-        this.collegeId = collegeId;
-    }
-
-    public Long getMajorId() {
-        return majorId;
-    }
-
-    public void setMajorId(Long majorId) {
-        this.majorId = majorId;
-    }
-
-    public List<String> getStudentTeacherCode() {
-        return studentTeacherCode;
-    }
-
-    public void setStudentTeacherCode(List<String> studentTeacherCode) {
-        this.studentTeacherCode = studentTeacherCode;
+    public void setStudentEmplWrite(String studentEmplWrite) {
+        this.studentEmplWrite = studentEmplWrite;
     }
 }

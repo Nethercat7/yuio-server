@@ -49,7 +49,7 @@ public class SysStudentServiceImpl implements SysStudentService {
             params.setStudentPwd(ShiroUtil.pwd2MD5("123456", params.getStudentSalt(), HASH));
             studentDao.add(params);
             studentDao.addRole(params.getStudentId(), 506870876013088768L);
-            studentDao.addTutor(params.getStudentTeacherCode(),params.getStudentCode());
+            studentDao.addTutor(params.getStudentTutorsCode(),params.getStudentCode());
         }
         return status;
     }
@@ -59,10 +59,10 @@ public class SysStudentServiceImpl implements SysStudentService {
         List<SysStudent> students = studentDao.get(params);
         for (SysStudent student : students
         ) {
-            if (ObjectUtils.isEmpty(student.getEmplStatus())) {
-                student.setEmplWrite("0");
+            if (ObjectUtils.isEmpty(student.getStudentEmplInfo())) {
+                student.setStudentEmplWrite("0");
             } else {
-                student.setEmplWrite("1");
+                student.setStudentEmplWrite("1");
             }
         }
         return students;
@@ -86,11 +86,11 @@ public class SysStudentServiceImpl implements SysStudentService {
     @Override
     public SysStudent getById(Long id) {
         SysStudent student = studentDao.getById(id);
-        if (ObjectUtils.isEmpty(student.getEmplStatus())) {
-            student.setEmplWrite("0");
-        } else {
-            student.setEmplWrite("1");
-        }
+//        if (ObjectUtils.isEmpty(student.getStudentEmplInfo().getEmplStatus())) {
+//            student.setStudentEmplInfo("0");
+//        } else {
+//            student.setEmplWrite("1");
+//        }
         return student;
     }
 

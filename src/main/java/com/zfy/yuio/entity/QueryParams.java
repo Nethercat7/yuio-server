@@ -28,6 +28,9 @@ public class QueryParams {
 
     private String type;
 
+    @JsonProperty("user_code")
+    private String userCode;
+
     public Long getStudentId() {
         return studentId;
     }
@@ -90,5 +93,13 @@ public class QueryParams {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 }
