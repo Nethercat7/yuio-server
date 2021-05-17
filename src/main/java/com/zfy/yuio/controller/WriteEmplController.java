@@ -26,8 +26,8 @@ public class WriteEmplController {
     }
 
     @GetMapping("get")
-    public ResultBody get(@RequestParam("id") Long id) {
-        WriteEmplInfo emplInfo = emplService.get(id);
+    public ResultBody get(@RequestParam("code") String code) {
+        WriteEmplInfo emplInfo = emplService.get(code);
         if (ObjectUtils.isEmpty(emplInfo)) {
             return new ResultBody(1, "未找到相关信息", "success");
         }

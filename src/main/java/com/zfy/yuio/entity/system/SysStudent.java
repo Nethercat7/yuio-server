@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zfy.yuio.converter.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @Description:学生实体类
@@ -121,6 +122,18 @@ public class SysStudent {
     @ExcelIgnore
     @JsonProperty("empl_protocol_file")
     private String emplProtocolFile;
+
+    @ExcelIgnore
+    @JsonProperty("college_id")
+    private Long collegeId;
+
+    @ExcelIgnore
+    @JsonProperty("major_id")
+    private Long majorId;
+
+    @ExcelIgnore
+    @JsonProperty("teacher_code")
+    private List<String> studentTeacherCode;
 
     public Long getStudentId() {
         return studentId;
@@ -320,5 +333,29 @@ public class SysStudent {
 
     public void setEmplProtocolFile(String emplProtocolFile) {
         this.emplProtocolFile = emplProtocolFile;
+    }
+
+    public Long getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(Long collegeId) {
+        this.collegeId = collegeId;
+    }
+
+    public Long getMajorId() {
+        return majorId;
+    }
+
+    public void setMajorId(Long majorId) {
+        this.majorId = majorId;
+    }
+
+    public List<String> getStudentTeacherCode() {
+        return studentTeacherCode;
+    }
+
+    public void setStudentTeacherCode(List<String> studentTeacherCode) {
+        this.studentTeacherCode = studentTeacherCode;
     }
 }

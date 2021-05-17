@@ -102,6 +102,11 @@ public class SysUserServiceImpl implements SysUserService {
         userDao.addFromExcel(params);
     }
 
+    @Override
+    public List<SysUser> getByCollege(Long id) {
+        return userDao.getByCollege(id);
+    }
+
     private int validator(SysUser params, int type) {
         if (type == 0) {
             if (!ObjectUtils.isEmpty(userDao.verify(params.getUserCode()))) return 1;

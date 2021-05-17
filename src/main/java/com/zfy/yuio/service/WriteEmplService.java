@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface WriteEmplService {
     int add(WriteEmplInfo params, MultipartFile file);
 
-    WriteEmplInfo get(Long id);
+    WriteEmplInfo get(String code);
 
     int upd(WriteEmplInfo params,MultipartFile file);
 }

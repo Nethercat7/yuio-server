@@ -36,4 +36,6 @@ public interface SysUserDao {
     void addFromExcel(List<ExcelUser> params);
 
     Long verify(String key);
+
+    List<SysUser> getByCollege(Long id);
 }

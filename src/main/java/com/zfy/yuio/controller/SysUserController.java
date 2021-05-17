@@ -101,4 +101,9 @@ public class SysUserController {
         EasyExcel.read(file.getInputStream(), ExcelUser.class, new SysUserExcelListener(userService)).sheet().doRead();
         return new ResultBody(0, "成功导入数据", "success");
     }
+
+    @GetMapping("getByCollege")
+    public ResultBody getByCollege(@RequestParam("id") Long id){
+        return new ResultBody(0,userService.getByCollege(id));
+    }
 }

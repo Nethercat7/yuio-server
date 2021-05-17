@@ -14,21 +14,21 @@ import java.util.List;
 public interface WriteEmplDao {
     int add(WriteEmplInfo params);
 
-    WriteEmplInfo get(Long id);
+    WriteEmplInfo get(String code);
 
     int upd(WriteEmplInfo params);
 
-    int addIntentionCities(Long studentId,Long cityId);
+    int addIntentionCities(String studentCode,Long cityId);
 
-    int addIntentionWorks(Long studentId,Long workId);
+    int addIntentionWorks(String studentCode,Long workId);
 
-    int delIntentionCities(Long id);
+    int delIntentionCities(String code);
 
-    int delIntentionWorks(Long id);
+    int delIntentionWorks(String code);
 
-    List<Long> getIntentionCities(Long id);
+    List<Long> getIntentionCities(String code);
 
-    List<Long> getIntentionWorks(Long id);
+    List<Long> getIntentionWorks(String code);
 
     void saveProtocolFile(WriteEmplInfo params);
 }

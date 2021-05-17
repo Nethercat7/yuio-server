@@ -1,5 +1,6 @@
 package com.zfy.yuio.service.impl;
 
+import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.WriteEmplDao;
 import com.zfy.yuio.entity.write.WriteEmplInfo;
 import com.zfy.yuio.service.WriteEmplService;
@@ -23,6 +24,9 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     @Autowired
     private WriteEmplDao emplDao;
 
+    @Autowired
+    private SysStudentDao studentDao;
+
     @Value("${file.path}")
     private String filePath;
 
@@ -37,29 +41,28 @@ public class WriteEmplServiceImpl implements WriteEmplService {
             if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
                 for (Long id : params.getIntentionCities()
                 ) {
-                    emplDao.addIntentionCities(params.getEmplStudentId(), id);
+                    emplDao.addIntentionCities(params.getEmplStudentCode(), id);
                 }
             }
 
             if (!ObjectUtils.isEmpty(params.getIntentionWorks())) {
                 for (Long id : params.getIntentionWorks()
                 ) {
-                    emplDao.addIntentionWorks(params.getEmplStudentId(), id);
+                    emplDao.addIntentionWorks(params.getEmplStudentCode(), id);
                 }
             }
         }
-
         //保存三方协议文件
         saveFile(params, file);
         return 0;
     }
 
     @Override
-    public WriteEmplInfo get(Long id) {
-        WriteEmplInfo info = emplDao.get(id);
+    public WriteEmplInfo get(String code) {
+        WriteEmplInfo info = emplDao.get(code);
         if (!ObjectUtils.isEmpty(info)) {
-            info.setIntentionCities(emplDao.getIntentionCities(id));
-            info.setIntentionWorks(emplDao.getIntentionWorks(id));
+            info.setIntentionCities(emplDao.getIntentionCities(code));
+            info.setIntentionWorks(emplDao.getIntentionWorks(code));
         }
         return info;
     }
@@ -68,18 +71,18 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     public int upd(WriteEmplInfo params, MultipartFile file) {
         //修改意向城市和意向岗位
         if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
-            emplDao.delIntentionCities(params.getEmplStudentId());
+            emplDao.delIntentionCities(params.getEmplStudentCode());
             for (Long id : params.getIntentionCities()
             ) {
-                emplDao.addIntentionCities(params.getEmplStudentId(), id);
+                emplDao.addIntentionCities(params.getEmplStudentCode(), id);
             }
         }
 
         if (!ObjectUtils.isEmpty(params.getIntentionWorks())) {
-            emplDao.delIntentionWorks(params.getEmplStudentId());
+            emplDao.delIntentionWorks(params.getEmplStudentCode());
             for (Long id : params.getIntentionWorks()
             ) {
-                emplDao.addIntentionWorks(params.getEmplStudentId(), id);
+                emplDao.addIntentionWorks(params.getEmplStudentCode(), id);
             }
         }
         emplDao.upd(params);
@@ -90,7 +93,7 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     private void saveFile(WriteEmplInfo params, MultipartFile file) {
         if (!ObjectUtils.isEmpty(file)) {
             //配置三方协议
-            Long id = params.getEmplStudentId();
+            Long id = params.getEmplId();
             String filename = id + ".pdf";
             try {
                 file.transferTo(Paths.get(filePath + filename));

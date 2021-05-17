@@ -94,7 +94,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
                 info.setEmplStatus("0");
             }
             info.setEmplPlan(String.valueOf(random.nextInt(12)));
-            info.setEmplStudentId(student.getStudentId());
+            info.setEmplStudentCode(student.getStudentCode());
             emplDao.add(info);
             //就业意向生成,随机选择3个城市和2个岗位
             int n = 0;
@@ -103,7 +103,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
             while (n < 3) {
                 Long cityId = cities.get(random.nextInt(cities.size())).getCityId();
                 if (!temp.contains(cityId)) {
-                    emplDao.addIntentionCities(student.getStudentId(), cityId);
+                    emplDao.addIntentionCities(student.getStudentCode(), cityId);
                     temp.add(cityId);
                     n++;
                 }
@@ -111,7 +111,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
             while (x < 2) {
                 Long workId = works.get(random.nextInt(works.size())).getWorkId();
                 if (!temp.contains(workId)) {
-                    emplDao.addIntentionWorks(student.getStudentId(), workId);
+                    emplDao.addIntentionWorks(student.getStudentCode(), workId);
                     temp.add(workId);
                     x++;
                 }

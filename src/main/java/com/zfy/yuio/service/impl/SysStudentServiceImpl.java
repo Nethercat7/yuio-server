@@ -49,6 +49,7 @@ public class SysStudentServiceImpl implements SysStudentService {
             params.setStudentPwd(ShiroUtil.pwd2MD5("123456", params.getStudentSalt(), HASH));
             studentDao.add(params);
             studentDao.addRole(params.getStudentId(), 506870876013088768L);
+            studentDao.addTutor(params.getStudentTeacherCode(),params.getStudentCode());
         }
         return status;
     }

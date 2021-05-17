@@ -5,53 +5,53 @@
 
 <mapper namespace="com.zfy.yuio.dao.WriteEmplDao">
     <insert id="add" parameterType="WriteEmplInfo">
-        INSERT INTO write_empl_info(empl_id,empl_status,empl_company,empl_protocol,empl_plan,empl_student_id,empl_city_id,empl_work_id)
-        VALUES(#{emplId},#{emplStatus},#{emplCompany},#{emplProtocol},#{emplPlan},#{emplStudentId},#{emplCityId},#{emplWorkId})
+        INSERT INTO write_empl_info(empl_id,empl_status,empl_company,empl_protocol,empl_plan,empl_student_code,empl_city_id,empl_work_id)
+        VALUES(#{emplId},#{emplStatus},#{emplCompany},#{emplProtocol},#{emplPlan},#{emplStudentCode},#{emplCityId},#{emplWorkId})
     </insert>
 
-    <select id="get" parameterType="Long" resultType="WriteEmplInfo">
+    <select id="get" parameterType="String" resultType="WriteEmplInfo">
         SELECT * FROM write_empl_info
-        WHERE empl_student_id=#{emplStudentId}
+        WHERE empl_student_code=#{emplStudentCode}
     </select>
 
     <update id="upd" parameterType="WriteEmplInfo">
         UPDATE write_empl_info SET empl_status=#{emplStatus},empl_company=#{emplCompany},empl_protocol=#{emplProtocol},
         empl_plan=#{emplPlan},empl_city_id=#{emplCityId},empl_work_id=#{emplWorkId}
-        WHERE empl_student_id=#{emplStudentId}
+        WHERE empl_student_code=#{emplStudentCode}
     </update>
 
-    <insert id="addIntentionCities" parameterType="Long">
-        INSERT INTO write_student_city(sc_student_id,sc_city_id)
-        VALUES(#{studentId},#{cityId})
+    <insert id="addIntentionCities" parameterType="Object">
+        INSERT INTO write_student_city(sc_student_code,sc_city_id)
+        VALUES(#{studentCode},#{cityId})
     </insert>
 
-    <insert id="addIntentionWorks" parameterType="Long">
-        INSERT INTO write_student_work(sw_student_id,sw_work_id)
-        VALUES(#{studentId},#{workId})
+    <insert id="addIntentionWorks" parameterType="Object">
+        INSERT INTO write_student_work(sw_student_code,sw_work_id)
+        VALUES(#{studentCode},#{workId})
     </insert>
 
-    <delete id="delIntentionCities" parameterType="Long">
+    <delete id="delIntentionCities" parameterType="String">
         DELETE FROM write_student_city
-        WHERE sc_student_id=#{id}
+        WHERE sc_student_code=#{code}
     </delete>
 
-    <delete id="delIntentionWorks" parameterType="Long">
+    <delete id="delIntentionWorks" parameterType="String">
         DELETE FROM write_student_work
-        WHERE sw_student_id=#{id}
+        WHERE sw_student_code=#{code}
     </delete>
 
-    <select id="getIntentionCities" parameterType="Long" resultType="Long">
+    <select id="getIntentionCities" parameterType="String" resultType="Long">
         SELECT sc_city_id FROM write_student_city
-        WHERE sc_student_id=#{id}
+        WHERE sc_student_code=#{code}
     </select>
 
-    <select id="getIntentionWorks" parameterType="Long" resultType="Long">
+    <select id="getIntentionWorks" parameterType="String" resultType="Long">
         SELECT sw_work_id FROM write_student_work
-        WHERE sw_student_id=#{id}
+        WHERE sw_student_code=#{code}
     </select>
 
     <update id="saveProtocolFile" parameterType="WriteEmplInfo">
         UPDATE write_empl_info SET empl_protocol_file=#{emplProtocolFile}
-        WHERE  empl_student_id=#{emplStudentId}
+        WHERE  empl_student_code=#{emplStudentCode}
     </update>
 </mapper>

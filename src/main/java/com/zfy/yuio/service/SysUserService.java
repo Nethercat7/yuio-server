@@ -26,4 +26,6 @@ public interface SysUserService {
     int updProfile(SysUser params);
 
     void addFromExcel(List<ExcelUser> params);
+
+    List<SysUser> getByCollege(Long id);
 }

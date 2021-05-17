@@ -31,4 +31,6 @@ public interface SysStudentDao {
     void addFromExcel(List<ExcelStudent> params);
 
     Long verify(String key);
+
+    void addTutor(List<String> teacherCode,String studentCode);
 }

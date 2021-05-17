@@ -20,8 +20,8 @@ public class WriteEmplInfo {
     private String emplStatus;
     @JsonProperty("plan")
     private String emplPlan;
-    @JsonProperty("student_id")
-    private Long emplStudentId;
+    @JsonProperty("student_code")
+    private String emplStudentCode;
     @JsonProperty("city_id")
     private Long emplCityId;
     @JsonProperty("work_id")
@@ -33,9 +33,8 @@ public class WriteEmplInfo {
     private List<Long> intentionCities;
     @JsonProperty("intention_works")
     private List<Long> intentionWorks;
-    @JsonProperty("student_code")
-    private String studentCode;
-
+    @JsonProperty("teacher_code")
+    private List<String> teacherCode;
 
     public Long getEmplId() {
         return emplId;
@@ -77,12 +76,12 @@ public class WriteEmplInfo {
         this.emplPlan = emplPlan;
     }
 
-    public Long getEmplStudentId() {
-        return emplStudentId;
+    public String getEmplStudentCode() {
+        return emplStudentCode;
     }
 
-    public void setEmplStudentId(Long emplStudentId) {
-        this.emplStudentId = emplStudentId;
+    public void setEmplStudentCode(String emplStudentCode) {
+        this.emplStudentCode = emplStudentCode;
     }
 
     public Long getEmplCityId() {
@@ -101,6 +100,14 @@ public class WriteEmplInfo {
         this.emplWorkId = emplWorkId;
     }
 
+    public String getEmplProtocolFile() {
+        return emplProtocolFile;
+    }
+
+    public void setEmplProtocolFile(String emplProtocolFile) {
+        this.emplProtocolFile = emplProtocolFile;
+    }
+
     public List<Long> getIntentionCities() {
         return intentionCities;
     }
@@ -117,19 +124,11 @@ public class WriteEmplInfo {
         this.intentionWorks = intentionWorks;
     }
 
-    public String getEmplProtocolFile() {
-        return emplProtocolFile;
+    public List<String> getTeacherCode() {
+        return teacherCode;
     }
 
-    public void setEmplProtocolFile(String emplProtocolFile) {
-        this.emplProtocolFile = emplProtocolFile;
-    }
-
-    public String getStudentCode() {
-        return studentCode;
-    }
-
-    public void setStudentCode(String studentCode) {
-        this.studentCode = studentCode;
+    public void setTeacherCode(List<String> teacherCode) {
+        this.teacherCode = teacherCode;
     }
 }

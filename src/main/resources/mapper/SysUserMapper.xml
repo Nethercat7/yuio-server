@@ -80,4 +80,12 @@
         WHERE user_code=#{key}
         OR user_phone=#{key}
     </select>
+
+    <select id="getByCollege" parameterType="Long" resultType="SysUser">
+        SELECT u.user_id,u.user_name,u.user_code,u.user_gender,u.user_phone,u.user_status,u.user_remark,u.user_create_time,u.user_college_id
+        FROM sys_user u
+        LEFT JOIN sys_college c
+        ON u.user_college_id=c.college_id
+        WHERE c.college_id=#{id}
+    </select>
 </mapper>

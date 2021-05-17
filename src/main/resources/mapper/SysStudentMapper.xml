@@ -15,8 +15,8 @@
         SELECT
         s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,s.student_remark,
         s.student_class_id,s.student_create_time,
-        c.college_name,
-        m.major_name,
+        c.college_name,c.college_id,
+        m.major_name,m.major_id,
         cls.class_name,
         ei.empl_status,ei.empl_company,ei.empl_protocol,ei.empl_plan,ei.empl_city_id,ei.empl_work_id,ei.empl_protocol_file,
         city.city_name AS empl_city_name,
@@ -29,7 +29,7 @@
         LEFT JOIN sys_college c
         ON m.major_college_id=c.college_id
         LEFT JOIN write_empl_info ei
-        ON ei.empl_student_id=s.student_id
+        ON ei.empl_student_code=s.student_code
         LEFT JOIN sys_city city
         ON ei.empl_city_id=city.city_id
         LEFT JOIN sys_work w
@@ -76,10 +76,10 @@
 
     <select id="getById" parameterType="Long" resultType="SysStudent">
         SELECT
-       s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,s.student_remark,
+        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,s.student_remark,
         s.student_class_id,s.student_create_time,
-        c.college_name,
-        m.major_name,
+        c.college_name,c.college_id,
+        m.major_name,m.major_id,
         cls.class_name,
         ei.empl_status,ei.empl_company,ei.empl_protocol,ei.empl_plan,ei.empl_city_id,ei.empl_work_id,
         city.city_name AS empl_city_name,
@@ -92,7 +92,7 @@
         LEFT JOIN sys_college c
         ON m.major_college_id=c.college_id
         LEFT JOIN write_empl_info ei
-        ON ei.empl_student_id=s.student_id
+        ON ei.empl_student_code=s.student_code
         LEFT JOIN sys_city city
         ON ei.empl_city_id=city.city_id
         LEFT JOIN sys_work w
@@ -131,4 +131,12 @@
         WHERE student_code=#{key}
         OR student_phone=#{key}
     </select>
+
+    <insert id="addTutor" parameterType="String">
+        INSERT INTO sys_student_teacher(st_teacher_code,st_student_code)
+        VALUES
+        <foreach collection="teacherCode" item="item">
+            (#{item},#{studentCode})
+        </foreach>
+    </insert>
 </mapper>
