@@ -105,9 +105,9 @@ public class SysStudentController {
     }
 
     @GetMapping("downloadProtocol")
-    public void downloadProtocol(@RequestParam("id") Long id,HttpServletResponse response) throws IOException {
-        String path=filepath+id+".pdf";
+    public void downloadProtocol(@RequestParam("code") String code,HttpServletResponse response) throws IOException {
+        String path=filepath+code+".pdf";
         response.setContentType("application/pdf");
-        UsefulUtil.download(path,id+".pdf",response);
+        UsefulUtil.download(path,code+".pdf",response);
     }
 }

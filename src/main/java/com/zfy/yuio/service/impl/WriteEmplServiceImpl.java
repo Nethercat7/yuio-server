@@ -93,8 +93,8 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     private void saveFile(WriteEmplInfo params, MultipartFile file) {
         if (!ObjectUtils.isEmpty(file)) {
             //配置三方协议
-            Long id = params.getEmplId();
-            String filename = id + ".pdf";
+            String code = params.getEmplStudentCode();
+            String filename = code + ".pdf";
             try {
                 file.transferTo(Paths.get(filePath + filename));
                 params.setEmplProtocolFile(filename);

@@ -116,29 +116,19 @@
         WHERE student_id=#{studentId}
     </update>
 
-    <select id="getById" parameterType="Long" resultType="SysStudent">
+    <select id="getById" parameterType="Long" resultMap="student">
         SELECT
-        s.student_id,s.student_name,s.student_code,s.student_gender,s.student_phone,s.student_status,s.student_grade,s.student_remark,
-        s.student_class_id,s.student_create_time,
-        c.college_name,c.college_id,
-        m.major_name,m.major_id,
-        cls.class_name,
-        ei.empl_status,ei.empl_company,ei.empl_protocol,ei.empl_plan,ei.empl_city_id,ei.empl_work_id,
-        city.city_name AS empl_city_name,
-        w.work_name AS empl_work_name
-        FROM sys_student s
-        LEFT JOIN sys_class cls
-        ON s.student_class_id=cls.class_id
-        LEFT JOIN sys_major m
-        ON cls.class_major_id=m.major_id
-        LEFT JOIN sys_college c
-        ON m.major_college_id=c.college_id
-        LEFT JOIN write_empl_info ei
-        ON ei.empl_student_code=s.student_code
-        LEFT JOIN sys_city city
-        ON ei.empl_city_id=city.city_id
-        LEFT JOIN sys_work w
-        ON ei.empl_work_id=w.work_id
+        *
+        FROM
+        sys_student s
+        LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
+        LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
+        LEFT JOIN sys_college c ON m.major_college_id = c.college_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_code = s.student_code
+        LEFT JOIN sys_city city ON ei.empl_city_id = city.city_id
+        LEFT JOIN sys_work w ON ei.empl_work_id = w.work_id
+        LEFT JOIN sys_student_teacher st ON s.student_code = st.st_student_code
+        LEFT JOIN sys_user u ON u.user_code = st.st_teacher_code
         WHERE s.student_id=#{id}
     </select>
 
