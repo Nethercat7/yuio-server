@@ -11,5 +11,4 @@ public class YuioApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(YuioApplication.class, args);
 	}
-
 }

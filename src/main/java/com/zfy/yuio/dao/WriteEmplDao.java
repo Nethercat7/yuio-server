@@ -29,4 +29,6 @@ public interface WriteEmplDao {
     List<Long> getIntentionCities(Long id);
 
     List<Long> getIntentionWorks(Long id);
+
+    void saveProtocolFile(WriteEmplInfo params);
 }

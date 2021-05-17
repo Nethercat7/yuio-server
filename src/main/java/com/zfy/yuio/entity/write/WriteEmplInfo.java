@@ -26,10 +26,8 @@ public class WriteEmplInfo {
     private Long emplCityId;
     @JsonProperty("work_id")
     private Long emplWorkId;
-    @JsonProperty("city")
-    private String emplCity;
-    @JsonProperty("work")
-    private String emplWork;
+    @JsonProperty("protocol_file")
+    private String emplProtocolFile;
     //非数据库字段
     @JsonProperty("intention_cities")
     private List<Long> intentionCities;
@@ -115,5 +113,13 @@ public class WriteEmplInfo {
 
     public void setIntentionWorks(List<Long> intentionWorks) {
         this.intentionWorks = intentionWorks;
+    }
+
+    public String getEmplProtocolFile() {
+        return emplProtocolFile;
+    }
+
+    public void setEmplProtocolFile(String emplProtocolFile) {
+        this.emplProtocolFile = emplProtocolFile;
     }
 }

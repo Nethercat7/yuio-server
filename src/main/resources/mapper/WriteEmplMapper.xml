@@ -49,4 +49,9 @@
         SELECT sw_work_id FROM write_student_work
         WHERE sw_student_id=#{id}
     </select>
+
+    <update id="saveProtocolFile" parameterType="WriteEmplInfo">
+        UPDATE write_empl_info SET empl_protocol_file=#{emplProtocolFile}
+        WHERE  empl_student_id=#{emplStudentId}
+    </update>
 </mapper>
