@@ -12,4 +12,6 @@ public interface ToolDataGeneratorService {
     void generateEmplInfo(int grade);
 
     void generateCity(List<SysCity> params);
+
+    void generateUser(int num);
 }

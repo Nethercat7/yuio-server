@@ -33,4 +33,9 @@ public class ToolDataGeneratorController {
     public void generateCity(@RequestBody List<SysCity> params){
         toolDataGeneratorService.generateCity(params);
     }
+
+    @GetMapping("generateUser")
+    public void generateUser(@RequestParam("num") int num){
+        toolDataGeneratorService.generateUser(num);
+    }
 }

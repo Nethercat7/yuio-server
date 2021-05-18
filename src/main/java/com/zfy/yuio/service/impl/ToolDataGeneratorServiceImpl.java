@@ -36,6 +36,13 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
     @Autowired
     private SysWorkDao workDao;
 
+    @Autowired
+    private SysCollegeDao collegeDao;
+
+    @Autowired
+    private SysUserDao userDao;
+
+
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(13, 0);
 
     @Override
@@ -63,7 +70,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
                 student.setStudentGrade(grade);
                 student.setStudentClassId(cls.getClassId());
                 studentDao.add(student);
-                studentDao.addRole(student.getStudentId(),506870876013088768L);
+                studentDao.addRole(student.getStudentId(), 506870876013088768L);
             }
         }
     }
@@ -141,6 +148,20 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
         }
     }
 
+    @Override
+    public void generateUser(int num) {
+        for (int i = 0; i < num; i++) {
+            List<SysCollege> colleges = collegeDao.get();
+            for (SysCollege c : colleges
+            ) {
+                SysUser user = setUserBaseInfo();
+                user.setUserCollegeId(c.getCollegeId());
+                userDao.add(user);
+                userDao.addRole(user.getUserId(), 506870316681678848L);
+            }
+        }
+    }
+
     private void addChildren(List<SysCity> params, Long pid, int level) {
         for (SysCity c : params
         ) {
@@ -174,5 +195,19 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
         student.setStudentPwd(ShiroUtil.pwd2MD5("123456", student.getStudentSalt(), 1739));
         student.setStudentName(RandomInfoGenerateUntil.randomChineseName(student.getStudentGender()));
         return student;
+    }
+
+    private SysUser setUserBaseInfo() {
+        SysUser user = new SysUser();
+        user.setUserId(snowflakeIdGeneratorUtil.nextId());
+        user.setUserCode(snowflakeIdGeneratorUtil.getId());
+        user.setUserGender(RandomInfoGenerateUntil.randomGender());
+        user.setUserPhone(RandomInfoGenerateUntil.randomChinaPhoneNumber());
+        user.setUserStatus("0");
+        user.setUserRemark("自从生成的用数据");
+        user.setUserSalt(ShiroUtil.getSalt(7));
+        user.setUserPwd(ShiroUtil.pwd2MD5("123456", user.getUserSalt(), 1739));
+        user.setUserName(RandomInfoGenerateUntil.randomChineseName(user.getUserGender()));
+        return user;
     }
 }

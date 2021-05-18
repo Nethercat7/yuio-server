@@ -64,7 +64,7 @@ public class SysUser {
     private String userSalt;
 
     @JsonProperty("college_id")
-    private String userCollegeId;
+    private Long userCollegeId;
 
     //非数据库字段
     @ExcelIgnore
@@ -161,11 +161,11 @@ public class SysUser {
         this.userStatus = userStatus;
     }
 
-    public String getUserCollegeId() {
+    public Long getUserCollegeId() {
         return userCollegeId;
     }
 
-    public void setUserCollegeId(String userCollegeId) {
+    public void setUserCollegeId(Long userCollegeId) {
         this.userCollegeId = userCollegeId;
     }
 
