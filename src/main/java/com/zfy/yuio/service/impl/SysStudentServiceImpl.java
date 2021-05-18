@@ -96,7 +96,7 @@ public class SysStudentServiceImpl implements SysStudentService {
     @Override
     public SysStudent getById(Long id) {
         SysStudent student = studentDao.getById(id);
-        if (ObjectUtils.isEmpty(student.getStudentEmplInfo().getEmplStatus())) {
+        if (ObjectUtils.isEmpty(student.getStudentEmplInfo())) {
             student.setStudentEmplWrite("0");
         } else {
             student.setStudentEmplWrite("1");
