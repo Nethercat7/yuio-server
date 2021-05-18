@@ -62,6 +62,7 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
 
     @Override
     public void generateStudent(int num, int grade) {
+        Random random=new Random();
         for (int i = 0; i < num; i++) {
             List<SysClass> classes = classDao.getByGrade(grade);
             for (SysClass cls : classes
@@ -71,6 +72,10 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
                 student.setStudentClassId(cls.getClassId());
                 studentDao.add(student);
                 studentDao.addRole(student.getStudentId(), 506870876013088768L);
+                List<SysUser> users=userDao.getByCollege(classDao.genGetCollegeId(cls.getClassId()));
+                List<String> tutorsCode=new ArrayList<String>();
+                tutorsCode.add(users.get(random.nextInt(users.size())).getUserCode());
+                studentDao.addTutor(tutorsCode,student.getStudentCode());
             }
         }
     }

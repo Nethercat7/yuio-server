@@ -32,4 +32,6 @@ public interface SysClassDao {
     void addFromExcel(List<ExcelClass> params);
 
     SysClass getById(Long id);
+
+    Long genGetCollegeId(Long id);
 }

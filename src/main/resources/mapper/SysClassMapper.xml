@@ -77,4 +77,15 @@
         SELECT * FROM sys_class
         WHERE class_id=#{id}
     </select>
+
+    <select id="genGetCollegeId" parameterType="Long" resultType="Long">
+        SELECT
+	co.college_id
+FROM
+	sys_college co
+	LEFT JOIN sys_major m ON co.college_id = m.major_college_id
+	LEFT JOIN sys_class cls ON m.major_id = cls.class_major_id
+WHERE
+	cls.class_id=#{id}
+    </select>
 </mapper>
