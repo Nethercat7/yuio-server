@@ -58,6 +58,9 @@ public class SysClass {
     @ExcelProperty(index = 3,value = "所属专业")
     private String classMajorName;
 
+    @ExcelIgnore
+    private boolean disabled;
+
     public Long getClassId() {
         return classId;
     }
@@ -128,5 +131,13 @@ public class SysClass {
 
     public void setClassMajorName(String classMajorName) {
         this.classMajorName = classMajorName;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

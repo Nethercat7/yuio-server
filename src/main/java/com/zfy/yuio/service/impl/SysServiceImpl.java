@@ -67,7 +67,17 @@ public class SysServiceImpl implements SysService {
         List<SysCollege> colleges = collegeDao.get();
         for (SysCollege c : colleges
         ) {
-            c.setChildren(majorDao.getByPid(c.getCollegeId()));
+            if (c.getCollegeStatus().equals("1")){
+                c.setDisabled(true);
+            }
+            List<SysMajor> majors= majorDao.getByPid(c.getCollegeId());
+            for (SysMajor m:majors
+                 ) {
+                if(m.getMajorStatus().equals("1")){
+                    m.setDisabled(true);
+                }
+            }
+            c.setChildren(majors);
         }
         return colleges;
     }
@@ -78,12 +88,25 @@ public class SysServiceImpl implements SysService {
         //添加之间的关联
         for (SysCollege c : collegeList
         ) {
+            if(c.getCollegeStatus().equals("1")){
+                c.setDisabled(true);
+            }
             //获取院系下的专业
             List<SysMajor> majors = majorDao.getByPid(c.getCollegeId());
             for (SysMajor m : majors
             ) {
+                if(m.getMajorStatus().equals("1")){
+                    m.setDisabled(true);
+                }
                 //获取专业下的班级
-                m.setChildren(classDao.getByPid(m.getMajorId(), grade));
+                List<SysClass> classes=classDao.getByPid(m.getMajorId(), grade);
+                for (SysClass cls:classes
+                     ) {
+                    if(cls.getClassStatus().equals("1")){
+                        cls.setDisabled(true);
+                    }
+                }
+                m.setChildren(classes);
             }
             c.setChildren(majors);
         }

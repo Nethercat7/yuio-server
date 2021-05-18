@@ -54,6 +54,9 @@ public class SysMajor {
     @ExcelIgnore
     private List<SysClass> children;
 
+    @ExcelIgnore
+    private boolean disabled;
+
     public Long getMajorId() {
         return majorId;
     }
@@ -116,5 +119,13 @@ public class SysMajor {
 
     public void setChildren(List<SysClass> children) {
         this.children = children;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

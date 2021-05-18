@@ -54,6 +54,9 @@ public class SysWork {
     @ExcelIgnore
     private List<SysWork> children;
 
+    @ExcelIgnore
+    private boolean  disabled;
+
     public String getWorkName() {
         return workName;
     }
@@ -116,5 +119,13 @@ public class SysWork {
 
     public void setWorkRemark(String workRemark) {
         this.workRemark = workRemark;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

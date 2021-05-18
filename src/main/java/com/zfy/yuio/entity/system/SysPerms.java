@@ -66,9 +66,13 @@ public class SysPerms {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ExcelIgnore
     private LocalDateTime permsCreateTime;
-    
+
+    //非数据库字段
     @ExcelIgnore
-    private List<SysPerms> children;//非数据库字段
+    private List<SysPerms> children;
+
+    @ExcelIgnore
+    private boolean disabled;
 
     public Long getPermsId() {
         return permsId;
@@ -164,5 +168,13 @@ public class SysPerms {
 
     public void setChildren(List<SysPerms> children) {
         this.children = children;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

@@ -35,7 +35,14 @@ public class SysCollegeServiceImpl implements SysCollegeService {
 
     @Override
     public List<SysCollege> get() {
-        return collegeDao.get();
+        List<SysCollege> colleges=collegeDao.get();
+        for (SysCollege c:colleges
+             ) {
+            if(c.getCollegeStatus().equals("1")){
+                c.setDisabled(true);
+            }
+        }
+        return colleges;
     }
 
     @Override

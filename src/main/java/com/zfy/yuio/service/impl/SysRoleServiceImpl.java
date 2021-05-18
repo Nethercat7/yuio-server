@@ -40,6 +40,9 @@ public class SysRoleServiceImpl implements SysRoleService {
         //获取当前角色所拥有的权限
         for (SysRole r : roles
         ) {
+            if(r.getRoleStatus().equals("1")){
+                r.setDisabled(true);
+            }
             r.setPerms(roleDao.getRolePerms(r.getRoleId()));
         }
         return roles;

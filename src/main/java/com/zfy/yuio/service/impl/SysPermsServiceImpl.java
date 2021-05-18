@@ -42,6 +42,9 @@ public class SysPermsServiceImpl implements SysPermsService {
         List<SysPerms> permsList = new ArrayList<>();
         for (SysPerms p : perms
         ) {
+            if(p.getPermsStatus().equals("1")){
+                p.setDisabled(true);
+            }
             if (p.getPermsPid() == 0) {
                 permsList.add(p);
             }

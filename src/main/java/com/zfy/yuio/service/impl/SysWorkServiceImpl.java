@@ -47,6 +47,9 @@ public class SysWorkServiceImpl implements SysWorkService {
         List<SysWork> works = new ArrayList<>();
         for (SysWork c : workList
         ) {
+            if(c.getWorkStatus().equals("1")){
+                c.setDisabled(true);
+            }
             if (c.getWorkPid() == 0) works.add(c);
         }
         for (SysWork c : works

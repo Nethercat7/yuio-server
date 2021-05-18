@@ -51,6 +51,9 @@ public class SysCity {
     @ExcelIgnore
     private List<SysCity> children;
 
+    @ExcelIgnore
+    private boolean disabled;
+
     public Long getCityId() {
         return cityId;
     }
@@ -113,5 +116,13 @@ public class SysCity {
 
     public void setCityRemark(String cityRemark) {
         this.cityRemark = cityRemark;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

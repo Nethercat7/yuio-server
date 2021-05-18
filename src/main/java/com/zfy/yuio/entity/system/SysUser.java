@@ -70,6 +70,9 @@ public class SysUser {
     @ExcelIgnore
     private List<Long> roles;
 
+    @ExcelIgnore
+    private boolean  disabled;
+
     public Long getUserId() {
         return userId;
     }
@@ -164,5 +167,13 @@ public class SysUser {
 
     public void setUserCollegeId(String userCollegeId) {
         this.userCollegeId = userCollegeId;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

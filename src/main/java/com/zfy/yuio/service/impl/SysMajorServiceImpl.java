@@ -39,6 +39,13 @@ public class SysMajorServiceImpl implements SysMajorService {
 
     @Override
     public List<SysMajor> get() {
+        List<SysMajor> majors = majorDao.get();
+        for (SysMajor m : majors
+        ) {
+            if (m.getMajorStatus().equals("1")) {
+                m.setDisabled(true);
+            }
+        }
         return majorDao.get();
     }
 
@@ -50,7 +57,7 @@ public class SysMajorServiceImpl implements SysMajorService {
     @Override
     public int upd(SysMajor params) {
         int status = validator(params, 1);
-        if(status==0){
+        if (status == 0) {
             majorDao.upd(params);
         }
         return status;

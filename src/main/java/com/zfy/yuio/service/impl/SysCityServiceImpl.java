@@ -46,6 +46,9 @@ public class SysCityServiceImpl implements SysCityService {
         List<SysCity> cities = new ArrayList<>();
         for (SysCity c : cityList
         ) {
+            if(c.getCityStatus().equals("1")){
+                c.setDisabled(true);
+            }
             if (c.getCityPid() == 0) cities.add(c);
         }
         for (SysCity c : cities

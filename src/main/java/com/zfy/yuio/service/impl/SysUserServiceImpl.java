@@ -46,6 +46,9 @@ public class SysUserServiceImpl implements SysUserService {
         List<SysUser> usrList = userDao.get();
         for (SysUser u : usrList
         ) {
+            if(u.getUserStatus().equals("1")){
+                u.setDisabled(true);
+            }
             u.setRoles(userDao.getRoles(u.getUserId()));
         }
         return usrList;
@@ -104,7 +107,14 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public List<SysUser> getByCollege(Long id) {
-        return userDao.getByCollege(id);
+        List<SysUser> users= userDao.getByCollege(id);
+        for (SysUser u:users
+             ) {
+            if(u.getUserStatus().equals("1")){
+                u.setDisabled(true);
+            }
+        }
+        return users;
     }
 
     private int validator(SysUser params, int type) {

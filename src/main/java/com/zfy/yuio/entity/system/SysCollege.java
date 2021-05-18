@@ -45,6 +45,9 @@ public class SysCollege {
     @ExcelIgnore
     private List<SysMajor> children;  //非数据库字段
 
+    @ExcelIgnore
+    private boolean disabled;
+
     public Long getCollegeId() {
         return collegeId;
     }
@@ -91,5 +94,13 @@ public class SysCollege {
 
     public void setChildren(List<SysMajor> children) {
         this.children = children;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

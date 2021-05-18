@@ -46,6 +46,9 @@ public class SysRole {
     @ExcelIgnore
     private List<Long> perms;
 
+    @ExcelIgnore
+    private boolean disabled;
+
     public Long getRoleId() {
         return roleId;
     }
@@ -92,5 +95,13 @@ public class SysRole {
 
     public void setPerms(List<Long> perms) {
         this.perms = perms;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

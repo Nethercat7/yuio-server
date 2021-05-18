@@ -34,7 +34,14 @@ public class SysClassServiceImpl implements SysClassService {
 
     @Override
     public List<SysClass> get() {
-        return classDao.get();
+        List<SysClass> classes=classDao.get();
+        for (SysClass c:classes
+             ) {
+            if(c.getClassStatus().equals("1")){
+                c.setDisabled(true);
+            }
+        }
+        return classes;
     }
 
     @Override
