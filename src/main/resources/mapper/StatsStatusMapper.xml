@@ -5,12 +5,12 @@
 
 <mapper namespace="com.zfy.yuio.dao.StatsStatusDao">
     <select id="getCityInfo" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT( s.student_id ) AS total_people,ci.city_name
+        SELECT COUNT( s.student_code ) AS total_people,ci.city_name
         FROM sys_student s
         LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
         LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
         LEFT JOIN sys_college c ON m.major_college_id = c.college_id
-        LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_code = s.student_code
         LEFT JOIN sys_city ci ON ei.empl_city_id = ci.city_id
         WHERE 1 = 1
         <if test="orgId!=null">
@@ -30,12 +30,12 @@
     </select>
 
     <select id="getWorkInfo" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT( s.student_id ) AS total_people,w.work_name,w.work_pid
+        SELECT COUNT( s.student_code ) AS total_people,w.work_name,w.work_pid
         FROM sys_student s
         LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
         LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
         LEFT JOIN sys_college c ON m.major_college_id = c.college_id
-        LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_code = s.student_code
         LEFT JOIN sys_work w ON ei.empl_work_id = w.work_id
         WHERE 1 = 1
         <if test="orgId!=null">
@@ -55,12 +55,12 @@
     </select>
 
     <select id="getStudentPlan" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT( s.student_id ) AS total_people,ei.empl_plan
+        SELECT COUNT( s.student_code ) AS total_people,ei.empl_plan
         FROM sys_student s
         LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
         LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
         LEFT JOIN sys_college c ON m.major_college_id = c.college_id
-        LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_code = s.student_code
         WHERE 1 = 1
         <if test="orgId!=null">
             AND (
@@ -79,12 +79,12 @@
     </select>
 
     <select id="getWorkRank" parameterType="QueryParams" resultType="StatsEmplResult">
-		SELECT COUNT( s.student_id ) AS total_people,w.work_name
+		SELECT COUNT( s.student_code ) AS total_people,w.work_name
 		FROM sys_student s
 		LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
 		LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
 		LEFT JOIN sys_college c ON m.major_college_id = c.college_id
-		LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+		LEFT JOIN write_empl_info ei ON ei.empl_student_code = s.student_code
 		LEFT JOIN sys_work w ON ei.empl_work_id = w.work_id
         WHERE 1 = 1
         <if test="orgId!=null">
@@ -108,12 +108,12 @@
     </select>
 
     <select id="getPlanRank" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT( s.student_id ) AS total_people,ei.empl_plan
+        SELECT COUNT( s.student_code ) AS total_people,ei.empl_plan
         FROM sys_student s
         LEFT JOIN sys_class cls ON s.student_class_id = cls.class_id
         LEFT JOIN sys_major m ON cls.class_major_id = m.major_id
         LEFT JOIN sys_college c ON m.major_college_id = c.college_id
-        LEFT JOIN write_empl_info ei ON ei.empl_student_id = s.student_id
+        LEFT JOIN write_empl_info ei ON ei.empl_student_code = s.student_code
         WHERE 1 = 1
         <if test="orgId!=null">
             AND (

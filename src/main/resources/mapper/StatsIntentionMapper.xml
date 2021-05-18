@@ -5,10 +5,10 @@
 
 <mapper namespace="com.zfy.yuio.dao.StatsIntentionDao">
     <select id="getIntentionCities" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT(s.student_id) AS total_people,c.city_name
+        SELECT COUNT(s.student_code) AS total_people,c.city_name
         FROM sys_student s
         LEFT JOIN write_student_city sc
-        ON s.student_id=sc.sc_student_id
+        ON s.student_code=sc.sc_student_code
         LEFT JOIN sys_city c
         ON c.city_id=sc.sc_city_id
         LEFT JOIN sys_class cls
@@ -17,7 +17,7 @@
         ON cls.class_major_id=m.major_id
         LEFT JOIN sys_college co
         ON m.major_college_id=co.college_id
-        WHERE sc.sc_student_id IS NOT NULL
+        WHERE sc.sc_student_code IS NOT NULL
         <if test="grade!=0">
             AND s.student_grade=#{grade}
         </if>
@@ -32,10 +32,10 @@
     </select>
 
     <select id="getIntentionWorks" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT(s.student_id) AS total_people,w.work_name
+        SELECT COUNT(s.student_code) AS total_people,w.work_name
         FROM sys_student s
         LEFT JOIN write_student_work sw
-        ON s.student_id=sw.sw_student_id
+        ON s.student_code=sw.sw_student_code
         LEFT JOIN sys_work w
         ON w.work_id=sw.sw_work_id
         LEFT JOIN sys_class cls
@@ -44,7 +44,7 @@
         ON cls.class_major_id=m.major_id
         LEFT JOIN sys_college co
         ON m.major_college_id=co.college_id
-        WHERE sw.sw_student_id IS NOT NULL
+        WHERE sw.sw_student_code IS NOT NULL
         <if test="grade!=0">
             AND s.student_grade=#{grade}
         </if>
@@ -59,10 +59,10 @@
     </select>
 
     <select id="getWorkRank" parameterType="QueryParams" resultType="StatsEmplResult">
-        SELECT COUNT(s.student_id) AS total_people,w.work_name
+        SELECT COUNT(s.student_code) AS total_people,w.work_name
         FROM sys_student s
         LEFT JOIN write_student_work sw
-        ON s.student_id=sw.sw_student_id
+        ON s.student_code=sw.sw_student_code
         LEFT JOIN sys_work w
         ON w.work_id=sw.sw_work_id
         LEFT JOIN sys_class cls
@@ -71,7 +71,7 @@
         ON cls.class_major_id=m.major_id
         LEFT JOIN sys_college co
         ON m.major_college_id=co.college_id
-        WHERE sw.sw_student_id IS NOT NULL
+        WHERE sw.sw_student_code IS NOT NULL
         <if test="grade!=0">
             AND s.student_grade=#{grade}
         </if>

@@ -18,6 +18,7 @@ import org.springframework.util.ObjectUtils;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Description:就业率模块
@@ -47,7 +48,7 @@ public class StatsRateServiceImpl implements StatsRateService {
         //计算未就业人数
         for (SysStudent student : students
         ) {
-            if (ObjectUtils.isEmpty(student.getStudentEmplInfo().getEmplStatus()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
+            if (ObjectUtils.isEmpty(student.getStudentEmplInfo()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
                 unEmplPeople += 1;
             }
         }
@@ -57,9 +58,11 @@ public class StatsRateServiceImpl implements StatsRateService {
         DecimalFormat df = new DecimalFormat("0.00");
         String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
         //计算已经交了三方协议的人数
-//        Map<String, List<SysStudent>> protocol = students.stream().filter(s -> s.getStudentEmplInfo().getEmplProtocol() != null)
-//                .collect(Collectors.groupingBy(SysStudent::getStudentEmplInfo);
-//        int protocolNumber = protocol.get("2").size();
+        List<SysStudent> protocol = students.stream().filter(s -> s.getStudentEmplInfo()!= null
+                &&s.getStudentEmplInfo().getEmplProtocol()!=null
+                &&s.getStudentEmplInfo().getEmplProtocol().equals("2"))
+                .collect(Collectors.toList());
+        int protocolNumber = protocol.size();
         //如果院系或者专业的ID等于空的话，那么默认获取所有的院系就业率
         if (ObjectUtils.isEmpty(params.getOrgId())) {
             result.setResults(getCollegeEmplInfo(params.getGrade()));
@@ -78,7 +81,7 @@ public class StatsRateServiceImpl implements StatsRateService {
         result.setEmplPeople(emplPeople);
         result.setUnEmplPeople(unEmplPeople);
         result.setEmplRate(emplRate);
-//        result.setProtocolNumber(protocolNumber);
+        result.setProtocolNumber(protocolNumber);
         return result;
     }
 
@@ -98,7 +101,7 @@ public class StatsRateServiceImpl implements StatsRateService {
             //计算未就业人数
             for (SysStudent student : students
             ) {
-                if (ObjectUtils.isEmpty(student.getStudentEmplInfo().getEmplStatus()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
+                if (ObjectUtils.isEmpty(student.getStudentEmplInfo()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
                     unEmplPeople += 1;
                 }
             }
@@ -108,15 +111,18 @@ public class StatsRateServiceImpl implements StatsRateService {
             DecimalFormat df = new DecimalFormat("0.00");
             String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
             //计算已经交了三方协议的人数
-//            Map<String, List<SysStudent>> protocol = students.stream().filter(s -> s.getStudentEmplInfo().getEmplProtocol() != null).collect(Collectors.groupingBy(SysStudent::getStudentEmplInfo().get));
-//            int protocolNumber = protocol.get("2").size();
+            List<SysStudent> protocol = students.stream().filter(s -> s.getStudentEmplInfo()!= null
+                    &&s.getStudentEmplInfo().getEmplProtocol()!=null
+                    &&s.getStudentEmplInfo().getEmplProtocol().equals("2"))
+                    .collect(Collectors.toList());
+            int protocolNumber = protocol.size();
             //设置数据
             result.setTotalPeople(totalPeople);
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
             result.setName(college.getCollegeName());
-//            result.setProtocolNumber(protocolNumber);
+            result.setProtocolNumber(protocolNumber);
             results.add(result);
         }
         return results;
@@ -138,7 +144,7 @@ public class StatsRateServiceImpl implements StatsRateService {
             //计算未就业人数
             for (SysStudent student : students
             ) {
-                if (ObjectUtils.isEmpty(student.getStudentEmplInfo().getEmplStatus()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
+                if (ObjectUtils.isEmpty(student.getStudentEmplInfo()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
                     unEmplPeople += 1;
                 }
             }
@@ -148,15 +154,18 @@ public class StatsRateServiceImpl implements StatsRateService {
             DecimalFormat df = new DecimalFormat("0.00");
             String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
             //计算已经交了三方协议的人数
-//            Map<String, List<SysStudent>> protocol = students.stream().filter(s -> s.getEmplProtocol() != null).collect(Collectors.groupingBy(SysStudent::getEmplProtocol));
-//            int protocolNumber = protocol.get("2").size();
+            List<SysStudent> protocol = students.stream().filter(s -> s.getStudentEmplInfo()!= null
+                    &&s.getStudentEmplInfo().getEmplProtocol()!=null
+                    &&s.getStudentEmplInfo().getEmplProtocol().equals("2"))
+                    .collect(Collectors.toList());
+            int protocolNumber = protocol.size();
             //设置数据
             result.setTotalPeople(totalPeople);
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
             result.setName(major.getMajorName());
-//            result.setProtocolNumber(protocolNumber);
+            result.setProtocolNumber(protocolNumber);
             results.add(result);
         }
         return results;
@@ -178,7 +187,7 @@ public class StatsRateServiceImpl implements StatsRateService {
             //计算未就业人数
             for (SysStudent student : students
             ) {
-                if (ObjectUtils.isEmpty(student.getStudentEmplInfo().getEmplStatus()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
+                if (ObjectUtils.isEmpty(student.getStudentEmplInfo()) || student.getStudentEmplInfo().getEmplStatus().equals("0")) {
                     unEmplPeople += 1;
                 }
             }
@@ -188,15 +197,18 @@ public class StatsRateServiceImpl implements StatsRateService {
             DecimalFormat df = new DecimalFormat("0.00");
             String emplRate = df.format((float) (totalPeople - unEmplPeople) / (float) totalPeople * 100);
             //计算已经交了三方协议的人数
-//            Map<String, List<SysStudent>> protocol = students.stream().filter(s -> s.getEmplProtocol() != null).collect(Collectors.groupingBy(SysStudent::getEmplProtocol));
-//            int protocolNumber = protocol.get("2").size();
+            List<SysStudent> protocol = students.stream().filter(s -> s.getStudentEmplInfo()!= null
+                    &&s.getStudentEmplInfo().getEmplProtocol()!=null
+                    &&s.getStudentEmplInfo().getEmplProtocol().equals("2"))
+                    .collect(Collectors.toList());
+            int protocolNumber = protocol.size();
             //设置数据
             result.setTotalPeople(totalPeople);
             result.setEmplPeople(emplPeople);
             result.setUnEmplPeople(unEmplPeople);
             result.setEmplRate(emplRate);
             result.setName(cls.getClassName());
-//            result.setProtocolNumber(protocolNumber);
+            result.setProtocolNumber(protocolNumber);
             results.add(result);
         }
         return results;
