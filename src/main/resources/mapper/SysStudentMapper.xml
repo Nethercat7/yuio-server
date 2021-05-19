@@ -189,4 +189,9 @@
         ON s.student_code=st.st_student_code
         WHERE s.student_code=#{code}
     </select>
+
+    <delete id="delStudentTutors" parameterType="String">
+        DELETE FROM sys_student_teacher
+        WHERE st_student_code=#{code}
+    </delete>
 </mapper>

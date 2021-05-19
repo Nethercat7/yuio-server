@@ -33,4 +33,6 @@ public interface SysStudentDao {
     Long verify(String key);
 
     void addTutor(List<String> teacherCode,String studentCode);
+
+    void delStudentTutors(String code);
 }

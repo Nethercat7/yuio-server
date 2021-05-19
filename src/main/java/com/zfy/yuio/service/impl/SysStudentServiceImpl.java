@@ -111,6 +111,10 @@ public class SysStudentServiceImpl implements SysStudentService {
         int status = validator(params, 1);
         if (status == 0) {
             studentDao.updProfile(params);
+            //删除学生与导师的关系
+            studentDao.delStudentTutors(params.getStudentCode());
+            //添加学生与导师的关系
+            studentDao.addTutor(params.getStudentTutorsCode(),params.getStudentCode());
         }
         return status;
     }
