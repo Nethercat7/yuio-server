@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 /**
  * @Description:就业情况填写
@@ -94,7 +95,8 @@ public class WriteEmplServiceImpl implements WriteEmplService {
         if (!ObjectUtils.isEmpty(file)) {
             //配置三方协议
             String code = params.getEmplStudentCode();
-            String filename = code + ".pdf";
+            String suffix=Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().indexOf("."));
+            String filename = code + suffix;
             try {
                 file.transferTo(Paths.get(filePath + filename));
                 params.setEmplProtocolFile(filename);
