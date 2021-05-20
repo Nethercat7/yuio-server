@@ -5,8 +5,10 @@ import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.excel.ExcelStudent;
 import com.zfy.yuio.entity.system.SysStudent;
+import com.zfy.yuio.entity.write.WriteEmplInfo;
 import com.zfy.yuio.listener.SysStudentExcelListener;
 import com.zfy.yuio.service.SysStudentService;
+import com.zfy.yuio.service.WriteEmplService;
 import com.zfy.yuio.utils.UsefulUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ import java.net.URLEncoder;
 public class SysStudentController {
     @Autowired
     private SysStudentService studentService;
+
+    @Autowired
+    private WriteEmplService writeEmplService;
 
     @Value("${file.path}")
     private String filepath;
@@ -106,7 +111,8 @@ public class SysStudentController {
 
     @GetMapping("downloadProtocol")
     public void downloadProtocol(@RequestParam("code") String code,HttpServletResponse response) throws IOException {
-        String path=filepath+code+".pdf";
+        WriteEmplInfo info=writeEmplService.get(code);
+        String path=filepath+info.getEmplProtocolFile();
         response.setContentType("application/pdf");
         UsefulUtil.download(path,code+".pdf",response);
     }
