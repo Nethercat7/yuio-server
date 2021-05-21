@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysCollegeDao;
-import com.zfy.yuio.entity.excel.ExcelCollege;
 import com.zfy.yuio.entity.system.SysCollege;
 import com.zfy.yuio.service.SysCollegeService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,10 +37,10 @@ public class SysCollegeServiceImpl implements SysCollegeService {
 
     @Override
     public List<SysCollege> get() {
-        List<SysCollege> colleges=collegeDao.get();
-        for (SysCollege c:colleges
-             ) {
-            if(c.getCollegeStatus().equals("1")){
+        List<SysCollege> colleges = collegeDao.get();
+        for (SysCollege c : colleges
+        ) {
+            if (c.getCollegeStatus().equals("1")) {
                 c.setDisabled(true);
             }
         }
@@ -65,12 +67,25 @@ public class SysCollegeServiceImpl implements SysCollegeService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelCollege> params) {
-        for (ExcelCollege c : params
+    public void addFromExcel(List<SysCollege> params) {
+        for (SysCollege c : params
         ) {
             c.setCollegeId(snowflakeIdGeneratorUtil.nextId());
         }
         collegeDao.addFromExcel(params);
+    }
+
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "college_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try {
+            EasyExcel.write(response.getOutputStream(), SysCollege.class).sheet("Sheet1").doWrite(get());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int validator(SysCollege params, int type) {

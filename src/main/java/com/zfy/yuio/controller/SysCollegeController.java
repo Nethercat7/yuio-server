@@ -2,7 +2,6 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.excel.ExcelCollege;
 import com.zfy.yuio.entity.system.SysCollege;
 import com.zfy.yuio.listener.SysCollegeExcelListener;
 import com.zfy.yuio.service.SysCollegeService;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 /**
  *@Description:院系管理
@@ -70,18 +68,14 @@ public class SysCollegeController {
 
     @GetMapping("output")
     @RequiresPermissions("system:college:output")
-    public void output(HttpServletResponse response) throws IOException {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setCharacterEncoding("utf-8");
-        String fileName = URLEncoder.encode("院系数据", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(), SysCollege.class).sheet("Sheet1").doWrite(collegeService.get());
+    public void output(HttpServletResponse response){
+      collegeService.output2Excel(response);
     }
 
     @PostMapping("upload")
     @RequiresPermissions("system:college:import")
     public ResultBody upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), ExcelCollege.class,new SysCollegeExcelListener(collegeService)).sheet().doRead();
+        EasyExcel.read(file.getInputStream(), SysCollege.class,new SysCollegeExcelListener(collegeService)).sheet().doRead();
         return new ResultBody(0,"成功导入数据","success");
     }
 }
