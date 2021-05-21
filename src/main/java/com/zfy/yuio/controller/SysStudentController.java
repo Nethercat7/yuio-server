@@ -113,7 +113,6 @@ public class SysStudentController {
     public void downloadProtocol(@RequestParam("code") String code,HttpServletResponse response) throws IOException {
         WriteEmplInfo info=writeEmplService.get(code);
         String path=filepath+info.getEmplProtocolFile();
-        response.setContentType("application/pdf");
-        UsefulUtil.download(path,code+".pdf",response);
+        UsefulUtil.download(path,info.getEmplProtocolFile(),response);
     }
 }
