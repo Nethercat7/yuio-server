@@ -1,8 +1,8 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.excel.ExcelClass;
 import com.zfy.yuio.entity.system.SysClass;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -21,5 +21,7 @@ public interface SysClassService {
 
     List<SysClass> getByKeyword(String keyword);
 
-    void addFromExcel(List<ExcelClass> params);
+    void addFromExcel(List<SysClass> params);
+
+    void output2Excel(HttpServletResponse response);
 }

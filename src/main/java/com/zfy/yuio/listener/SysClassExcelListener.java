@@ -2,18 +2,18 @@ package com.zfy.yuio.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.zfy.yuio.entity.excel.ExcelClass;
+import com.zfy.yuio.entity.system.SysClass;
 import com.zfy.yuio.service.SysClassService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysClassExcelListener extends AnalysisEventListener<ExcelClass> {
+public class SysClassExcelListener extends AnalysisEventListener<SysClass> {
     /**
      * 每隔5条存储数据库，实际使用中可以3000条，然后清理list ，方便内存回收
      */
     private static final int BATCH_COUNT = 5;
-    List<ExcelClass> list = new ArrayList<ExcelClass>();
+    List<SysClass> list = new ArrayList<SysClass>();
 
     private SysClassService service;
 
@@ -22,7 +22,7 @@ public class SysClassExcelListener extends AnalysisEventListener<ExcelClass> {
     }
 
     @Override
-    public void invoke(ExcelClass data, AnalysisContext analysisContext) {
+    public void invoke(SysClass data, AnalysisContext analysisContext) {
         list.add(data);
         if (list.size() >= BATCH_COUNT) {
             saveData();

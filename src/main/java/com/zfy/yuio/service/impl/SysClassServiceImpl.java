@@ -1,8 +1,8 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysClassDao;
 import com.zfy.yuio.dao.SysMajorDao;
-import com.zfy.yuio.entity.excel.ExcelClass;
 import com.zfy.yuio.entity.system.SysClass;
 import com.zfy.yuio.service.SysClassService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -34,10 +36,10 @@ public class SysClassServiceImpl implements SysClassService {
 
     @Override
     public List<SysClass> get() {
-        List<SysClass> classes=classDao.get();
-        for (SysClass c:classes
-             ) {
-            if(c.getClassStatus().equals("1")){
+        List<SysClass> classes = classDao.get();
+        for (SysClass c : classes
+        ) {
+            if (c.getClassStatus().equals("1")) {
                 c.setDisabled(true);
             }
         }
@@ -64,13 +66,26 @@ public class SysClassServiceImpl implements SysClassService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelClass> params) {
-        for (ExcelClass c : params
+    public void addFromExcel(List<SysClass> params) {
+        for (SysClass c : params
         ) {
             c.setClassId(snowflakeIdGeneratorUtil.nextId());
             c.setClassMajorId(majorDao.getIdByName(c.getClassMajorName()));
         }
         classDao.addFromExcel(params);
+    }
+
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "class_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try {
+            EasyExcel.write(response.getOutputStream(), SysClass.class).sheet("Sheet1").doWrite(get());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int validator(SysClass params, int type) {

@@ -65,10 +65,10 @@
         WHERE class_name=#{name}
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelClass">
+    <insert id="addFromExcel" parameterType="SysClass">
         INSERT INTO sys_class(class_id,class_name,class_status,class_remark,class_major_id,class_grade)
         VALUES
-        <foreach collection="params" item="c">
+        <foreach collection="params" item="c" separator=",">
             (#{c.classId},#{c.className},#{c.classStatus},#{c.classRemark},#{c.classMajorId},#{c.classGrade})
         </foreach>
     </insert>

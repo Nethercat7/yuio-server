@@ -1,6 +1,5 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.excel.ExcelClass;
 import com.zfy.yuio.entity.system.SysClass;
 import org.springframework.stereotype.Repository;
 
@@ -29,7 +28,7 @@ public interface SysClassDao {
 
     Long getIdByName(String name);
 
-    void addFromExcel(List<ExcelClass> params);
+    void addFromExcel(List<SysClass> params);
 
     SysClass getById(Long id);
 

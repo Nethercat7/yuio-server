@@ -20,43 +20,43 @@ import java.time.LocalDateTime;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysClass {
-    @JsonProperty("id")
-    @ExcelIgnore
-    private Long classId;
-
+    @ExcelProperty(value = "班级名称")
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "班级名称")
-    private String className;
+    private String className; //DB property
 
+    @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
     @JsonProperty("status")
-    @ExcelProperty(index = 1,value = "状态",converter = UvslStatusConverter.class)
-    private String classStatus;
+    private String classStatus; //DB property
 
-    @JsonProperty("create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime classCreateTime;
-
-    @JsonProperty("remark")
-    @ExcelProperty(index = 5,value = "备注")
-    private String classRemark;
-
-    @JsonProperty("major_id")
-    @ExcelIgnore
-    private Long classMajorId;
-
-    @JsonProperty("grade")
-    @ExcelProperty(index = 4,value = "所属年级")
-    private int classGrade;
-
-    //非数据库字段
     @JsonProperty("college_name")
-    @ExcelProperty(index = 2,value = "所属院系")
+    @ExcelProperty(value = "所属院系")
     private String classCollegeName;
 
     @JsonProperty("major_name")
-    @ExcelProperty(index = 3,value = "所属专业")
+    @ExcelProperty(value = "所属专业")
     private String classMajorName;
+
+    @ExcelProperty(value = "所属年级")
+    @JsonProperty("grade")
+    private int classGrade; //DB property
+
+    @ExcelProperty(value = "备注")
+    @JsonProperty("remark")
+    private String classRemark; //DB property
+
+    //Ignore properties
+    @ExcelIgnore
+    @JsonProperty("id")
+    private Long classId; //DB property
+
+    @ExcelIgnore
+    @JsonProperty("create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime classCreateTime; //DB property
+
+    @ExcelIgnore
+    @JsonProperty("major_id")
+    private Long classMajorId; //DB property
 
     @ExcelIgnore
     private boolean disabled;
