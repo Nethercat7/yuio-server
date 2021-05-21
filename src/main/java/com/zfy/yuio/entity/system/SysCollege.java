@@ -21,29 +21,30 @@ import java.util.List;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysCollege {
-    @JsonProperty("id")
-    @ExcelIgnore
-    private Long collegeId;
-
+    @ExcelProperty(value = "院系名称")
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "院系名称")
-    private String collegeName;
+    private String collegeName; //DB property
 
+    @ExcelProperty(value = "院系状态",converter = UvslStatusConverter.class)
     @JsonProperty("status")
-    @ExcelProperty(index = 1,value = "院系状态",converter = UvslStatusConverter.class)
-    private String collegeStatus;
+    private String collegeStatus; //DB property
 
+    @ExcelProperty(value = "备注")
     @JsonProperty("remark")
-    @ExcelProperty(index = 2,value = "备注")
-    private String collegeRemark;
+    private String collegeRemark; //DB property
 
+    //Ignore properties
+    @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime collegeCreateTime;
+    private LocalDateTime collegeCreateTime; //DB property
 
     @ExcelIgnore
-    private List<SysMajor> children;  //非数据库字段
+    @JsonProperty("id")
+    private Long collegeId; //DB property
+
+    @ExcelIgnore
+    private List<SysMajor> children;
 
     @ExcelIgnore
     private boolean disabled;

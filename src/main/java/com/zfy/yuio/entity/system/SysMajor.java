@@ -13,43 +13,43 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *@Description:专业实体
- *@Author:赵富源
- *@CreateDate:2021/4/9 16:34
-*/
+ * @Description:专业实体
+ * @Author:赵富源
+ * @CreateDate:2021/4/9 16:34
+ */
 @ContentRowHeight(20)
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysMajor {
-    @JsonProperty("id")
-    @ExcelIgnore
-    private Long majorId;
-
+    @ExcelProperty(value = "专业名称")
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "专业名称")
-    private String majorName;
+    private String majorName; //DB Property
 
-    @JsonProperty("status")
-    @ExcelProperty(index = 1,value = "状态",converter = UvslStatusConverter.class)
-    private String majorStatus;
-
-    @JsonProperty("create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime majorCreateTime;
-
-    @JsonProperty("remark")
-    @ExcelProperty(index = 3,value = "备注")
-    private String majorRemark;
-
-    @JsonProperty("college_id")
-    @ExcelIgnore
-    private Long majorCollegeId;
-
-    //非数据库字段
+    @ExcelProperty(value = "所属院系")
     @JsonProperty("college_name")
-    @ExcelProperty(index = 2,value = "所属院系")
     private String collegeName;
+
+    @ExcelProperty(value = "状态", converter = UvslStatusConverter.class)
+    @JsonProperty("status")
+    private String majorStatus; //DB Property
+
+    @ExcelProperty(value = "备注")
+    @JsonProperty("remark")
+    private String majorRemark; //DB Property
+
+    //Ignore properties
+    @ExcelIgnore
+    @JsonProperty("college_id")
+    private Long majorCollegeId; //DB Property
+
+    @ExcelIgnore
+    @JsonProperty("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime majorCreateTime; //DB Property
+
+    @ExcelIgnore
+    @JsonProperty("id")
+    private Long majorId; //DB Property
 
     @ExcelIgnore
     private List<SysClass> children;

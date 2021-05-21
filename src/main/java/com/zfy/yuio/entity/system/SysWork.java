@@ -21,36 +21,36 @@ import java.util.List;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysWork {
+    @ExcelProperty( value = "ID")
     @JsonProperty("id")
-    @ExcelProperty(index = 0, value = "ID")
-    private Long workId;
+    private Long workId; //DB property
 
+    @ExcelProperty(value = "岗位名称")
     @JsonProperty("name")
-    @ExcelProperty(index = 1, value = "岗位名称")
-    private String workName;
+    private String workName; //DB property
 
+    @ExcelProperty(value = "层级")
+    @JsonProperty("level")
+    private int workLevel; //DB property
+
+    @ExcelProperty(value = "上级ID")
     @JsonProperty("pid")
-    @ExcelProperty(index = 4, value = "上级ID")
-    private Long workPid;
+    private Long workPid; //DB property
 
+    @ExcelProperty(value = "状态", converter = UvslStatusConverter.class)
     @JsonProperty("status")
-    @ExcelProperty(index = 3, value = "状态", converter = UvslStatusConverter.class)
-    private String workStatus;
+    private String workStatus; //DB property
 
+    @ExcelProperty(value = "备注")
+    @JsonProperty("remark")
+    private String workRemark; //DB property
+
+    //Ignore properties
+    @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime workCreateTime;
+    private LocalDateTime workCreateTime; //DB property
 
-    @JsonProperty("level")
-    @ExcelProperty(index = 2, value = "层级")
-    private int workLevel;
-
-    @JsonProperty("remark")
-    @ExcelProperty(index = 5, value = "备注")
-    private String workRemark;
-
-    //非数据库字段
     @ExcelIgnore
     private List<SysWork> children;
 

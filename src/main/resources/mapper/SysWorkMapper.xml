@@ -34,10 +34,10 @@
         WHERE work_name LIKE concat('%',#{keyword},'%')
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelWork">
+    <insert id="addFromExcel" parameterType="SysWork">
         INSERT INTO sys_work(work_id,work_name,work_pid,work_status,work_level,work_remark)
         VALUES
-        <foreach collection="params" item="w">
+        <foreach collection="params" item="w" separator=",">
             (#{w.workId},#{w.workName},#{w.workPid},#{w.workStatus},#{w.workLevel},#{w.workRemark})
         </foreach>
     </insert>

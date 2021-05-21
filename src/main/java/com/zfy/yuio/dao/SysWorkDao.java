@@ -1,6 +1,5 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.excel.ExcelWork;
 import com.zfy.yuio.entity.system.SysWork;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +24,7 @@ public interface SysWorkDao {
 
     List<SysWork> getByKeyword(String keyword);
 
-    void addFromExcel(List<ExcelWork> params);
+    void addFromExcel(List<SysWork> params);
 
     List<SysWork> getWithoutIndustry();
 
