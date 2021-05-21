@@ -42,10 +42,10 @@
         WHERE major_name LIKE concat('%',#{keyword},'%')
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelMajor">
+    <insert id="addFromExcel" parameterType="SysMajor">
         INSERT INTO sys_major(major_id,major_name,major_status,major_remark,major_college_id)
         VALUES
-        <foreach collection="params" item="m">
+        <foreach collection="params" item="m" separator=",">
             (#{m.majorId},#{m.majorName},#{m.majorStatus},#{m.majorRemark},#{m.majorCollegeId})
         </foreach>
     </insert>

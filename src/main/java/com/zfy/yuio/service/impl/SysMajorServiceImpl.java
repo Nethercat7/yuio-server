@@ -1,8 +1,8 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysCollegeDao;
 import com.zfy.yuio.dao.SysMajorDao;
-import com.zfy.yuio.entity.excel.ExcelMajor;
 import com.zfy.yuio.entity.system.SysMajor;
 import com.zfy.yuio.service.SysMajorService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -69,13 +71,26 @@ public class SysMajorServiceImpl implements SysMajorService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelMajor> params) {
-        for (ExcelMajor m : params
+    public void addFromExcel(List<SysMajor> params) {
+        for (SysMajor m : params
         ) {
             m.setMajorId(snowflakeIdGeneratorUtil.nextId());
             m.setMajorCollegeId(collegeDao.getIdByName(m.getCollegeName()));
         }
         majorDao.addFromExcel(params);
+    }
+
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName ="major_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try{
+            EasyExcel.write(response.getOutputStream(), SysMajor.class).sheet("Sheet1").doWrite(get());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public int validator(SysMajor params, int type) {

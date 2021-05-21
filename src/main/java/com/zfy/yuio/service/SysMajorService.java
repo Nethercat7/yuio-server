@@ -1,8 +1,8 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.excel.ExcelMajor;
 import com.zfy.yuio.entity.system.SysMajor;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -21,5 +21,7 @@ public interface SysMajorService {
 
     List<SysMajor> getByKeyword(String keyword);
 
-    void addFromExcel(List<ExcelMajor> params);
+    void addFromExcel(List<SysMajor> params);
+
+    void output2Excel(HttpServletResponse response);
 }
