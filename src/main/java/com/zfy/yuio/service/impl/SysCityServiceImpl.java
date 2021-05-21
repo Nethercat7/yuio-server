@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysCityDao;
-import com.zfy.yuio.entity.excel.ExcelCity;
 import com.zfy.yuio.entity.system.SysCity;
 import com.zfy.yuio.service.SysCityService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,8 +93,21 @@ public class SysCityServiceImpl implements SysCityService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelCity> params) {
+    public void addFromExcel(List<SysCity> params) {
         cityDao.addFromExcel(params);
+    }
+
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "city_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try{
+            EasyExcel.write(response.getOutputStream(), SysCity.class).sheet("Sheet1").doWrite(getWithoutConvert());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private int validator(SysCity params, int type) {

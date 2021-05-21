@@ -49,10 +49,10 @@
         OR (city_level = 1 AND city_direct =0 )
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelCity">
+    <insert id="addFromExcel" parameterType="SysCity">
         INSERT INTO sys_city(city_id,city_name,city_pid,city_level,city_status,city_remark)
         VALUES
-        <foreach collection="params" item="c">
+        <foreach collection="params" item="c" separator=",">
             (#{c.cityId},#{c.cityName},#{c.cityPid},#{c.cityLevel},#{c.cityStatus},#{c.cityRemark})
         </foreach>
     </insert>

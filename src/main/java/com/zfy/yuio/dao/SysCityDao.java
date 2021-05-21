@@ -1,6 +1,5 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.excel.ExcelCity;
 import com.zfy.yuio.entity.system.SysCity;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +24,7 @@ public interface SysCityDao {
 
     List<SysCity> getByKeyword(String keyword);
 
-    void addFromExcel(List<ExcelCity> params);
+    void addFromExcel(List<SysCity> params);
 
     List<SysCity> getWithoutProvinces();
 

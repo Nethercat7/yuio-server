@@ -2,7 +2,6 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.excel.ExcelCity;
 import com.zfy.yuio.entity.system.SysCity;
 import com.zfy.yuio.listener.SysCityExcelListener;
 import com.zfy.yuio.service.SysCityService;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 @CrossOrigin
 @RestController
@@ -66,17 +64,13 @@ public class SysCityController {
     @GetMapping("output")
     @RequiresPermissions("system:city:output")
     public void output(HttpServletResponse response) throws IOException {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setCharacterEncoding("utf-8");
-        String fileName = URLEncoder.encode("城市数据", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(), SysCity.class).sheet("Sheet1").doWrite(cityService.getWithoutConvert());
+        cityService.output2Excel(response);
     }
 
     @PostMapping("upload")
     @RequiresPermissions("system:city:import")
     public ResultBody upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), ExcelCity.class, new SysCityExcelListener(cityService)).sheet().doRead();
+        EasyExcel.read(file.getInputStream(), SysCity.class, new SysCityExcelListener(cityService)).sheet().doRead();
         return new ResultBody(0, "成功导入数据", "success");
     }
 }

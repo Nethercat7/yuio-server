@@ -1,8 +1,8 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.excel.ExcelCity;
 import com.zfy.yuio.entity.system.SysCity;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -23,5 +23,7 @@ public interface SysCityService {
 
     List<SysCity> getWithoutConvert();
 
-    void addFromExcel(List<ExcelCity> params);
+    void addFromExcel(List<SysCity> params);
+
+    void output2Excel(HttpServletResponse response);
 }

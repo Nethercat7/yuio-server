@@ -19,35 +19,35 @@ import java.util.List;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysCity {
+    @ExcelProperty(value = "ID")
     @JsonProperty("id")
-    @ExcelProperty(index = 0, value = "ID")
-    private Long cityId;
+    private Long cityId; //DB property
 
+    @ExcelProperty(value = "城市名称")
     @JsonProperty("name")
-    @ExcelProperty(index = 1, value = "城市名称")
-    private String cityName;
+    private String cityName; //DB property
 
+    @ExcelProperty(value = "层级")
     @JsonProperty("level")
-    @ExcelProperty(index = 2, value = "层级")
-    private int cityLevel;
+    private int cityLevel; //DB property
 
-    @JsonProperty("direct")
-    @ExcelIgnore
-    private int cityDirect;
-
+    @ExcelProperty(value = "上级ID")
     @JsonProperty("pid")
-    @ExcelProperty(index = 3, value = "上级ID")
-    private Long cityPid;
+    private Long cityPid; //DB property
 
+    @ExcelProperty(value = "状态", converter = UvslStatusConverter.class)
     @JsonProperty("status")
-    @ExcelProperty(index = 4, value = "状态", converter = UvslStatusConverter.class)
-    private String cityStatus;
+    private String cityStatus; //DB property
 
+    @ExcelProperty(value = "备注")
     @JsonProperty("remark")
-    @ExcelProperty(index = 5, value = "备注")
-    private String cityRemark;
+    private String cityRemark; //DB property
 
-    //非数据库字段
+    //Ignore properties
+    @ExcelIgnore
+    @JsonProperty("direct")
+    private int cityDirect; //DB property
+
     @ExcelIgnore
     private List<SysCity> children;
 
