@@ -36,7 +36,14 @@ public class UvslStatusConverter implements Converter<String> {
 
     @Override
     public String convertToJavaData(CellData cellData, ExcelContentProperty excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        return null;
+        String data="0";
+        for (SysDictData d:dictList
+             ) {
+            if(cellData.getStringValue().equals(d.getDictLabel())){
+                data=d.getDictValue();
+            }
+        }
+        return data;
     }
 
     @Override

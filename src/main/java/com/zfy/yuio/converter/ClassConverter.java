@@ -21,7 +21,9 @@ public class ClassConverter implements Converter<SysClass> {
 
     @Override
     public SysClass convertToJavaData(CellData cellData, ExcelContentProperty excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        return null;
+        SysClass data=new SysClass();
+        data.setClassName(cellData.getStringValue());
+        return data;
     }
 
     @Override

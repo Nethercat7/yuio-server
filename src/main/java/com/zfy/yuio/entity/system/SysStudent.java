@@ -1,7 +1,13 @@
 package com.zfy.yuio.entity.system;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zfy.yuio.converter.*;
 import com.zfy.yuio.entity.write.WriteEmplInfo;
 
 import java.time.LocalDateTime;
@@ -12,77 +18,106 @@ import java.util.List;
  * @Author:赵富源
  * @CreateDate:2021/4/9 23:14
  */
+@ContentRowHeight(20)
+@HeadRowHeight(20)
+@ColumnWidth(20)
 public class SysStudent {
-    @JsonProperty("id")
-    private Long studentId;
-
+    @ExcelProperty(value = "姓名")
     @JsonProperty("name")
     private String studentName;
 
+    @ExcelProperty(value = "学号")
     @JsonProperty("code")
     private String studentCode;
 
+    @ExcelProperty(value = "性别",converter = GenderConverter.class)
+    @JsonProperty("gender")
+    private String studentGender;
+
+    @ExcelProperty(value = "手机号码")
     @JsonProperty("phone")
     private String studentPhone;
 
-    @JsonProperty("status")
-    private String studentStatus;
+    @ExcelProperty(value = "院系",converter = CollegeConverter.class)
+    @JsonProperty("college")
+    private SysCollege studentCollege;
 
+    @ExcelProperty(value = "专业",converter = MajorConverter.class)
+    @JsonProperty("major")
+    private SysMajor studentMajor;
+
+    @ExcelProperty(value = "年级")
     @JsonProperty("grade")
     private int studentGrade;
 
+    @ExcelProperty(value = "班级",converter = ClassConverter.class)
+    @JsonProperty("class")
+    private SysClass studentClass;
+
+    @ExcelProperty(value = "指导老师",converter = TutorsConverter.class)
+    @JsonProperty("tutors_name")
+    private List<String> studentTutorsName;
+
+    @ExcelProperty(value = "就业信息填写",converter = EmplWriteConverter.class)
+    @JsonProperty("empl_write")
+    private String studentEmplWrite;
+
+    @ExcelProperty(value = "是否就业",converter = EmplStatusConverter.class)
+    private String studentEmplStatus;
+
+    @ExcelProperty(value = "就业单位")
+    private String studentEmplConpany;
+
+    @ExcelProperty(value = "协议状况",converter = ProtocolConverter.class)
+    private String studentEmplProtocol;
+
+    @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
+    @JsonProperty("status")
+    private String studentStatus;
+
+    @ExcelProperty(value = "备注")
     @JsonProperty("remark")
     private String studentRemark;
 
+    //Ignore properties
+    @ExcelIgnore
+    @JsonProperty("id")
+    private Long studentId;
+
+    @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime studentCreateTime;
 
+    @ExcelIgnore
     @JsonProperty("class_id")
     private Long studentClassId;
 
-    @JsonProperty("gender")
-    private String studentGender;
-
+    @ExcelIgnore
     @JsonProperty("pwd")
     private String studentPwd;
 
+    @ExcelIgnore
     @JsonProperty("salt")
     private String studentSalt;
 
-    //NOT DB property
-    @JsonProperty("class")
-    private SysClass studentClass;
-
-    @JsonProperty("major")
-    private SysMajor studentMajor;
-
-    @JsonProperty("college")
-    private SysCollege studentCollege;
-
+    @ExcelIgnore
     @JsonProperty("work")
     private SysWork studentWork;
 
+    @ExcelIgnore
     @JsonProperty("city")
     private SysCity studentCity;
 
+    @ExcelIgnore
     @JsonProperty("empl_info")
     private WriteEmplInfo studentEmplInfo;
 
+    @ExcelIgnore
     @JsonProperty("tutors_code")
     private List<String> studentTutorsCode;
 
-    @JsonProperty("tutors_name")
-    private List<String> studentTutorsName;
 
-    @JsonProperty("empl_write")
-    private String studentEmplWrite;
-
-    private String studentEmplStatus;
-
-    private String studentEmplConpany;
-
-    private String studentEmplProtocol;
 
     public Long getStudentId() {
         return studentId;

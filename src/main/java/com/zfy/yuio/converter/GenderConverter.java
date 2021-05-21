@@ -37,18 +37,24 @@ public class GenderConverter implements Converter<String> {
     }
 
     @Override
-    public String convertToJavaData(CellData cellData, ExcelContentProperty
-            excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        return null;
+    public String convertToJavaData(CellData cellData, ExcelContentProperty excelContentProperty, GlobalConfiguration globalConfiguration) throws Exception {
+       String gender="0";
+        for (SysDictData d:dictList
+             ) {
+            if(cellData.getStringValue().equals(d.getDictLabel())){
+                gender=d.getDictValue();
+            }
+        }
+        return gender;
     }
 
     @Override
     public CellData convertToExcelData(String s, ExcelContentProperty excelContentProperty, GlobalConfiguration
             globalConfiguration) throws Exception {
-        for (SysDictData d:dictList
-             ) {
-            if(s.equals(d.getDictValue())){
-                s=d.getDictLabel();
+        for (SysDictData d : dictList
+        ) {
+            if (s.equals(d.getDictValue())) {
+                s = d.getDictLabel();
             }
         }
         return new CellData(s);

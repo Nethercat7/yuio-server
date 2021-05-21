@@ -6,7 +6,6 @@ import com.zfy.yuio.dao.SysPermsDao;
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.SysUserDao;
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.excel.ExcelStudent;
 import com.zfy.yuio.entity.system.SysStudent;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.utils.ShiroUtil;
@@ -131,21 +130,19 @@ public class SysStudentServiceImpl implements SysStudentService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelStudent> params) {
+    public void addFromExcel(List<SysStudent> params) {
         //Add status and class id for students
-        for (ExcelStudent s : params
+        for (SysStudent s : params
         ) {
             s.setStudentId(snowflakeIdGeneratorUtil.nextId());
-            ;
-            //s.setStudentClassId(classDao.getIdByName(s.getClassName()));
-
+            s.setStudentClassId(classDao.getIdByName(s.getStudentClass().getClassName()));
             //Set default password
             s.setStudentSalt(ShiroUtil.getSalt(7));
             s.setStudentPwd(ShiroUtil.pwd2MD5("123456", s.getStudentSalt(), 1739));
         }
         studentDao.addFromExcel(params);
         //Add student role
-        for (ExcelStudent s : params
+        for (SysStudent s : params
         ) {
             studentDao.addRole(s.getStudentId(), 506870876013088768L);
         }
@@ -171,7 +168,7 @@ public class SysStudentServiceImpl implements SysStudentService {
                     s.setStudentEmplStatus(s.getStudentEmplInfo().getEmplStatus());
                 }
             }
-            EasyExcel.write(response.getOutputStream(), ExcelStudent.class).sheet("sheet1").doWrite(students);
+            EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("sheet1").doWrite(students);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,6 @@
 package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.QueryParams;
-import com.zfy.yuio.entity.excel.ExcelStudent;
 import com.zfy.yuio.entity.system.SysStudent;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +24,7 @@ public interface SysStudentService {
 
     int updProfile(SysStudent params);
 
-    void addFromExcel(List<ExcelStudent> params);
+    void addFromExcel(List<SysStudent> params);
 
     void output2Excel(QueryParams params, HttpServletResponse response);
 }

@@ -149,7 +149,7 @@
         WHERE student_id=#{id}
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelStudent">
+    <insert id="addFromExcel" parameterType="SysStudent">
         INSERT INTO sys_student(student_id,student_name,student_code,student_gender,student_phone,student_status,student_grade,student_remark,student_class_id,student_pwd,student_salt)
         VALUES
             <foreach collection="params" item="s" separator=",">
