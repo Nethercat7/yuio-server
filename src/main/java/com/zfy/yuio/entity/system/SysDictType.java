@@ -18,29 +18,29 @@ import com.zfy.yuio.converter.UvslStatusConverter;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysDictType {
-    @JsonProperty("id")
     @ExcelProperty(value = "ID")
+    @JsonProperty("id")
     private Long dictId;
 
-    @JsonProperty("name")
     @ExcelProperty(value = "标签")
+    @JsonProperty("name")
     private String dictName;
 
-    @JsonProperty("type")
     @ExcelProperty(value = "类型")
+    @JsonProperty("type")
     private String dictType;
 
-    @JsonProperty("status")
     @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
+    @JsonProperty("status")
     private String dictStatus;
 
-    @JsonProperty("remark")
     @ExcelProperty(value = "备注")
+    @JsonProperty("remark")
     private String dictRemark;
 
+    @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
     private String dictCreateTime;
 
     public Long getDictId() {

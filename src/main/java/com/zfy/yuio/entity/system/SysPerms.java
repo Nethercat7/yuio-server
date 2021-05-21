@@ -22,6 +22,10 @@ import java.util.List;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysPerms {
+    @ExcelProperty(value = "ID")
+    @JsonProperty("id")
+    private Long permsId; //DB Property
+
     @ExcelProperty(value = "标签")
     @JsonProperty("name")
     private String permsName; //DB Property
@@ -60,10 +64,6 @@ public class SysPerms {
 
 
     //Ignore properties
-    @ExcelProperty(value = "ID")
-    @JsonProperty("id")
-    private Long permsId; //DB Property
-
     @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
