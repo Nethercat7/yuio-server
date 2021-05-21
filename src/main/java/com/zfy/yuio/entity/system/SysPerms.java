@@ -22,52 +22,53 @@ import java.util.List;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysPerms {
-    @JsonProperty("id")
-    @ExcelProperty(value = "ID")
-    private Long permsId;
-
-    @JsonProperty("name")
     @ExcelProperty(value = "标签")
-    private String permsName;
+    @JsonProperty("name")
+    private String permsName; //DB Property
 
-    @JsonProperty("mark")
     @ExcelProperty(value = "权限字符串")
-    private String permsMark;
+    @JsonProperty("mark")
+    private String permsMark; //DB Property
 
-    @JsonProperty("url")
     @ExcelProperty(value = "请求地址")
-    private String permsUrl;
+    @JsonProperty("url")
+    private String permsUrl; //DB Property
 
-    @JsonProperty("icon")
     @ExcelProperty(value = "图标")
-    private String permsIcon;
+    @JsonProperty("icon")
+    private String permsIcon; //DB Property
 
-    @JsonProperty("status")
     @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
-    private String permsStatus;
+    @JsonProperty("status")
+    private String permsStatus; //DB Property
 
-    @JsonProperty("pid")
     @ExcelProperty(value = "上级ID")
-    private Long permsPid;
+    @JsonProperty("pid")
+    private Long permsPid; //DB Property
 
-    @JsonProperty("level")
     @ExcelProperty(value = "层级")
-    private int permsLevel;
+    @JsonProperty("level")
+    private int permsLevel; //DB Property
 
-    @JsonProperty("type")
     @ExcelProperty(value = "类型",converter = PermsTypeConverter.class)
-    private String permsType;
+    @JsonProperty("type")
+    private String permsType; //DB Property
 
-    @JsonProperty("remark")
     @ExcelProperty(value = "备注")
-    private String permsRemark;
+    @JsonProperty("remark")
+    private String permsRemark; //DB Property
 
+
+    //Ignore properties
+    @ExcelProperty(value = "ID")
+    @JsonProperty("id")
+    private Long permsId; //DB Property
+
+    @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime permsCreateTime;
+    private LocalDateTime permsCreateTime; //DB Property
 
-    //非数据库字段
     @ExcelIgnore
     private List<SysPerms> children;
 

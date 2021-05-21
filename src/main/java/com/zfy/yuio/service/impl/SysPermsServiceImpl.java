@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysPermsDao;
-import com.zfy.yuio.entity.excel.ExcelPerms;
 import com.zfy.yuio.entity.system.SysPerms;
 import com.zfy.yuio.service.SysPermsService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +96,22 @@ public class SysPermsServiceImpl implements SysPermsService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelPerms> params) {
+    public void addFromExcel(List<SysPerms> params) {
         permsDao.addFromExcel(params);
     }
 
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "perms_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try {
+            EasyExcel.write(response.getOutputStream(), SysPerms.class).sheet("Sheet1").doWrite(getWithoutConvert());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     private int validate(SysPerms params, int type) {
         if (type == 0) {

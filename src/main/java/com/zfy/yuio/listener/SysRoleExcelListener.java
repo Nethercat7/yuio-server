@@ -2,7 +2,6 @@ package com.zfy.yuio.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.zfy.yuio.entity.excel.ExcelRole;
 import com.zfy.yuio.entity.system.SysRole;
 import com.zfy.yuio.service.SysRoleService;
 

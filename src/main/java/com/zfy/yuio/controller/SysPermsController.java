@@ -2,7 +2,6 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.excel.ExcelPerms;
 import com.zfy.yuio.entity.system.SysPerms;
 import com.zfy.yuio.listener.SysPermsExcelListener;
 import com.zfy.yuio.service.SysPermsService;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 /**
  * @Description:Menu mgt
@@ -79,17 +77,13 @@ public class SysPermsController {
     @GetMapping("output")
     @RequiresPermissions("system:perms:output")
     public void output(HttpServletResponse response) throws IOException {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setCharacterEncoding("utf-8");
-        String fileName = URLEncoder.encode("系统权限数据", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(), SysPerms.class).sheet("Sheet1").doWrite(permsService.getWithoutConvert());
+       permsService.output2Excel(response);
     }
 
     @PostMapping("upload")
     @RequiresPermissions("system:perms:import")
     public ResultBody upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), ExcelPerms.class, new SysPermsExcelListener(permsService)).sheet().doRead();
+        EasyExcel.read(file.getInputStream(), SysPerms.class, new SysPermsExcelListener(permsService)).sheet().doRead();
         return new ResultBody(0, "成功导入数据", "success");
     }
 }

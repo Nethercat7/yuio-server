@@ -84,10 +84,10 @@
         GROUP BY m.perms_id
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelPerms">
+    <insert id="addFromExcel" parameterType="SysPerms">
         INSERT INTO sys_perms(perms_id,perms_name,perms_mark,perms_url,perms_icon,perms_remark,perms_status,perms_level,perms_pid,perms_type)
         VALUES
-        <foreach collection="params" item="p">
+        <foreach collection="params" item="p" separator=",">
             (#{p.permsId},#{p.permsName},#{p.permsMark},#{p.permsUrl},#{p.permsIcon},#{p.permsRemark},#{p.permsStatus},#{p.permsLevel},#{p.permsPid},#{p.permsType})
         </foreach>
     </insert>
