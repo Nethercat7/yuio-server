@@ -22,56 +22,57 @@ import java.util.List;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysUser {
-    @JsonProperty("id")
-    @ExcelIgnore
-    private Long userId;
-
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "姓名")
-    private String userName;
+    @ExcelProperty(value = "姓名")
+    private String userName; //DB Property
 
     @JsonProperty("code")
-    @ExcelProperty(index = 1,value = "工号")
-    private String userCode;
+    @ExcelProperty(value = "工号")
+    private String userCode; //DB Property
 
     @JsonProperty("gender")
-    @ExcelProperty(index = 2,value = "性别",converter = GenderConverter.class)
-    private String userGender;
+    @ExcelProperty(value = "性别", converter = GenderConverter.class)
+    private String userGender; //DB Property
 
     @JsonProperty("phone")
-    @ExcelProperty(index = 3,value = "手机号码")
-    private String userPhone;
+    @ExcelProperty(value = "手机号码")
+    private String userPhone; //DB Property
 
     @JsonProperty("status")
-    @ExcelProperty(index = 4,value = "状态",converter = UvslStatusConverter.class)
-    private String userStatus;
+    @ExcelProperty(value = "状态", converter = UvslStatusConverter.class)
+    private String userStatus; //DB Property
 
     @JsonProperty("remark")
-    @ExcelProperty(index = 5,value = "备注")
-    private String userRemark;
+    @ExcelProperty(value = "备注")
+    private String userRemark; //DB Property
 
     @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime userCreateTime;
+    private LocalDateTime userCreateTime; //DB Property
 
+    //Ignore Properties
+    @ExcelIgnore
+    @JsonProperty("id")
+    private Long userId; //DB Property
+
+    @ExcelIgnore
     @JsonProperty("pwd")
-    @ExcelIgnore
-    private String userPwd;
+    private String userPwd; //DB Property
 
+    @ExcelIgnore
     @JsonProperty("salt")
+    private String userSalt; //DB Property
+
     @ExcelIgnore
-    private String userSalt;
-
     @JsonProperty("college_id")
-    private Long userCollegeId;
+    private Long userCollegeId; //DB Property
 
-    //非数据库字段
     @ExcelIgnore
     private List<Long> roles;
 
     @ExcelIgnore
-    private boolean  disabled;
+    private boolean disabled;
 
     public Long getUserId() {
         return userId;

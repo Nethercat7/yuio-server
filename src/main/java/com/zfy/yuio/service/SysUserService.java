@@ -1,8 +1,8 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.excel.ExcelUser;
 import com.zfy.yuio.entity.system.SysUser;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -25,7 +25,9 @@ public interface SysUserService {
 
     int updProfile(SysUser params);
 
-    void addFromExcel(List<ExcelUser> params);
+    void addFromExcel(List<SysUser> params);
 
     List<SysUser> getByCollege(Long id);
+
+    void output2Excel(HttpServletResponse response);
 }

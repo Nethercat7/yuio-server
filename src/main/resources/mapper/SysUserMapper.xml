@@ -66,10 +66,10 @@
         WHERE user_id=#{id}
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelUser">
+    <insert id="addFromExcel" parameterType="SysUser">
         INSERT INTO sys_user(user_id,user_name,user_code,user_gender,user_phone,user_status,user_remark,user_pwd,user_salt)
         VALUES
-        <foreach collection="params" item="u">
+        <foreach collection="params" item="u" separator=",">
             (#{u.userId},#{u.userName},#{u.userCode},#{u.userGender},#{u.userPhone},#{u.userStatus},#{u.userRemark},#{u.userPwd},#{u.userSalt})
         </foreach>
     </insert>

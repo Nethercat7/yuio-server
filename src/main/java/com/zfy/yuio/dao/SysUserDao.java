@@ -1,6 +1,5 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.excel.ExcelUser;
 import com.zfy.yuio.entity.system.SysUser;
 import org.springframework.stereotype.Repository;
 
@@ -33,7 +32,7 @@ public interface SysUserDao {
 
     int updProfile(SysUser params);
 
-    void addFromExcel(List<ExcelUser> params);
+    void addFromExcel(List<SysUser> params);
 
     Long verify(String key);
 

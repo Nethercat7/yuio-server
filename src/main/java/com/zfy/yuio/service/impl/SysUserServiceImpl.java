@@ -1,8 +1,8 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.SysUserDao;
-import com.zfy.yuio.entity.excel.ExcelUser;
 import com.zfy.yuio.entity.system.SysUser;
 import com.zfy.yuio.service.SysUserService;
 import com.zfy.yuio.utils.ShiroUtil;
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -94,8 +96,8 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelUser> params) {
-        for (ExcelUser u : params
+    public void addFromExcel(List<SysUser> params) {
+        for (SysUser u : params
         ) {
             u.setUserId(snowflakeIdGeneratorUtil.nextId());
             //set password
@@ -115,6 +117,27 @@ public class SysUserServiceImpl implements SysUserService {
             }
         }
         return users;
+    }
+
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "user_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try{
+            List<SysUser> usrList = userDao.get();
+            for (SysUser u : usrList
+            ) {
+                if(u.getUserStatus().equals("1")){
+                    u.setDisabled(true);
+                }
+                u.setRoles(userDao.getRoles(u.getUserId()));
+            }
+            EasyExcel.write(response.getOutputStream(), SysUser.class).sheet("Sheet1").doWrite(usrList);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private int validator(SysUser params, int type) {

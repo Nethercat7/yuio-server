@@ -24,19 +24,19 @@ import java.util.List;
 public class SysStudent {
     @ExcelProperty(value = "姓名")
     @JsonProperty("name")
-    private String studentName;
+    private String studentName; //DB Property
 
     @ExcelProperty(value = "学号")
     @JsonProperty("code")
-    private String studentCode;
+    private String studentCode; //DB Property
 
     @ExcelProperty(value = "性别",converter = GenderConverter.class)
     @JsonProperty("gender")
-    private String studentGender;
+    private String studentGender; //DB Property
 
     @ExcelProperty(value = "手机号码")
     @JsonProperty("phone")
-    private String studentPhone;
+    private String studentPhone; //DB Property
 
     @ExcelProperty(value = "院系",converter = CollegeConverter.class)
     @JsonProperty("college")
@@ -48,7 +48,7 @@ public class SysStudent {
 
     @ExcelProperty(value = "年级")
     @JsonProperty("grade")
-    private int studentGrade;
+    private int studentGrade; //DB Property
 
     @ExcelProperty(value = "班级",converter = ClassConverter.class)
     @JsonProperty("class")
@@ -73,33 +73,33 @@ public class SysStudent {
 
     @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
     @JsonProperty("status")
-    private String studentStatus;
+    private String studentStatus; //DB Property
 
     @ExcelProperty(value = "备注")
     @JsonProperty("remark")
-    private String studentRemark;
+    private String studentRemark; //DB Property
 
     //Ignore properties
     @ExcelIgnore
     @JsonProperty("id")
-    private Long studentId;
+    private Long studentId; //DB Property
 
     @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime studentCreateTime;
+    private LocalDateTime studentCreateTime; //DB Property
 
     @ExcelIgnore
     @JsonProperty("class_id")
-    private Long studentClassId;
+    private Long studentClassId; //DB Property
 
     @ExcelIgnore
     @JsonProperty("pwd")
-    private String studentPwd;
+    private String studentPwd; //DB Property
 
     @ExcelIgnore
     @JsonProperty("salt")
-    private String studentSalt;
+    private String studentSalt; //DB Property
 
     @ExcelIgnore
     @JsonProperty("work")
