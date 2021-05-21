@@ -1,8 +1,8 @@
 package com.zfy.yuio.service;
 
-import com.zfy.yuio.entity.excel.ExcelRole;
 import com.zfy.yuio.entity.system.SysRole;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -43,7 +43,9 @@ public interface SysRoleService {
      */
     int upd(SysRole params);
 
-    void addFromExcel(List<ExcelRole> params);
+    void addFromExcel(List<SysRole> params);
 
     List<SysRole> getByKeyword(String keyword);
+
+    void output2Excel(HttpServletResponse response);
 }

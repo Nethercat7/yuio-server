@@ -40,10 +40,10 @@
         WHERE rp_role_id=#{id}
     </delete>
 
-    <insert id="addFromExcel" parameterType="ExcelRole">
+    <insert id="addFromExcel" parameterType="SysRole">
         INSERT INTO sys_role(role_id,role_name,role_status,role_remark)
         VALUES
-        <foreach collection="params" item="r">
+        <foreach collection="params" item="r" separator=",">
             (#{r.roleId},#{r.roleName},#{r.roleStatus},#{r.roleRemark})
         </foreach>
     </insert>

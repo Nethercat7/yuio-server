@@ -21,28 +21,28 @@ import java.util.List;
 @HeadRowHeight(20)
 @ColumnWidth(20)
 public class SysRole {
-    @JsonProperty("id")
-    @ExcelIgnore
-    private Long roleId;
-
+    @ExcelProperty(value = "角色名称")
     @JsonProperty("name")
-    @ExcelProperty(index = 0,value = "角色名称")
-    private String roleName;
+    private String roleName; //DB Property
 
+    @ExcelProperty(value = "角色状态",converter = UvslStatusConverter.class)
     @JsonProperty("status")
-    @ExcelProperty(index = 1,value = "角色状态",converter = UvslStatusConverter.class)
+    private String roleStatus; //DB Property
 
-    private String roleStatus;
+    @ExcelProperty(value = "备注")
     @JsonProperty("remark")
-    @ExcelProperty(index = 2,value = "备注")
-    private String roleRemark;
+    private String roleRemark; //DB Property
 
+    //Ignore Properties
+    @ExcelIgnore
+    @JsonProperty("id")
+    private Long roleId; //DB Property
+
+    @ExcelIgnore
     @JsonProperty("create_time")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ExcelIgnore
-    private LocalDateTime roleCreateTime;
+    private LocalDateTime roleCreateTime; //DB Property
 
-    //非数据库字段
     @ExcelIgnore
     private List<Long> perms;
 

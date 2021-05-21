@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysRoleDao;
-import com.zfy.yuio.entity.excel.ExcelRole;
 import com.zfy.yuio.entity.system.SysRole;
 import com.zfy.yuio.service.SysRoleService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -69,8 +71,8 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelRole> params) {
-        for (ExcelRole r : params
+    public void addFromExcel(List<SysRole> params) {
+        for (SysRole r : params
         ) {
             r.setRoleId(snowflakeIdGeneratorUtil.nextId());
             r.setRoleStatus("0");
@@ -95,6 +97,19 @@ public class SysRoleServiceImpl implements SysRoleService {
             }
         }
         return 0;
+    }
+
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "role_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try{
+            EasyExcel.write(response.getOutputStream(), SysRole.class).sheet("Sheet1").doWrite(get());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void savePerms(SysRole params) {
