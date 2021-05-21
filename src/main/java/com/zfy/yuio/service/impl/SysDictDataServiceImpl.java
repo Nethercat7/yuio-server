@@ -1,7 +1,7 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysDictDataDao;
-import com.zfy.yuio.entity.excel.ExcelDictData;
 import com.zfy.yuio.entity.system.SysDictData;
 import com.zfy.yuio.service.SysDictDataService;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -58,8 +60,21 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     }
 
     @Override
-    public void addFromExcel(List<ExcelDictData> params) {
+    public void addFromExcel(List<SysDictData> params) {
         sysDictDataDao.addFromExcel(params);
+    }
+
+    @Override
+    public void output2Excel(HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "dict_data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try {
+            EasyExcel.write(response.getOutputStream(), SysDictData.class).sheet("Sheet1").doWrite(getAll());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private int validator(SysDictData params, int type) {

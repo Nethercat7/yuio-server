@@ -2,7 +2,6 @@ package com.zfy.yuio.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.ResultBody;
-import com.zfy.yuio.entity.excel.ExcelDictData;
 import com.zfy.yuio.entity.system.SysDictData;
 import com.zfy.yuio.listener.SysDictDataExcelListener;
 import com.zfy.yuio.service.SysDictDataService;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 /**
  *@Description:字典数据
@@ -73,18 +71,14 @@ public class SysDictDataController {
 
     @GetMapping("output")
     @RequiresPermissions("system:dict:output")
-    public void output(HttpServletResponse response) throws IOException {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setCharacterEncoding("utf-8");
-        String fileName = URLEncoder.encode("字典数据", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(), SysDictData.class).sheet("Sheet1").doWrite(sysDictDataService.getAll());
+    public void output(HttpServletResponse response){
+       sysDictDataService.output2Excel(response);
     }
 
     @PostMapping("upload")
     @RequiresPermissions("system:dict:import")
     public ResultBody upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), ExcelDictData.class,new SysDictDataExcelListener(sysDictDataService)).sheet().doRead();
+        EasyExcel.read(file.getInputStream(), SysDictData.class,new SysDictDataExcelListener(sysDictDataService)).sheet().doRead();
         return new ResultBody(0,"成功导入数据","success");
     }
 }

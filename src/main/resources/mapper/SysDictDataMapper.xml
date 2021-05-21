@@ -35,7 +35,7 @@
         SELECT * FROM sys_dict_data
     </select>
 
-    <insert id="addFromExcel" parameterType="ExcelDictData">
+    <insert id="addFromExcel" parameterType="SysDictData">
         INSERT INTO sys_dict_data(dict_id,dict_label,dict_type,dict_value,dict_status,dict_remark)
         VALUES
         <foreach collection="params" item="d" separator=",">

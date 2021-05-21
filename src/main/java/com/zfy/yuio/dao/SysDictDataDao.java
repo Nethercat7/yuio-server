@@ -1,6 +1,5 @@
 package com.zfy.yuio.dao;
 
-import com.zfy.yuio.entity.excel.ExcelDictData;
 import com.zfy.yuio.entity.system.SysDictData;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +24,7 @@ public interface SysDictDataDao {
 
     List<SysDictData> getAll();
 
-    void addFromExcel(List<ExcelDictData> params);
+    void addFromExcel(List<SysDictData> params);
 
     SysDictData getById(Long id);
 
