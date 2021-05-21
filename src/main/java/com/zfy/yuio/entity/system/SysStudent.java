@@ -1,8 +1,5 @@
 package com.zfy.yuio.entity.system;
 
-import com.alibaba.excel.annotation.write.style.ColumnWidth;
-import com.alibaba.excel.annotation.write.style.ContentRowHeight;
-import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zfy.yuio.entity.write.WriteEmplInfo;
@@ -15,9 +12,6 @@ import java.util.List;
  * @Author:赵富源
  * @CreateDate:2021/4/9 23:14
  */
-@ContentRowHeight(20)
-@HeadRowHeight(20)
-@ColumnWidth(20)
 public class SysStudent {
     @JsonProperty("id")
     private Long studentId;
@@ -83,6 +77,12 @@ public class SysStudent {
 
     @JsonProperty("empl_write")
     private String studentEmplWrite;
+
+    private String studentEmplStatus;
+
+    private String studentEmplConpany;
+
+    private String studentEmplProtocol;
 
     public Long getStudentId() {
         return studentId;
@@ -250,5 +250,29 @@ public class SysStudent {
 
     public void setStudentEmplWrite(String studentEmplWrite) {
         this.studentEmplWrite = studentEmplWrite;
+    }
+
+    public String getStudentEmplStatus() {
+        return studentEmplStatus;
+    }
+
+    public void setStudentEmplStatus(String studentEmplStatus) {
+        this.studentEmplStatus = studentEmplStatus;
+    }
+
+    public String getStudentEmplConpany() {
+        return studentEmplConpany;
+    }
+
+    public void setStudentEmplConpany(String studentEmplConpany) {
+        this.studentEmplConpany = studentEmplConpany;
+    }
+
+    public String getStudentEmplProtocol() {
+        return studentEmplProtocol;
+    }
+
+    public void setStudentEmplProtocol(String studentEmplProtocol) {
+        this.studentEmplProtocol = studentEmplProtocol;
     }
 }

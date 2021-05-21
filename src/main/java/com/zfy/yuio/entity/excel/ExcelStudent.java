@@ -2,43 +2,93 @@ package com.zfy.yuio.entity.excel;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
+import com.zfy.yuio.converter.*;
+import com.zfy.yuio.entity.system.*;
+import com.zfy.yuio.entity.write.WriteEmplInfo;
 
-public class ExcelStudent {
-    @ExcelProperty("姓名")
+import java.time.LocalDateTime;
+import java.util.List;
+
+@ContentRowHeight(20)
+@HeadRowHeight(20)
+@ColumnWidth(20)
+public class ExcelStudent{
+
+    @ExcelProperty(value = "姓名")
     private String studentName;
 
-    @ExcelProperty("学号")
+    @ExcelProperty(value = "学号")
     private String studentCode;
 
-    @ExcelProperty("电话号码")
-    private String studentPhone;
-
-    @ExcelProperty("年级")
-    private int studentGrade;
-
-    @ExcelProperty("备注")
-    private String studentRemark;
-
-    @ExcelProperty("性别")
+    @ExcelProperty(value = "性别",converter = GenderConverter.class)
     private String studentGender;
 
-    @ExcelProperty("班级")
-    private String className;
+    @ExcelProperty(value = "手机号码")
+    private String studentPhone;
 
-    @ExcelProperty("状态")
+    @ExcelProperty(value = "院系",converter = CollegeConverter.class)
+    private SysCollege studentCollege;
+
+    @ExcelProperty(value = "专业",converter = MajorConverter.class)
+    private SysMajor studentMajor;
+
+    @ExcelProperty(value = "年级")
+    private int studentGrade;
+
+    @ExcelProperty(value = "班级",converter = ClassConverter.class)
+    private SysClass studentClass;
+
+    @ExcelProperty(value = "指导老师",converter = TutorsConverter.class)
+    private List<String> studentTutorsName;
+
+    @ExcelProperty(value = "就业信息填写",converter = EmplWriteConverter.class)
+    private String studentEmplWrite;
+
+    @ExcelProperty(value = "是否就业",converter = EmplStatusConverter.class)
+    private String studentEmplStatus;
+
+    @ExcelProperty(value = "就业单位")
+    private String studentEmplConpany;
+
+    @ExcelProperty(value = "协议状况",converter = ProtocolConverter.class)
+    private String studentEmplProtocol;
+
+    @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
     private String studentStatus;
+
+    @ExcelProperty(value = "备注")
+    private String studentRemark;
+
+    //Ignore properties
+    @ExcelIgnore
+    private Long studentId;
+
+    @ExcelIgnore
+    private LocalDateTime studentCreateTime;
 
     @ExcelIgnore
     private Long studentClassId;
-
-    @ExcelIgnore
-    private Long studentId;
 
     @ExcelIgnore
     private String studentPwd;
 
     @ExcelIgnore
     private String studentSalt;
+
+    @ExcelIgnore
+    private SysWork studentWork;
+
+    @ExcelIgnore
+    private SysCity studentCity;
+
+    @ExcelIgnore
+    private WriteEmplInfo studentEmplInfo;
+
+    @ExcelIgnore
+    private List<String> studentTutorsCode;
 
     public String getStudentName() {
         return studentName;
@@ -56,12 +106,36 @@ public class ExcelStudent {
         this.studentCode = studentCode;
     }
 
+    public String getStudentGender() {
+        return studentGender;
+    }
+
+    public void setStudentGender(String studentGender) {
+        this.studentGender = studentGender;
+    }
+
     public String getStudentPhone() {
         return studentPhone;
     }
 
     public void setStudentPhone(String studentPhone) {
         this.studentPhone = studentPhone;
+    }
+
+    public SysCollege getStudentCollege() {
+        return studentCollege;
+    }
+
+    public void setStudentCollege(SysCollege studentCollege) {
+        this.studentCollege = studentCollege;
+    }
+
+    public SysMajor getStudentMajor() {
+        return studentMajor;
+    }
+
+    public void setStudentMajor(SysMajor studentMajor) {
+        this.studentMajor = studentMajor;
     }
 
     public int getStudentGrade() {
@@ -72,28 +146,52 @@ public class ExcelStudent {
         this.studentGrade = studentGrade;
     }
 
-    public String getStudentRemark() {
-        return studentRemark;
+    public SysClass getStudentClass() {
+        return studentClass;
     }
 
-    public void setStudentRemark(String studentRemark) {
-        this.studentRemark = studentRemark;
+    public void setStudentClass(SysClass studentClass) {
+        this.studentClass = studentClass;
     }
 
-    public String getStudentGender() {
-        return studentGender;
+    public List<String> getStudentTutorsName() {
+        return studentTutorsName;
     }
 
-    public void setStudentGender(String studentGender) {
-        this.studentGender = studentGender;
+    public void setStudentTutorsName(List<String> studentTutorsName) {
+        this.studentTutorsName = studentTutorsName;
     }
 
-    public String getClassName() {
-        return className;
+    public String getStudentEmplWrite() {
+        return studentEmplWrite;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setStudentEmplWrite(String studentEmplWrite) {
+        this.studentEmplWrite = studentEmplWrite;
+    }
+
+    public String getStudentEmplStatus() {
+        return studentEmplStatus;
+    }
+
+    public void setStudentEmplStatus(String studentEmplStatus) {
+        this.studentEmplStatus = studentEmplStatus;
+    }
+
+    public String getStudentEmplConpany() {
+        return studentEmplConpany;
+    }
+
+    public void setStudentEmplConpany(String studentEmplConpany) {
+        this.studentEmplConpany = studentEmplConpany;
+    }
+
+    public String getStudentEmplProtocol() {
+        return studentEmplProtocol;
+    }
+
+    public void setStudentEmplProtocol(String studentEmplProtocol) {
+        this.studentEmplProtocol = studentEmplProtocol;
     }
 
     public String getStudentStatus() {
@@ -104,12 +202,12 @@ public class ExcelStudent {
         this.studentStatus = studentStatus;
     }
 
-    public Long getStudentClassId() {
-        return studentClassId;
+    public String getStudentRemark() {
+        return studentRemark;
     }
 
-    public void setStudentClassId(Long studentClassId) {
-        this.studentClassId = studentClassId;
+    public void setStudentRemark(String studentRemark) {
+        this.studentRemark = studentRemark;
     }
 
     public Long getStudentId() {
@@ -118,6 +216,22 @@ public class ExcelStudent {
 
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
+    }
+
+    public LocalDateTime getStudentCreateTime() {
+        return studentCreateTime;
+    }
+
+    public void setStudentCreateTime(LocalDateTime studentCreateTime) {
+        this.studentCreateTime = studentCreateTime;
+    }
+
+    public Long getStudentClassId() {
+        return studentClassId;
+    }
+
+    public void setStudentClassId(Long studentClassId) {
+        this.studentClassId = studentClassId;
     }
 
     public String getStudentPwd() {
@@ -134,5 +248,37 @@ public class ExcelStudent {
 
     public void setStudentSalt(String studentSalt) {
         this.studentSalt = studentSalt;
+    }
+
+    public SysWork getStudentWork() {
+        return studentWork;
+    }
+
+    public void setStudentWork(SysWork studentWork) {
+        this.studentWork = studentWork;
+    }
+
+    public SysCity getStudentCity() {
+        return studentCity;
+    }
+
+    public void setStudentCity(SysCity studentCity) {
+        this.studentCity = studentCity;
+    }
+
+    public WriteEmplInfo getStudentEmplInfo() {
+        return studentEmplInfo;
+    }
+
+    public void setStudentEmplInfo(WriteEmplInfo studentEmplInfo) {
+        this.studentEmplInfo = studentEmplInfo;
+    }
+
+    public List<String> getStudentTutorsCode() {
+        return studentTutorsCode;
+    }
+
+    public void setStudentTutorsCode(List<String> studentTutorsCode) {
+        this.studentTutorsCode = studentTutorsCode;
     }
 }

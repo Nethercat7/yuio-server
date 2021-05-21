@@ -1,5 +1,6 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.SysClassDao;
 import com.zfy.yuio.dao.SysPermsDao;
 import com.zfy.yuio.dao.SysStudentDao;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,9 +73,9 @@ public class SysStudentServiceImpl implements SysStudentService {
                 student.setStudentEmplWrite("1");
             }
         }
-        List<String> perms=permsDao.getUserPerms(params.getUserCode());
+        List<String> perms = permsDao.getUserPerms(params.getUserCode());
         //如果没有查看所有学生的权限，那么只能查看自己所带的学生。
-        if(!perms.contains("system:student:getAll")){
+        if (!perms.contains("system:student:getAll")) {
             students = students.stream().filter(s -> s.getStudentTutorsCode().contains(params.getUserCode())).collect(Collectors.toList());
         }
         return students;
@@ -89,6 +92,12 @@ public class SysStudentServiceImpl implements SysStudentService {
         int status = validator(params, 1);
         if (status == 0) {
             studentDao.upd(params);
+            //删除学生与导师的关系
+            studentDao.delStudentTutors(params.getStudentCode());
+            if (!ObjectUtils.isEmpty(params.getStudentTutorsCode())) {
+                //添加学生与导师的关系
+                studentDao.addTutor(params.getStudentTutorsCode(), params.getStudentCode());
+            }
         }
         return status;
     }
@@ -96,7 +105,7 @@ public class SysStudentServiceImpl implements SysStudentService {
     @Override
     public SysStudent getById(Long id) {
         SysStudent student = studentDao.getById(id);
-        if(!ObjectUtils.isEmpty(student)){
+        if (!ObjectUtils.isEmpty(student)) {
             if (ObjectUtils.isEmpty(student.getStudentEmplInfo())) {
                 student.setStudentEmplWrite("0");
             } else {
@@ -113,9 +122,9 @@ public class SysStudentServiceImpl implements SysStudentService {
             studentDao.updProfile(params);
             //删除学生与导师的关系
             studentDao.delStudentTutors(params.getStudentCode());
-            if(!ObjectUtils.isEmpty(params.getStudentTutorsCode())){
+            if (!ObjectUtils.isEmpty(params.getStudentTutorsCode())) {
                 //添加学生与导师的关系
-                studentDao.addTutor(params.getStudentTutorsCode(),params.getStudentCode());
+                studentDao.addTutor(params.getStudentTutorsCode(), params.getStudentCode());
             }
         }
         return status;
@@ -128,7 +137,7 @@ public class SysStudentServiceImpl implements SysStudentService {
         ) {
             s.setStudentId(snowflakeIdGeneratorUtil.nextId());
             ;
-            s.setStudentClassId(classDao.getIdByName(s.getClassName()));
+            //s.setStudentClassId(classDao.getIdByName(s.getClassName()));
 
             //Set default password
             s.setStudentSalt(ShiroUtil.getSalt(7));
@@ -139,6 +148,32 @@ public class SysStudentServiceImpl implements SysStudentService {
         for (ExcelStudent s : params
         ) {
             studentDao.addRole(s.getStudentId(), 506870876013088768L);
+        }
+    }
+
+    @Override
+    public void output2Excel(QueryParams params, HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "Student_Data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        try {
+            List<SysStudent> students = studentDao.get(params);
+            //数据转换
+            for (SysStudent s : students
+            ) {
+                if (ObjectUtils.isEmpty(s.getStudentEmplInfo())) {
+                    s.setStudentEmplWrite("0");
+                } else {
+                    s.setStudentEmplWrite("1");
+                    s.setStudentEmplConpany(s.getStudentEmplInfo().getEmplCompany());
+                    s.setStudentEmplProtocol(s.getStudentEmplInfo().getEmplProtocol());
+                    s.setStudentEmplStatus(s.getStudentEmplInfo().getEmplStatus());
+                }
+            }
+            EasyExcel.write(response.getOutputStream(), ExcelStudent.class).sheet("sheet1").doWrite(students);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

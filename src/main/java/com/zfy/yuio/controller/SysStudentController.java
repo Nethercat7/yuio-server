@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 /**
  * @Description:学生管理模块
@@ -94,12 +93,8 @@ public class SysStudentController {
 
     @PostMapping("output")
     @RequiresPermissions("system:student:output")
-    public void output(@RequestBody QueryParams params, HttpServletResponse response) throws IOException {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setCharacterEncoding("utf-8");
-        String fileName = URLEncoder.encode("学生数据", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("sheet1").doWrite(studentService.get(params));
+    public void output(@RequestBody QueryParams params, HttpServletResponse response){
+        studentService.output2Excel(params, response);
     }
 
     @PostMapping("upload")
