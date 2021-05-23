@@ -31,6 +31,9 @@ public class QueryParams {
     @JsonProperty("user_code")
     private String userCode;
 
+    @JsonProperty("empl_protocol")
+    private String emplProtocol;
+
     public Long getStudentId() {
         return studentId;
     }
@@ -101,5 +104,13 @@ public class QueryParams {
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
+    }
+
+    public String getEmplProtocol() {
+        return emplProtocol;
+    }
+
+    public void setEmplProtocol(String emplProtocol) {
+        this.emplProtocol = emplProtocol;
     }
 }

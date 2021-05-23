@@ -102,6 +102,9 @@
         <if test="emplWrite==1">
             AND ei.empl_status IS NOT NULL
         </if>
+        <if test="emplProtocol!=null">
+            AND ei.empl_protocol=#{emplProtocol}
+        </if>
     </select>
 
     <delete id="del" parameterType="Long">
