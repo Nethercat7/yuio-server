@@ -105,6 +105,9 @@
         <if test="emplProtocol!=null">
             AND ei.empl_protocol=#{emplProtocol}
         </if>
+        <if test="tutorCode!=null">
+            AND u.user_code=#{tutorCode}
+        </if>
     </select>
 
     <delete id="del" parameterType="Long">
