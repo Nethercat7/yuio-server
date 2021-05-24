@@ -77,14 +77,14 @@ public class SysStudent {
     @ExcelProperty(value = "是否下载就业APP",converter = EmplAppConverter.class)
     private String studentEmplApp;
 
-    @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
-    @JsonProperty("status")
-    private String studentStatus; //DB Property
-
     @ExcelProperty(value = "备注")
     private String studentEmplRemark;
 
     //Ignore properties
+    @ExcelIgnore
+    @JsonProperty("status")
+    private String studentStatus; //DB Property
+
     @ExcelIgnore
     @JsonProperty("remark")
     private String studentRemark; //DB Property
