@@ -36,25 +36,25 @@ public class WriteEmplServiceImpl implements WriteEmplService {
     @Override
     public int add(WriteEmplInfo params, MultipartFile file) {
         params.setEmplId(snowflakeIdGeneratorUtil.nextId());
-        int status = emplDao.add(params);
-        //添加意向城市和意向岗位
-        if (status == 1) {
-            if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
-                for (Long id : params.getIntentionCities()
-                ) {
-                    emplDao.addIntentionCities(params.getEmplStudentCode(), id);
-                }
-            }
-
-            if (!ObjectUtils.isEmpty(params.getIntentionWorks())) {
-                for (Long id : params.getIntentionWorks()
-                ) {
-                    emplDao.addIntentionWorks(params.getEmplStudentCode(), id);
-                }
-            }
-        }
-        //保存三方协议文件
-        saveFile(params, file);
+//        int status = emplDao.add(params);
+//        //添加意向城市和意向岗位
+//        if (status == 1) {
+//            if (!ObjectUtils.isEmpty(params.getIntentionCities())) {
+//                for (Long id : params.getIntentionCities()
+//                ) {
+//                    emplDao.addIntentionCities(params.getEmplStudentCode(), id);
+//                }
+//            }
+//
+//            if (!ObjectUtils.isEmpty(params.getIntentionWorks())) {
+//                for (Long id : params.getIntentionWorks()
+//                ) {
+//                    emplDao.addIntentionWorks(params.getEmplStudentCode(), id);
+//                }
+//            }
+//        }
+//        //保存三方协议文件
+//        saveFile(params, file);
         return 0;
     }
 

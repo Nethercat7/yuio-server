@@ -5,8 +5,8 @@
 
 <mapper namespace="com.zfy.yuio.dao.WriteEmplDao">
     <insert id="add" parameterType="WriteEmplInfo">
-        INSERT INTO write_empl_info(empl_id,empl_status,empl_company,empl_protocol,empl_plan,empl_student_code,empl_city_id,empl_work_id)
-        VALUES(#{emplId},#{emplStatus},#{emplCompany},#{emplProtocol},#{emplPlan},#{emplStudentCode},#{emplCityId},#{emplWorkId})
+        INSERT INTO write_empl_info(empl_id,empl_status,empl_company,empl_protocol,empl_plan,empl_student_code,empl_city_id,empl_work_id,empl_date,empl_app,empl_remark)
+        VALUES(#{emplId},#{emplStatus},#{emplCompany},#{emplProtocol},#{emplPlan},#{emplStudentCode},#{emplCityId},#{emplWorkId},#{emplDate},#{emplApp},#{emplRemark})
     </insert>
 
     <select id="get" parameterType="String" resultType="WriteEmplInfo">
@@ -16,7 +16,7 @@
 
     <update id="upd" parameterType="WriteEmplInfo">
         UPDATE write_empl_info SET empl_status=#{emplStatus},empl_company=#{emplCompany},empl_protocol=#{emplProtocol},
-        empl_plan=#{emplPlan},empl_city_id=#{emplCityId},empl_work_id=#{emplWorkId}
+        empl_plan=#{emplPlan},empl_city_id=#{emplCityId},empl_work_id=#{emplWorkId},empl_date=#{emplDate},empl_app=#{emplApp},empl_remark=#{emplRemark}
         WHERE empl_student_code=#{emplStudentCode}
     </update>
 

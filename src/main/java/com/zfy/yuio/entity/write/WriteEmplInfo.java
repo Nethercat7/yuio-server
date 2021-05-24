@@ -2,6 +2,7 @@ package com.zfy.yuio.entity.write;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -28,6 +29,12 @@ public class WriteEmplInfo {
     private Long emplWorkId;
     @JsonProperty("protocol_file")
     private String emplProtocolFile;
+    @JsonProperty("date")
+    private LocalDate emplDate;
+    @JsonProperty("app")
+    private String emplApp;
+    @JsonProperty("remark")
+    private String emplRemark;
     //非数据库字段
     @JsonProperty("intention_cities")
     private List<Long> intentionCities;
@@ -130,5 +137,29 @@ public class WriteEmplInfo {
 
     public void setTeacherCode(List<String> teacherCode) {
         this.teacherCode = teacherCode;
+    }
+
+    public LocalDate getEmplDate() {
+        return emplDate;
+    }
+
+    public void setEmplDate(LocalDate emplDate) {
+        this.emplDate = emplDate;
+    }
+
+    public String getEmplApp() {
+        return emplApp;
+    }
+
+    public void setEmplApp(String emplApp) {
+        this.emplApp = emplApp;
+    }
+
+    public String getEmplRemark() {
+        return emplRemark;
+    }
+
+    public void setEmplRemark(String emplRemark) {
+        this.emplRemark = emplRemark;
     }
 }
