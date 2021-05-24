@@ -46,6 +46,9 @@
             <result column="empl_protocol" property="emplProtocol"></result>
             <result column="empl_plan" property="emplPlan"></result>
             <result column="empl_protocol_file" property="emplProtocolFile"></result>
+            <result column="empl_date" property="emplDate"></result>
+            <result column="empl_app" property="emplApp"></result>
+            <result column="empl_remark" property="emplRemark"></result>
         </association>
         <collection property="studentTutorsCode" ofType="String">
             <id column="user_code" property="String"></id>
