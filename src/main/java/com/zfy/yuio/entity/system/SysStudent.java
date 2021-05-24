@@ -71,15 +71,24 @@ public class SysStudent {
     @ExcelProperty(value = "协议状况",converter = ProtocolConverter.class)
     private String studentEmplProtocol;
 
+    @ExcelProperty(value = "预计签约时间")
+    private String studentEmplDate;
+
+    @ExcelProperty(value = "是否下载就业APP",converter = EmplAppConverter.class)
+    private String studentEmplApp;
+
     @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
     @JsonProperty("status")
     private String studentStatus; //DB Property
 
     @ExcelProperty(value = "备注")
+    private String studentEmplRemark;
+
+    //Ignore properties
+    @ExcelIgnore
     @JsonProperty("remark")
     private String studentRemark; //DB Property
 
-    //Ignore properties
     @ExcelIgnore
     @JsonProperty("id")
     private Long studentId; //DB Property
@@ -309,5 +318,29 @@ public class SysStudent {
 
     public void setStudentEmplProtocol(String studentEmplProtocol) {
         this.studentEmplProtocol = studentEmplProtocol;
+    }
+
+    public String getStudentEmplDate() {
+        return studentEmplDate;
+    }
+
+    public void setStudentEmplDate(String studentEmplDate) {
+        this.studentEmplDate = studentEmplDate;
+    }
+
+    public String getStudentEmplApp() {
+        return studentEmplApp;
+    }
+
+    public void setStudentEmplApp(String studentEmplApp) {
+        this.studentEmplApp = studentEmplApp;
+    }
+
+    public String getStudentEmplRemark() {
+        return studentEmplRemark;
+    }
+
+    public void setStudentEmplRemark(String studentEmplRemark) {
+        this.studentEmplRemark = studentEmplRemark;
     }
 }

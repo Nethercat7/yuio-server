@@ -166,6 +166,9 @@ public class SysStudentServiceImpl implements SysStudentService {
                     s.setStudentEmplConpany(s.getStudentEmplInfo().getEmplCompany());
                     s.setStudentEmplProtocol(s.getStudentEmplInfo().getEmplProtocol());
                     s.setStudentEmplStatus(s.getStudentEmplInfo().getEmplStatus());
+                    s.setStudentEmplDate(s.getStudentEmplInfo().getEmplDate());
+                    s.setStudentEmplApp(s.getStudentEmplInfo().getEmplApp());
+                    s.setStudentEmplRemark(s.getStudentEmplInfo().getEmplRemark());
                 }
             }
             EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("sheet1").doWrite(students);
