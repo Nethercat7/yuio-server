@@ -1,13 +1,17 @@
 package com.zfy.yuio.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.dao.StatsStatusDao;
 import com.zfy.yuio.entity.QueryParams;
+import com.zfy.yuio.entity.statstics.ExcelCityStatus;
 import com.zfy.yuio.entity.statstics.StatsEmplResult;
 import com.zfy.yuio.service.StatsStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
@@ -95,5 +99,23 @@ public class StatsStatusServiceImpl implements StatsStatusService {
             result.setMaleRank(malePlanRank);
         }
         return result;
+    }
+
+    @Override
+    public void outputCityInfo(List<ExcelCityStatus> excelCityStatuses, HttpServletResponse response) {
+        try{
+            setExcelParams(excelCityStatuses,response);
+            EasyExcel.write(response.getOutputStream(),ExcelCityStatus.class).sheet("sheet1").doWrite(excelCityStatuses);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private List<ExcelCityStatus> setExcelParams(List<ExcelCityStatus> excelCityStatuses,HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "Student_Data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        return null;
     }
 }

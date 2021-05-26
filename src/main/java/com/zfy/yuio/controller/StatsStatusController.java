@@ -2,10 +2,14 @@ package com.zfy.yuio.controller;
 
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
+import com.zfy.yuio.entity.statstics.ExcelCityStatus;
 import com.zfy.yuio.service.StatsStatusService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @Description:数据统计模块
@@ -41,5 +45,10 @@ public class StatsStatusController {
     @RequiresPermissions("statistics:status:view")
     public ResultBody getEmplStudentPlan(@RequestBody QueryParams params){
         return new ResultBody(0,statusService.getEmplStudentPlan(params));
+    }
+
+    @PostMapping("outputCityInfo")
+    public void outputCityInfo(@RequestBody List<ExcelCityStatus> excelCityStatusList, HttpServletResponse response){
+        statusService.outputCityInfo(excelCityStatusList,response);
     }
 }

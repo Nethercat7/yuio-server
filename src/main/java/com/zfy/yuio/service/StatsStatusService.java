@@ -1,8 +1,10 @@
 package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.QueryParams;
+import com.zfy.yuio.entity.statstics.ExcelCityStatus;
 import com.zfy.yuio.entity.statstics.StatsEmplResult;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -18,4 +20,6 @@ public interface StatsStatusService {
     StatsEmplResult getUnEmplStudentPlan(QueryParams params);
 
     StatsEmplResult getEmplStudentPlan(QueryParams params);
+
+    void outputCityInfo(List<ExcelCityStatus> excelCityStatuses, HttpServletResponse response);
 }
