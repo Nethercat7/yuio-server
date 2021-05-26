@@ -16,6 +16,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -150,34 +151,48 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Override
     public void output2Excel(QueryParams params, HttpServletResponse response) {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setCharacterEncoding("utf-8");
-        String fileName = "Student_Data";
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         try {
-            List<SysStudent> students = studentDao.get(params);
-            //数据转换
-            for (SysStudent s : students
-            ) {
-                if (ObjectUtils.isEmpty(s.getStudentEmplInfo())) {
-                    s.setStudentEmplWrite("0");
-                } else {
-                    s.setStudentEmplWrite("1");
-                    s.setStudentEmplConpany(s.getStudentEmplInfo().getEmplCompany());
-                    s.setStudentEmplProtocol(s.getStudentEmplInfo().getEmplProtocol());
-                    s.setStudentEmplStatus(s.getStudentEmplInfo().getEmplStatus());
-                    s.setStudentEmplDate(s.getStudentEmplInfo().getEmplDate());
-                    s.setStudentEmplApp(s.getStudentEmplInfo().getEmplApp());
-                    s.setStudentEmplRemark(s.getStudentEmplInfo().getEmplRemark());
-                }
-            }
-            EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("sheet1").doWrite(students);
+            EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("sheet1").doWrite(setExcelParams(studentDao.get(params), response));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public int validator(SysStudent params, int type) {
+    @Override
+    public void outputSelected(List<SysStudent> students, HttpServletResponse response) {
+        try {
+            EasyExcel.write(response.getOutputStream(), SysStudent.class).sheet("sheet1").doWrite(setExcelParams(students, response));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<SysStudent> setExcelParams(List<SysStudent> students, HttpServletResponse response) {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "Student_Data";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        List<SysStudent> list = new ArrayList<SysStudent>();
+        //数据转换
+        for (SysStudent s : students
+        ) {
+            if (ObjectUtils.isEmpty(s.getStudentEmplInfo())) {
+                s.setStudentEmplWrite("0");
+            } else {
+                s.setStudentEmplWrite("1");
+                s.setStudentEmplConpany(s.getStudentEmplInfo().getEmplCompany());
+                s.setStudentEmplProtocol(s.getStudentEmplInfo().getEmplProtocol());
+                s.setStudentEmplStatus(s.getStudentEmplInfo().getEmplStatus());
+                s.setStudentEmplDate(s.getStudentEmplInfo().getEmplDate());
+                s.setStudentEmplApp(s.getStudentEmplInfo().getEmplApp());
+                s.setStudentEmplRemark(s.getStudentEmplInfo().getEmplRemark());
+            }
+            list.add(s);
+        }
+        return list;
+    }
+
+    private int validator(SysStudent params, int type) {
         if (type == 0) {
             if (!ObjectUtils.isEmpty(studentDao.verify(params.getStudentCode()))) return 1;
             if (!ObjectUtils.isEmpty(params.getStudentPhone())) {

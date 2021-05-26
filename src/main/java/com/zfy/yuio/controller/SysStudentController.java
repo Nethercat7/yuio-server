@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @Description:学生管理模块
@@ -108,5 +109,10 @@ public class SysStudentController {
         WriteEmplInfo info=writeEmplService.get(code);
         String path=filepath+info.getEmplProtocolFile();
         UsefulUtil.download(path,info.getEmplProtocolFile(),response);
+    }
+
+    @PostMapping("outputSelected")
+    public void outputSelected(@RequestBody List<SysStudent> students, HttpServletResponse response){
+        studentService.outputSelected(students,response);
     }
 }

@@ -27,4 +27,6 @@ public interface SysStudentService {
     void addFromExcel(List<SysStudent> params);
 
     void output2Excel(QueryParams params, HttpServletResponse response);
+
+    void outputSelected(List<SysStudent> students,HttpServletResponse response);
 }
