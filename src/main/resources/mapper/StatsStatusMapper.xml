@@ -53,6 +53,7 @@
             AND ei.empl_status=#{emplStatus}
         </if>
         GROUP BY w.work_name
+        ORDER BY total_people DESC
     </select>
 
     <select id="getStudentPlan" parameterType="QueryParams" resultType="StatsEmplResult">
@@ -77,6 +78,7 @@
             AND ei.empl_status=#{emplStatus}
         </if>
         GROUP BY ei.empl_plan
+        ORDER BY total_people DESC
     </select>
 
     <select id="getWorkRank" parameterType="QueryParams" resultType="StatsEmplResult">

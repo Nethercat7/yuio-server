@@ -3,6 +3,7 @@ package com.zfy.yuio.controller;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.statstics.ExcelCityStatus;
+import com.zfy.yuio.entity.statstics.ExcelWorkStats;
 import com.zfy.yuio.service.StatsStatusService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,10 @@ public class StatsStatusController {
     @PostMapping("outputCityInfo")
     public void outputCityInfo(@RequestBody List<ExcelCityStatus> excelCityStatusList, HttpServletResponse response){
         statusService.outputCityInfo(excelCityStatusList,response);
+    }
+
+    @PostMapping("outputWorkInfo")
+    public void outputWorkInfo(@RequestBody ExcelWorkStats params, HttpServletResponse response){
+        statusService.outputWorkInfo(params,response);
     }
 }

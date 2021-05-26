@@ -1,9 +1,12 @@
 package com.zfy.yuio.service.impl;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.zfy.yuio.dao.StatsStatusDao;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.statstics.ExcelCityStatus;
+import com.zfy.yuio.entity.statstics.ExcelWorkStats;
 import com.zfy.yuio.entity.statstics.StatsEmplResult;
 import com.zfy.yuio.service.StatsStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,18 +107,36 @@ public class StatsStatusServiceImpl implements StatsStatusService {
     @Override
     public void outputCityInfo(List<ExcelCityStatus> excelCityStatuses, HttpServletResponse response) {
         try{
-            setExcelParams(excelCityStatuses,response);
+            setExcelParams(response);
             EasyExcel.write(response.getOutputStream(),ExcelCityStatus.class).sheet("sheet1").doWrite(excelCityStatuses);
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
-    private List<ExcelCityStatus> setExcelParams(List<ExcelCityStatus> excelCityStatuses,HttpServletResponse response) {
+    @Override
+    public void outputWorkInfo(ExcelWorkStats params, HttpServletResponse response) {
+        try{
+            setExcelParams(response);
+            ExcelWriter writer = EasyExcel.write(response.getOutputStream()).build();
+            //创建单元格
+            WriteSheet sheet1=EasyExcel.writerSheet(0,"总排行").head(ExcelWorkStats.class).build();
+            WriteSheet sheet2=EasyExcel.writerSheet(1,"女生排行").head(ExcelWorkStats.class).build();
+            WriteSheet sheet3=EasyExcel.writerSheet(2,"男生排行").head(ExcelWorkStats.class).build();
+            //写入数据
+            writer.write(params.getTotalRank(),sheet1);
+            writer.write(params.getFemaleRank(),sheet2);
+            writer.write(params.getMaleRank(),sheet3);
+            writer.finish();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void setExcelParams(HttpServletResponse response) {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
-        String fileName = "Student_Data";
+        String fileName = "Data";
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        return null;
     }
 }
