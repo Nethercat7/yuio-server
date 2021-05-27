@@ -29,6 +29,7 @@
             )
         </if>
         GROUP BY c.city_name
+        ORDER BY total_people DESC
     </select>
 
     <select id="getIntentionWorks" parameterType="QueryParams" resultType="StatsEmplResult">
