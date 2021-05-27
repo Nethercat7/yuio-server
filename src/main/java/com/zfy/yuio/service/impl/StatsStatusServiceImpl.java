@@ -6,6 +6,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.zfy.yuio.dao.StatsStatusDao;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.statstics.ExcelCityStatus;
+import com.zfy.yuio.entity.statstics.ExcelPlanStats;
 import com.zfy.yuio.entity.statstics.ExcelWorkStats;
 import com.zfy.yuio.entity.statstics.StatsEmplResult;
 import com.zfy.yuio.service.StatsStatusService;
@@ -123,6 +124,25 @@ public class StatsStatusServiceImpl implements StatsStatusService {
             WriteSheet sheet1=EasyExcel.writerSheet(0,"总排行").head(ExcelWorkStats.class).build();
             WriteSheet sheet2=EasyExcel.writerSheet(1,"女生排行").head(ExcelWorkStats.class).build();
             WriteSheet sheet3=EasyExcel.writerSheet(2,"男生排行").head(ExcelWorkStats.class).build();
+            //写入数据
+            writer.write(params.getTotalRank(),sheet1);
+            writer.write(params.getFemaleRank(),sheet2);
+            writer.write(params.getMaleRank(),sheet3);
+            writer.finish();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void outputStudentPlan(ExcelPlanStats params, HttpServletResponse response) {
+        try{
+            setExcelParams(response);
+            ExcelWriter writer = EasyExcel.write(response.getOutputStream()).build();
+            //创建单元格
+            WriteSheet sheet1=EasyExcel.writerSheet(0,"总排行").head(ExcelPlanStats.class).build();
+            WriteSheet sheet2=EasyExcel.writerSheet(1,"女生排行").head(ExcelPlanStats.class).build();
+            WriteSheet sheet3=EasyExcel.writerSheet(2,"男生排行").head(ExcelPlanStats.class).build();
             //写入数据
             writer.write(params.getTotalRank(),sheet1);
             writer.write(params.getFemaleRank(),sheet2);
