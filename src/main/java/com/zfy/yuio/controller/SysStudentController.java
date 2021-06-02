@@ -105,6 +105,7 @@ public class SysStudentController {
     }
 
     @GetMapping("downloadProtocol")
+    @RequiresPermissions("system:student:download")
     public void downloadProtocol(@RequestParam("code") String code,HttpServletResponse response) throws IOException {
         WriteEmplInfo info=writeEmplService.get(code);
         String path=filepath+info.getEmplProtocolFile();
@@ -112,6 +113,7 @@ public class SysStudentController {
     }
 
     @PostMapping("outputSelected")
+    @RequiresPermissions("system:student:outputSelected")
     public void outputSelected(@RequestBody List<SysStudent> students, HttpServletResponse response){
         studentService.outputSelected(students,response);
     }

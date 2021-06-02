@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- *@Description:导出统计数据
- *@Author:Nethercat7
- *@CreateDate:2021/5/27 17:35
-*/
+ * @Description:导出统计数据
+ * @Author:Nethercat7
+ * @CreateDate:2021/5/27 17:35
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("stats/output")
@@ -23,17 +23,17 @@ public class StatsDataOutputController {
     private StatsDataOutputService outputService;
 
     @PostMapping("city")
-    public void outputCityInfo(@RequestBody List<ExcelCityStatus> excelCityStatusList, HttpServletResponse response){
-        outputService.outputCityInfo(excelCityStatusList,response);
+    public void outputCityInfo(@RequestBody List<ExcelCityStatus> excelCityStatusList, HttpServletResponse response) {
+        outputService.outputCityInfo(excelCityStatusList, response);
     }
 
     @PostMapping("work")
-    public void outputWorkInfo(@RequestBody ExcelWorkStats params, HttpServletResponse response){
-        outputService.outputWorkInfo(params,response);
+    public void outputWorkInfo(@RequestBody ExcelWorkStats params, HttpServletResponse response) {
+        outputService.outputWorkInfo(params, response);
     }
 
     @PostMapping("plan")
-    public void outputStudentPlan(@RequestBody ExcelPlanStats params, HttpServletResponse response){
-        outputService.outputStudentPlan(params,response);
+    public void outputStudentPlan(@RequestBody ExcelPlanStats params, HttpServletResponse response) {
+        outputService.outputStudentPlan(params, response);
     }
 }
