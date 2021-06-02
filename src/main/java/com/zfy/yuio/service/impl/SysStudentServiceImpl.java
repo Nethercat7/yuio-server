@@ -7,12 +7,15 @@ import com.zfy.yuio.dao.SysStudentDao;
 import com.zfy.yuio.dao.SysUserDao;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.system.SysStudent;
+import com.zfy.yuio.listener.SysStudentExcelListener;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -46,8 +49,9 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     SnowflakeIdGeneratorUtil snowflakeIdGeneratorUtil = new SnowflakeIdGeneratorUtil(3, 0);
 
+    @Transactional
     @Override
-    public int add(SysStudent params) {
+    public int add(SysStudent params){
         int status = validator(params, 0);
         if (status == 0) {
             params.setStudentId(snowflakeIdGeneratorUtil.nextId());
@@ -87,6 +91,7 @@ public class SysStudentServiceImpl implements SysStudentService {
         return studentDao.del(id);
     }
 
+    @Transactional
     @Override
     public int upd(SysStudent params) {
         int status = validator(params, 1);
@@ -115,6 +120,7 @@ public class SysStudentServiceImpl implements SysStudentService {
         return student;
     }
 
+    @Transactional
     @Override
     public int updProfile(SysStudent params) {
         int status = validator(params, 1);
@@ -130,6 +136,7 @@ public class SysStudentServiceImpl implements SysStudentService {
         return status;
     }
 
+    @Transactional
     @Override
     public void addFromExcel(List<SysStudent> params) {
         //Add status and class id for students
@@ -167,10 +174,19 @@ public class SysStudentServiceImpl implements SysStudentService {
         }
     }
 
+    @Override
+    public void importFormExcel(MultipartFile file) {
+        try{
+            EasyExcel.read(file.getInputStream(), SysStudent.class, new SysStudentExcelListener(this)).sheet().doRead();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     private List<SysStudent> setExcelParams(List<SysStudent> students, HttpServletResponse response) {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
-        String fileName = "Student_Data";
+        String fileName = "Data";
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         List<SysStudent> list = new ArrayList<SysStudent>();
         //数据转换

@@ -2,6 +2,7 @@ package com.zfy.yuio.service;
 
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.system.SysStudent;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -29,4 +30,6 @@ public interface SysStudentService {
     void output2Excel(QueryParams params, HttpServletResponse response);
 
     void outputSelected(List<SysStudent> students,HttpServletResponse response);
+
+    void importFormExcel(MultipartFile file);
 }

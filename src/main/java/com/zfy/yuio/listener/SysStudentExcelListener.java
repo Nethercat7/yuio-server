@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SysStudentExcelListener extends AnalysisEventListener<SysStudent> {
-    /**
-     * 每隔5条存储数据库，实际使用中可以3000条，然后清理list ，方便内存回收
-     */
-    private static final int BATCH_COUNT = 5;
+    private static final int BATCH_COUNT = 3000;
+
     List<SysStudent> list = new ArrayList<SysStudent>();
 
     private SysStudentService studentService;

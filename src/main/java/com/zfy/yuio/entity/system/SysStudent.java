@@ -80,11 +80,11 @@ public class SysStudent {
     @ExcelProperty(value = "备注")
     private String studentEmplRemark;
 
-    //Ignore properties
-    @ExcelIgnore
+    @ExcelProperty(value = "状态",converter = UvslStatusConverter.class)
     @JsonProperty("status")
     private String studentStatus; //DB Property
 
+    //Ignore properties
     @ExcelIgnore
     @JsonProperty("remark")
     private String studentRemark; //DB Property

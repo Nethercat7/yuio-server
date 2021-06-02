@@ -43,24 +43,28 @@ public class UsefulUtil {
      * @Description 文件下载
      * @Return void
      */
-    public static void download(String filepath, String filename, HttpServletResponse response) throws IOException {
+    public static void download(String filepath, String filename, HttpServletResponse response){
         File file = new File(filepath);
         if (file.exists()) {
-            response.addHeader("Content-Length", String.valueOf(file.length()));
-            response.setCharacterEncoding("utf-8");
-            String n = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
-            response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + n);
-            byte[] buffer = new byte[1024];
-            FileInputStream fis = new FileInputStream(file);
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            OutputStream os = response.getOutputStream();
-            int i = bis.read(buffer);
-            while (i != -1) {
-                os.write(buffer);
-                i = bis.read(buffer);
+            try{
+                response.addHeader("Content-Length", String.valueOf(file.length()));
+                response.setCharacterEncoding("utf-8");
+                String n = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+                response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + n);
+                byte[] buffer = new byte[1024];
+                FileInputStream fis = new FileInputStream(file);
+                BufferedInputStream bis = new BufferedInputStream(fis);
+                OutputStream os = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    os.write(buffer);
+                    i = bis.read(buffer);
+                }
+                fis.close();
+                bis.close();
+            }catch (IOException e){
+                e.printStackTrace();
             }
-            fis.close();
-            bis.close();
         }
     }
 }

@@ -1,11 +1,9 @@
 package com.zfy.yuio.controller;
 
-import com.alibaba.excel.EasyExcel;
 import com.zfy.yuio.entity.QueryParams;
 import com.zfy.yuio.entity.ResultBody;
 import com.zfy.yuio.entity.system.SysStudent;
 import com.zfy.yuio.entity.write.WriteEmplInfo;
-import com.zfy.yuio.listener.SysStudentExcelListener;
 import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.service.WriteEmplService;
 import com.zfy.yuio.utils.UsefulUtil;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,7 +36,7 @@ public class SysStudentController {
 
     @PostMapping("add")
     @RequiresPermissions("system:student:add")
-    public ResultBody add(@RequestBody SysStudent params) {
+    public ResultBody add(@RequestBody SysStudent params){
         int status = studentService.add(params);
         if (status == 1) {
             return new ResultBody(status, "学号已存在", "error");
@@ -93,28 +90,28 @@ public class SysStudentController {
 
     @PostMapping("output")
     @RequiresPermissions("system:student:output")
-    public void output(@RequestBody QueryParams params, HttpServletResponse response){
+    public void output(@RequestBody QueryParams params, HttpServletResponse response) {
         studentService.output2Excel(params, response);
     }
 
     @PostMapping("upload")
     @RequiresPermissions("system:student:import")
-    public ResultBody upload(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream(), SysStudent.class, new SysStudentExcelListener(studentService)).sheet().doRead();
+    public ResultBody upload(MultipartFile file){
+        studentService.importFormExcel(file);
         return new ResultBody(0, "成功导入数据", "success");
     }
 
     @GetMapping("downloadProtocol")
     @RequiresPermissions("system:student:download")
-    public void downloadProtocol(@RequestParam("code") String code,HttpServletResponse response) throws IOException {
-        WriteEmplInfo info=writeEmplService.get(code);
-        String path=filepath+info.getEmplProtocolFile();
-        UsefulUtil.download(path,info.getEmplProtocolFile(),response);
+    public void downloadProtocol(@RequestParam("code") String code, HttpServletResponse response) {
+        WriteEmplInfo info = writeEmplService.get(code);
+        String path = filepath + info.getEmplProtocolFile();
+        UsefulUtil.download(path, info.getEmplProtocolFile(), response);
     }
 
     @PostMapping("outputSelected")
     @RequiresPermissions("system:student:outputSelected")
-    public void outputSelected(@RequestBody List<SysStudent> students, HttpServletResponse response){
-        studentService.outputSelected(students,response);
+    public void outputSelected(@RequestBody List<SysStudent> students, HttpServletResponse response) {
+        studentService.outputSelected(students, response);
     }
 }
