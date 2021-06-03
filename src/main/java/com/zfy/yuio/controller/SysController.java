@@ -83,7 +83,7 @@ public class SysController {
     @GetMapping("getTemplate")
     public void getTemplate(@RequestParam("template") String template, @RequestParam("type") String type, HttpServletResponse response){
         String filename = template + "." + type;
-        String filepath = path.equals("default") ? ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/excel/" + type + "/" + filename : path;
+        String filepath = path.equals("default") ? ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/excel/" + type + "/" + filename : path+type+"/"+filename;
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         UsefulUtil.download(filepath, filename, response);
     }
