@@ -56,7 +56,7 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Transactional
     @Override
-    public int add(SysStudent params){
+    public int add(SysStudent params) {
         int status = validator(params, 0);
         if (status == 0) {
             params.setStudentId(snowflakeIdGeneratorUtil.nextId());
@@ -66,7 +66,8 @@ public class SysStudentServiceImpl implements SysStudentService {
             params.setStudentPwd(ShiroUtil.pwd2MD5(defaultPwd, params.getStudentSalt(), hash));
             studentDao.add(params);
             studentDao.addRole(params.getStudentId(), 506870876013088768L);
-            studentDao.addTutor(params.getStudentTutorsCode(), params.getStudentCode());
+            if (!ObjectUtils.isEmpty(params.getStudentTutorsCode()))
+                studentDao.addTutor(params.getStudentTutorsCode(), params.getStudentCode());
         }
         return status;
     }
@@ -181,9 +182,9 @@ public class SysStudentServiceImpl implements SysStudentService {
 
     @Override
     public void importFormExcel(MultipartFile file) {
-        try{
+        try {
             EasyExcel.read(file.getInputStream(), SysStudent.class, new SysStudentExcelListener(this)).sheet().doRead();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
