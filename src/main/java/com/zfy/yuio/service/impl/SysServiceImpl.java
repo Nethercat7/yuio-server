@@ -7,6 +7,7 @@ import com.zfy.yuio.service.SysService;
 import com.zfy.yuio.utils.JWTUtil;
 import com.zfy.yuio.utils.ShiroUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -21,6 +22,12 @@ import java.util.Map;
  */
 @Service
 public class SysServiceImpl implements SysService {
+    @Value("${pwd.hash}")
+    private int hash;
+
+    @Value("${pwd.default}")
+    private String defaultPwd;
+
     @Autowired
     private SysDao sysDao;
 
@@ -45,10 +52,10 @@ public class SysServiceImpl implements SysService {
         String pwd = "";
         if (isUser) {
             String salt = info.get("user_salt");
-            pwd = ShiroUtil.pwd2MD5("123456", salt, 1739);
+            pwd = ShiroUtil.pwd2MD5(defaultPwd, salt, hash);
         } else {
             String salt = info.get("student_salt");
-            pwd = ShiroUtil.pwd2MD5("123456", salt, 1739);
+            pwd = ShiroUtil.pwd2MD5(defaultPwd, salt, hash);
         }
         return sysDao.resetPwd(isUser, key, pwd);
     }
@@ -67,13 +74,13 @@ public class SysServiceImpl implements SysService {
         List<SysCollege> colleges = collegeDao.get();
         for (SysCollege c : colleges
         ) {
-            if (c.getCollegeStatus().equals("1")){
+            if (c.getCollegeStatus().equals("1")) {
                 c.setDisabled(true);
             }
-            List<SysMajor> majors= majorDao.getByPid(c.getCollegeId());
-            for (SysMajor m:majors
-                 ) {
-                if(m.getMajorStatus().equals("1")){
+            List<SysMajor> majors = majorDao.getByPid(c.getCollegeId());
+            for (SysMajor m : majors
+            ) {
+                if (m.getMajorStatus().equals("1")) {
                     m.setDisabled(true);
                 }
             }
@@ -88,21 +95,21 @@ public class SysServiceImpl implements SysService {
         //添加之间的关联
         for (SysCollege c : collegeList
         ) {
-            if(c.getCollegeStatus().equals("1")){
+            if (c.getCollegeStatus().equals("1")) {
                 c.setDisabled(true);
             }
             //获取院系下的专业
             List<SysMajor> majors = majorDao.getByPid(c.getCollegeId());
             for (SysMajor m : majors
             ) {
-                if(m.getMajorStatus().equals("1")){
+                if (m.getMajorStatus().equals("1")) {
                     m.setDisabled(true);
                 }
                 //获取专业下的班级
-                List<SysClass> classes=classDao.getByPid(m.getMajorId(), grade);
-                for (SysClass cls:classes
-                     ) {
-                    if(cls.getClassStatus().equals("1")){
+                List<SysClass> classes = classDao.getByPid(m.getMajorId(), grade);
+                for (SysClass cls : classes
+                ) {
+                    if (cls.getClassStatus().equals("1")) {
                         cls.setDisabled(true);
                     }
                 }
@@ -129,8 +136,8 @@ public class SysServiceImpl implements SysService {
             info = sysDao.getPwd(true, id);
             if (!ObjectUtils.isEmpty(info)) {
                 String salt = info.get("user_salt");
-                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(info.get("user_pwd"))) {
-                    String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
+                if (ShiroUtil.pwd2MD5(oldPwd, salt, hash).equals(info.get("user_pwd"))) {
+                    String pwd = ShiroUtil.pwd2MD5(newPwd, salt, hash);
                     return sysDao.changePwd(true, id, pwd);
                 } else {
                     return 2;
@@ -142,8 +149,8 @@ public class SysServiceImpl implements SysService {
             info = sysDao.getPwd(false, id);
             if (!ObjectUtils.isEmpty(info)) {
                 String salt = info.get("student_salt");
-                if (ShiroUtil.pwd2MD5(oldPwd, salt, 1739).equals(info.get("student_pwd"))) {
-                    String pwd = ShiroUtil.pwd2MD5(newPwd, salt, 1739);
+                if (ShiroUtil.pwd2MD5(oldPwd, salt, hash).equals(info.get("student_pwd"))) {
+                    String pwd = ShiroUtil.pwd2MD5(newPwd, salt, hash);
                     return sysDao.changePwd(false, id, pwd);
                 } else {
                     return 2;
@@ -198,7 +205,8 @@ public class SysServiceImpl implements SysService {
         if (loginInfo != null) {
             String currentPwd = loginInfo.getStudentPwd();
             String salt = loginInfo.getStudentSalt();
-            if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, 1739))) return new ResultBody(2, "密码不正确", "error");
+            if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, hash))) return new ResultBody(2, "密码不正确", "error");
+            if (loginInfo.getStudentStatus().equals("1")) return new ResultBody(3, "禁止登录", "error");
         } else {
             return new ResultBody(1, "账号不存在", "error");
         }
@@ -210,7 +218,8 @@ public class SysServiceImpl implements SysService {
         if (loginInfo != null) {
             String currentPwd = loginInfo.getUserPwd();
             String salt = loginInfo.getUserSalt();
-            if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, 1739))) return new ResultBody(2, "密码不正确", "error");
+            if (!currentPwd.equals(ShiroUtil.pwd2MD5(pwd, salt, hash))) return new ResultBody(2, "密码不正确", "error");
+            if (loginInfo.getUserStatus().equals("1")) return new ResultBody(3, "禁止登录", "error");
         } else {
             return new ResultBody(1, "账号不存在", "error");
         }

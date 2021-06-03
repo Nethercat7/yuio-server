@@ -9,6 +9,7 @@ import com.zfy.yuio.utils.RandomInfoGenerateUntil;
 import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -18,6 +19,15 @@ import java.util.Random;
 
 @Service
 public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
+    @Value("${pwd.salt}")
+    private int salt;
+
+    @Value("${pwd.hash}")
+    private int hash;
+
+    @Value("${pwd.default}")
+    private String defaultPwd;
+
     @Autowired
     private SysMajorDao majorDao;
 
@@ -196,8 +206,8 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
         student.setStudentPhone(RandomInfoGenerateUntil.randomChinaPhoneNumber());
         student.setStudentStatus("0");
         student.setStudentRemark("自动生成的学生数据");
-        student.setStudentSalt(ShiroUtil.getSalt(7));
-        student.setStudentPwd(ShiroUtil.pwd2MD5("123456", student.getStudentSalt(), 1739));
+        student.setStudentSalt(ShiroUtil.getSalt(salt));
+        student.setStudentPwd(ShiroUtil.pwd2MD5(defaultPwd, student.getStudentSalt(), hash));
         student.setStudentName(RandomInfoGenerateUntil.randomChineseName(student.getStudentGender()));
         return student;
     }
@@ -210,8 +220,8 @@ public class ToolDataGeneratorServiceImpl implements ToolDataGeneratorService {
         user.setUserPhone(RandomInfoGenerateUntil.randomChinaPhoneNumber());
         user.setUserStatus("0");
         user.setUserRemark("自从生成的用数据");
-        user.setUserSalt(ShiroUtil.getSalt(7));
-        user.setUserPwd(ShiroUtil.pwd2MD5("123456", user.getUserSalt(), 1739));
+        user.setUserSalt(ShiroUtil.getSalt(salt));
+        user.setUserPwd(ShiroUtil.pwd2MD5(defaultPwd, user.getUserSalt(), hash));
         user.setUserName(RandomInfoGenerateUntil.randomChineseName(user.getUserGender()));
         return user;
     }
