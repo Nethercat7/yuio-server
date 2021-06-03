@@ -12,6 +12,7 @@ import com.zfy.yuio.service.SysStudentService;
 import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -30,10 +31,14 @@ import java.util.stream.Collectors;
  */
 @Service
 public class SysStudentServiceImpl implements SysStudentService {
-    //随机盐的个数
-    private static final int SALT = 7;
-    //散列次数
-    private static final int HASH = 1739;
+    @Value("${pwd.salt}")
+    private int salt;
+
+    @Value("${pwd.hash}")
+    private int hash;
+
+    @Value("${pwd.default}")
+    private String defaultPwd;
 
     @Autowired
     private SysStudentDao studentDao;
@@ -56,9 +61,9 @@ public class SysStudentServiceImpl implements SysStudentService {
         if (status == 0) {
             params.setStudentId(snowflakeIdGeneratorUtil.nextId());
             //设置随机盐
-            params.setStudentSalt(ShiroUtil.getSalt(SALT));
+            params.setStudentSalt(ShiroUtil.getSalt(salt));
             //默认密码
-            params.setStudentPwd(ShiroUtil.pwd2MD5("123456", params.getStudentSalt(), HASH));
+            params.setStudentPwd(ShiroUtil.pwd2MD5(defaultPwd, params.getStudentSalt(), hash));
             studentDao.add(params);
             studentDao.addRole(params.getStudentId(), 506870876013088768L);
             studentDao.addTutor(params.getStudentTutorsCode(), params.getStudentCode());
@@ -145,8 +150,8 @@ public class SysStudentServiceImpl implements SysStudentService {
             s.setStudentId(snowflakeIdGeneratorUtil.nextId());
             s.setStudentClassId(classDao.getIdByName(s.getStudentClass().getClassName()));
             //Set default password
-            s.setStudentSalt(ShiroUtil.getSalt(7));
-            s.setStudentPwd(ShiroUtil.pwd2MD5("123456", s.getStudentSalt(), 1739));
+            s.setStudentSalt(ShiroUtil.getSalt(salt));
+            s.setStudentPwd(ShiroUtil.pwd2MD5(defaultPwd, s.getStudentSalt(), hash));
         }
         studentDao.addFromExcel(params);
         //Add student role

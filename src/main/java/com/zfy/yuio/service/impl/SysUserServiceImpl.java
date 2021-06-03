@@ -8,6 +8,7 @@ import com.zfy.yuio.service.SysUserService;
 import com.zfy.yuio.utils.ShiroUtil;
 import com.zfy.yuio.utils.SnowflakeIdGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -22,6 +23,15 @@ import java.util.List;
  */
 @Service
 public class SysUserServiceImpl implements SysUserService {
+    @Value("${pwd.salt}")
+    private int salt;
+
+    @Value("${pwd.hash}")
+    private int hash;
+
+    @Value("${pwd.default}")
+    private String defaultPwd;
+
     @Autowired
     private SysUserDao userDao;
 
@@ -35,8 +45,8 @@ public class SysUserServiceImpl implements SysUserService {
         int status = validator(params, 0);
         if (status == 0) {
             params.setUserId(snowflakeIdGeneratorUtil.nextId());
-            params.setUserSalt(ShiroUtil.getSalt(7));
-            params.setUserPwd(ShiroUtil.pwd2MD5("123456", params.getUserSalt(), 1739));
+            params.setUserSalt(ShiroUtil.getSalt(salt));
+            params.setUserPwd(ShiroUtil.pwd2MD5(defaultPwd, params.getUserSalt(), hash));
             userDao.add(params);
             saveUserRole(params);
         }
@@ -101,8 +111,8 @@ public class SysUserServiceImpl implements SysUserService {
         ) {
             u.setUserId(snowflakeIdGeneratorUtil.nextId());
             //set password
-            u.setUserSalt(ShiroUtil.getSalt(7));
-            u.setUserPwd(ShiroUtil.pwd2MD5("123456", u.getUserSalt(), 1739));
+            u.setUserSalt(ShiroUtil.getSalt(salt));
+            u.setUserPwd(ShiroUtil.pwd2MD5(defaultPwd, u.getUserSalt(), hash));
         }
         userDao.addFromExcel(params);
     }
