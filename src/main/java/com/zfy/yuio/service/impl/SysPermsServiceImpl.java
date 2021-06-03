@@ -117,15 +117,12 @@ public class SysPermsServiceImpl implements SysPermsService {
         if (type == 0) {
             if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsName()))) return 1;
             if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsMark()))) return 2;
-            if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsUrl()))) return 3;
         } else {
             SysPerms p = permsDao.getById(params.getPermsId());
             if (!p.getPermsName().equals(params.getPermsName())) {
                 if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsName()))) return 1;
             } else if (!p.getPermsMark().equals(params.getPermsMark())) {
                 if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsMark()))) return 2;
-            } else if (!p.getPermsUrl().equals(params.getPermsUrl())) {
-                if (!ObjectUtils.isEmpty(permsDao.verify(params.getPermsUrl()))) return 3;
             }
         }
         return 0;

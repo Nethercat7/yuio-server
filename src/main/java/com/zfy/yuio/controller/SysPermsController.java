@@ -33,8 +33,6 @@ public class SysPermsController {
             return new ResultBody(status, "名称已存在", "error");
         } else if (status == 2) {
             return new ResultBody(status, "标识符已存在", "error");
-        } else if (status == 3) {
-            return new ResultBody(status, "请求地址已存在", "error");
         }
         return new ResultBody(status, "成功添加", "success");
     }
