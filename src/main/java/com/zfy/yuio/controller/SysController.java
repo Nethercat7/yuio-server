@@ -6,12 +6,12 @@ import com.zfy.yuio.utils.UsefulUtil;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +24,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("sys")
 public class SysController {
+    @Value("${file.template}")
+    private String path;
+
     @Autowired
     private SysService sysService;
 
@@ -78,9 +81,9 @@ public class SysController {
     }
 
     @GetMapping("getTemplate")
-    public void getTemplate(@RequestParam("template") String template, @RequestParam("type") String type, HttpServletResponse response) throws IOException {
-        String filename = template +"."+ type;
-        String filepath = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/excel/" + type + "/" + filename;
+    public void getTemplate(@RequestParam("template") String template, @RequestParam("type") String type, HttpServletResponse response){
+        String filename = template + "." + type;
+        String filepath = path.equals("default") ? ClassUtils.getDefaultClassLoader().getResource("").getPath() + "static/excel/" + type + "/" + filename : path;
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         UsefulUtil.download(filepath, filename, response);
     }
