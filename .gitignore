@@ -35,3 +35,4 @@ build/
 out
 src/main/resources/META-INF
 application2.properties
+yuio.log
